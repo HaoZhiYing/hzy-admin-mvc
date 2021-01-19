@@ -18,7 +18,7 @@ https://gitee.com/hzy6/hzy-admin-code-generation
 数据库脚本位置：根目录/doc/HZY.Admin.sql
 
 
-#### 部分界面截图
+####  :cherries:  部分界面截图
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/165956_13c32f7f_1242080.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170028_73a15756_1242080.png "屏幕截图.png")

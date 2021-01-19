@@ -50,6 +50,9 @@ https://gitee.com/hzy6/hzy-admin-code-generation
 5、打包 vue 前端页面得到 dist 文件夹 拷贝到 ClientApp 中 即可
 
 
+####  :heart: 捐赠 兄弟们就当打发要饭的吧！
+![输入图片说明](https://images.gitee.com/uploads/images/2020/1216/105734_96c2122c_1242080.png "未标题-1.png")
+
 
 #### 使用说明
 

@@ -13,9 +13,9 @@ https://gitee.com/hzy6/hzy-admin-code-generation
 ###  **_交流群: 534584927_** 
 
 
-前端：BootStrap 4、Layer(只是弹层 没用到 layui)、Jquery、Vue 、Element UI
+前端：Vue3.x 、Antd Of Vue 2.0
 
-数据库脚本位置：根目录/doc/HZY.Admin.sql
+数据库脚本位置：根目录/doc/HzyAdminSpa.sql
 
 
 #### :cherries:  部分界面截图

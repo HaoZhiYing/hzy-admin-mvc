@@ -1,4 +1,4 @@
-import {get, post, download } from '@/scripts/request';
+import {get, post, upload, download } from '@/scripts/request';
 import tools from "@/scripts/tools";
 
 const controllerName = "Member";

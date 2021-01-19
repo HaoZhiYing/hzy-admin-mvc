@@ -103,8 +103,8 @@ export default {
      * 设置值
      */
     setHtml() {
-      if (this.htmlData && this.editor) {
-        this.editor.txt.html(this.htmlData);
+      if (this.editor) {
+        this.editor.txt.html(this.htmlData ? this.htmlData : "");
       }
     },
     /**

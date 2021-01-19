@@ -1,77 +1,81 @@
-import axios from 'axios';
-import qs from 'qs';
-import tools from '@/scripts/tools';
+import axios from "axios";
+import tools from "@/scripts/tools";
 //axios 基本配置
 axios.defaults.timeout = 100 * 1000;
-axios.defaults.baseURL = tools.domainName + '/admin'; //http://localhost:6789
+axios.defaults.baseURL = tools.domainName + "/admin"; //http://localhost:6789
+let isLoading = true;
 
 //http request 拦截器
-axios.interceptors.request.use(config => {
+axios.interceptors.request.use(
+    (config) => {
         if (isLoading) {
             tools.loading.start();
         }
 
         let authorization = tools.getAuthorization();
         if (authorization) {
-            config.headers['Authorization'] = authorization;
+            config.headers["Authorization"] = authorization;
         }
-        config.headers['X-Requested-With'] = 'XMLHttpRequest';
+        config.headers["X-Requested-With"] = "XMLHttpRequest";
         // config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-        config.headers['Content-Type'] = 'application/json; charset=UTF-8';
+        config.headers["Content-Type"] = "application/json; charset=UTF-8";
 
         if (!config.data) return config;
 
-        if (config.data.isUpload)
-            config.headers['Content-Type'] = 'multipart/form-data';
+        if (config.data.isUpload) config.headers["Content-Type"] = "multipart/form-data";
         // else
         //config.data = qs.stringify(config.data); //如果是非上传类型 则 将数据重新组装
 
         return config;
     },
-    error => {
+    (error) => {
         console.log(error);
         return Promise.reject(error);
-    });
+    }
+);
 
 //http response 拦截器
-axios.interceptors.response.use(response => {
+axios.interceptors.response.use(
+    (response) => {
         tools.loading.close();
         const data = response.data;
 
-        if (Object.prototype.hasOwnProperty.call(data, 'code')) {
+        if (Object.prototype.hasOwnProperty.call(data, "code")) {
             //     程序异常 = -2,
             // 未授权 = -1,
             // 失败 = 0,
             // 成功 = 1,
 
-            if (data.code === -1) { //接口授权码无效
-                tools.message(data.message + ',请重新登录授权!', "警告");
+            if (data.code === -1) {
+                //接口授权码无效
+                tools.message(data.message + ",请重新登录授权!", "警告");
                 return global.$router.push("/login");
             }
-            if (data.code === -2) { //服务端异常
+            if (data.code === -2) {
+                //服务端异常
                 tools.message(data.message, "错误");
                 return;
             }
-            if (data.code === 0) { //失败
-                tools.message(data.message, '警告');
+            if (data.code === 0) {
+                //失败
+                tools.message(data.message, "警告");
                 return;
             }
         }
 
         return response;
     },
-    error => {
+    (error) => {
         tools.loading.close();
         console.log(error);
         if (error.response.status === 401) {
             tools.notice("未授权!", "错误");
-            return global.$router.push('/login');
+            return global.$router.push("/login");
         } else {
-            return Promise.reject(error)
+            return Promise.reject(error);
         }
-    });
-
-let isLoading = true;
+    }
+);
 
 /**
  * 封装get方法
@@ -83,18 +87,17 @@ let isLoading = true;
  */
 export function get(url, data = {}, loading = true, config = {}) {
     isLoading = loading;
-    if (data && data !== {}) {
-        url = `${url}?${qs.stringify(data)}`;
-    }
+    config["params"] = data;
     return new Promise((resolve, reject) => {
-        axios.get(url, config)
-            .then(response => {
+        axios
+            .get(url, config)
+            .then((response) => {
                 if (response) resolve(response.data);
             })
-            .catch(err => {
-                reject(err)
-            })
-    })
+            .catch((err) => {
+                reject(err);
+            });
+    });
 }
 
 /**
@@ -108,13 +111,15 @@ export function get(url, data = {}, loading = true, config = {}) {
 export function post(url, data = {}, loading = true, config = {}) {
     isLoading = loading;
     return new Promise((resolve, reject) => {
-        axios.post(url, data, config)
-            .then(response => {
+        axios.post(url, data, config).then(
+            (response) => {
                 if (response) resolve(response.data);
-            }, err => {
-                reject(err)
-            })
-    })
+            },
+            (err) => {
+                reject(err);
+            }
+        );
+    });
 }
 
 /**
@@ -130,58 +135,56 @@ export function upload(url, data = {}, loading = true, config = {}) {
     if (!data) data = {};
     data.isUpload = true;
     return new Promise((resolve, reject) => {
-        axios.post(url, data, config)
-            .then(response => {
+        axios.post(url, data, config).then(
+            (response) => {
                 if (response) resolve(response.data);
-            }, err => {
-                reject(err)
-            })
-    })
+            },
+            (err) => {
+                reject(err);
+            }
+        );
+    });
 }
 
 /**
  * 封装 get请求 用于下载文件
+ *
  * @param url
  * @param data
  * @param loading 是否有加载效果
  * @returns {Promise}
  */
-export function download(url, data = {}, loading = true) {
-    this.get(url, data, loading, {
-        // responseType: 'stream',
-        responseType: 'blob',
-        // responseType: 'arraybuffer',
-    }).then(res => {
-        let data = res.data;
-        let headers = res.headers;
-        //"attachment; filename=6a9c13bc-e214-44e4-8456-dbca9fcd2367.xls;filename*=UTF-8''6a9c13bc-e214-44e4-8456-dbca9fcd2367.xls"
-        let contentDisposition = headers['content-disposition'];
-        let contentType = headers['content-type'];
-        let attachmentInfoArrary = contentDisposition.split(';');
-        let fileName = '';
-        if (attachmentInfoArrary.length > 1) {
-            fileName = attachmentInfoArrary[1].split('=')[1];
-        }
-        let blob = new Blob([data], {type: contentType});
+export function download(url, data = {}, fileName, loading = true) {
+    return new Promise((resolve, reject) => {
+        post(url, data, loading, { responseType: "blob" }).then(
+            (res) => {
+                var blob = new Blob([res], { type: res.type });
+                if (!fileName) fileName = new Date().getTime();
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    // IE
+                    window.navigator.msSaveOrOpenBlob(blob, fileName);
+                } else {
+                    let url = (window.URL || window.webkitURL).createObjectURL(blob);
+                    // window.open(url, "_blank"); //下载
+                    // window.URL.revokeObjectURL(url) // 只要映射存在，Blob就不能进行垃圾回收，因此一旦不再需要引用，就必须小心撤销URL，释放掉blob对象。
 
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE
-            window.navigator.msSaveOrOpenBlob(blob, fileName);
-        } else {
-            let url = (window.URL || window.webkitURL).createObjectURL(blob);
-            // window.open(url, "_blank"); //下载
-            // window.URL.revokeObjectURL(url) // 只要映射存在，Blob就不能进行垃圾回收，因此一旦不再需要引用，就必须小心撤销URL，释放掉blob对象。
+                    let a = document.createElement("a");
+                    a.style.display = "none";
+                    a.href = url;
+                    a.setAttribute("download", fileName);
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a); // 下载完成移除元素
+                    // window.location.href = url
+                    window.URL.revokeObjectURL(url); // 只要映射存在，Blob就不能进行垃圾回收，因此一旦不再需要引用，就必须小心撤销URL，释放掉blob对象。
+                }
 
-            let a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.setAttribute('download', fileName);
-            document.body.appendChild(a);
-            a.click()
-            document.body.removeChild(a); // 下载完成移除元素
-            // window.location.href = url
-            window.URL.revokeObjectURL(url); // 只要映射存在，Blob就不能进行垃圾回收，因此一旦不再需要引用，就必须小心撤销URL，释放掉blob对象。
-
-        }
+                resolve(res);
+            },
+            (err) => {
+                reject(err);
+            }
+        );
     });
 }
 
@@ -196,13 +199,15 @@ export function download(url, data = {}, loading = true) {
 export function patch(url, data = {}, loading = true, config = {}) {
     isLoading = loading;
     return new Promise((resolve, reject) => {
-        axios.patch(url, data, config)
-            .then(response => {
+        axios.patch(url, data, config).then(
+            (response) => {
                 if (response) resolve(response.data);
-            }, err => {
-                reject(err)
-            })
-    })
+            },
+            (err) => {
+                reject(err);
+            }
+        );
+    });
 }
 
 /**
@@ -216,11 +221,13 @@ export function patch(url, data = {}, loading = true, config = {}) {
 export function put(url, data = {}, loading = true, config = {}) {
     isLoading = loading;
     return new Promise((resolve, reject) => {
-        axios.put(url, data, config)
-            .then(response => {
+        axios.put(url, data, config).then(
+            (response) => {
                 if (response) resolve(response.data);
-            }, err => {
-                reject(err)
-            })
-    })
+            },
+            (err) => {
+                reject(err);
+            }
+        );
+    });
 }

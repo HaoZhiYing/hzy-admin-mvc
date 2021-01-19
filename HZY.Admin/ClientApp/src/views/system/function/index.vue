@@ -54,10 +54,9 @@
           </template>
         </a-col>
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15 text-right">
-          <a-button type="primary" class="mr-10" @click="exportExcel"
-            >导出 Excel
-          </a-button>
-          <a-button type="primary" class="mr-10" @click="exportPdf">导出 Pdf</a-button>
+          <!-- <a-button type="primary" class="mr-10" @click="exportExcel">
+            导出 Excel
+          </a-button> -->
         </a-col>
       </a-row>
       <a-table
@@ -252,12 +251,9 @@ export default {
       this.form.visible = true;
       this.form.key = id;
     },
-    exportExcel() {
-      tools.notice("导出Excel成功!", "成功", "提醒");
-    },
-    exportPdf() {
-      tools.notice("导出Pdf成功!", "成功", "提醒");
-    },
+    // exportExcel() {
+    //   service.exportExcel(this.table.search.vm);
+    // },
   },
 };
 </script>

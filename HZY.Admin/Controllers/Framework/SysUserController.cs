@@ -88,8 +88,7 @@ namespace HZY.Admin.Controllers.Framework
         public async Task<FileContentResult> ExportExcelAsync([FromBody] SysUser search)
             => this.File(await this.DefaultService.ExportExcelAsync(search), Tools.GetFileContentType[".xls"].ToStr(),
                 $"{Guid.NewGuid()}.xls");
-
-
+        
         /// <summary>
         /// 获取用户信息
         /// </summary>

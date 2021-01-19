@@ -1,4 +1,4 @@
-import {get, post, upload} from '@/scripts/request';
+import {get, post, download } from '@/scripts/request';
 import tools from "@/scripts/tools";
 
 const controllerName = "Member";
@@ -40,5 +40,12 @@ export default {
      */
     saveForm(form) {
         return upload(`${controllerName}/saveForm`, form);
+    },
+    /**
+     * 导出 excel
+     * @param {*} search 
+     */
+    exportExcel(search) {
+        return download(`${controllerName}/exportExcel`, search);
     }
 };

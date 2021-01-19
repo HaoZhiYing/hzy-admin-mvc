@@ -35,7 +35,11 @@
         </a-col>
         <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
           <h4>生日:</h4>
-          <a-date-picker v-model:value="vm.form.birthday" style="width: 100%" />
+          <a-date-picker
+            v-model:value="vm.form.birthday"
+            valueFormat="YYYY-MM-DD"
+            style="width: 100%"
+          />
         </a-col>
         <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
           <h4>头像:</h4>

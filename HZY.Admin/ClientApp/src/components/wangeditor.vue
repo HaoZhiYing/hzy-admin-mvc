@@ -42,6 +42,9 @@ export default {
     // 销毁编辑器
     this.destroy();
   },
+  unmount() {
+    alert(111);
+  },
   methods: {
     init() {
       let t = this;

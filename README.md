@@ -8,7 +8,7 @@ https://gitee.com/hzy6/hzy-admin-code-generation
 
 
 #### 软件架构
-开发环境：vs2019 、 .Net5.0
+开发环境：vs2019 、 .Net5.0 、VsCode
 
 ###  **_交流群: 534584927_** 
 

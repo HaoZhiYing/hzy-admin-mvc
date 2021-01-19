@@ -1,7 +1,7 @@
 # HzyAdminSpa
 
 #### :yellow_heart: 介绍 
-后台通配权限管理系统！基于.Net5、Entity Framework Core 5
+前后分离,后台通配权限管理系统！基于.Net5、Entity Framework Core 5
 
 ### :blue_heart: 代码生成器 
 https://gitee.com/hzy6/hzy-admin-code-generation

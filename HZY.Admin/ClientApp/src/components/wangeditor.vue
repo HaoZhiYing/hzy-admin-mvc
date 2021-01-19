@@ -38,12 +38,11 @@ export default {
     this.init();
   },
   //组件销毁前
-  beforeUnmount() {
+  beforeUnmount() {},
+  //组件销毁后
+  unmounted() {
     // 销毁编辑器
     this.destroy();
-  },
-  unmount() {
-    alert(111);
   },
   methods: {
     init() {

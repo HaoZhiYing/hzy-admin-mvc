@@ -9,13 +9,16 @@
     </a-config-provider>
     <a-button type="primary"> 按钮 </a-button>
     <a-button type="link"> Link </a-button>
+    <a-button class="btn-success"> Success </a-button>
+    <a-button class="btn-info"> Info </a-button>
+    <a-button class="btn-warning"> warning </a-button>
   </div>
 </template>
 <script>
 import { message } from "ant-design-vue";
 
 export default {
-  name:"button",
+  name: "button",
   data() {
     return {
       message: "hello",

@@ -17,7 +17,7 @@
                 <div class="fs-20">
                   <a
                       target="_black"
-                      href="https://gitee.com/hzy6/hzy-antdv-admin-ui"
+                      href="https://gitee.com/hzy6/hzy-admin-spa-ui"
                       class="text-blue"
                   >源码</a>
                 </div>

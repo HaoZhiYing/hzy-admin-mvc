@@ -3,6 +3,10 @@
 #### :yellow_heart: 介绍 
 前后分离,后台通配权限管理系统！基于.Net5、Entity Framework Core 5
 
+前端：Vue3.x 、Antd Of Vue 2.0
+
+数据库脚本位置：根目录/doc/HzyAdminSpa.sql
+
 ### :blue_heart: 代码生成器 
 https://gitee.com/hzy6/hzy-admin-code-generation
 
@@ -16,9 +20,8 @@ https://gitee.com/hzy6/hzy-admin-spa-ui
 ###  **_交流群: 534584927_** 
 
 
-前端：Vue3.x 、Antd Of Vue 2.0
-
-数据库脚本位置：根目录/doc/HzyAdminSpa.sql
+### Java 版本
+https://gitee.com/hzy6/hzy-admin-spa
 
 
 #### :cherries:  部分界面截图

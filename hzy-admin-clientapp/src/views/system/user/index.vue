@@ -1,37 +1,35 @@
 <template>
   <div class="p-15">
-    <template v-if="power.search">
-      <a-card class="w100 mb-15" bodyStyle="padding:0">
-        <a-row :gutter="[15, 15]" class="p-15">
-          <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-            <a-input v-model:value="table.search.vm.name" placeholder="真实名称" />
-          </a-col>
-          <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-            <a-input v-model:value="table.search.vm.loginName" placeholder="账户名称" />
-          </a-col>
-          <!--button-->
-          <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" style="float: right">
-            <a-button type="primary" class="mr-10" @click="findList">查询</a-button>
-            <a-button class="mr-10" @click="onResetSearch">重置</a-button>
-            <a-button
-              type="link"
-              @click="table.search.state = !table.search.state"
-              v-if="table.search.fieldCount > 5"
-            >
-              <div v-show="!table.search.state">
-                <AppIcons iconName="DownOutlined" /> &nbsp;&nbsp;展开
-              </div>
-              <div v-show="table.search.state">
-                <AppIcons iconName="UpOutlined" /> &nbsp;&nbsp;收起
-              </div>
-            </a-button>
-          </a-col>
-        </a-row>
-      </a-card>
-    </template>
+    <a-card class="w100 mb-15" bodyStyle="padding:0" v-show="table.search.state">
+      <a-row :gutter="[15, 15]" class="p-15">
+        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+          <a-input v-model:value="table.search.vm.name" placeholder="真实名称" />
+        </a-col>
+        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+          <a-input v-model:value="table.search.vm.loginName" placeholder="账户名称" />
+        </a-col>
+        <!--button-->
+        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" style="float: right">
+          <a-button type="primary" class="mr-10" @click="findList">查询</a-button>
+          <a-button class="mr-10" @click="onResetSearch">重置</a-button>
+        </a-col>
+      </a-row>
+    </a-card>
     <a-card class="w100" bodyStyle="padding:0">
       <a-row :gutter="20" class="p-15 pb-0">
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
+          <template v-if="power.search">
+            <a-button
+              type="dashed"
+              class="mr-10"
+              @click="table.search.state = !table.search.state"
+            >
+              <div v-if="table.search.state">
+                <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
+              </div>
+              <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
+            </a-button>
+          </template>
           <template v-if="power.insert">
             <a-button type="primary" class="mr-10" @click="openForm()">
               <template #icon>
@@ -182,7 +180,6 @@ export default {
         //检索
         search: {
           state: false,
-          fieldCount: 2,
           vm: {
             name: "",
             loginName: "",

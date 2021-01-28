@@ -1,26 +1,31 @@
 <template>
   <div class="app-tabs">
     <a-tabs
-        hide-add
-        tabPosition="top"
-        type="editable-card"
-        :tabBarGutter="0"
-        @edit="closeTabSelf"
-        @tabClick="tabClick"
-        v-model:activeKey="activeKey"
+      hide-add
+      tabPosition="top"
+      type="editable-card"
+      :tabBarGutter="0"
+      @edit="closeTabSelf"
+      @tabClick="tabClick"
+      v-model:activeKey="activeKey"
     >
       <a-tab-pane v-for="item in tabList" :key="item.name" :closable="item.meta.close">
         <template #tab>
-          <a-dropdown :trigger="['contextmenu']">
-            <span style="user-select: none">{{ item.meta.title }}</span>
+          <a-dropdown>
+            <AppIcons iconName="EllipsisOutlined" class="mr-10" />
             <template #overlay>
               <a-menu>
-                <a-menu-item key="1" @click="closeTabSelf(item.name)">关闭当前</a-menu-item>
-                <a-menu-item key="2" @click="closeTabOther(item.name)">关闭其他</a-menu-item>
+                <a-menu-item key="1" @click="closeTabSelf(item.name)">
+                  关闭当前
+                </a-menu-item>
+                <a-menu-item key="2" @click="closeTabOther(item.name)">
+                  关闭其他
+                </a-menu-item>
                 <a-menu-item key="3" @click="closeTabAll()">关闭全部</a-menu-item>
               </a-menu>
             </template>
           </a-dropdown>
+          <span style="user-select: none">{{ item.meta.title }}</span>
         </template>
       </a-tab-pane>
     </a-tabs>
@@ -28,12 +33,16 @@
 </template>
 <script>
 //vuex
-import {mapState, mapMutations} from "vuex";
+import { mapState, mapMutations } from "vuex";
+import AppIcons from "@/components/appIcons";
 
 export default {
   name: "app-layout-tabs",
   data() {
     return {};
+  },
+  components: {
+    AppIcons,
   },
   computed: {
     ...mapState("app", {
@@ -41,7 +50,7 @@ export default {
     }),
     activeKey() {
       return this.$route.name;
-    }
+    },
   },
   watch: {
     $route() {
@@ -51,8 +60,7 @@ export default {
   created() {
     this.addTags();
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     ...mapMutations(`app`, {
       closeTabSelf: "closeTabSelf",
@@ -61,7 +69,7 @@ export default {
       tabClick: "tabClick",
     }),
     addTags() {
-      global.$vuex.commit('app/addTab', this.$route);
+      global.$vuex.commit("app/addTab", this.$route);
     },
   },
 };

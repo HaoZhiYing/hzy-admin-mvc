@@ -16,11 +16,7 @@
       <a-row :gutter="20" class="p-15 pb-0">
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
           <template v-if="power.search">
-            <a-button
-              type="dashed"
-              class="mr-10"
-              @click="table.search.state = !table.search.state"
-            >
+            <a-button class="mr-10" @click="table.search.state = !table.search.state">
               <div v-if="table.search.state">
                 <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
               </div>

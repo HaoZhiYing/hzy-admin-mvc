@@ -17,10 +17,10 @@
         <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
           <a-input v-model:value="fromSearch.vm.value" placeholder="地址" />
         </a-col>
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" v-show="fromSearch.state">
+        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
           <a-input v-model:value="fromSearch.vm.value" placeholder="地址1" />
         </a-col>
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" v-show="fromSearch.state">
+        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
           <a-input v-model:value="fromSearch.vm.value" placeholder="地址2" />
         </a-col>
         <!--button-->
@@ -33,7 +33,7 @@
     <a-card class="w100" bodyStyle="padding:0">
       <a-row :gutter="20" class="p-15 pb-0">
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
-          <a-button type="link" @click="fromSearch.state = !fromSearch.state">
+          <a-button class="mr-10" @click="fromSearch.state = !fromSearch.state">
             <div v-if="fromSearch.state">
               <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
             </div>

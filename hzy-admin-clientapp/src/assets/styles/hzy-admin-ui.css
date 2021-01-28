@@ -46,9 +46,6 @@ body {
 .ant-spin-nested-loading {
   min-height: 500px;
 }
-#hzy-layout .ant-layout-sider-children {
-  overflow-x: hidden;
-}
 .hzy-logo {
   text-align: center;
   font-size: 16px;

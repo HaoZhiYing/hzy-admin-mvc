@@ -1,7 +1,11 @@
 # HzyAdminSpa
 
-稳定版看这个分支：https://gitee.com/hzy6/HzyAdminSpa/tree/efcore5.0/
-master分支为下一个版本 基于 Freesql
+
+## 稳定版看这个分支：https://gitee.com/hzy6/HzyAdminSpa/tree/efcore5.0/
+
+## master分支为下一个版本 基于 Freesql
+
+
 
 #### :yellow_heart: 介绍 
 前后分离,后台通配权限管理系统！基于.Net5、Entity Framework Core 5

@@ -7,7 +7,7 @@ using HZY.Admin.Core;
 using HZY.Framework;
 using HZY.Framework.Filter;
 using HZY.Framework.Middleware;
-using HZY.Repository.Core.Provider;
+using HZY.Repository.Core;
 using HZY.Toolkit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,14 +24,12 @@ namespace HZY.Admin
 {
     public class Startup
     {
-        private readonly IWebHostEnvironment _webHostEnvironment;
 
         private readonly IEnumerable<string> _versionList = typeof(ApiVersions).GetEnumNames().OrderBy(w=>w);
 
-        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _webHostEnvironment = webHostEnvironment;
         }
 
         private IConfiguration Configuration { get; }
@@ -53,7 +51,6 @@ namespace HZY.Admin
                     //设置 如果是 Dictionary 那么 在 json 序列化 是 key 的字符 采用 小驼峰 命名
                     options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
                 })
-                .AddRazorRuntimeCompilation()
                 ;
 
             #region 取消默认验证Api 接收参数模型 的 验证特性 如有 [ApiController]

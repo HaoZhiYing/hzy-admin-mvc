@@ -6,7 +6,6 @@ using HZY.Admin.Model.Dto;
 using HZY.Framework.Services;
 using HZY.Repository.Entity.Framework;
 using HZY.Repository.Framework;
-using Microsoft.EntityFrameworkCore;
 
 namespace HZY.Admin.Services.Framework
 {
@@ -45,10 +44,12 @@ namespace HZY.Admin.Services.Framework
 
             foreach (var item in functionIds)
             {
-                var model = new SysRoleMenuFunction();
-                model.MenuId = menuId;
-                model.RoleId = roleId;
-                model.FunctionId = item;
+                var model = new SysRoleMenuFunction
+                {
+                    MenuId = menuId,
+                    RoleId = roleId,
+                    FunctionId = item
+                };
 
                 await this.Repository.InsertAsync(model);
             }

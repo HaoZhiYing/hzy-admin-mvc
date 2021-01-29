@@ -32,19 +32,19 @@ namespace HZY.Framework.Services
             var sheet = workbook.CreateSheet();
             //数据
             var data = pagingViewModel.DataSource;
-            var cols = pagingViewModel.Columns.Where(w => w.Show).ToList();
+            var cols = pagingViewModel.Columns;
             //填充表头
             var dataRow = sheet.CreateRow(0);
             foreach (var item in cols)
             {
                 var index = cols.IndexOf(item);
-                if (byName != null && byName.ContainsKey(item.FieldName))
+                if (byName != null && byName.ContainsKey(item))
                 {
-                    dataRow.CreateCell(index).SetCellValue(byName[item.FieldName]);
+                    dataRow.CreateCell(index).SetCellValue(byName[item]);
                 }
                 else
                 {
-                    dataRow.CreateCell(index).SetCellValue(item.Title);
+                    dataRow.CreateCell(index).SetCellValue(item);
                 }
             }
 
@@ -55,9 +55,9 @@ namespace HZY.Framework.Services
                 dataRow = sheet.CreateRow(i + 1);
                 foreach (var col in cols)
                 {
-                    if (!col.Show) continue;
+                    if (!col.StartsWith("_")) continue;
                     var index = cols.IndexOf(col);
-                    var name = col.FieldName.FirstCharToUpper();
+                    var name = col.FirstCharToUpper();
                     if (!item.ContainsKey(name)) continue;
                     var value = item[name];
                     dataRow.CreateCell(index).SetCellValue(value == null ? "" : value.ToString());
@@ -71,6 +71,5 @@ namespace HZY.Framework.Services
         }
 
         #endregion
-
     }
 }

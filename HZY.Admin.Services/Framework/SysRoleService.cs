@@ -35,7 +35,7 @@ namespace HZY.Admin.Services.Framework
         {
             var query = await this.Repository.Select
                     .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), a => a.Name.Contains(search.Name))
-                    .OrderByDescending(w => w.CreateTime)
+                    .OrderBy(w => w.Number)
                     .Count(out var total)
                     .Page(page, size)
                     .ToListAsync(w => new

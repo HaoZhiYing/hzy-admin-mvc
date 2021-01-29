@@ -145,7 +145,7 @@ namespace HZY.Admin.Services.Framework
             {
                 var sysUserRole = sysUserRoles.FirstOrDefault(w => w.RoleId == item).NullSafe();
 
-                sysUserRole.Id = sysUserRole.Id == Guid.Empty ? Guid.NewGuid() : sysUserRole.Id;
+                sysUserRole.Id = Guid.NewGuid();
                 sysUserRole.RoleId = item;
                 sysUserRole.UserId = model.Id;
                 await this._sysUserRoleRepository.InsertAsync(sysUserRole);

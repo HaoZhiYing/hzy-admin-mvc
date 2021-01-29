@@ -59,7 +59,6 @@ namespace HZY.Repository.Core.Provider
                 if (columnHead == null) continue;
                 columnHead.Show = item.Show;
                 columnHead.Title = item.Title;
-                columnHead.Width = item.Width;
             }
         }
 

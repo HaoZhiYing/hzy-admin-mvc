@@ -19,28 +19,11 @@
             }
         }
 
-        public TableViewColumnHead(string fieldName, string title, int width)
-        {
-            this.FieldName = fieldName;
-            this.Title = title;
-            if (fieldName.ToLower() == "Id".ToLower())
-            {
-                this.Show = false;
-            }
-            else
-            {
-                this.Show = !fieldName.StartsWith("_");
-            }
-
-            this.Width = width.ToString();
-        }
-
-        public TableViewColumnHead(string fieldName, string title, bool show, int width)
+        public TableViewColumnHead(string fieldName, string title, bool show)
         {
             this.FieldName = fieldName;
             this.Title = title;
             this.Show = show;
-            this.Width = width.ToString();
         }
 
         /// <summary>
@@ -57,10 +40,5 @@
         /// 是否显示
         /// </summary>
         public bool Show { get; set; } = true;
-
-        /// <summary>
-        /// 列宽度
-        /// </summary>
-        public string Width { get; set; } = string.Empty;
     }
 }

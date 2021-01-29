@@ -50,10 +50,7 @@ namespace HZY.Admin.Services.Framework
                     })
                 ;
 
-            return await this.Repository.AsPagingViewModelAsync(query, page, rows, new List<TableViewColumnHead>()
-            {
-                new TableViewColumnHead("Name", "角色名称 test", 200)
-            });
+            return await this.Repository.AsPagingViewModelAsync(query, page, rows);
         }
 
         /// <summary>

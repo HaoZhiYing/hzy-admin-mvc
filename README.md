@@ -8,7 +8,7 @@
 
 
 #### :yellow_heart: 介绍 
-前后分离,后台通配权限管理系统！基于.Net5、Entity Framework Core 5
+前后分离,后台通配权限管理系统！基于.Net5、FreeSql
 
 前端：Vue3.x 、Antd Of Vue 2.0
 

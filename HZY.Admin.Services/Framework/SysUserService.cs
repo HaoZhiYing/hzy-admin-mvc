@@ -52,16 +52,16 @@ namespace HZY.Admin.Services.Framework
                         w.Id,
                         w.Name,
                         w.LoginName,
-                        所属角色 = string.Join(",", this.Repository.Orm
-                            .Select<SysUserRole, SysRole>()
-                            .LeftJoin(t => t.t1.RoleId == t.t2.Id)
-                            .Where(t => t.t1.UserId == w.Id)
-                            .ToList(t => t.t2.Name)),
                         // 所属角色 = string.Join(",", this.Repository.Orm
                         //     .Select<SysUserRole, SysRole>()
-                        //     .LeftJoin((a, b) => a.RoleId == b.Id)
-                        //     .Where((a, b) => a.UserId == w.Id)
-                        //     .ToList((a, b) => b.Name)),
+                        //     .LeftJoin(t => t.t1.RoleId == t.t2.Id)
+                        //     .Where(t => t.t1.UserId == w.Id)
+                        //     .ToList(t => t.t2.Name)),
+                        所属角色 = string.Join(",", this.Repository.Orm
+                            .Select<SysUserRole, SysRole>()
+                            .LeftJoin((a, b) => a.RoleId == b.Id)
+                            .Where((a, b) => a.UserId == w.Id)
+                            .ToList((a, b) => b.Name)),
                         w.Phone,
                         w.Email,
                         UpdateTime = w.UpdateTime.ToString("yyyy-MM-dd"),

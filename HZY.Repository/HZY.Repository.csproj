@@ -10,10 +10,15 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="FreeSql" Version="2.3.0-preview20210123" />
-    <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.0-preview20210123" />
-    <PackageReference Include="FreeSql.Repository" Version="2.3.0-preview20210123" />
-    <PackageReference Include="FreeSql.Extensions.Linq" Version="2.3.0-preview20210123" />
+    <PackageReference Include="NPOI" Version="2.5.1" />
+<!--    <PackageReference Include="FreeSql" Version="2.3.0-preview20210123" />-->
+<!--    <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.3.0-preview20210123" />-->
+<!--    <PackageReference Include="FreeSql.Repository" Version="2.3.0-preview20210123" />-->
+<!--    <PackageReference Include="FreeSql.Extensions.Linq" Version="2.3.0-preview20210123" />-->
+    <PackageReference Include="FreeSql" Version="2.0.105" />
+    <PackageReference Include="FreeSql.Provider.SqlServer" Version="2.0.105" />
+    <PackageReference Include="FreeSql.Repository" Version="2.0.105" />
+    <PackageReference Include="FreeSql.Extensions.Linq" Version="2.0.105" />
   </ItemGroup>
   
   <ItemGroup>
@@ -25,10 +30,6 @@
     <None Update="HZY.Repository.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NPOI" Version="2.5.1" />
   </ItemGroup>
 
   <ItemGroup>

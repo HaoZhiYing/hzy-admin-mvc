@@ -135,8 +135,7 @@ namespace HZY.Admin.Services.Framework
                 .ToListAsync();
             foreach (var item in functionIds)
             {
-                var sysMenuFunction = sysMenuFunctionList.FirstOrDefault(w => w.FunctionId == item).NullSafe();
-
+                var sysMenuFunction = sysMenuFunctionList.FirstOrDefault(w => w.FunctionId == item) ?? new SysMenuFunction();
                 sysMenuFunction.Id = sysMenuFunction.Id == Guid.Empty ? Guid.Empty : sysMenuFunction.Id;
                 sysMenuFunction.FunctionId = item;
                 sysMenuFunction.MenuId = model.Id;

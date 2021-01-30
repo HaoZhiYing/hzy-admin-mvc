@@ -42,17 +42,11 @@ namespace HZY.Admin.Services.Framework
 
             await this.Repository.DeleteAsync(w => w.RoleId == roleId && w.MenuId == menuId);
 
-            foreach (var item in functionIds)
-            {
-                var model = new SysRoleMenuFunction
-                {
-                    MenuId = menuId,
-                    RoleId = roleId,
-                    FunctionId = item
-                };
+            var sysRoleMenuFunctions = functionIds
+                .Select(item => new SysRoleMenuFunction {MenuId = menuId, RoleId = roleId, FunctionId = item})
+                .ToList();
 
-                await this.Repository.InsertAsync(model);
-            }
+            await this.Repository.InsertAsync(sysRoleMenuFunctions);
 
             return roleId;
         }

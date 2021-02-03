@@ -151,6 +151,10 @@ namespace HZY.Admin
             });
 
             #endregion
+            
+            #region 设置 Vue 单页面 地址
+            services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/dist");
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

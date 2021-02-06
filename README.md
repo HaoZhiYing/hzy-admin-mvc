@@ -15,7 +15,7 @@
 数据库脚本位置：根目录/doc/HzyAdminSpa.sql
 
 ### :blue_heart: 代码生成器 
-https://gitee.com/hzy6/hzy-admin-code-generation
+https://gitee.com/hzy6/hzy-admin-spa-code-generation
 
 ### 后台模板
 https://gitee.com/hzy6/hzy-admin-spa-ui

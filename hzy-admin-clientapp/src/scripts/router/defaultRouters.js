@@ -1,18 +1,20 @@
 import layout from '@/components/layout/layout';
+import login from '@/views/login';
+import notFoundComponent from '@/components/notFoundComponent';
+import redirect from '@/views/redirect';
+
 //路由配置
 export default [
-    {path: '/login', name: "/login", component: import('@/views/login')},
-    {path: '/:pathMatch(.*)', name: 'NotFound', component: import('@/components/notFoundComponent')},
+    { path: '/login', name: "/login", component: login },
+    { path: '/:pathMatch(.*)', name: 'NotFound', component: notFoundComponent },
     {
         path: '/redirect',
         component: layout,
         hidden: true,
-        children: [
-            {
-                path: '/redirect/:path(.*)',
-                component: import('@/views/redirect'),
-            }
-        ]
+        children: [{
+            path: '/redirect/:path(.*)',
+            component: redirect,
+        }]
     },
     // {
     //     path: '',

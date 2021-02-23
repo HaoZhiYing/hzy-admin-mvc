@@ -50,7 +50,7 @@ https://gitee.com/hzy6/hzy-admin-spa
 
 #### 安装教程
 
-1. 找到目录 HzyAdminSpa/ HZY.Admin / ClientApp 使用 VS Code 打开
+1. 前端 UI 在项目跟目录下 hzy-admin-clientapp 使用 VS Code 打开
 2. VS Code 打开终端执行CMD命令>> cnpm install 拉包 （node 环境 这些不懂得自行百度查询资料！）
 3. 然后使用 Vs 2019 打开服务端代码 f5 调试模式 运行即可
 注意：![输入图片说明](https://images.gitee.com/uploads/images/2019/1224/131124_8c2c3463_1242080.png "屏幕截图.png")
@@ -58,9 +58,7 @@ https://gitee.com/hzy6/hzy-admin-spa
 请使用这种独立模式启动，不要使用 iis 模式
 
 
-4、发布 Net Core 程序后 在 发布文件 根建立 ClientApp 文件夹
-
-5、打包 vue 前端页面得到 dist 文件夹 拷贝到 ClientApp 中 即可
+4、命令 npm run build 打包后使用 iis 或者 nginx 部署前端 ui
 
 
 ####  :heart: 捐赠 兄弟们就当打发要饭的吧！

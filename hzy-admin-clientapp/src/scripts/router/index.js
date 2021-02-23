@@ -31,15 +31,15 @@ vueRouter.beforeEach((to, from, next) => {
         //创建动态路由
         let hasRouteLayout = getDynamicRouters(data.menus);
         console.log(vueRouter.getRoutes());
-        if (getAuthority(data, to)) {
-            if (hasRouteLayout) {
+        if (hasRouteLayout) {
+            if (getAuthority(data, to)) {
                 next()
             } else {
-                vueRouter.replace('/')
+                next('/login');
+                // global.$router.push("/login");
             }
         } else {
-            next('/login');
-            // global.$router.push("/login");
+            vueRouter.replace('/');
         }
     });
 });

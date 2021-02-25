@@ -2,7 +2,7 @@ import {message, Modal, notification} from 'ant-design-vue';
 
 let tools = {
     tokenKey: "Authorization_HZY_ADMIN_For_Net5",
-    domainName:"https://localhost:5601",
+    domainName:process.env.NODE_ENV == "production"?"":"https://localhost:5601",
     //加载 loading
     loading: {
         //开始加载

@@ -37,7 +37,8 @@ export default {
       if (dialogContext) {
         return dialogContext.getDialogWrap();
       } else {
-        return document.body;
+        // return document.body;
+        return document.getElementById("hzy-layout");
       }
     },
     ...mapMutations(`app`, {

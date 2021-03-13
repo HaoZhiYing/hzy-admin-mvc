@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -140,15 +140,15 @@ namespace HZY.Admin.Services.Framework
                 .Where(w => w.UserId == model.Id)
                 .ToListAsync();
 
-            await this._sysUserRoleRepository.DeleteAsync(w => w.UserId == model.Id);
+            //await this._sysUserRoleRepository.DeleteAsync(w => w.UserId == model.Id);
             foreach (var item in roleIds)
             {
                 var sysUserRole = sysUserRoles.FirstOrDefault(w => w.RoleId == item).NullSafe();
 
-                sysUserRole.Id = Guid.NewGuid();
+                sysUserRole.Id = sysUserRole.Id == Guid.Empty ? Guid.NewGuid() : sysUserRole.Id;
                 sysUserRole.RoleId = item;
                 sysUserRole.UserId = model.Id;
-                await this._sysUserRoleRepository.InsertAsync(sysUserRole);
+                await this._sysUserRoleRepository.InsertOrUpdateAsync(sysUserRole);
             }
 
             return model;

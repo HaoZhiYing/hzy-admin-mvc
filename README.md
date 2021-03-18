@@ -1,12 +1,5 @@
 # HzyAdminSpa
 
-#### :yellow_heart: 介绍 
-前后分离,后台通配权限管理系统！基于.Net5、FreeSql
-
-前端：Vue3.x 、Antd Of Vue 2.0
-
-数据库脚本位置：根目录/doc/HzyAdminSpa.sql
-
 ### :blue_heart: 代码生成器 
 https://gitee.com/hzy6/hzy-admin-spa-code-generation
 
@@ -19,16 +12,17 @@ https://gitee.com/hzy6/hzy-admin-spa-ui
 
 2. https://gitee.com/hzy6/hzy-admin-spa
 
+#### :yellow_heart: 介绍 
+前后分离,后台通配权限管理系统！基于.Net5、FreeSql
+
+前端：Vue3.x 、Antd Of Vue 2.0
+
+数据库脚本位置：根目录/doc/HzyAdminSpa.sql
 
 #### 软件架构
 开发环境：vs2019 、 .Net5.0 、VsCode
 
 ###  **_交流群: 534584927_** 
-
-
-### Java 版本
-https://gitee.com/hzy6/hzy-admin-spa
-
 
 #### :cherries:  部分界面截图
 | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/165956_13c32f7f_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |

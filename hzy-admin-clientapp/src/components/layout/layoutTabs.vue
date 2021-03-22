@@ -9,7 +9,11 @@
       @tabClick="tabClick"
       v-model:activeKey="activeKey"
     >
-      <a-tab-pane v-for="item in tabList" :key="item.name" :closable="item.meta.close">
+      <a-tab-pane
+        v-for="item in tabList"
+        :key="item.name"
+        :closable="item.meta.close == 1"
+      >
         <template #tab>
           <a-dropdown>
             <AppIcons iconName="EllipsisOutlined" class="mr-10" />

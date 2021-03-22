@@ -48,7 +48,7 @@
 import AppIcons from "@/components/appIcons";
 import layoutTabs from "./layoutTabs";
 //vuex
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   props: {
@@ -71,6 +71,7 @@ export default {
       screenWidth: 0,
       screenHeight: 0,
       isMobile: this.screenWidth < 992,
+      tabs: [],
     };
   },
   watch: {
@@ -95,6 +96,12 @@ export default {
     this.calcScreen();
   },
   methods: {
+    ...mapMutations(`app`, {
+      closeTabSelf: "closeTabSelf",
+      closeTabOther: "closeTabOther",
+      closeTabAll: "closeTabAll",
+      tabClick: "tabClick",
+    }),
     onCollapsed() {
       this.collapsed = !this.collapsed;
       this.$emit("update:propCollapsed", this.collapsed);

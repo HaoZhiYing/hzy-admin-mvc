@@ -23,8 +23,9 @@ function createDynamicRouters(data) {
             dynamicRouters.push({
                 path: item.router ? item.router : '',
                 name: item.componentName,
-                component: import('@/' + item.url),
-                meta: {title: item.name, close: item.close, keepAlive: true, menuId: item.id},
+                component: () =>
+                    import ('@/' + item.url),
+                meta: { title: item.name, close: item.close, keepAlive: true, menuId: item.id },
             })
         }
     }
@@ -41,7 +42,8 @@ export function getDynamicRouters(data) {
         router.addRoute({
             name: 'appLayout',
             path: '',
-            component: import('@/components/layout/layout'),
+            component: () =>
+                import ('@/components/layout/layout'),
             children: dynamicRouters
         });
     }

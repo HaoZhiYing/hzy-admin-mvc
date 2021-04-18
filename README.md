@@ -10,7 +10,7 @@ https://gitee.com/hzy6/hzy-admin-spa-ui
 2. https://gitee.com/hzy6/hzy-admin-spa
 
 #### :yellow_heart: 介绍 
-前后分离,后台通配权限管理系统！
+前后分离,后台通配权限管理系统！基于.Net5
 
 后端技术：.Net5、EFCore5、Vue3.x 、Antd2.0 、Swagger
 

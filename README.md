@@ -1,8 +1,5 @@
 # HzyAdminSpa
 
-### :blue_heart: 代码生成器 
-https://gitee.com/hzy6/hzy-admin-spa-code-generation
-
 ### 后台模板
 https://gitee.com/hzy6/hzy-admin-spa-ui
 
@@ -13,7 +10,9 @@ https://gitee.com/hzy6/hzy-admin-spa-ui
 2. https://gitee.com/hzy6/hzy-admin-spa
 
 #### :yellow_heart: 介绍 
-前后分离,后台通配权限管理系统！基于.Net5、FreeSql
+前后分离,后台通配权限管理系统！
+
+后端技术：.Net5、EFCore5、Vue3.x 、Antd2.0 、Swagger
 
 前端：Vue3.x 、Antd Of Vue 2.0
 

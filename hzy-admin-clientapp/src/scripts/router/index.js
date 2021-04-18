@@ -1,16 +1,16 @@
-import {createRouter, createWebHistory} from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import tools from '@/scripts/tools';
 import defaultRouters from '@/scripts/router/defaultRouters';
-import {getDynamicRouters} from '@/scripts/router/dynamicRouters';
+import { getDynamicRouters } from '@/scripts/router/dynamicRouters';
 
-const routerHistory = createWebHistory();
+const routerHistory = createWebHashHistory(); // createWebHistory();
 
 let vueRouter = createRouter({
     history: routerHistory,
     routes: defaultRouters,
-    scrollBehavior: () => ({y: 0}),
+    scrollBehavior: () => ({ y: 0 }),
 });
 
 //监听路由

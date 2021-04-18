@@ -6,10 +6,10 @@ using HZY.Admin.Services.Framework;
 using HZY.Framework.Attributes;
 using HZY.Framework.Controllers;
 using HZY.Framework.Model;
-using HZY.Repository.Entity.Framework;
 using HZY.Repository.Attributes;
-using HZY.Toolkit;
+using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
+using HZY.Repository.Domain.Framework;
 
 namespace HZY.Admin.Controllers.Framework
 {
@@ -37,8 +37,7 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="search"></param>
         /// <returns></returns>
         [HttpPost("FindList/{size}/{page}")]
-        public async Task<ApiResult> FindListAsync([FromRoute] int size, [FromRoute] int page,
-            [FromBody] SysUser search)
+        public async Task<ApiResult> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysUser search)
         {
             return this.ResultOk(await this.DefaultService.FindListAsync(page, size, search));
         }
@@ -88,7 +87,7 @@ namespace HZY.Admin.Controllers.Framework
         public async Task<FileContentResult> ExportExcelAsync([FromBody] SysUser search)
             => this.File(await this.DefaultService.ExportExcelAsync(search), Tools.GetFileContentType[".xls"].ToStr(),
                 $"{Guid.NewGuid()}.xls");
-        
+
         /// <summary>
         /// 获取用户信息
         /// </summary>

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using HZY.Admin.Model.Dto;
 using HZY.Framework.Services;
-using HZY.Repository.Entity.Framework;
+using HZY.Repository.Domain.Framework;
 using HZY.Repository.Framework;
+using Microsoft.EntityFrameworkCore;
 
 namespace HZY.Admin.Services.Framework
 {
@@ -46,7 +47,7 @@ namespace HZY.Admin.Services.Framework
                 .Select(item => new SysRoleMenuFunction {MenuId = menuId, RoleId = roleId, FunctionId = item})
                 .ToList();
 
-            await this.Repository.InsertAsync(sysRoleMenuFunctions);
+            await this.Repository.InsertRangeAsync(sysRoleMenuFunctions);
 
             return roleId;
         }

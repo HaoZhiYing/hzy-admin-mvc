@@ -8,7 +8,7 @@ using HZY.Framework;
 using HZY.Framework.Filter;
 using HZY.Framework.Middleware;
 using HZY.Repository.Core;
-using HZY.Toolkit;
+using HZY.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +19,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using HZY.Repository.Core.Provider;
 
 namespace HZY.Admin
 {
@@ -125,7 +126,7 @@ namespace HZY.Admin
 
                 //为 Swagger JSON and UI设置xml文档注释路径
                 var xmlPath = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.xml");
-                var xmlPath1 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.Model.xml");
+                var xmlPath1 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Repository.xml");
                 options.IncludeXmlComments(xmlPath, true);
                 options.IncludeXmlComments(xmlPath1, true);
 

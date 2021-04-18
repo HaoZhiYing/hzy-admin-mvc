@@ -18,7 +18,7 @@
             <param name="authUserDto">Dto</param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysFunctionController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Entity.Framework.SysFunction)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysFunctionController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Framework.SysFunction)">
             <summary>
             获取列表
             </summary>
@@ -41,21 +41,21 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysFunctionController.SaveFormAsync(HZY.Repository.Entity.Framework.SysFunction)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysFunctionController.SaveFormAsync(HZY.Repository.Domain.Framework.SysFunction)">
             <summary>
             保存
             </summary>
             <param name="form"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysFunctionController.ExportExcelAsync(HZY.Repository.Entity.Framework.SysFunction)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysFunctionController.ExportExcelAsync(HZY.Repository.Domain.Framework.SysFunction)">
             <summary>
             导出Excel
             </summary>
             <param name="search"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysMenuController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Entity.Framework.SysMenu)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysMenuController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Framework.SysMenu)">
             <summary>
             获取列表
             </summary>
@@ -85,7 +85,7 @@
             <param name="form"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysMenuController.ExportExcelAsync(HZY.Repository.Entity.Framework.SysMenu)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysMenuController.ExportExcelAsync(HZY.Repository.Domain.Framework.SysMenu)">
             <summary>
             导出Excel
             </summary>
@@ -104,7 +104,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysRoleController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Entity.Framework.SysRole)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysRoleController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Framework.SysRole)">
             <summary>
             获取列表
             </summary>
@@ -127,21 +127,21 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysRoleController.SaveFormAsync(HZY.Repository.Entity.Framework.SysRole)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysRoleController.SaveFormAsync(HZY.Repository.Domain.Framework.SysRole)">
             <summary>
             保存
             </summary>
             <param name="form"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysRoleController.ExportExcelAsync(HZY.Repository.Entity.Framework.SysRole)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysRoleController.ExportExcelAsync(HZY.Repository.Domain.Framework.SysRole)">
             <summary>
             导出Excel
             </summary>
             <param name="search"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysRoleMenuFunctionController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Entity.Framework.SysRole)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysRoleMenuFunctionController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Framework.SysRole)">
             <summary>
             获取列表
             </summary>
@@ -168,7 +168,7 @@
             系统账号管理
             </summary>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysUserController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Entity.Framework.SysUser)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysUserController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Framework.SysUser)">
             <summary>
             获取列表
             </summary>
@@ -198,7 +198,7 @@
             <param name="form"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Framework.SysUserController.ExportExcelAsync(HZY.Repository.Entity.Framework.SysUser)">
+        <member name="M:HZY.Admin.Controllers.Framework.SysUserController.ExportExcelAsync(HZY.Repository.Domain.Framework.SysUser)">
             <summary>
             导出Excel
             </summary>
@@ -222,7 +222,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.MemberController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Entity.Member)">
+        <member name="M:HZY.Admin.Controllers.MemberController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Member)">
             <summary>
             获取列表
             </summary>
@@ -245,14 +245,14 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.MemberController.SaveFormAsync(HZY.Repository.Entity.Member)">
+        <member name="M:HZY.Admin.Controllers.MemberController.SaveFormAsync(HZY.Repository.Domain.Member)">
             <summary>
             保存
             </summary>
             <param name="form"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.MemberController.ExportExcelAsync(HZY.Repository.Entity.Member)">
+        <member name="M:HZY.Admin.Controllers.MemberController.ExportExcelAsync(HZY.Repository.Domain.Member)">
             <summary>
             导出Excel
             </summary>

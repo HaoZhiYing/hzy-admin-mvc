@@ -8,9 +8,9 @@ namespace HZY.Repository.Core.Models
     public class PagingViewModel
     {
         /// <summary>
-        /// 列头
+        /// 列信息
         /// </summary>
-        public List<string> Columns { get; set; }
+        public List<TableViewColumnHead> Columns { get; set; } = new List<TableViewColumnHead>();
 
         /// <summary>
         /// 转换后数据
@@ -20,12 +20,12 @@ namespace HZY.Repository.Core.Models
         /// <summary>
         /// 总数
         /// </summary>
-        public long Total { get; set; }
+        public int Count { get; set; }
 
         /// <summary>
         /// 总页数
         /// </summary>
-        public long PageCount { get; set; }
+        public int PageCount { get; set; }
 
         /// <summary>
         /// 一页显示多少条

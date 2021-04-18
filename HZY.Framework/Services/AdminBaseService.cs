@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using HZY.Common;
+using HZY.Common.Attributes;
 using HZY.Repository.Core.Models;
-using HZY.Toolkit;
-using HZY.Toolkit.Attributes;
-using Microsoft.AspNetCore.Http;
 using NPOI.HSSF.UserModel;
 
 namespace HZY.Framework.Services
@@ -25,8 +22,7 @@ namespace HZY.Framework.Services
         /// <param name="pagingViewModel"></param>
         /// <param name="byName">别名</param>
         /// <returns></returns>
-        protected virtual byte[] ExportExcelByPagingViewModel(PagingViewModel pagingViewModel,
-            Dictionary<string, string> byName = null)
+        protected virtual byte[] ExportExcelByPagingViewModel(PagingViewModel pagingViewModel, Dictionary<string, string> byName = null)
         {
             var workbook = new HSSFWorkbook();
             var sheet = workbook.CreateSheet();
@@ -38,13 +34,13 @@ namespace HZY.Framework.Services
             foreach (var item in cols)
             {
                 var index = cols.IndexOf(item);
-                if (byName != null && byName.ContainsKey(item))
+                if (byName != null && byName.ContainsKey(item.FieldName))
                 {
-                    dataRow.CreateCell(index).SetCellValue(byName[item]);
+                    dataRow.CreateCell(index).SetCellValue(byName[item.FieldName]);
                 }
                 else
                 {
-                    dataRow.CreateCell(index).SetCellValue(item);
+                    dataRow.CreateCell(index).SetCellValue(item.FieldName);
                 }
             }
 
@@ -55,9 +51,9 @@ namespace HZY.Framework.Services
                 dataRow = sheet.CreateRow(i + 1);
                 foreach (var col in cols)
                 {
-                    if (!col.StartsWith("_")) continue;
+                    if (!col.FieldName.StartsWith("_")) continue;
                     var index = cols.IndexOf(col);
-                    var name = col.FirstCharToUpper();
+                    var name = col.FieldName.FirstCharToUpper();
                     if (!item.ContainsKey(name)) continue;
                     var value = item[name];
                     dataRow.CreateCell(index).SetCellValue(value == null ? "" : value.ToString());

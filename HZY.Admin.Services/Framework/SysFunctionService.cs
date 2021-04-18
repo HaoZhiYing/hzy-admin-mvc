@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HZY.Framework.Services;
-using HZY.Repository.Entity.Framework;
+using HZY.Repository.Domain.Framework;
 using HZY.Repository.Core.Models;
 using HZY.Repository.Framework;
-using HZY.Toolkit;
+using HZY.Common;
+using Microsoft.EntityFrameworkCore;
+using HZY.Repository.Core.Provider;
 
 namespace HZY.Admin.Services.Framework
 {
@@ -28,23 +30,21 @@ namespace HZY.Admin.Services.Framework
         /// <returns></returns>
         public async Task<PagingViewModel> FindListAsync(int page, int size, SysFunction search)
         {
-            var query = await this.Repository.Select
-                    .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), a => a.Name.Contains(search.Name))
-                    .OrderBy(w => w.Number)
-                    .Count(out var total)
-                    .Page(page, size)
-                    .ToListAsync(w => new
-                    {
-                        w.Id,
-                        w.Number,
-                        w.Name,
-                        w.ByName,
-                        UpdateTime = w.UpdateTime.ToString("yyyy-MM-dd"),
-                        CreateTime = w.CreateTime.ToString("yyyy-MM-dd"),
-                    })
-                ;
+            var query = this.Repository.Select
+                .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), a => a.Name.Contains(search.Name))
+                .OrderBy(w => w.Number)
+                .Select(w => new
+                {
+                    w.Id,
+                    w.Number,
+                    w.Name,
+                    w.ByName,
+                    UpdateTime = w.UpdateTime.ToString("yyyy-MM-dd"),
+                    CreateTime = w.CreateTime.ToString("yyyy-MM-dd"),
+                })
+            ;
 
-            return await this.Repository.AsPagingViewModelAsync(query, page, size, total);
+            return await this.Repository.AsPagingViewModelAsync(query, page, size);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace HZY.Admin.Services.Framework
         /// <returns></returns>
         public async Task DeleteListAsync(List<Guid> ids)
         {
-            await this.Repository.DeleteAsync(ids);
+            await this.Repository.DeleteByIdAsync(ids);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace HZY.Admin.Services.Framework
         public async Task<Dictionary<string, object>> FindFormAsync(Guid id)
         {
             var res = new Dictionary<string, object>();
-            var form = await this.Repository.FindAsync(id);
+            var form = await this.Repository.FindByIdAsync(id);
             form = form.NullSafe();
 
             if (form.Id == Guid.Empty)

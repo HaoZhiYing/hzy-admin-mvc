@@ -5,10 +5,10 @@ using HZY.Admin.Services.Framework;
 using HZY.Framework.Attributes;
 using HZY.Framework.Controllers;
 using HZY.Framework.Model;
-using HZY.Repository.Entity.Framework;
 using HZY.Repository.Attributes;
-using HZY.Toolkit;
+using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
+using HZY.Repository.Domain.Framework;
 
 namespace HZY.Admin.Controllers.Framework
 {
@@ -18,7 +18,7 @@ namespace HZY.Admin.Controllers.Framework
         public SysFunctionController(SysFunctionService defaultService) : base(defaultService)
         {
         }
-        
+
         /// <summary>
         /// 获取列表
         /// </summary>
@@ -27,8 +27,7 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="search"></param>
         /// <returns></returns>
         [HttpPost("FindList/{size}/{page}")]
-        public async Task<ApiResult> FindListAsync([FromRoute] int size, [FromRoute] int page,
-            [FromBody] SysFunction search)
+        public async Task<ApiResult> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysFunction search)
         {
             return this.ResultOk(await this.DefaultService.FindListAsync(page, size, search));
         }
@@ -68,7 +67,7 @@ namespace HZY.Admin.Controllers.Framework
         {
             return this.ResultOk(await this.DefaultService.SaveFormAsync(form));
         }
-        
+
         /// <summary>
         /// 导出Excel
         /// </summary>
@@ -77,6 +76,6 @@ namespace HZY.Admin.Controllers.Framework
         [HttpPost("ExportExcel")]
         public async Task<FileContentResult> ExportExcelAsync([FromBody] SysFunction search)
             => this.File(await this.DefaultService.ExportExcelAsync(search), Tools.GetFileContentType[".xls"].ToStr(), $"{Guid.NewGuid()}.xls");
-        
+
     }
 }

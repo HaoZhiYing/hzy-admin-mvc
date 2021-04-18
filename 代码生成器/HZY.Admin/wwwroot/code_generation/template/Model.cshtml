@@ -1,0 +1,77 @@
+﻿@using HZY.Repository.Entity
+@model HZY.Admin.Model.CodeGenerationModel
+@{
+    var className = Model.TableName;
+    var classNameRemark = Model.AppTableInfos.First().TabNameRemark;
+    var ignores = new string[] { "Id", "CreateTime", "UpdateTime" };
+    var tableInfos = Model.AppTableInfos
+        .Where(w => !ignores.Contains(w.ColName))
+        .ToList()
+        ;
+}
+
+@functions
+{
+    //获取类型 根据 appTableInfo
+    string GetType(AppTableInfo appTableInfo)
+    {
+        switch (appTableInfo.ColType)
+        {
+            case "uniqueidentifier":
+                return appTableInfo.ColIsKey == 1 ? "Guid" : "Guid?";
+            case "bit":
+            case "int":
+                return appTableInfo.ColIsKey == 1 ? "int" : "int?";
+            case "datetime":
+                return appTableInfo.ColIsNull == 1 ? "DateTime?" : "DateTime";
+            case "float":
+            case "money":
+                return appTableInfo.ColIsNull == 1 ? "double?" : "double";
+            case "decimal":
+                return appTableInfo.ColIsNull == 1 ? "decimal?" : "decimal";
+            default:
+                return "string";
+        }
+    }
+    //获取类型 根据 appTableInfo
+    string GetTypeNew(AppTableInfo appTableInfo)
+    {
+        if (appTableInfo.CsType.ToLower().Equals("string")) return appTableInfo.CsType;
+        return appTableInfo.ColIsNull == 1 ? $"{appTableInfo.CsType}?" : appTableInfo.CsType;
+    }
+}
+
+<pre>
+/*
+ * *******************************************************
+ *
+ * 作者：hzy
+ *
+ * 开源地址：https://gitee.com/hzy6
+ *
+ * *******************************************************
+ */
+using System;
+using System.ComponentModel.DataAnnotations;
+using HZY.Repository.Core.Models;
+
+namespace HZY.Repository.Domain
+{
+    /// <summary>
+    /// @classNameRemark
+    /// </summary>
+    public class @className : GuidKeyBaseModel
+    {
+        @foreach (var item in tableInfos)
+        {
+            <text>
+            /// <summary>
+            /// @(item.ColRemark) => 备注: @item.ColName
+            /// </summary>
+            public @(GetTypeNew(item)) @item.ColName { get; set; }
+            </text>
+        }
+
+    }
+}
+</pre>

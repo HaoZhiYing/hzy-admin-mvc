@@ -154,7 +154,7 @@ namespace HZY.Admin
             #endregion
             
             #region 设置 Vue 单页面 地址
-            services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/dist");
+            //services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/dist");
             #endregion
         }
 

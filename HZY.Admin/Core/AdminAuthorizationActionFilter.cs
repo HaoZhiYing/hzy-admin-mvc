@@ -39,21 +39,20 @@ namespace HZY.Admin.Core
             #region 拦截操作数据库的 接口 方便发布线上演示
 
             //拦截操作数据库的 接口
-            /*
-            var actionList = new[] {"SaveForm", "DeleteList"};
+
+            var actionList = new[] { "SaveForm", "DeleteList" };
             if (actionList.Any(w => w.ToLower() == actionName.ToLower()))
             {
                 MessageBox.Show("请下载源代码本地运行!");
             }
-            */
 
             #endregion
 
-            var controller = (ControllerBase) context.Controller;
+            var controller = (ControllerBase)context.Controller;
             //获取 class 上面所有的 自定义 特性
             var customAttributes = controller.GetType().GetCustomAttributes();
             //处理 控制器 class 上面 带有 ControllerDescriptorAttribute 标记
-            var adminApiDescribeAttribute = (ControllerDescriptorAttribute) customAttributes
+            var adminApiDescribeAttribute = (ControllerDescriptorAttribute)customAttributes
                 .FirstOrDefault(w => w is ControllerDescriptorAttribute);
             if (adminApiDescribeAttribute == null) return;
 
@@ -71,7 +70,7 @@ namespace HZY.Admin.Core
             #endregion
 
             var menuId = adminApiDescribeAttribute.GetMenuId().ToGuid();
-            var actionDescriptorAttribute = (ActionDescriptorAttribute) context.ActionDescriptor.EndpointMetadata
+            var actionDescriptorAttribute = (ActionDescriptorAttribute)context.ActionDescriptor.EndpointMetadata
                 .FirstOrDefault(w => w is ActionDescriptorAttribute);
 
             #region 检查页面权限信息

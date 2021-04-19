@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace HZY.Admin.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class IndexController : Controller
     {
         [Route("")]

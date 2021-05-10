@@ -79,7 +79,7 @@ namespace HZY.Repository.Core.Provider
 
             //Update
             var updateEntries = entityEntries
-                .Where(w => w.Entity is BaseModel && w.State == EntityState.Modified || w.State == EntityState.Unchanged)
+                .Where(w => w.Entity is BaseModel && w.State == EntityState.Modified) // || w.State == EntityState.Unchanged
                 .Select(item => (BaseModel)item.Entity)
                 .ToList();
             updateEntries.ForEach(w => w.UpdateTime = DateTime.Now);

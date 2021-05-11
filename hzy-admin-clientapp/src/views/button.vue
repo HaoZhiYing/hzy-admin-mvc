@@ -1,5 +1,5 @@
 <template>
-  <div class="p-15" @click="onHello">
+  <div class="p-15 text-center" @click="onHello">
     <a-button type="primary"> Primary </a-button>
     <a-button>Default</a-button>
     <a-button type="dashed"> Dashed </a-button>
@@ -15,19 +15,28 @@
   </div>
 </template>
 <script>
+import { defineComponent, ref } from "vue";
 import { message } from "ant-design-vue";
 
-export default {
+export default defineComponent({
   name: "button",
-  data() {
+  setup() {
+    const messageText = ref("hello");
+
+    const methods = {
+      onHello() {
+        message.success(messageText.value);
+      },
+    };
+
     return {
-      message: "hello",
+      ...methods,
     };
   },
-  methods: {
-    onHello() {
-      message.success(this.message);
-    },
-  },
-};
+});
 </script>
+<style lang="less" scope>
+.ant-btn {
+  margin: 10px;
+}
+</style>

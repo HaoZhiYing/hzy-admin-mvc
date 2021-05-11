@@ -44,10 +44,11 @@ import { computed, defineComponent, reactive, toRefs, watch } from "vue";
 import AppIcons from "@/components/appIcons.vue";
 import router from "@/router/index";
 import { useStore } from "vuex";
+import SubMenus from "./subMenus";
 
 export default defineComponent({
   name: "layoutMenus",
-  components: { AppIcons },
+  components: { AppIcons, SubMenus },
   props: {
     propMenuTheme: {
       type: String,

@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import tools from '@/scripts/tools';
 import defaultRouters from '@/router/defaultRouters';
 import { getDynamicRouters } from '@/router/dynamicRouters';
+import store from '@/store/index'
 
 const routerHistory = createWebHashHistory(); // createWebHistory();
 
@@ -25,7 +26,7 @@ router.beforeEach((to, from, next) => {
     }
 
     //路由和用户信息 处理
-    global.$vuex.dispatch('app/getUserInfo').then(data => {
+    store.dispatch('app/getUserInfo').then(data => {
         //创建动态路由
         let hasRouteLayout = getDynamicRouters(data.menus);
         console.log(router.getRoutes());
@@ -37,7 +38,8 @@ router.beforeEach((to, from, next) => {
                 // global.$router.push("/login");
             }
         } else {
-            router.replace('/');
+            next('/')
+            // router.replace('/');
         }
     });
 });

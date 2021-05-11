@@ -5,7 +5,7 @@
       tabPosition="top"
       type="editable-card"
       :tabBarGutter="0"
-      @edit="closeTabSelf"
+      @edit="onEdit"
       @tabClick="tabClick"
       v-model:activeKey="activeKey"
     >

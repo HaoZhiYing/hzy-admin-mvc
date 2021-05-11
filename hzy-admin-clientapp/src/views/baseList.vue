@@ -1,6 +1,10 @@
 <template>
   <div class="p-15">
-    <a-table :row-selection="rowSelection" :columns="columns" :data-source="data">
+    <a-table
+      :row-selection="rowSelection"
+      :columns="columns"
+      :data-source="data"
+    >
       <template #name="{ text }">
         <a>{{ text }}</a>
       </template>
@@ -8,6 +12,8 @@
   </div>
 </template>
 <script>
+import { defineComponent, reactive, toRefs } from "vue";
+
 const columns = [
   {
     title: "Name",
@@ -50,30 +56,48 @@ const data = [
   },
 ];
 
-export default {
-  name:"base_list",
-  data() {
-    return {
-      data,
+export default defineComponent({
+  name: "base_list",
+  setup() {
+    const state = reactive({
       columns,
+      data,
+    });
+
+    // const rowSelection = computed(() => {
+    //   return {
+    //     onChange: (selectedRowKeys, selectedRows) => {
+    //       console.log(
+    //         `selectedRowKeys: ${selectedRowKeys}`,
+    //         "selectedRows: ",
+    //         selectedRows
+    //       );
+    //     },
+    //     getCheckboxProps: (record) => ({
+    //       disabled: record.name === "Disabled User", // Column configuration not to be checked
+    //       name: record.name,
+    //     }),
+    //   };
+    // });
+
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log(
+          `selectedRowKeys: ${selectedRowKeys}`,
+          "selectedRows: ",
+          selectedRows
+        );
+      },
+      getCheckboxProps: (record) => ({
+        disabled: record.name === "Disabled User", // Column configuration not to be checked
+        name: record.name,
+      }),
+    };
+
+    return {
+      ...toRefs(state),
+      rowSelection,
     };
   },
-  computed: {
-    rowSelection() {
-      return {
-        onChange: (selectedRowKeys, selectedRows) => {
-          console.log(
-            `selectedRowKeys: ${selectedRowKeys}`,
-            "selectedRows: ",
-            selectedRows
-          );
-        },
-        getCheckboxProps: (record) => ({
-          disabled: record.name === "Disabled User", // Column configuration not to be checked
-          name: record.name,
-        }),
-      };
-    },
-  },
-};
+});
 </script>

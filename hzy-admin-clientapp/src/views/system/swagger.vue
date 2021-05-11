@@ -11,35 +11,40 @@
 </template>
 
 <script>
-import tools from "@/scripts/tools";
+import { defineComponent, onMounted, ref } from "vue";
+import appConsts from "@/scripts/app-consts";
 
-export default {
+export default defineComponent({
   name: "system_swagger",
-  data() {
+  setup() {
+    const loading = ref(true);
+    const domainName = ref(appConsts.domainName);
+
+    onMounted(() => {
+      let iframe = document.getElementById("iframe_swagger");
+
+      if (iframe != null) {
+        // 处理兼容行问题
+        if (Object.prototype.hasOwnProperty.call(iframe, "attachEvent")) {
+          iframe.addEventListener("onload", () => {
+            // iframe加载完毕以后执行操作
+            loading.value = false;
+          });
+        } else {
+          iframe.onload = function() {
+            // iframe加载完毕以后执行操作
+            loading.value = false;
+          };
+        }
+      }
+    });
+
     return {
-      loading: true,
-      domainName: tools.domainName,
+      loading,
+      domainName,
     };
   },
-  created() {},
-  mounted() {
-    let t = this;
-    let iframe = document.getElementById("iframe_swagger");
-
-    // 处理兼容行问题
-    if (Object.prototype.hasOwnProperty.call(iframe, "attachEvent")) {
-      iframe.attachEvent("onload", function () {
-        // iframe加载完毕以后执行操作
-        t.loading = false;
-      });
-    } else {
-      iframe.onload = function () {
-        // iframe加载完毕以后执行操作
-        t.loading = false;
-      };
-    }
-  },
-};
+});
 </script>
 
 <style lang="less" scoped>

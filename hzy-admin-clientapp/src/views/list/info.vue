@@ -1,8 +1,16 @@
 <template>
   <div>
-    <a-modal v-model:visible="visible" title="编辑" centered @ok="visible = false" :width="800">
+    <a-modal
+      v-model:visible="visible"
+      title="编辑"
+      centered
+      @ok="visible = false"
+      :width="800"
+    >
       <template #footer>
-        <a-button type="primary" :loading="loading" @click="save()">提交</a-button>
+        <a-button type="primary" :loading="loading" @click="save()"
+          >提交</a-button
+        >
         <a-button type="danger" ghost @click="visible = false">关闭</a-button>
       </template>
       <a-row :gutter="[15, 15]">
@@ -63,36 +71,49 @@
   </div>
 </template>
 <script>
-import { message } from "ant-design-vue";
+import { defineComponent, reactive, toRefs, watch } from "vue";
+import tools from "@/scripts/tools";
 
-export default {
+export default defineComponent({
   props: {
     propVisible: Boolean,
   },
-  data() {
-    return {
-      visible: this.propVisible,
+  setup(props, context) {
+    const state = reactive({
+      visible: props.propVisible,
       value: "",
+    });
+
+    watch(
+      () => props.propVisible,
+      (value) => {
+        state.visible = value;
+      }
+    );
+
+    watch(
+      () => state.visible,
+      (value) => {
+        context.emit("update:propVisible", value);
+      }
+    );
+
+    const methods = {
+      afterVisibleChange(val) {
+        console.log("visible", val);
+      },
+      // showDrawer() {
+      //   this.visible = true;
+      // },
+      save() {
+        tools.message("提交成功!");
+      },
+    };
+
+    return {
+      ...toRefs(state),
+      ...methods,
     };
   },
-  watch: {
-    propVisible(value) {
-      this.visible = value;
-    },
-    visible(value) {
-      this.$emit("update:propVisible", value);
-    },
-  },
-  methods: {
-    afterVisibleChange(val) {
-      console.log("visible", val);
-    },
-    // showDrawer() {
-    //   this.visible = true;
-    // },
-    save() {
-      message.success("提交成功!");
-    },
-  },
-};
+});
 </script>

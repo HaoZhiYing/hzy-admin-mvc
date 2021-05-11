@@ -33,6 +33,9 @@ import {
   EyeOutlined,
   BranchesOutlined,
   ArrowUpOutlined,
+  //新增图标
+  GoldOutlined,
+  DesktopOutlined,
   //tab 选项卡
 } from "@ant-design/icons-vue";
 
@@ -70,6 +73,9 @@ export default defineComponent({
     EyeOutlined,
     BranchesOutlined,
     ArrowUpOutlined,
+    //新增图标
+    GoldOutlined,
+    DesktopOutlined,
     //tab 选项卡
   },
 });

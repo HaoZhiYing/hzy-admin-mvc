@@ -242,22 +242,29 @@
   </div>
 </template>
 <script>
-import AppIcons from "@/components/appIcons";
+import { defineComponent, reactive, toRefs } from "vue";
+import AppIcons from "@/components/appIcons.vue";
 import hzyImg from "@/assets/hzy.jpg";
 
-export default {
+export default defineComponent({
   name: "home",
-  data() {
-    return {
+  components: { AppIcons },
+  setup() {
+    const state = reactive({
       imgPath: hzyImg,
       deadline: Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30,
+    });
+
+    const methods = {
+      onFinish() {
+        console.log("over");
+      },
+    };
+
+    return {
+      ...toRefs(state),
+      ...methods,
     };
   },
-  components: { AppIcons },
-  methods: {
-    onFinish() {
-      console.log("over");
-    },
-  },
-};
+});
 </script>

@@ -91,8 +91,8 @@ export default {
     width: 100%;
     display: inline-block;
     .app-skin-item {
-      width: 25px;
-      height: 25px;
+      width: 30px;
+      height: 30px;
       float: left;
       margin: 8px;
       cursor: pointer;

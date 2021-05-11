@@ -43,11 +43,11 @@
         />
         <a-layout-content>
           <router-view v-slot="{ Component }">
-            <transition name="fade" mode="out-in">
-              <keep-alive :include="cacheViews">
-                <component :is="Component" :key="key" />
-              </keep-alive>
-            </transition>
+            <!-- <transition name="fade" mode="out-in"> -->
+            <keep-alive :include="cacheViews">
+              <component :is="Component" :key="key" />
+            </keep-alive>
+            <!-- </transition> -->
           </router-view>
         </a-layout-content>
         <a-layout-footer style="text-align: center">

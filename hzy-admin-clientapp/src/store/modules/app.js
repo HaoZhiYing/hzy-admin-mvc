@@ -1,3 +1,6 @@
+//属性状态管理
+import store from '@/store/index'
+import router from '@/router/index'
 import userService from "@/service/system/userService";
 
 function getTabs() {
@@ -11,7 +14,6 @@ function getTabs() {
 export default {
     namespaced: true,
     state: () => ({
-        loading: true,
         tabList: getTabs(),
         //缓存视图
         cacheViews: ["home"],
@@ -19,9 +21,6 @@ export default {
         userInfo: {}
     }),
     mutations: {
-        setLoading(state, value) {
-            state.loading = !!value;
-        },
         //添加缓存视图
         addCacheView(state, value) {
             const { name, meta } = value;
@@ -62,7 +61,7 @@ export default {
                 state.tabList.push(value);
             }
 
-            this.commit("app/addCacheView", value);
+            store.commit("app/addCacheView", value);
         },
         //关闭当前
         closeTabSelf(state, value) {
@@ -70,11 +69,11 @@ export default {
             let oldTab = state.tabList[index];
             if (oldTab.meta.close) {
                 state.tabList.splice(index, 1);
-                this.commit("app/delCacheView", oldTab.name);
+                store.commit("app/delCacheView", oldTab.name);
             }
             let tab = state.tabList[index - 1];
             if (!tab) return;
-            global.$router.push({ name: tab.name });
+            router.push({ name: tab.name });
         },
         //关闭其他
         closeTabOther(state, value) {
@@ -87,31 +86,31 @@ export default {
                 }
             }
 
-            let route = global.$router.currentRoute;
+            let route = router.currentRoute;
             if (value != route.name) {
-                global.$router.push({ name: value });
+                router.push({ name: value });
             }
 
-            this.commit("app/delCacheViewOther", name);
+            store.commit("app/delCacheViewOther", name);
             state.tabList = list;
         },
         //关闭所有
         closeTabAll(state) {
             let tab = state.tabList.find(w => !w.meta.close);
-            let route = global.$router.currentRoute;
+            let route = router.currentRoute;
 
             if (tab.name != route.name) {
-                global.$router.push({ name: tab.name });
+                router.push({ name: tab.name });
             }
 
             state.tabList = [];
             state.tabList.push(tab);
 
-            this.commit("app/delCacheViewAll");
+            store.commit("app/delCacheViewAll");
         },
         //点击切换选项卡
         tabClick(state, value) {
-            global.$router.push({ name: value });
+            router.push({ name: value });
         },
         //设置用户信息
         setUserInfo(state, value) {

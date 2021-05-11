@@ -1,13 +1,13 @@
 <template>
   <a-layout-header style="padding: 0; height: 87px; background: #fff">
-    <div class="hzy-layout-header" :class="hdeaderTheme">
+    <div class="hzy-layout-header" :class="headerTheme">
       <div class="hzy-header-btn" @click="onCollapsed">
         <AppIcons iconName="MenuUnfoldOutlined" v-if="collapsed" />
         <AppIcons iconName="MenuFoldOutlined" v-else />
       </div>
       <!-- <div class="hzy-header-btn logo" v-if="!isMobile">{{ title }}</div> -->
       <div style="flex: 1 1 0%"></div>
-      <div class="hzy-header-btn" @click="reload">
+      <div class="hzy-header-btn" @click="onReload">
         <AppIcons iconName="ReloadOutlined" />
       </div>
       <div class="hzy-header-btn" @click="onSettings">

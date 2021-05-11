@@ -1,5 +1,6 @@
 import { message, Modal, notification } from 'ant-design-vue';
 import NProgress from 'nprogress';
+import appConsts from '@/scripts/app-consts';
 
 let tools = {
     nprogressState: false,
@@ -238,15 +239,15 @@ let tools = {
     },
     //保存 token
     setAuthorization(token) {
-        this.setCookie(tools.tokenKey, token);
+        this.setCookie(appConsts.tokenKey, token);
     },
     //获取 token
     getAuthorization() {
-        return this.getCookie(tools.tokenKey);
+        return this.getCookie(appConsts.tokenKey);
     },
     //删除 token
     delAuthorization() {
-        this.delCookie(tools.tokenKey);
+        this.delCookie(appConsts.tokenKey);
     },
     //设置头部颜色
     setHeaderTheme(theme) {

@@ -33,11 +33,13 @@
     <a-card class="w100" bodyStyle="padding:0">
       <a-row :gutter="20" class="p-15 pb-0">
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
-          <a-button class="mr-10" @click="fromSearch.state = !fromSearch.state">
+          <a-button class="mr-15" @click="fromSearch.state = !fromSearch.state">
             <div v-if="fromSearch.state">
               <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
             </div>
-            <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
+            <div v-else>
+              <AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开
+            </div>
           </a-button>
           <a-button type="primary" class="mr-15" @click="from.visible = true">
             <template #icon>
@@ -59,11 +61,20 @@
             </a-button>
           </a-popconfirm>
         </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15 text-right">
+        <a-col
+          :xs="24"
+          :sm="24"
+          :md="12"
+          :lg="12"
+          :xl="12"
+          class="pb-15 text-right"
+        >
           <a-button type="primary" class="mr-15" @click="exportExcel"
             >导出 Excel</a-button
           >
-          <a-button type="primary" class="mr-15" @click="exportExcel">导出 Pdf</a-button>
+          <a-button type="primary" class="mr-15" @click="exportExcel"
+            >导出 Pdf</a-button
+          >
         </a-col>
       </a-row>
       <a-table
@@ -76,7 +87,7 @@
         <!-- <template #id="{ record }"> -->
         <template #id>
           <span>
-            <a href="#" @click="from.visible = true">修改</a>
+            <a href="javascript:;" @click="from.visible = true">修改</a>
             <a-divider type="vertical" />
             <a class="text-danger">删除</a>
           </span>
@@ -87,16 +98,20 @@
   </div>
 </template>
 <script>
-import AppIcons from "@/components/appIcons";
-import tools from "@/scripts/tools";
-import info from "./info";
+import { defineComponent, reactive, toRefs } from "vue";
 
-export default {
+import AppIcons from "@/components/appIcons.vue";
+import info from "./info.vue";
+import tools from "@/scripts/tools";
+
+export default defineComponent({
   name: "list",
-  data() {
-    return {
+  components: { AppIcons, info },
+  setup() {
+    const state = reactive({
       fromSearch: {
         state: false,
+        fieldCount: 7,
         vm: {
           value: "",
         },
@@ -109,57 +124,64 @@ export default {
         columns: [],
         data: [],
       },
+    });
+
+    const methods = {
+      findList() {
+        state.table.loading = true;
+        setTimeout(() => {
+          const columns = [
+            {
+              title: "姓名",
+              dataIndex: "name",
+              width: 130,
+            },
+            {
+              title: "年龄",
+              dataIndex: "age",
+              width: 80,
+            },
+            {
+              title: "地址",
+              dataIndex: "address",
+            },
+            {
+              title: "操作",
+              dataIndex: "id",
+              width: 200,
+              slots: { customRender: "id" },
+            },
+          ];
+
+          const data = [];
+          for (let i = 0; i < 100; i++) {
+            data.push({
+              key: i,
+              name: `Hzy ${i + 1}`,
+              age: 18 + i,
+              address: `addr. ${i + 1}`,
+              id: i,
+            });
+          }
+          state.table.columns = columns;
+          state.table.data = data;
+          state.table.loading = false;
+        }, 100);
+      },
+      exportExcel() {
+        tools.notice("导出Excel成功!", "成功", "提醒");
+      },
+      confirm() {
+        tools.message("删除成功!", "成功");
+      },
+    };
+
+    methods.findList();
+
+    return {
+      ...toRefs(state),
+      ...methods,
     };
   },
-  components: { AppIcons, info },
-  created() {
-    this.findList();
-  },
-  methods: {
-    findList() {
-      this.table.loading = true;
-      setTimeout(() => {
-        const columns = [
-          {
-            title: "姓名",
-            dataIndex: "name",
-            width: 130,
-          },
-          {
-            title: "年龄",
-            dataIndex: "age",
-            width: 80,
-          },
-          {
-            title: "地址",
-            dataIndex: "address",
-          },
-          {
-            title: "操作",
-            dataIndex: "id",
-            width: 200,
-            slots: { customRender: "id" },
-          },
-        ];
-
-        const data = [];
-        for (let i = 0; i < 100; i++) {
-          data.push({
-            key: i,
-            name: `Hzy ${i + 1}`,
-            age: 18 + i,
-            address: `addr. ${i + 1}`,
-            id: i,
-          });
-        }
-        this.table.columns = columns;
-        this.table.data = data;
-        this.table.loading = false;
-      }, 100);
-    },
-    exportExcel() {
-      tools.notice("导出Excel成功!", "成功", "提醒");
-    },
-  },
-};
+});
 </script>

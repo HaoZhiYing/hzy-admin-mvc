@@ -24,6 +24,7 @@ import { defineComponent } from "vue";
 import AppIcons from "@/components/appIcons.vue";
 
 export default defineComponent({
+  name: "subMenus",
   props: ["menuInfo"],
   components: {
     AppIcons,

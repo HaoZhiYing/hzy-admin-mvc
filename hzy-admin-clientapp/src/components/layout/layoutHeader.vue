@@ -45,12 +45,24 @@
   </a-layout-header>
 </template>
 <script>
-import AppIcons from "@/components/appIcons";
-import layoutTabs from "./layoutTabs";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  reactive,
+  toRefs,
+  watch,
+} from "vue";
+import AppIcons from "@/components/appIcons.vue";
+import layoutTabs from "./layoutTabs.vue";
 //vuex
-import { mapState, mapMutations } from "vuex";
+import { useStore } from "vuex";
+import router from "@/router/index";
+import screenfull from "screenfull";
+import tools from "@/scripts/tools";
 
-export default {
+export default defineComponent({
+  name: "layoutHeader",
   props: {
     propCollapsed: Boolean,
     propLayoutSettingsState: Boolean,
@@ -60,104 +72,102 @@ export default {
     AppIcons,
     layoutTabs,
   },
-  data() {
-    return {
-      collapsed: this.propCollapsed,
-      hdeaderTheme: this.propHeaderTheme,
+  setup(props, context) {
+    const state = reactive({
+      collapsed: props.propCollapsed,
+      headerTheme: props.propHeaderTheme,
       fullscreen: false,
       layoutSettings: {
-        state: this.propLayoutSettingsState,
+        state: props.propLayoutSettingsState,
       },
       screenWidth: 0,
       screenHeight: 0,
-      isMobile: this.screenWidth < 992,
+      // isMobile: screenWidth < 992,
+      isMobile: false,
       tabs: [],
+    });
+
+    watch(
+      () => props.propCollapsed,
+      (value) => {
+        state.collapsed = value;
+      }
+    );
+
+    watch(
+      () => props.propLayoutSettingsState,
+      (value) => {
+        state.layoutSettings.state = value;
+      }
+    );
+
+    watch(
+      () => props.propHeaderTheme,
+      (value) => {
+        state.headerTheme = value;
+      }
+    );
+
+    const store = useStore();
+    const title = computed(() => store.state.app.title);
+    const userName = computed(() => store.state.app.userInfo.name);
+
+    //页面加载 钩子函数
+    onMounted(() => {
+      methods.calcScreen();
+    });
+
+    const methods = {
+      //实时计算监听 宽高
+      calcScreen() {
+        state.screenWidth = window.innerWidth;
+        state.screenHeight = window.innerHeight;
+        state.isMobile = state.screenWidth < 992;
+        window.onresize = () => {
+          return (() => {
+            state.screenWidth = window.innerWidth;
+            state.screenHeight = window.innerHeight;
+            state.isMobile = state.screenWidth < 992;
+          })();
+        };
+      },
+      onCollapsed() {
+        state.collapsed = !state.collapsed;
+        context.emit("update:propCollapsed", state.collapsed);
+      },
+      onSettings() {
+        context.emit(
+          "update:propLayoutSettingsState",
+          !state.layoutSettings.state
+        );
+      },
+      onLogOut() {
+        //退出登录
+        router.push("/login");
+      },
+      onReload(dom) {
+        context.emit("reload", dom);
+      },
+      //全屏事件
+      onFullScreen() {
+        if (!screenfull.isEnabled) {
+          return tools.message(
+            "您的浏览器无法使用全屏功能，请更换谷歌浏览器或者请手动点击F11按钮全屏展示！"
+          );
+        }
+        screenfull.toggle();
+        state.fullscreen = !screenfull.isFullscreen;
+      },
+    };
+
+    return {
+      ...toRefs(state),
+      ...methods,
+      title,
+      userName,
     };
   },
-  watch: {
-    propCollapsed(value) {
-      this.collapsed = value;
-    },
-    propLayoutSettingsState(value) {
-      this.layoutSettings.state = value;
-    },
-    propHeaderTheme(value) {
-      this.hdeaderTheme = value;
-    },
-  },
-  computed: {
-    ...mapState("app", {
-      title: (state) => state.title,
-      userName: (state) => state.userInfo.name,
-    }),
-  },
-  created() {},
-  mounted() {
-    this.calcScreen();
-  },
-  methods: {
-    ...mapMutations(`app`, {
-      closeTabSelf: "closeTabSelf",
-      closeTabOther: "closeTabOther",
-      closeTabAll: "closeTabAll",
-      tabClick: "tabClick",
-    }),
-    onCollapsed() {
-      this.collapsed = !this.collapsed;
-      this.$emit("update:propCollapsed", this.collapsed);
-    },
-    onSettings() {
-      this.$emit("update:propLayoutSettingsState", !this.layoutSettings.state);
-    },
-    onLogOut() {
-      //退出登录
-      this.$router.push("/login");
-    },
-    reload(dom) {
-      this.$emit("reload", dom);
-    },
-    //实时计算监听 宽高
-    calcScreen() {
-      this.screenWidth = window.innerWidth;
-      this.screenHeight = window.innerHeight;
-      this.isMobile = this.screenWidth < 992;
-      window.onresize = () => {
-        return (() => {
-          this.screenWidth = window.innerWidth;
-          this.screenHeight = window.innerHeight;
-          this.isMobile = this.screenWidth < 992;
-        })();
-      };
-    },
-    // 全屏事件
-    onFullScreen() {
-      let element = document.documentElement;
-      if (this.fullscreen) {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      } else {
-        if (element.requestFullscreen) {
-          element.requestFullscreen();
-        } else if (element.webkitRequestFullScreen) {
-          element.webkitRequestFullScreen();
-        } else if (element.mozRequestFullScreen) {
-          element.mozRequestFullScreen();
-        } else if (element.msRequestFullscreen) {
-          // IE11
-          element.msRequestFullscreen();
-        }
-      }
-      this.fullscreen = !this.fullscreen;
-    },
-  },
-};
+});
 </script>
 <style lang="less">
 #hzy-layout {

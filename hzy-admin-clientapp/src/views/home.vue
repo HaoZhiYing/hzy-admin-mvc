@@ -12,7 +12,10 @@
               </a-col>
               <a-col :span="16" :order="2">
                 <div class="fs-20">
-                  <a target="_black" href="https://gitee.com/hzy6" class="text-cyan"
+                  <a
+                    target="_black"
+                    href="https://gitee.com/hzy6"
+                    class="text-cyan"
                     >HZY</a
                   >
                 </div>
@@ -114,10 +117,18 @@
               </a-card-grid>
             </a-col>
           </a-row>
-          <a-card-grid style="width: 25%; textalign: 'center'">Content</a-card-grid>
-          <a-card-grid style="width: 25%; textalign: 'center'">Content</a-card-grid>
-          <a-card-grid style="width: 25%; textalign: 'center'">Content</a-card-grid>
-          <a-card-grid style="width: 25%; textalign: 'center'">Content</a-card-grid>
+          <a-card-grid style="width: 25%; textalign: 'center'"
+            >Content</a-card-grid
+          >
+          <a-card-grid style="width: 25%; textalign: 'center'"
+            >Content</a-card-grid
+          >
+          <a-card-grid style="width: 25%; textalign: 'center'"
+            >Content</a-card-grid
+          >
+          <a-card-grid style="width: 25%; textalign: 'center'"
+            >Content</a-card-grid
+          >
         </a-card>
       </a-col>
     </a-row>
@@ -167,11 +178,15 @@
             >
             <a-timeline-item>
               <template #dot>
-                <AppIcons iconName="ClockCircleOutlined" style="font-size: 16px" />
+                <AppIcons
+                  iconName="ClockCircleOutlined"
+                  style="font-size: 16px"
+                />
               </template>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-              doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-              veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+              quae ab illo inventore veritatis et quasi architecto beatae vitae
+              dicta sunt explicabo.
             </a-timeline-item>
             <a-timeline-item color="red"
               >Network problems being solved 2015-09-01</a-timeline-item
@@ -179,7 +194,10 @@
             <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
             <a-timeline-item>
               <template #dot>
-                <AppIcons iconName="ClockCircleOutlined" style="font-size: 16px" />
+                <AppIcons
+                  iconName="ClockCircleOutlined"
+                  style="font-size: 16px"
+                />
               </template>
               Technical testing 2015-09-01
             </a-timeline-item>
@@ -225,7 +243,7 @@
 </template>
 <script>
 import AppIcons from "@/components/appIcons";
-import hzyImg from "@/assets/images/hzy.jpg";
+import hzyImg from "@/assets/hzy.jpg";
 
 export default {
   name: "home",

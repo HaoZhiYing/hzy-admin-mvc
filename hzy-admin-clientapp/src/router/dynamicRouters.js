@@ -1,5 +1,5 @@
-import router from '@/scripts/router/index'
-import vueRouter from "@/scripts/router/index";
+import router from '@/router/index'
+import vueRouter from "@/router/index";
 
 let dynamicRouters = [];
 
@@ -24,7 +24,7 @@ function createDynamicRouters(data) {
                 path: item.router ? item.router : '',
                 name: item.componentName,
                 component: () =>
-                    import ('@/' + item.url),
+                    import('@/' + item.url),
                 meta: { title: item.name, close: item.close, keepAlive: true, menuId: item.id },
             })
         }
@@ -43,7 +43,7 @@ export function getDynamicRouters(data) {
             name: 'appLayout',
             path: '',
             component: () =>
-                import ('@/components/layout/layout'),
+                import('@/components/layout/layout'),
             children: dynamicRouters
         });
     }

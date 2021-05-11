@@ -111,7 +111,6 @@ export default {
         },
         //点击切换选项卡
         tabClick(state, value) {
-            console.log('value123', value);
             global.$router.push({ name: value });
         },
         //设置用户信息

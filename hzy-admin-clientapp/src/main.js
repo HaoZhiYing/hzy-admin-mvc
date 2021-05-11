@@ -1,25 +1,18 @@
-import { createApp } from 'vue';
-import App from './App';
-
-const app = createApp(App);
-app.config.productionTip = false;
-
-//引入覆盖样式
-import '@/assets/styles/antdv-cover.less';
-
-//路由
-import router from '@/scripts/router/index';
-app.use(router);
-global.$router = router;
-
-//vuex
-import store from '@/scripts/vuex/store';
-app.use(store);
-global.$vuex = store;
-
+import { createApp } from 'vue'
+import App from './App.vue'
+//vue 路由
+import router from './router'
+//属性状态管理
+import store from './store'
 //ant-design-vue
-import Antd from 'ant-design-vue';
-app.use(Antd);
+import antd from 'ant-design-vue'
+//样式-引入覆盖antd
+import '@/assets/styles/hzy-admin-ui-antd.less'
+//样式-nprogress
+import 'nprogress/nprogress.css';
 
-//dom
-app.mount('#app')
+createApp(App)
+    .use(store)
+    .use(router)
+    .use(antd)
+    .mount('#app')

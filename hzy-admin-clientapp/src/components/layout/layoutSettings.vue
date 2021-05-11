@@ -19,7 +19,11 @@
     </div>
     <a-divider>菜单颜色</a-divider>
     <div class="mt-5 text-center">
-      <a-radio-group name="radioGroup" defaultValue="dark" v-model:value="menuTheme">
+      <a-radio-group
+        name="radioGroup"
+        defaultValue="dark"
+        v-model:value="menuTheme"
+      >
         <a-radio value="dark">暗色</a-radio>
         <a-radio value="light">亮色</a-radio>
       </a-radio-group>
@@ -87,12 +91,12 @@ export default {
     width: 100%;
     display: inline-block;
     .app-skin-item {
-      width: 40px;
-      height: 40px;
+      width: 25px;
+      height: 25px;
       float: left;
       margin: 8px;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 5px;
       border: 1px solid #f5222d;
     }
   }

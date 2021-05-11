@@ -2,46 +2,50 @@
   <div id="hzy-layout">
     <a-layout style="min-height: 100vh">
       <a-layout-sider
-          hasSider
-          v-model:collapsed="collapsed"
-          :breakpoint="'lg'"
-          @breakpoint="onBreakpoint"
-          :collapsedWidth="siderWidth"
-          :style="{
+        hasSider
+        v-model:collapsed="collapsed"
+        :breakpoint="'lg'"
+        @breakpoint="onBreakpoint"
+        :collapsedWidth="siderWidth"
+        :style="{
           overflow: 'auto',
           height: '100vh',
           position: 'fixed',
           left: 0,
         }"
-          :theme="menuTheme"
+        :theme="menuTheme"
       >
         <div class="hzy-logo">{{ title }}</div>
         <a-drawer
-            placement="left"
-            :closable="false"
-            :visible="!collapsed"
-            @close="collapsed = !collapsed"
-            :bodyStyle="{ padding: 0 }"
-            :drawerStyle="{ background: menuTheme == 'dark' ? '#001529' : '' }"
-            v-if="breakpoint"
+          placement="left"
+          :closable="false"
+          :visible="!collapsed"
+          @close="collapsed = !collapsed"
+          :bodyStyle="{ padding: 0 }"
+          :drawerStyle="{ background: menuTheme == 'dark' ? '#001529' : '' }"
+          v-if="breakpoint"
         >
           <div class="hzy-logo">{{ title }}</div>
-          <layoutMenus class="hzy-layout-sider" :propMenuTheme="menuTheme"/>
+          <layoutMenus class="hzy-layout-sider" :propMenuTheme="menuTheme" />
         </a-drawer>
-        <layoutMenus class="hzy-layout-sider" :propMenuTheme="menuTheme" v-else/>
+        <layoutMenus
+          class="hzy-layout-sider"
+          :propMenuTheme="menuTheme"
+          v-else
+        />
       </a-layout-sider>
       <a-layout :style="{ marginLeft: siderWidth + 'px', zIndex: 5 }">
         <layoutHeader
-            v-model:propCollapsed="collapsed"
-            v-model:propHeaderTheme="headerTheme"
-            v-model:propLayoutSettingsState="layoutSettings.state"
-            @reload="reload"
+          v-model:propCollapsed="collapsed"
+          v-model:propHeaderTheme="headerTheme"
+          v-model:propLayoutSettingsState="layoutSettings.state"
+          @reload="reload"
         />
         <a-layout-content>
           <router-view v-slot="{ Component }">
             <transition name="fade" mode="out-in">
               <keep-alive :include="cacheViews">
-                <component :is="Component" :key="key"/>
+                <component :is="Component" :key="key" />
               </keep-alive>
             </transition>
           </router-view>
@@ -54,85 +58,103 @@
 
     <!--设置弹框-->
     <layoutSettings
-        v-model:propState="layoutSettings.state"
-        v-model:propHeaderTheme="headerTheme"
-        v-model:propMenuTheme="menuTheme"
+      v-model:propState="layoutSettings.state"
+      v-model:propHeaderTheme="headerTheme"
+      v-model:propMenuTheme="menuTheme"
     />
   </div>
 </template>
 <script>
-// 创建前(beforeCreate) 对应的钩子函数为beforeCreate。此阶段为...
-// 2.创建后(created) 对应的钩子函数为created。在这个阶段vue实例已经创建...
-// 3.载入前(beforeMount) 对应的钩子函数是beforemount,在这一阶段...
-// 4.载入后(mounted) 对应的钩子函数是mounted。mounted是平时我们使用最...
-// 5.更新前(beforeUpdate) 对应的钩子函数是beforeUpdate。在这一阶段...
-import layoutHeader from "./layoutHeader";
-import layoutMenus from "./menus/layoutMenus";
-import layoutSettings from "./layoutSettings";
-//vuex
-import {mapState} from "vuex";
+import {
+  computed,
+  nextTick,
+  reactive,
+  watch,
+  defineComponent,
+  toRefs,
+  ref,
+} from "vue";
 import tools from "@/scripts/tools";
+import router from "@/router/index";
+import { useStore } from "vuex";
+import layoutHeader from "./layoutHeader.vue";
+import layoutMenus from "./menus/layoutMenus.vue";
+import layoutSettings from "./layoutSettings.vue";
 
-export default {
+export default defineComponent({
   name: "AppMain",
   components: {
     layoutHeader,
     layoutMenus,
     layoutSettings,
   },
-  data() {
-    return {
+  setup() {
+    const fullPath = ref(router.currentRoute.value.fullPath);
+    const routeName = ref(router.currentRoute.value.name);
+    const headerTheme = tools.getHeaderTheme() ?? "hzy-layout-header-light";
+
+    const state = reactive({
       collapsed: false,
       selectedKeys: ["1"],
       openKeys: [],
       siderWidth: 200,
       breakpoint: false,
-      headerTheme: tools.getHeaderTheme()
-          ? tools.getHeaderTheme()
-          : "hzy-layout-header-light",
+      headerTheme,
       menuTheme: tools.getMenuTheme() ? tools.getMenuTheme() : "dark",
       layoutSettings: {
         state: false,
+      },
+    });
+
+    //监听菜单收缩状态
+    watch(
+      () => state.collapsed,
+      (value) => {
+        if (state.breakpoint) {
+          //如果小屏幕 菜单宽度
+          state.siderWidth = 0;
+        } else {
+          state.siderWidth = value ? 80 : 200;
+        }
       }
+    );
+
+    watch(
+      () => router.currentRoute.value,
+      (value) => {
+        fullPath.value = value.fullPath;
+        routeName.value = value.name;
+      }
+    );
+
+    //计算属性
+    const store = useStore();
+    const title = computed(() => store.state.app.title);
+    const cacheViews = computed(() => store.state.app.cacheViews);
+
+    //
+    const onBreakpoint = (broken) => {
+      state.breakpoint = broken;
     };
-  },
-  watch: {
-    collapsed(value) {
-      if (this.breakpoint) {
-        //如果小屏幕 菜单宽度
-        this.siderWidth = 0;
-      } else {
-        this.siderWidth = value ? 80 : 200;
-      }
-    }
-  },
-  computed: {
-    ...mapState("app", {
-      title: (state) => state.title,
-      cacheViews: (state) => state.cacheViews
-    }),
-    key() {
-      return this.$route.path;
-    }
-  },
-  created() {
-  },
-  methods: {
-    onBreakpoint(broken) {
-      this.breakpoint = broken;
-    },
+
     //刷新当前页面
-    reload() {
-      const {fullPath, name} = this.$route;
-      this.$store.dispatch('app/delCacheView', name).then(() => {
-        this.$nextTick(() => {
-          this.$router.push({
-            path: '/redirect' + fullPath
-          })
+    const reload = () => {
+      store.dispatch("app/delCacheView", routeName.value).then(() => {
+        nextTick(() => {
+          router.push({
+            path: "/redirect" + fullPath.value,
+          });
         });
       });
+    };
 
-    },
+    return {
+      ...toRefs(state),
+      onBreakpoint,
+      reload,
+      title,
+      cacheViews,
+    };
   },
-};
+});
 </script>

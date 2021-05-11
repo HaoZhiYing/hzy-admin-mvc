@@ -1,15 +1,18 @@
 import axios from "axios";
 import tools from "@/scripts/tools";
+import appConsts from '@/scripts/app-consts';
+import router from '@/router'
+
 //axios 基本配置
 axios.defaults.timeout = 100 * 1000;
-axios.defaults.baseURL = tools.domainName + "/admin"; //http://localhost:6789
+axios.defaults.baseURL = appConsts.domainName + "/admin"; //http://localhost:6789
 let isLoading = true;
 
 //http request 拦截器
 axios.interceptors.request.use(
     (config) => {
         if (isLoading) {
-            tools.loading.start();
+            tools.loadingStart();
         }
 
         let authorization = tools.getAuthorization();
@@ -37,7 +40,7 @@ axios.interceptors.request.use(
 //http response 拦截器
 axios.interceptors.response.use(
     (response) => {
-        tools.loading.close();
+        tools.loadingStop();
         const data = response.data;
 
         if (Object.prototype.hasOwnProperty.call(data, "code")) {
@@ -49,7 +52,7 @@ axios.interceptors.response.use(
             if (data.code === -1) {
                 //接口授权码无效
                 tools.message(data.message + ",请重新登录授权!", "警告");
-                return global.$router.push("/login");
+                return router.push("/login");
             }
             if (data.code === -2) {
                 //服务端异常
@@ -66,11 +69,11 @@ axios.interceptors.response.use(
         return response;
     },
     (error) => {
-        tools.loading.close();
+        tools.loadingStop();
         console.log(error);
         if (error.response.status === 401) {
             tools.notice("未授权!", "错误");
-            return global.$router.push("/login");
+            return router.push("/login");
         } else {
             return Promise.reject(error);
         }

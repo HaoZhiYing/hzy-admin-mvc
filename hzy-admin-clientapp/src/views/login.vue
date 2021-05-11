@@ -22,37 +22,45 @@
   </div>
 </template>
 <script>
-import loginService from "@/service/system/loginService";
-import tools from "@/scripts/tools";
+import { computed, defineComponent, reactive, toRefs } from "vue";
 //vuex
-import { mapState } from "vuex";
+import { useStore } from "vuex";
+import router from "@/router/index";
+import tools from "@/scripts/tools";
+import loginService from "@/service/system/loginService";
 
-export default {
-  data() {
-    return {
+export default defineComponent({
+  setup() {
+    const state = reactive({
       userName: "admin",
       userPassword: "123456",
+    });
+
+    const store = useStore();
+    const title = computed(() => store.state.app.title);
+
+    store.commit("app/setUserInfo", {});
+    tools.delAuthorization();
+
+    const methods = {
+      check() {
+        if (!state.userName) return tools.message("用户名不能为空!", "警告");
+        if (!state.userPassword) return tools.message("密码不能为空!", "警告");
+        loginService.login(state.userName, state.userPassword).then((res) => {
+          if (res.code !== 1) return;
+          tools.setAuthorization(res.data.token);
+          router.push("/");
+        });
+      },
+    };
+
+    return {
+      ...toRefs(state),
+      title,
+      ...methods,
     };
   },
-  computed: {
-    ...mapState("app", {
-      title: (state) => state.title,
-    }),
-  },
-  mounted() {
-    global.$vuex.commit("app/setUserInfo", {});
-    tools.delAuthorization();
-  },
-  methods: {
-    check() {
-      loginService.login(this.userName, this.userPassword).then((res) => {
-        if (res.code !== 1) return;
-        tools.setAuthorization(res.data.token);
-        this.$router.push("/");
-      });
-    },
-  },
-};
+});
 </script>
 <style lang="less" scoped>
 #login {

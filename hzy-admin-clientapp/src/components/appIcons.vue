@@ -1,7 +1,8 @@
 <template>
-  <component :is="iconName" v-if="!!iconName"/>
+  <component :is="iconName" v-if="!!iconName" />
 </template>
 <script>
+import { defineComponent } from "vue";
 //程序中所有的 ant 图标 都需要在这个组件中 注册 且通过这个组件使用 图标
 import {
   HomeOutlined,
@@ -32,13 +33,10 @@ import {
   EyeOutlined,
   BranchesOutlined,
   ArrowUpOutlined,
-  //新增图标
-  GoldOutlined,
-  DesktopOutlined
-
+  //tab 选项卡
 } from "@ant-design/icons-vue";
 
-export default {
+export default defineComponent({
   name: "appIcons",
   props: {
     iconName: String,
@@ -72,10 +70,7 @@ export default {
     EyeOutlined,
     BranchesOutlined,
     ArrowUpOutlined,
-    //新增图标
-    GoldOutlined,
-    DesktopOutlined
-
+    //tab 选项卡
   },
-};
+});
 </script>

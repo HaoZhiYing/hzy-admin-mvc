@@ -16,7 +16,7 @@
       >
         <template #tab>
           <a-dropdown>
-            <AppIcons iconName="EllipsisOutlined" class="mr-10" />
+            <AppIcons iconName="EllipsisOutlined" class="tab-more" />
             <template #overlay>
               <a-menu>
                 <a-menu-item key="1" @click="closeTabSelf(item.name)">
@@ -25,7 +25,9 @@
                 <a-menu-item key="2" @click="closeTabOther(item.name)">
                   关闭其他
                 </a-menu-item>
-                <a-menu-item key="3" @click="closeTabAll()">关闭全部</a-menu-item>
+                <a-menu-item key="3" @click="closeTabAll()"
+                  >关闭全部</a-menu-item
+                >
               </a-menu>
             </template>
           </a-dropdown>
@@ -36,47 +38,70 @@
   </div>
 </template>
 <script>
-//vuex
-import { mapState, mapMutations } from "vuex";
-import AppIcons from "@/components/appIcons";
+import { computed, defineComponent, onMounted, watch, ref } from "vue";
+import { useStore } from "vuex";
+import AppIcons from "@/components/appIcons.vue";
+import router from "@/router/index";
 
-export default {
-  name: "app-layout-tabs",
-  data() {
-    return {};
+export default defineComponent({
+  name: "layoutTabs",
+  components: { AppIcons },
+  setup() {
+    //计算属性
+    const store = useStore();
+    const tabList = computed(() => store.state.app.tabList);
+    const activeKey = ref(router.currentRoute.value.name);
+
+    //
+    watch(
+      () => router.currentRoute.value.name,
+      (value) => {
+        activeKey.value = value;
+        methods.addTags();
+      }
+    );
+
+    // const tabEvent = mapMutations("app", [
+    //   "closeTabSelf",
+    //   "closeTabOther",
+    //   "closeTabAll",
+    //   "tabClick",
+    // ]);
+
+    const methods = {
+      addTags() {
+        store.commit("app/addTab", router.currentRoute.value);
+      },
+      onEdit(key, action) {
+        if (action === "remove") {
+          methods.closeTabSelf(key);
+        }
+      },
+      closeTabSelf(key) {
+        store.commit("app/closeTabSelf", key);
+      },
+      closeTabOther(key) {
+        store.commit("app/closeTabOther", key);
+      },
+      closeTabAll() {
+        store.commit("app/closeTabAll");
+      },
+      tabClick(key) {
+        store.commit("app/tabClick", key);
+      },
+    };
+
+    onMounted(() => {
+      methods.addTags();
+    });
+
+    return {
+      tabList,
+      activeKey,
+      ...methods,
+    };
   },
-  components: {
-    AppIcons,
-  },
-  computed: {
-    ...mapState("app", {
-      tabList: (state) => state.tabList,
-    }),
-    activeKey() {
-      return this.$route.name;
-    },
-  },
-  watch: {
-    $route() {
-      this.addTags();
-    },
-  },
-  created() {
-    this.addTags();
-  },
-  mounted() {},
-  methods: {
-    ...mapMutations(`app`, {
-      closeTabSelf: "closeTabSelf",
-      closeTabOther: "closeTabOther",
-      closeTabAll: "closeTabAll",
-      tabClick: "tabClick",
-    }),
-    addTags() {
-      global.$vuex.commit("app/addTab", this.$route);
-    },
-  },
-};
+});
 </script>
 <style lang="less" scope>
 .app-tabs {
@@ -85,7 +110,7 @@ export default {
   left: 0;
   width: 100%;
   z-index: 6;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  // box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .ant-tabs-bar {
     margin: 0 !important;
@@ -95,12 +120,33 @@ export default {
       background: #ffffff !important;
       border: 0 !important;
       border-radius: 0 !important;
-      padding: 0 30px !important;
-      line-height: 39px !important;
+      padding: 0 40px !important;
+      line-height: 40px !important;
     }
 
     .ant-tabs-tab.ant-tabs-tab-active {
       background: #f0f2f5 !important;
+    }
+
+    .tab-more {
+      position: absolute;
+      margin-top: 13px;
+      left: 18px;
+      display: none;
+    }
+
+    .ant-tabs-close-x {
+      position: absolute;
+      margin-top: 13px;
+      right: 18px;
+      display: none;
+    }
+
+    .ant-tabs-tab:hover {
+      .tab-more,
+      .ant-tabs-close-x {
+        display: inline-block;
+      }
     }
   }
 }

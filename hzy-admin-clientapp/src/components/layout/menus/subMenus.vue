@@ -20,12 +20,13 @@
   </a-sub-menu>
 </template>
 <script>
-import AppIcons from "@/components/appIcons";
-export default {
-  name: "sub-menus",
+import { defineComponent } from "vue";
+import AppIcons from "@/components/appIcons.vue";
+
+export default defineComponent({
   props: ["menuInfo"],
   components: {
     AppIcons,
   },
-};
+});
 </script>

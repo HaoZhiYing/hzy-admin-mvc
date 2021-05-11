@@ -27,7 +27,11 @@
 
     <!-- 动态生成-->
     <template v-for="item in menus">
-      <a-menu-item v-if="item.children.length === 0" :key="item.componentName" :title="item.name">
+      <a-menu-item
+        v-if="item.children.length === 0"
+        :key="item.componentName"
+        :title="item.name"
+      >
         <AppIcons :iconName="item.icon" />
         <span>{{ item.name }}</span>
       </a-menu-item>
@@ -36,57 +40,65 @@
   </a-menu>
 </template>
 <script>
-//vuex
-import { mapState } from "vuex";
-import SubMenus from "./subMenus";
-import AppIcons from "@/components/appIcons";
+import { computed, defineComponent, reactive, toRefs, watch } from "vue";
+import AppIcons from "@/components/appIcons.vue";
+import router from "@/router/index";
+import { useStore } from "vuex";
 
-let openKeys = localStorage.getItem("openKeys");
-export default {
+export default defineComponent({
+  name: "layoutMenus",
+  components: { AppIcons },
   props: {
-    propMenuTheme: String,
+    propMenuTheme: {
+      type: String,
+      required: true,
+    },
   },
-  components: {
-    SubMenus,
-    AppIcons,
-  },
-  data() {
+  setup(props) {
+    const routeName = router.currentRoute.value.name;
+    const openKeysString = localStorage.getItem("openKeys") ?? "";
+    const openKeys = openKeysString ? JSON.parse(openKeysString) ?? [] : [];
+
+    const state = reactive({
+      defaultSelectedKeys: [routeName],
+      selectedKeys: [routeName],
+      openKeys: openKeys,
+      menuTheme: props.propMenuTheme,
+    });
+
+    watch(
+      () => router.currentRoute.value,
+      (value) => {
+        state.selectedKeys = [value.name];
+      }
+    );
+    watch(
+      () => props.propMenuTheme,
+      (value) => {
+        state.menuTheme = value;
+      }
+    );
+
+    watch(
+      () => state.openKeys,
+      (value) => {
+        localStorage.setItem("openKeys", JSON.stringify(value));
+      }
+    );
+
+    const store = useStore();
+    const menus = computed(() => store.state.app.userInfo.menus);
+
+    //菜单选中
+    const onMenuSelected = (obj) => {
+      router.push({ name: obj.key });
+    };
+
     return {
-      defaultSelectedKeys: [this.$route.name],
-      selectedKeys: [this.$route.name],
-      openKeys: openKeys ? JSON.parse(openKeys) : [],
-      menuTheme: this.propMenuTheme,
+      ...toRefs(state),
+      onMenuSelected,
+      menus,
     };
   },
-  watch: {
-    $route(value) {
-      this.selectedKeys = [value.name];
-    },
-    propMenuTheme(value) {
-      this.menuTheme = value;
-    },
-    openKeys(value) {
-      localStorage.setItem("openKeys", JSON.stringify(value));
-    },
-  },
-  computed: {
-    ...mapState("app", {
-      title: (state) => state.title,
-      menus: (state) => state.userInfo.menus,
-    }),
-  },
-  created() {
-    let openKeys = localStorage.getItem("openKeys");
-    if (openKeys) {
-      this.openKeys = JSON.parse(openKeys);
-    }
-  },
-  mounted() {},
-  methods: {
-    //菜单选中
-    onMenuSelected(obj) {
-      this.$router.push({name: obj.key});
-    },
-  },
-};
+});
 </script>

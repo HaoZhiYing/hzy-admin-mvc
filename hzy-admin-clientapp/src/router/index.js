@@ -1,21 +1,19 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
 import tools from '@/scripts/tools';
-import defaultRouters from '@/scripts/router/defaultRouters';
-import { getDynamicRouters } from '@/scripts/router/dynamicRouters';
+import defaultRouters from '@/router/defaultRouters';
+import { getDynamicRouters } from '@/router/dynamicRouters';
 
 const routerHistory = createWebHashHistory(); // createWebHistory();
 
-let vueRouter = createRouter({
+let router = createRouter({
     history: routerHistory,
     routes: defaultRouters,
-    scrollBehavior: () => ({ y: 0 }),
+    scrollBehavior: () => ({ top: 0 }),//to, from, savedPosition
 });
 
 //监听路由
-vueRouter.beforeEach((to, from, next) => {
-    NProgress.start();
+router.beforeEach((to, from, next) => {
+    tools.loadingStart();
     console.log('路由拦截器=>', from, to);
 
     if (to.name === "/login") {
@@ -30,7 +28,7 @@ vueRouter.beforeEach((to, from, next) => {
     global.$vuex.dispatch('app/getUserInfo').then(data => {
         //创建动态路由
         let hasRouteLayout = getDynamicRouters(data.menus);
-        console.log(vueRouter.getRoutes());
+        console.log(router.getRoutes());
         if (hasRouteLayout) {
             if (getAuthority(data, to)) {
                 next()
@@ -39,13 +37,13 @@ vueRouter.beforeEach((to, from, next) => {
                 // global.$router.push("/login");
             }
         } else {
-            vueRouter.replace('/');
+            router.replace('/');
         }
     });
 });
 
-vueRouter.afterEach(() => {
-    NProgress.done();
+router.afterEach(() => {
+    tools.loadingStop();
 });
 
 /**
@@ -62,4 +60,4 @@ function getAuthority(data, to) {
     return power.display;
 }
 
-export default vueRouter
+export default router

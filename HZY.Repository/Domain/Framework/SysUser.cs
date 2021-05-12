@@ -1,4 +1,5 @@
 ﻿using HZY.Repository.Core.Models;
+using System;
 
 namespace HZY.Repository.Domain.Framework
 {
@@ -36,5 +37,10 @@ namespace HZY.Repository.Domain.Framework
         /// 能否删除
         /// </summary>
         public int IsDelete { get; set; } = 1;
+
+        /// <summary>
+        /// 组织Id
+        /// </summary>
+        public Guid? OrganizationId { get; set; }
     }
 }

@@ -502,6 +502,71 @@
             菜单与功能绑定
             </summary>
         </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Name">
+            <summary>
+            部门名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.OrderNumber">
+            <summary>
+            部门排序号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Leader">
+            <summary>
+            负责人
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Phone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.ParentId">
+            <summary>
+            父级Id
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysPost">
+            <summary>
+            岗位
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.Number">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.Code">
+            <summary>
+            岗位编码
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.Name">
+            <summary>
+            岗位名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.StateEnum">
+            <summary>
+            状态 枚举
+            </summary>
+        </member>
         <member name="T:HZY.Repository.Domain.Framework.SysRole">
             <summary>
             角色
@@ -565,6 +630,26 @@
         <member name="P:HZY.Repository.Domain.Framework.SysUser.IsDelete">
             <summary>
             能否删除
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUser.OrganizationId">
+            <summary>
+            组织Id
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysUserPost">
+            <summary>
+            用户鱼岗位绑定表
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUserPost.UserId">
+            <summary>
+            账户Id
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUserPost.PostId">
+            <summary>
+            岗位Id
             </summary>
         </member>
         <member name="T:HZY.Repository.Domain.Framework.SysUserRole">

@@ -1,3 +1,4 @@
+// import { createStore } from 'vuex';
 //属性状态管理
 import store from '@/store/index'
 import router from '@/router/index'
@@ -86,7 +87,7 @@ export default {
                 }
             }
 
-            let route = router.currentRoute;
+            let route = router.currentRoute.value;
             if (value != route.name) {
                 router.push({ name: value });
             }
@@ -97,7 +98,7 @@ export default {
         //关闭所有
         closeTabAll(state) {
             let tab = state.tabList.find(w => !w.meta.close);
-            let route = router.currentRoute;
+            let route = router.currentRoute.value;
 
             if (tab.name != route.name) {
                 router.push({ name: tab.name });
@@ -115,6 +116,18 @@ export default {
         //设置用户信息
         setUserInfo(state, value) {
             state.userInfo = value;
+        },
+    },
+    getters: {
+        /**
+        * 根据菜单 Id 获取 菜单所 对应的 权限
+        * @param menuId
+        * @returns {*}
+        */
+        getMenuPowerById(state) {
+            let route = router.currentRoute.value;
+            const data = state.userInfo.menuPowers.find(w => w.menuId == route.meta.menuId);
+            return data ? data : {};
         }
     },
     actions: {
@@ -139,6 +152,5 @@ export default {
             })
 
         }
-    },
-    getters: {}
+    }
 }

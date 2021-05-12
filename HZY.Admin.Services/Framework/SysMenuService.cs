@@ -64,6 +64,8 @@ namespace HZY.Admin.Services.Framework
                       w.t1.Name,
                       w.t1.Url,
                       父级菜单 = w.t2.Name,
+                      w.t1.ComponentName,
+                      w.t1.Router,
                       w.t1.Icon,
                       w.t1.Close,
                       w.t1.Show,

@@ -1,16 +1,28 @@
 <template>
   <div class="p-15">
-    <a-card class="w100 mb-15" bodyStyle="padding:0" v-show="table.search.state">
+    <a-card
+      class="w100 mb-15"
+      bodyStyle="padding:0"
+      v-show="table.search.state"
+    >
       <a-row :gutter="[15, 15]" class="p-15">
         <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-          <a-input v-model:value="table.search.vm.name" placeholder="真实名称" />
+          <a-input
+            v-model:value="table.search.vm.name"
+            placeholder="真实名称"
+          />
         </a-col>
         <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-          <a-input v-model:value="table.search.vm.loginName" placeholder="账户名称" />
+          <a-input
+            v-model:value="table.search.vm.loginName"
+            placeholder="账户名称"
+          />
         </a-col>
         <!--button-->
         <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" style="float: right">
-          <a-button type="primary" class="mr-10" @click="findList">查询</a-button>
+          <a-button type="primary" class="mr-10" @click="findList"
+            >查询</a-button
+          >
           <a-button class="mr-10" @click="onResetSearch">重置</a-button>
         </a-col>
       </a-row>
@@ -19,11 +31,16 @@
       <a-row :gutter="20" class="p-15 pb-0">
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
           <template v-if="power.search">
-            <a-button class="mr-10" @click="table.search.state = !table.search.state">
+            <a-button
+              class="mr-10"
+              @click="table.search.state = !table.search.state"
+            >
               <div v-if="table.search.state">
                 <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
               </div>
-              <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
+              <div v-else>
+                <AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开
+              </div>
             </a-button>
           </template>
           <template v-if="power.insert">
@@ -50,7 +67,14 @@
             </a-popconfirm>
           </template>
         </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15 text-right">
+        <a-col
+          :xs="24"
+          :sm="24"
+          :md="12"
+          :lg="12"
+          :xl="12"
+          class="pb-15 text-right"
+        >
           <a-button type="primary" class="mr-10" @click="exportExcel">
             导出 Excel
           </a-button>
@@ -63,7 +87,8 @@
         :pagination="false"
         :row-selection="{
           selectedRowKeys: table.selectedRowKeys,
-          onChange: (selectedRowKeys) => (table.selectedRowKeys = selectedRowKeys),
+          onChange: (selectedRowKeys) =>
+            (table.selectedRowKeys = selectedRowKeys),
         }"
         tableLayout="fixed"
         rowKey="id"
@@ -110,6 +135,8 @@
   </div>
 </template>
 <script>
+import { computed, defineComponent, onMounted, reactive, toRefs } from "vue";
+import { useStore } from "vuex";
 import AppIcons from "@/components/appIcons";
 import info from "./info";
 import tools from "@/scripts/tools";
@@ -168,10 +195,12 @@ const columns = [
   },
 ];
 
-export default {
+export default defineComponent({
   name: "system_user",
-  data() {
-    return {
+  components: { AppIcons, info },
+  setup() {
+    const store = useStore();
+    const state = reactive({
       table: {
         //检索
         search: {
@@ -194,75 +223,79 @@ export default {
         visible: false,
         key: "",
       },
+    });
+
+    //权限
+    const power = computed(() => store.getters["app/getMenuPowerById"]);
+
+    const methods = {
+      onChange(page, rows) {
+        page = page == 0 ? 1 : page;
+        state.table.page = page;
+        state.table.rows = rows;
+        methods.findList();
+      },
+      onShowSizeChange(page, rows) {
+        page = page == 0 ? 1 : page;
+        state.table.page = page;
+        state.table.rows = rows;
+        methods.findList();
+      },
+      //重置检索条件
+      onResetSearch() {
+        let searchVm = state.table.search.vm;
+        for (let key in searchVm) {
+          searchVm[key] = "";
+        }
+        methods.findList();
+      },
+      //获取列表数据
+      findList() {
+        state.table.loading = true;
+        service
+          .findList(state.table.rows, state.table.page, state.table.search.vm)
+          .then((res) => {
+            let data = res.data;
+            state.table.loading = false;
+            state.table.page = data.page;
+            state.table.rows = data.size;
+            state.table.total = data.total;
+            state.table.data = data.dataSource;
+          });
+      },
+      //删除数据
+      deleteList(id) {
+        let ids = [];
+        if (id) {
+          ids.push(id);
+        } else {
+          ids = state.table.selectedRowKeys;
+        }
+        service.deleteList(ids).then((res) => {
+          if (res.code != 1) return;
+          tools.message("删除成功!", "成功");
+          methods.findList();
+        });
+      },
+      //打开表单页面
+      openForm(id) {
+        state.form.visible = true;
+        state.form.key = id;
+      },
+      exportExcel() {
+        service.exportExcel(state.table.search.vm);
+      },
+    };
+
+    onMounted(() => {
+      methods.findList();
+    });
+
+    return {
+      ...toRefs(state),
+      ...methods,
+      power,
     };
   },
-  computed: {
-    power() {
-      //权限
-      return tools.getMenuPowerById(this.$route.meta.menuId);
-    },
-  },
-  components: { AppIcons, info },
-  created() {
-    this.findList();
-  },
-  methods: {
-    onChange(page, rows) {
-      page = page == 0 ? 1 : page;
-      this.table.page = page;
-      this.table.rows = rows;
-      this.findList();
-    },
-    onShowSizeChange(page, rows) {
-      page = page == 0 ? 1 : page;
-      this.table.page = page;
-      this.table.rows = rows;
-      this.findList();
-    },
-    //重置检索条件
-    onResetSearch() {
-      let searchVm = this.table.search.vm;
-      for (let key in searchVm) {
-        searchVm[key] = "";
-      }
-      this.findList();
-    },
-    //获取列表数据
-    findList() {
-      this.table.loading = true;
-      service
-        .findList(this.table.rows, this.table.page, this.table.search.vm)
-        .then((res) => {
-          let data = res.data;
-          this.table.loading = false;
-          this.table.page = data.page;
-          this.table.rows = data.size;
-          this.table.total = data.total;
-          this.table.data = data.dataSource;
-        });
-    },
-    //删除数据
-    deleteList(id) {
-      let ids = [];
-      if (id) {
-        ids.push(id);
-      } else {
-        ids = this.table.selectedRowKeys;
-      }
-      service.deleteList(ids).then((res) => {
-        if (res.code != 1) return;
-        tools.message("删除成功!", "成功");
-        this.findList();
-      });
-    },
-    //打开表单页面
-    openForm(id) {
-      this.form.visible = true;
-      this.form.key = id;
-    },
-    exportExcel() {
-      service.exportExcel(this.table.search.vm);
-    },
-  },
-};
+});
 </script>

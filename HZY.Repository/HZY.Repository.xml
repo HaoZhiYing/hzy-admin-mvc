@@ -96,7 +96,7 @@
             转换后数据
             </summary>
         </member>
-        <member name="P:HZY.Repository.Core.Models.PagingViewModel.Count">
+        <member name="P:HZY.Repository.Core.Models.PagingViewModel.Total">
             <summary>
             总数
             </summary>

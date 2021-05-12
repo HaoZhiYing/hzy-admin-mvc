@@ -29,17 +29,15 @@ router.beforeEach((to, from, next) => {
     store.dispatch('app/getUserInfo').then(data => {
         //创建动态路由
         let hasRouteLayout = getDynamicRouters(data.menus);
-        console.log(router.getRoutes());
+        // console.log(router.getRoutes());
         if (hasRouteLayout) {
             if (getAuthority(data, to)) {
                 next()
             } else {
                 next('/login');
-                // global.$router.push("/login");
             }
         } else {
             next('/')
-            // router.replace('/');
         }
     });
 });

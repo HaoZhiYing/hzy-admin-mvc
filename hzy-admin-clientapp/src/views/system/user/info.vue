@@ -36,7 +36,11 @@
           <h4>角色:</h4>
           <a-checkbox-group v-model:value="vm.roleIds" class="w100">
             <a-row>
-              <a-col :span="6" v-for="(item, index) in vm.allRoleList" :key="index">
+              <a-col
+                :span="6"
+                v-for="(item, index) in vm.allRoleList"
+                :key="index"
+              >
                 <a-checkbox :value="item.id">
                   {{ item.name }}
                 </a-checkbox>
@@ -61,52 +65,65 @@
   </div>
 </template>
 <script>
+import { defineComponent, reactive, toRefs, watch } from "vue";
 import tools from "@/scripts/tools";
 import service from "@/service/system/userService";
 
-export default {
+export default defineComponent({
   props: {
     propVisible: Boolean,
     formKey: String,
     onSaveSuccess: Function,
   },
-  data() {
-    return {
-      visible: this.propVisible,
+  setup(props, context) {
+    const state = reactive({
+      visible: props.propVisible,
       vm: {
         id: "",
         form: {},
         roleIds: [],
         allRoleList: [],
       },
+    });
+
+    watch(
+      () => props.propVisible,
+      (value) => {
+        state.visible = value;
+      }
+    );
+
+    watch(
+      () => state.visible,
+      (value) => {
+        context.emit("update:propVisible", value);
+        if (value) {
+          methods.findForm();
+        }
+      }
+    );
+
+    const methods = {
+      findForm() {
+        service.findForm(props.formKey).then((res) => {
+          if (res.code != 1) return;
+          state.vm = res.data;
+        });
+      },
+      saveForm() {
+        service.saveForm(state.vm).then((res) => {
+          if (res.code != 1) return;
+          tools.message("操作成功!", "成功");
+          state.visible = false;
+          context.emit("on-save-success");
+        });
+      },
+    };
+
+    return {
+      ...toRefs(state),
+      ...methods,
     };
   },
-  watch: {
-    propVisible(value) {
-      this.visible = value;
-    },
-    visible(value) {
-      this.$emit("update:propVisible", value);
-      if (value) {
-        this.findForm();
-      }
-    },
-  },
-  methods: {
-    findForm() {
-      service.findForm(this.formKey).then((res) => {
-        if (res.code != 1) return;
-        this.vm = res.data;
-      });
-    },
-    saveForm() {
-      service.saveForm(this.vm).then((res) => {
-        if (res.code != 1) return;
-        tools.message("操作成功!", "成功");
-        this.visible = false;
-        this.$emit("on-save-success");
-      });
-    },
-  },
-};
+});
 </script>

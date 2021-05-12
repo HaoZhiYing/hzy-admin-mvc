@@ -43,6 +43,7 @@ namespace HZY.Admin.Services.Framework
                         w.Id,
                         w.Number,
                         w.Name,
+                        w.Remark,
                         IsDelete = w.IsDelete == 1 ? "是" : "否",
                         UpdateTime = w.UpdateTime.ToString("yyyy-MM-dd"),
                         CreateTime = w.CreateTime.ToString("yyyy-MM-dd"),

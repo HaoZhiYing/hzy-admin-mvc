@@ -77,8 +77,8 @@ namespace HZY.Repository.Core.Provider
             int size,
             List<TableViewColumnHead> columnHeads = default)
         {
-            var pagingViewModel = new PagingViewModel { Page = page, Size = size, Count = await query.CountAsync() };
-            pagingViewModel.PageCount = (pagingViewModel.Count / size);
+            var pagingViewModel = new PagingViewModel { Page = page, Size = size, Total = await query.CountAsync() };
+            pagingViewModel.PageCount = (pagingViewModel.Total / size);
             var data = await query.Page(page, size).ToListAsync();
 
             var propertyInfos = typeof(TModel).GetProperties();
@@ -129,8 +129,8 @@ namespace HZY.Repository.Core.Provider
         {
             var count = this.Orm.Database.ExecuteScalar<int>(
                 $"SELECT COUNT(1) FROM ({sql}) TAB", parameters);
-            var pagingViewModel = new PagingViewModel { Page = page, Size = size, Count = count };
-            pagingViewModel.PageCount = (pagingViewModel.Count / size);
+            var pagingViewModel = new PagingViewModel { Page = page, Size = size, Total = count };
+            pagingViewModel.PageCount = (pagingViewModel.Total / size);
             var offSet = size * (page - 1);
             var data = this.Orm.Database.ExcuteDataTable(
                 $"SELECT * FROM ({sql}) TAB ORDER BY {orderBy} OFFSET {offSet} ROWS FETCH NEXT {size} ROWS ONLY",

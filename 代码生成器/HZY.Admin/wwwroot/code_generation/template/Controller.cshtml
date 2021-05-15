@@ -17,13 +17,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HZY.Admin.Core;
 using HZY.Admin.Services;
-using HZY.Framework.Attributes;
-using HZY.Framework.Controllers;
-using HZY.Framework.Model;
 using HZY.Repository.Domain;
 using HZY.Repository.Attributes;
 using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
+using HZY.Framework.Permission.Attributes;
+using HZY.Repository.Core.Models;
 
 namespace HZY.Admin.Controllers
 {
@@ -44,7 +43,7 @@ namespace HZY.Admin.Controllers
         /// <param name="search">search</param>
         /// <returns></returns>
         [HttpPost("FindList/{size}/{page}")]
-        public async Task<@("ApiResult")> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] @(className) search)
+        public async Task<@("PagingViewModel")> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] @(className) search)
         {
             return this.ResultOk(await this.DefaultService.FindListAsync(page, size, search));
         }
@@ -57,10 +56,10 @@ namespace HZY.Admin.Controllers
         [ActionDescriptor("Delete")]
         [Transactional]
         [HttpPost("DeleteList")]
-        public async Task<@("ApiResult")> DeleteListAsync([FromBody] List<@("Guid")> ids)
+        public async Task<@("bool")> DeleteListAsync([FromBody] List<@("Guid")> ids)
         {
             await this.DefaultService.DeleteListAsync(ids);
-            return this.ResultOk("ok");
+            return true;
         }
 
         /// <summary>
@@ -70,7 +69,7 @@ namespace HZY.Admin.Controllers
         /// <returns></returns>
         [ActionDescriptor("Have")]
         [HttpGet("FindForm/{id?}")]
-        public async Task<@("ApiResult")> FindFormAsync([FromRoute] Guid id)
+        public async Task<@("Dictionary<string, object>")> FindFormAsync([FromRoute] Guid id)
         {
             return this.ResultOk(await this.DefaultService.FindFormAsync(id));
         }
@@ -84,10 +83,25 @@ namespace HZY.Admin.Controllers
         [AdminCheckModel]
         [Transactional]
         [HttpPost("SaveForm")]
-        public async Task<@("ApiResult")> SaveFormAsync([FromBody] @(className) form)
+        public async Task<@(className)> SaveFormAsync([FromBody] @(className) form)
         {
             return this.ResultOk(await this.DefaultService.SaveFormAsync(form));
         }
+
+        /// <summary>
+        /// 导出Excel
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
+        [ActionDescriptor("GetExcel")]
+        [HttpPost("ExportExcel")]
+        public async Task<@("FileContentResult")> ExportExcelAsync([FromBody] @(className) search)
+            => this.File(await this.DefaultService.ExportExcelAsync(search), Tools.GetFileContentType[".xls"].ToStr(),
+                $"{Guid.NewGuid()}.xls");
+
+
+
+
     }
 }
 </pre>

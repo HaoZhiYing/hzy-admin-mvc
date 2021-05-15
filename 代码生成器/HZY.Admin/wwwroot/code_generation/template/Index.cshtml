@@ -127,10 +127,14 @@
     </div>
 </template>
 <script>
+import { computed, defineComponent, onMounted, reactive, toRefs } from "vue";
+import { useStore } from "vuex";
 import AppIcons from "@@/components/appIcons";
 import info from "./info";
 import tools from "@@/scripts/tools";
-import service from "@@/service/@(className.ToLower())/@(className.ToLower())Service";
+import appConsts from "@@/scripts/app-consts";
+import service from "@@/service/base/@(className.ToLower())Service";
+
 //列头
 const columns = [
     @foreach (var item in tableInfos)
@@ -152,10 +156,13 @@ const columns = [
         fixed: "right",
         slots: { customRender: "id" },
     }];
-    export default {
+    export default defineComponent({
         name: "@(className.ToLower())",
-        data() {
-            return {
+        components: { AppIcons, info },
+        setup() {
+
+            const store = useStore();
+            const state = reactive({
                 table: {
                     //检索
                     search: {
@@ -178,76 +185,82 @@ const columns = [
                     visible: false,
                     key: "",
                 },
-            };
-        },
-        computed: {
-            power() {
-                //权限
-                return tools.getMenuPowerById(this.$route.meta.menuId);
-            },
-        },
-        components: { AppIcons, info },
-        created() {
-            this.findList();
-        },
-        methods: {
-            onChange(page, rows) {
-                page = page == 0 ? 1 : page;
-                this.table.page = page;
-                this.table.rows = rows;
-                this.findList();
-            },
-            onShowSizeChange(page, rows) {
-                page = page == 0 ? 1 : page;
-                this.table.page = page;
-                this.table.rows = rows;
-                this.findList();
-            },
-            //重置检索条件
-            onResetSearch() {
-                let searchVm = this.table.search.vm;
-                for (let key in searchVm) {
-                    searchVm[key] = "";
-                }
-                this.findList();
-            },
-            //获取列表数据
-            findList() {
-                this.table.loading = true;
-                service
-                    .findList(this.table.rows, this.table.page, this.table.search.vm)
-                    .then((res) => {
-                        let data = res.data;
-                        this.table.loading = false;
-                        this.table.page = data.page;
-                        this.table.rows = data.size;
-                        this.table.total = data.total;
-                        this.table.data = data.dataSource;
+            });
+
+            //权限
+            const power = computed(() => store.getters["app/getMenuPowerById"]);
+
+            //事件 函数
+            const methods = {
+                onChange(page, rows) {
+                    page = page == 0 ? 1 : page;
+                    state.table.page = page;
+                    state.table.rows = rows;
+                    methods.findList();
+                },
+                onShowSizeChange(page, rows) {
+                    page = page == 0 ? 1 : page;
+                    state.table.page = page;
+                    state.table.rows = rows;
+                    methods.findList();
+                },
+                //重置检索条件
+                onResetSearch() {
+                    let searchVm = state.table.search.vm;
+                    for (let key in searchVm) {
+                        searchVm[key] = "";
+                    }
+                    methods.findList();
+                },
+                //获取列表数据
+                findList() {
+                    state.table.loading = true;
+                    service
+                        .findList(state.table.rows, state.table.page, state.table.search.vm)
+                        .then((res) => {
+                            let data = res.data;
+                            state.table.loading = false;
+                            state.table.page = data.page;
+                            state.table.rows = data.size;
+                            state.table.total = data.total;
+                            state.table.data = data.dataSource;
+                        });
+                },
+                //删除数据
+                deleteList(id) {
+                    let ids = [];
+                    if (id) {
+                        ids.push(id);
+                    } else {
+                        ids = state.table.selectedRowKeys;
+                    }
+                    service.deleteList(ids).then((res) => {
+                        if (res.code != 1) return;
+                        tools.message("删除成功!", "成功");
+                        methods.findList();
                     });
-            },
-            //删除数据
-            deleteList(id) {
-                let ids = [];
-                if (id) {
-                    ids.push(id);
-                } else {
-                    ids = this.table.selectedRowKeys;
-                }
-                service.deleteList(ids).then((res) => {
-                    if (res.code != 1) return;
-                    tools.message("删除成功!", "成功");
-                    this.findList();
-                });
-            },
-            //打开表单页面
-            openForm(id) {
-                this.form.visible = true;
-                this.form.key = id;
-            },
-            exportExcel() {
-                service.exportExcel(this.table.search.vm);
-            },
-        },
-    };
+                },
+                //打开表单页面
+                openForm(id) {
+                    state.form.visible = true;
+                    state.form.key = id;
+                },
+                exportExcel() {
+                    service.exportExcel(state.table.search.vm);
+                },
+            };
+
+            onMounted(() => {
+                methods.findList();
+            });
+
+            return {
+                ...toRefs(state),
+                power,
+                ...methods,
+            };
+
+        }
+    });
 </script>
 </pre>

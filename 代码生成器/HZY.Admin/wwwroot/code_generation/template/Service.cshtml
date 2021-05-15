@@ -117,6 +117,20 @@ namespace HZY.Admin.Services
         {
             return await this.Repository.InsertOrUpdateAsync(form);
         }
+
+        /// <summary>
+        /// 导出Excel
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
+        public async Task<@("byte[]")> ExportExcelAsync(Member search)
+        {
+            var tableViewModel = await this.FindListAsync(1, 999999, search);
+            return this.ExportExcelByPagingViewModel(tableViewModel);
+        }
+
+
+
     }
 }
 </pre>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HZY.Framework.Attributes
+namespace HZY.Framework.Permission.Attributes
 {
     /// <summary>
     /// 控制器 接口 描述

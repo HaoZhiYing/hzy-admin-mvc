@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HZY.Framework;
+using HZY.Framework.Controllers;
+using HZY.Framework.Filter;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HZY.Framework.Controllers
+namespace HZY.Admin.Controllers
 {
     /// <summary>
     /// 控制器服务
@@ -24,6 +27,7 @@ namespace HZY.Framework.Controllers
     /// 控制器服务
     /// </summary>
     [Authorize]
+    [ApiResultFilter]
     [ApiExplorerSettings(GroupName = nameof(ApiVersions.Admin_后台权限管理系统_Api))]
     [Route("Admin/[controller]")]
     public class AdminBaseController : FrameworkBaseController

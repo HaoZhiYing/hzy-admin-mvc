@@ -2,10 +2,9 @@
 using System.Threading.Tasks;
 using HZY.Admin.Model.Dto;
 using HZY.Admin.Services.Framework;
-using HZY.Framework.Attributes;
-using HZY.Framework.Controllers;
-using HZY.Framework.Model;
+using HZY.Framework.Permission.Attributes;
 using HZY.Repository.Attributes;
+using HZY.Repository.Core.Models;
 using HZY.Repository.Domain.Framework;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,9 +29,9 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="search"></param>
         /// <returns></returns>
         [HttpPost("FindList/{size}/{page}")]
-        public async Task<ApiResult> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysRole search)
+        public async Task<PagingViewModel> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysRole search)
         {
-            return this.ResultOk(await this._sysRoleService.FindListAsync(page, size, search));
+            return await this._sysRoleService.FindListAsync(page, size, search);
         }
 
 
@@ -43,9 +42,9 @@ namespace HZY.Admin.Controllers.Framework
         /// <returns></returns>
         [Transactional]
         [HttpPost("SaveForm")]
-        public async Task<ApiResult> SaveFormAsync([FromBody] SysRoleMenuFunctionDto form)
+        public async Task<Guid> SaveFormAsync([FromBody] SysRoleMenuFunctionDto form)
         {
-            return this.ResultOk(await this.DefaultService.SaveFormAsync(form));
+            return await this.DefaultService.SaveFormAsync(form);
         }
 
         #region 角色菜单功能 Tree
@@ -55,11 +54,11 @@ namespace HZY.Admin.Controllers.Framework
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetRoleMenuFunctionTree/{RoleId}")]
-        public async Task<ApiResult> FindRoleMenuFunctionTreeAsync(Guid roleId)
+        public async Task<object> FindRoleMenuFunctionTreeAsync(Guid roleId)
         {
             var (guids, objects) = await this.DefaultService.GetRoleMenuFunctionTreeAsync(roleId);
 
-            return this.ResultOk(new { expandedRowKeys = guids, list = objects });
+            return new { expandedRowKeys = guids, list = objects };
         }
 
         #endregion

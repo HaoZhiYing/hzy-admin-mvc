@@ -2,12 +2,11 @@
 using System.Linq;
 using System.Reflection;
 using HZY.Admin.Services.Framework;
-using HZY.Framework;
-using HZY.Framework.Attributes;
-using HZY.Framework.Model;
 using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using HZY.Framework.Permission.Attributes;
+using HZY.Framework.ApiResultManage;
 
 namespace HZY.Admin.Core
 {
@@ -63,7 +62,7 @@ namespace HZY.Admin.Core
 
             if (this._accountService.GetAccountInfo() == null)
             {
-                var data = ApiResult.ResultMessage(ApiResult.ApiResultCodeEnum.UnAuth, unAuthMessage);
+                var data = ApiResult.ResultMessage(ApiResultCodeEnum.UnAuth, unAuthMessage);
                 context.Result = new JsonResult(data);
             }
 
@@ -85,7 +84,7 @@ namespace HZY.Admin.Core
 
             if (power.ContainsKey(functionName) && !power[functionName])
             {
-                var data = ApiResult.ResultMessage(ApiResult.ApiResultCodeEnum.UnAuth, unAuthMessage);
+                var data = ApiResult.ResultMessage(ApiResultCodeEnum.UnAuth, unAuthMessage);
                 context.Result = new JsonResult(data);
             }
 

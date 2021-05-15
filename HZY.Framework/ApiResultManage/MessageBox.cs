@@ -1,7 +1,6 @@
 ﻿using System;
-using HZY.Framework.Model;
 
-namespace HZY.Framework
+namespace HZY.Framework.ApiResultManage
 {
     /// <summary>
     /// 警告消息

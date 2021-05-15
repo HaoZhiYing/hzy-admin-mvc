@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HZY.Framework.Attributes
+namespace HZY.Framework.Permission.Attributes
 {
     /// <summary>
     /// action 功能模块描述

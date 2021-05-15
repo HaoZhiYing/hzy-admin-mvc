@@ -4,6 +4,22 @@
         <name>HZY.Admin</name>
     </assembly>
     <members>
+        <member name="T:HZY.Admin.Controllers.AdminBaseController`1">
+            <summary>
+            控制器服务
+            </summary>
+            <typeparam name="TDefaultService">默认服务类型</typeparam>
+        </member>
+        <member name="F:HZY.Admin.Controllers.AdminBaseController`1.DefaultService">
+            <summary>
+            默认服务
+            </summary>
+        </member>
+        <member name="T:HZY.Admin.Controllers.AdminBaseController">
+            <summary>
+            控制器服务
+            </summary>
+        </member>
         <member name="M:HZY.Admin.Controllers.Framework.ChangePasswordController.ChangePasswordAsync(HZY.Admin.Model.Dto.ChangePasswordDto)">
             <summary>
             更新密码
@@ -221,6 +237,11 @@
             上传图片
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:HZY.Admin.Controllers.JumpClientController">
+            <summary>
+            跳转客户端
+            </summary>
         </member>
         <member name="M:HZY.Admin.Controllers.MemberController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Member)">
             <summary>

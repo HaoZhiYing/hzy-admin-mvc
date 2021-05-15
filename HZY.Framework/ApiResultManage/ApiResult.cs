@@ -1,4 +1,4 @@
-﻿namespace HZY.Framework.Model
+﻿namespace HZY.Framework.ApiResultManage
 {
     /// <summary>
     /// Api 消息返回类
@@ -16,37 +16,6 @@
         public string Message { get; set; }
         public object Data { get; set; }
 
-        /// <summary>
-        /// 消息返回码
-        /// </summary>
-        public enum ApiResultCodeEnum
-        {
-            /// <summary>
-            /// 接口不存在
-            /// </summary>
-            NotFount = -3,
-
-            /// <summary>
-            /// 程序错误
-            /// </summary>
-            Error,
-
-            /// <summary>
-            /// 未授权
-            /// </summary>
-            UnAuth,
-
-            /// <summary>
-            /// 警告
-            /// </summary>
-            Warn,
-
-            /// <summary>
-            /// 成功
-            /// </summary>
-            Ok,
-        }
-
         #region result
 
         /// <summary>
@@ -56,7 +25,7 @@
         /// <param name="message"></param>
         /// <returns></returns>
         public static ApiResult ResultMessage(ApiResultCodeEnum apiResultCodeEnum, string message)
-            => new ApiResult((int) apiResultCodeEnum, message, null);
+            => new ApiResult((int)apiResultCodeEnum, message, null);
 
         /// <summary>
         /// 返回数据
@@ -65,7 +34,7 @@
         /// <param name="data"></param>
         /// <returns></returns>
         public static ApiResult ResultData(ApiResultCodeEnum apiResultCodeEnum, object data)
-            => new ApiResult((int) apiResultCodeEnum, null, data);
+            => new ApiResult((int)apiResultCodeEnum, null, data);
 
         /// <summary>
         /// 可返回消息和数据
@@ -75,7 +44,7 @@
         /// <param name="data"></param>
         /// <returns></returns>
         public static ApiResult Result(ApiResultCodeEnum apiResultCodeEnum, string message, object data)
-            => new ApiResult((int) apiResultCodeEnum, message, data);
+            => new ApiResult((int)apiResultCodeEnum, message, data);
 
         #endregion
 
@@ -168,5 +137,39 @@
             => Result(ApiResultCodeEnum.Warn, message, data);
 
         #endregion
+
+
     }
+
+    /// <summary>
+    /// 消息返回码
+    /// </summary>
+    public enum ApiResultCodeEnum
+    {
+        /// <summary>
+        /// 接口不存在
+        /// </summary>
+        NotFount = -3,
+
+        /// <summary>
+        /// 程序错误
+        /// </summary>
+        Error,
+
+        /// <summary>
+        /// 未授权
+        /// </summary>
+        UnAuth,
+
+        /// <summary>
+        /// 警告
+        /// </summary>
+        Warn,
+
+        /// <summary>
+        /// 成功
+        /// </summary>
+        Ok,
+    }
+
 }

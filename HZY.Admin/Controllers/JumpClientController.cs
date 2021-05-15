@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace HZY.Admin.Controllers
 {
+    /// <summary>
+    /// 跳转客户端
+    /// </summary>
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class IndexController : Controller
+    public class JumpClientController : Controller
     {
         [Route("")]
         public IActionResult Index()

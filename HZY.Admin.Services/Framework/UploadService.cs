@@ -2,16 +2,17 @@ using System;
 using System.IO;
 using System.Linq;
 using HZY.Framework;
-using HZY.Common.Attributes;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using HZY.Common.ScanDIService.Attributes;
+using HZY.Framework.ApiResultManage;
 
 namespace HZY.Admin.Services.Framework
 {
     /// <summary>
     /// 上传文件服务
     /// </summary>
-    [AppService]
+    [DIService]
     public class UploadService
     {
         private readonly string _webRootPath;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using HZY.Admin.Services.Framework;
-using HZY.Framework.Attributes;
 using HZY.Framework.Controllers;
+using HZY.Framework.Permission.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers

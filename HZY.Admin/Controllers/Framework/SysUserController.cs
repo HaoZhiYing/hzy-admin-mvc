@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HZY.Admin.Model.Dto;
 using HZY.Admin.Services.Framework;
-using HZY.Framework.Attributes;
-using HZY.Framework.Controllers;
-using HZY.Framework.Model;
 using HZY.Repository.Attributes;
 using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
 using HZY.Repository.Domain.Framework;
+using HZY.Framework.Permission.Attributes;
+using HZY.Repository.Core.Models;
+using HZY.Admin.Model.Bo;
 
 namespace HZY.Admin.Controllers.Framework
 {
@@ -22,8 +22,7 @@ namespace HZY.Admin.Controllers.Framework
         private readonly AccountService _accountService;
         private readonly SysMenuService _sysMenuService;
 
-        public SysUserController(SysUserService defaultService, AccountService accountService,
-            SysMenuService sysMenuService) : base(defaultService)
+        public SysUserController(SysUserService defaultService, AccountService accountService, SysMenuService sysMenuService) : base(defaultService)
         {
             _accountService = accountService;
             _sysMenuService = sysMenuService;
@@ -37,9 +36,9 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="search"></param>
         /// <returns></returns>
         [HttpPost("FindList/{size}/{page}")]
-        public async Task<ApiResult> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysUser search)
+        public async Task<PagingViewModel> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysUser search)
         {
-            return this.ResultOk(await this.DefaultService.FindListAsync(page, size, search));
+            return await this.DefaultService.FindListAsync(page, size, search);
         }
 
         /// <summary>
@@ -49,10 +48,10 @@ namespace HZY.Admin.Controllers.Framework
         /// <returns></returns>
         [Transactional]
         [HttpPost("DeleteList")]
-        public async Task<ApiResult> DeleteListAsync([FromBody] List<Guid> ids)
+        public async Task<bool> DeleteListAsync([FromBody] List<Guid> ids)
         {
             await this.DefaultService.DeleteListAsync(ids);
-            return this.ResultOk("ok");
+            return true;
         }
 
         /// <summary>
@@ -61,9 +60,9 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("FindForm/{id?}")]
-        public async Task<ApiResult> FindFormAsync([FromRoute] Guid id)
+        public async Task<Dictionary<string, object>> FindFormAsync([FromRoute] Guid id)
         {
-            return this.ResultOk(await this.DefaultService.FindFormAsync(id));
+            return await this.DefaultService.FindFormAsync(id);
         }
 
         /// <summary>
@@ -73,9 +72,9 @@ namespace HZY.Admin.Controllers.Framework
         /// <returns></returns>
         [Transactional]
         [HttpPost("SaveForm")]
-        public async Task<ApiResult> SaveFormAsync([FromBody] SysUserFormDto form)
+        public async Task<SysUser> SaveFormAsync([FromBody] SysUserFormDto form)
         {
-            return this.ResultOk(await this.DefaultService.SaveFormAsync(form));
+            return await this.DefaultService.SaveFormAsync(form);
         }
 
         /// <summary>
@@ -93,7 +92,7 @@ namespace HZY.Admin.Controllers.Framework
         /// </summary>
         /// <returns></returns>
         [HttpGet("info")]
-        public async Task<ApiResult> GetUserInfoAsync()
+        public async Task<AccountInfo> GetUserInfoAsync()
         {
             var userInfo = this._accountService.GetAccountInfo();
             var sysMenus = await this._sysMenuService.GetMenusByCurrentRoleAsync();
@@ -102,7 +101,7 @@ namespace HZY.Admin.Controllers.Framework
             userInfo.Menus = sysMenusMap;
             //设置菜单权限
             userInfo.MenuPowers = await this._sysMenuService.GetPowerByMenusAsync(sysMenus);
-            return this.ResultOk(userInfo);
+            return userInfo;
         }
     }
 }

@@ -1,16 +1,24 @@
 ﻿using System.Net;
 using HZY.Common;
-using HZY.Framework.Model;
+using HZY.Framework.ApiResultManage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace HZY.Framework.Filter
 {
     /// <summary>
     /// 异常过滤器
     /// </summary>
-    public class ExceptionFilter : IExceptionFilter, IOrderedFilter
+    public class ApiExceptionFilter : IExceptionFilter, IOrderedFilter
     {
+        private readonly ILogger<ApiExceptionFilter> _logger;
+
+        public ApiExceptionFilter(ILogger<ApiExceptionFilter> logger)
+        {
+            _logger = logger;
+        }
+
         public int Order { get; set; } = int.MaxValue - 10;
 
         public void OnException(ExceptionContext context)
@@ -24,18 +32,18 @@ namespace HZY.Framework.Filter
                 return;
             }
 
-            if (context.HttpContext.Response.StatusCode == (int) HttpStatusCode.Unauthorized)
+            if (context.HttpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
             {
                 context.ExceptionHandled = true;
                 context.HttpContext.Response.StatusCode = 200;
-                context.Result = new JsonResult(ApiResult.ResultMessage(ApiResult.ApiResultCodeEnum.UnAuth, "未授权!"));
+                context.Result = new JsonResult(ApiResult.ResultMessage(ApiResultCodeEnum.UnAuth, "未授权!"));
                 return;
             }
 
             //nlog 写入日志到 txt
-            LogUtil.WriteError(exception, context.HttpContext.Connection.RemoteIpAddress?.ToString());
+            _logger.LogError(exception, context.HttpContext.Connection.RemoteIpAddress?.ToString());
             var message = $"服务端出现异常![异常消息：{exception.Message}]";
-            var apiResult = ApiResult.ResultMessage(ApiResult.ApiResultCodeEnum.Error, message);
+            var apiResult = ApiResult.ResultMessage(ApiResultCodeEnum.Error, message);
             context.Result = new JsonResult(apiResult);
         }
     }

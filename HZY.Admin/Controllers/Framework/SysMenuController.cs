@@ -4,13 +4,12 @@ using System.Threading.Tasks;
 using HZY.Admin.Model.Bo;
 using HZY.Admin.Model.Dto;
 using HZY.Admin.Services.Framework;
-using HZY.Framework.Attributes;
-using HZY.Framework.Controllers;
-using HZY.Framework.Model;
 using HZY.Repository.Attributes;
 using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
 using HZY.Repository.Domain.Framework;
+using HZY.Framework.Permission.Attributes;
+using HZY.Repository.Core.Models;
 
 namespace HZY.Admin.Controllers.Framework
 {
@@ -32,9 +31,9 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="search"></param>
         /// <returns></returns>
         [HttpPost("FindList/{size}/{page}")]
-        public async Task<ApiResult> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysMenu search)
+        public async Task<PagingViewModel> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysMenu search)
         {
-            return this.ResultOk(await this.DefaultService.FindListAsync(page, size, search));
+            return await this.DefaultService.FindListAsync(page, size, search);
         }
 
         /// <summary>
@@ -44,10 +43,10 @@ namespace HZY.Admin.Controllers.Framework
         /// <returns></returns>
         [Transactional]
         [HttpPost("DeleteList")]
-        public async Task<ApiResult> DeleteListAsync([FromBody] List<Guid> ids)
+        public async Task<bool> DeleteListAsync([FromBody] List<Guid> ids)
         {
             await this.DefaultService.DeleteListAsync(ids);
-            return this.ResultOk("ok");
+            return true;
         }
 
         /// <summary>
@@ -56,9 +55,9 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("FindForm/{id?}")]
-        public async Task<ApiResult> FindFormAsync([FromRoute] Guid id)
+        public async Task<Dictionary<string, object>> FindFormAsync([FromRoute] Guid id)
         {
-            return this.ResultOk(await this.DefaultService.FindFormAsync(id));
+            return await this.DefaultService.FindFormAsync(id);
         }
 
         /// <summary>
@@ -68,9 +67,9 @@ namespace HZY.Admin.Controllers.Framework
         /// <returns></returns>
         [Transactional]
         [HttpPost("SaveForm")]
-        public async Task<ApiResult> SaveFormAsync([FromBody] SysMenuFormDto form)
+        public async Task<SysMenu> SaveFormAsync([FromBody] SysMenuFormDto form)
         {
-            return this.ResultOk(await this.DefaultService.SaveFormAsync(form));
+            return await this.DefaultService.SaveFormAsync(form);
         }
 
         /// <summary>
@@ -90,17 +89,17 @@ namespace HZY.Admin.Controllers.Framework
         /// </summary>
         /// <returns></returns>
         [HttpGet("FindSysMenuTree")]
-        public async Task<ApiResult> FindSysMenuTreeAsync()
+        public async Task<object> FindSysMenuTreeAsync()
         {
             var allList = await DefaultService.GetMenusByCurrentRoleAsync();
 
-            return this.ResultOk(new
+            return new
             {
                 userName = this._accountInfo.Name,
                 list = this.DefaultService.CreateMenus(Guid.Empty, allList),
                 allList,
                 powerState = await this.DefaultService.GetPowerByMenusAsync(allList)
-            });
+            };
         }
 
         /// <summary>
@@ -108,16 +107,16 @@ namespace HZY.Admin.Controllers.Framework
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetMenusFunctionTree")]
-        public async Task<ApiResult> FindMenuFunctionTreeAsync()
+        public async Task<object> FindMenuFunctionTreeAsync()
         {
             var menuFunctionTree = await this.DefaultService.GetMenuFunctionTreeAsync();
 
-            return this.ResultOk(new
+            return new
             {
                 tree = menuFunctionTree.Item1,
                 defaultExpandedKeys = menuFunctionTree.Item2,
                 defaultCheckedKeys = menuFunctionTree.Item3
-            });
+            };
         }
 
         #endregion

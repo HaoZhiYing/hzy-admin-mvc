@@ -7,8 +7,6 @@ using HZY.Admin.Core;
 using HZY.Framework;
 using HZY.Framework.Filter;
 using HZY.Framework.Middleware;
-using HZY.Repository.Core;
-using HZY.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,13 +18,14 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using HZY.Repository.Core.Provider;
+using HZY.Common.ScanDIService;
 
 namespace HZY.Admin
 {
     public class Startup
     {
 
-        private readonly IEnumerable<string> _versionList = typeof(ApiVersions).GetEnumNames().OrderBy(w=>w);
+        private readonly IEnumerable<string> _versionList = typeof(ApiVersions).GetEnumNames().OrderBy(w => w);
 
         public Startup(IConfiguration configuration)
         {
@@ -44,7 +43,7 @@ namespace HZY.Admin
 
             services.AddControllers(options =>
                 {
-                    options.Filters.Add<ExceptionFilter>();
+                    options.Filters.Add<ApiExceptionFilter>();
                     options.Filters.Add<AdminAuthorizationActionFilter>();
                 })
                 .AddJsonOptions(options =>
@@ -69,7 +68,7 @@ namespace HZY.Admin
             #region 仓储注册 、 自动扫描服务注册 、 中间件注册
 
             services.RegisterRepository(connectionString);
-            services.ScanAppServices();
+            services.ScanningAppServices("HZY.");
             services.AddTransient<TakeUpTimeMiddleware>();
 
             #endregion
@@ -85,7 +84,7 @@ namespace HZY.Admin
                         .AllowAnyHeader();
                     //.AllowAnyOrigin()
                     //.AllowCredentials();
-//6877
+                    //6877
                 });
             });
 
@@ -152,7 +151,7 @@ namespace HZY.Admin
             });
 
             #endregion
-            
+
             #region 设置 Vue 单页面 地址
             //services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/dist");
             #endregion
@@ -184,7 +183,7 @@ namespace HZY.Admin
             app.UseAuthorization();
 
             #endregion
-            
+
             #region Swagger
 
             //启用中间件服务生成Swagger作为JSON终结点
@@ -203,12 +202,12 @@ namespace HZY.Admin
             app.UseCors("HZYCors");
 
             #endregion
-            
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
-            
 
-            
-            
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+
+
+
         }
     }
 }

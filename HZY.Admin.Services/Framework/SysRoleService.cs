@@ -10,6 +10,7 @@ using HZY.Repository.Framework;
 using HZY.Common;
 using Microsoft.EntityFrameworkCore;
 using HZY.Repository.Core.Provider;
+using HZY.Framework.ApiResultManage;
 
 namespace HZY.Admin.Services.Framework
 {

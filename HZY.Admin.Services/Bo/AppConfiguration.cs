@@ -1,6 +1,7 @@
 ﻿using System;
 using HZY.Common;
-using HZY.Common.Attributes;
+using HZY.Common.ScanDIService.Attributes;
+using HZY.Common.ScanDIService.Enums;
 using Microsoft.Extensions.Configuration;
 
 namespace HZY.Admin.Model.Bo
@@ -8,7 +9,7 @@ namespace HZY.Admin.Model.Bo
     /// <summary>
     /// 程序配置信息映射类 appsettings.json
     /// </summary>
-    [AppService(AppServiceType.Singleton)]
+    [DIService(DIType.Singleton)]
     public class AppConfiguration
     {
         private readonly IConfiguration _configuration;

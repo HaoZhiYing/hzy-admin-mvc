@@ -2,7 +2,6 @@
 using HZY.Admin.Model.Dto;
 using HZY.Admin.Services.Framework;
 using HZY.Framework.Controllers;
-using HZY.Framework.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers.Framework
@@ -23,14 +22,14 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="authUserDto">Dto</param>
         /// <returns></returns>
         [HttpPost("Check")]
-        public async Task<ApiResult> CheckAccountAsync([FromBody] AuthUserDto authUserDto)
+        public async Task<dynamic> CheckAccountAsync([FromBody] AuthUserDto authUserDto)
         {
             var token = await this._sysUserService
                 .CheckAccountAsync(authUserDto.UserName, authUserDto.UserPassword, authUserDto.LoginCode);
 
             const string tokenType = "Bearer ";
 
-            return this.ResultOk(new {token = tokenType + token, tokenType});
+            return new { token = tokenType + token, tokenType };
         }
     }
 }

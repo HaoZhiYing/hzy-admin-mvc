@@ -7,38 +7,33 @@
  *
  * *******************************************************
  */
+using HZY.Common.ScanDIService.Enums;
 using System;
 
-namespace HZY.Common.Attributes
+namespace HZY.Common.ScanDIService.Attributes
 {
     /// <summary>
     /// 服务标记 用于 程序 启动 扫描到后自动 注册服务
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class AppServiceAttribute : Attribute
+    public class DIServiceAttribute : Attribute
     {
-        private readonly AppServiceType _serviceType;
+        private readonly DIType _dIType;
 
         /// <summary>
         /// 忽略当前 对象 服务
         /// </summary>
         public bool IgnoreCurrent { get; set; } = false;
 
-        public AppServiceAttribute(AppServiceType serviceType = AppServiceType.Transient)
+        public DIServiceAttribute(DIType dIType = DIType.Transient)
         {
-            this._serviceType = serviceType;
+            this._dIType = dIType;
         }
 
-        public AppServiceType GetAppServiceType()
+        public DIType GetAppServiceType()
         {
-            return this._serviceType;
+            return this._dIType;
         }
     }
 
-    public enum AppServiceType
-    {
-        Scoped,
-        Transient,
-        Singleton
-    }
 }

@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using HZY.Common;
-using HZY.Common.Attributes;
+using HZY.Common.ScanDIService.Attributes;
+using HZY.Common.ScanDIService.Interface;
+using HZY.Framework.Services;
 using HZY.Repository.Core.Models;
 using NPOI.HSSF.UserModel;
 
-namespace HZY.Framework.Services
+namespace HZY.Admin.Services.Framework
 {
-    [AppService]
-    public class AdminBaseService<TRepository> : FrameworkBaseService<TRepository> where TRepository : class
+    public class AdminBaseService<TRepository> : FrameworkBaseService<TRepository>, IDITransientSelf 
+        where TRepository : class
     {
         public AdminBaseService(TRepository repository) : base(repository)
         {

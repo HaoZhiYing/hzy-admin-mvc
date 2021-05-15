@@ -13,7 +13,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using HZY.Common;
-using HZY.Common.Attributes;
+using HZY.Common.ScanDIService.Interface;
 using HZY.Repository.Core.Impl;
 using HZY.Repository.Core.Models;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +24,9 @@ namespace HZY.Repository.Core.Provider
     /// 默认基础仓储
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [AppService(IgnoreCurrent = true)]
-    public class AppRepository<T> : RepositoryImpl<T, AppDbContext> where T : class, new()
+    //[AppService(IgnoreCurrent = true)]
+    public class AppRepository<T> : RepositoryImpl<T, AppDbContext>, IDITransientSelf
+        where T : class, new()
     {
         public AppRepository(AppDbContext context) : base(context)
         {

@@ -2,10 +2,12 @@
 using HZY.Admin.Model.Dto;
 using HZY.Admin.Services.Framework;
 using HZY.Framework.Controllers;
+using HZY.Framework.Filter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers.Framework
 {
+    [ApiResultFilter]
     [Route("Admin/[controller]")]
     public class LoginController : FrameworkBaseController
     {

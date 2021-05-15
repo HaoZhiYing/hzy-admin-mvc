@@ -14,7 +14,9 @@
             <input type="password" v-model="userPassword" />
           </div>
           <div class="login-btn">
-            <a-button type="primary" @click="check">登录</a-button>
+            <a-button type="primary" @click="check" :loading="loading">
+              登录
+            </a-button>
           </div>
         </div>
       </a-card>
@@ -22,7 +24,7 @@
   </div>
 </template>
 <script>
-import { computed, defineComponent, reactive, toRefs } from "vue";
+import { computed, defineComponent, reactive, toRefs, ref } from "vue";
 //vuex
 import { useStore } from "vuex";
 import router from "@/router/index";
@@ -35,6 +37,7 @@ export default defineComponent({
       userName: "admin",
       userPassword: "123456",
     });
+    const loading = ref(false);
 
     const store = useStore();
     const title = computed(() => store.state.app.title);
@@ -46,9 +49,11 @@ export default defineComponent({
       check() {
         if (!state.userName) return tools.message("用户名不能为空!", "警告");
         if (!state.userPassword) return tools.message("密码不能为空!", "警告");
+        loading.value = true;
         loginService.login(state.userName, state.userPassword).then((res) => {
           if (res.code !== 1) return;
           tools.setAuthorization(res.data.token);
+          loading.value = false;
           router.push("/");
         });
       },
@@ -58,6 +63,7 @@ export default defineComponent({
       ...toRefs(state),
       title,
       ...methods,
+      loading,
     };
   },
 });

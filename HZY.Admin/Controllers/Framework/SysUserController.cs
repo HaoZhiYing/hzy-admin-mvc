@@ -10,6 +10,7 @@ using HZY.Repository.Domain.Framework;
 using HZY.Framework.Permission.Attributes;
 using HZY.Repository.Core.Models;
 using HZY.Admin.Model.Bo;
+using HZY.Framework.Filter;
 
 namespace HZY.Admin.Controllers.Framework
 {
@@ -91,6 +92,7 @@ namespace HZY.Admin.Controllers.Framework
         /// 获取用户信息
         /// </summary>
         /// <returns></returns>
+        [ApiResourceCacheFilter]
         [HttpGet("info")]
         public async Task<AccountInfo> GetUserInfoAsync()
         {

@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using HZY.Repository.Core.Provider;
 using HZY.Common.ScanDIService;
+using NLog.Extensions.Logging;
 
 namespace HZY.Admin
 {
@@ -59,9 +60,10 @@ namespace HZY.Admin
 
             #endregion
 
-            #region HttpContext
+            #region HttpContext、IMemoryCache
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMemoryCache();
 
             #endregion
 
@@ -69,7 +71,7 @@ namespace HZY.Admin
 
             services.RegisterRepository(connectionString);
             services.ScanningAppServices("HZY.");
-            services.AddTransient<TakeUpTimeMiddleware>();
+            services.AddScoped<TakeUpTimeMiddleware>();
 
             #endregion
 
@@ -155,6 +157,12 @@ namespace HZY.Admin
             #region 设置 Vue 单页面 地址
             //services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/dist");
             #endregion
+
+            #region NLog 日志配置 ILogger 对象日志可以自动存入 nlog 文件中
+
+            services.AddLogging(w => w.AddNLog());
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -203,9 +211,11 @@ namespace HZY.Admin
 
             #endregion
 
+            #region 使用 Api 耗时计算中间件
+            app.UseMiddleware<TakeUpTimeMiddleware>();
+            #endregion
+
             app.UseEndpoints(endpoints => endpoints.MapControllers());
-
-
 
 
         }

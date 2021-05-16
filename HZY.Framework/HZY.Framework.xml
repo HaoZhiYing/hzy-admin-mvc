@@ -235,20 +235,44 @@
             异常过滤器
             </summary>
         </member>
+        <member name="T:HZY.Framework.Filter.ApiResourceCacheFilterAttribute">
+            <summary>
+            接口资源加载过滤 拦截资源做缓存
+            </summary>
+        </member>
+        <member name="M:HZY.Framework.Filter.ApiResourceCacheFilterAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)">
+            <summary>
+            资源加载之前
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:HZY.Framework.Filter.ApiResourceCacheFilterAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)">
+            <summary>
+            资源加载之后
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:HZY.Framework.Filter.ApiResourceCacheFilterAttribute.GetCacheKey(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取每个唯一请求的缓存 key
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
         <member name="T:HZY.Framework.Filter.ApiResultFilterAttribute">
             <summary>
             Api 结果返回包装器
             </summary>
         </member>
-        <member name="M:HZY.Framework.Filter.ApiResultFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
-            <summary>
-            拦截 Action 前
-            </summary>
-            <param name="context"></param>
-        </member>
         <member name="M:HZY.Framework.Filter.ApiResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)">
             <summary>
             结果 返回前
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:HZY.Framework.Filter.ApiResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
+            <summary>
+            返回结果后
             </summary>
             <param name="context"></param>
         </member>

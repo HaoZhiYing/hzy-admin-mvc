@@ -1,31 +1,22 @@
 ﻿using HZY.Framework.ApiResultManage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System;
 
 namespace HZY.Framework.Filter
 {
     /// <summary>
     /// Api 结果返回包装器
     /// </summary>
-    public class ApiResultFilterAttribute : ActionFilterAttribute
+    public class ApiResultFilterAttribute : Attribute, IResultFilter
     {
-        /// <summary>
-        /// 拦截 Action 前
-        /// </summary>
-        /// <param name="context"></param>
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            base.OnActionExecuting(context);
-        }
 
         /// <summary>
         /// 结果 返回前
         /// </summary>
         /// <param name="context"></param>
-        public override void OnResultExecuting(ResultExecutingContext context)
+        public void OnResultExecuting(ResultExecutingContext context)
         {
-            base.OnResultExecuting(context);
-
             if (context.Result == null)
             {
                 return;
@@ -50,9 +41,17 @@ namespace HZY.Framework.Filter
                 context.Result = new JsonResult(apiResultData.ResultOk("success", result.Content));
                 return;
             }
-
-
         }
+
+        /// <summary>
+        /// 返回结果后
+        /// </summary>
+        /// <param name="context"></param>
+        public void OnResultExecuted(ResultExecutedContext context)
+        {
+            //throw new NotImplementedException();
+        }
+
 
 
     }

@@ -158,7 +158,7 @@ namespace HZY.Admin.Services.Framework
         public async Task<byte[]> ExportExcelAsync(SysUser search)
         {
             var tableViewModel = await this.FindListAsync(1, 999999, search);
-            return this.ExportExcelByPagingViewModel(tableViewModel);
+            return this.ExportExcelByPagingViewModel(tableViewModel, null, "Id");
         }
 
         /// <summary>

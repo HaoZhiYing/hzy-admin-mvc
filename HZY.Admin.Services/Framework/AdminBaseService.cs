@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using HZY.Common;
 using HZY.Common.ScanDIService.Attributes;
 using HZY.Common.ScanDIService.Interface;
@@ -9,7 +10,7 @@ using NPOI.HSSF.UserModel;
 
 namespace HZY.Admin.Services.Framework
 {
-    public class AdminBaseService<TRepository> : FrameworkBaseService<TRepository>, IDITransientSelf 
+    public class AdminBaseService<TRepository> : FrameworkBaseService<TRepository>, IDITransientSelf
         where TRepository : class
     {
         public AdminBaseService(TRepository repository) : base(repository)
@@ -24,13 +25,16 @@ namespace HZY.Admin.Services.Framework
         /// <param name="pagingViewModel"></param>
         /// <param name="byName">别名</param>
         /// <returns></returns>
-        protected virtual byte[] ExportExcelByPagingViewModel(PagingViewModel pagingViewModel, Dictionary<string, string> byName = null)
+        protected virtual byte[] ExportExcelByPagingViewModel(PagingViewModel pagingViewModel, Dictionary<string, string> byName = null, params string[] ignore)
         {
             var workbook = new HSSFWorkbook();
             var sheet = workbook.CreateSheet();
             //数据
             var data = pagingViewModel.DataSource;
-            var cols = pagingViewModel.Columns;
+            var cols = ignore == null ? pagingViewModel.Columns :
+                pagingViewModel.Columns.Where(w => !ignore.Any(i => i.ToLower() == w.FieldName.ToLower()))
+                .ToList();
+
             //填充表头
             var dataRow = sheet.CreateRow(0);
             foreach (var item in cols)
@@ -42,8 +46,10 @@ namespace HZY.Admin.Services.Framework
                 }
                 else
                 {
-                    dataRow.CreateCell(index).SetCellValue(item.FieldName);
+                    dataRow.CreateCell(index).SetCellValue(item.Title ?? item.FieldName);
                 }
+
+                sheet.SetColumnWidth(index, 30 * 256);
             }
 
             //填充内容
@@ -53,7 +59,7 @@ namespace HZY.Admin.Services.Framework
                 dataRow = sheet.CreateRow(i + 1);
                 foreach (var col in cols)
                 {
-                    if (!col.FieldName.StartsWith("_")) continue;
+                    if (col.FieldName.StartsWith("_")) continue;
                     var index = cols.IndexOf(col);
                     var name = col.FieldName.FirstCharToUpper();
                     if (!item.ContainsKey(name)) continue;

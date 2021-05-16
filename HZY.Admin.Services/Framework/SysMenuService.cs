@@ -152,7 +152,7 @@ namespace HZY.Admin.Services.Framework
         public async Task<byte[]> ExportExcelAsync(SysMenu search)
         {
             var tableViewModel = await this.FindListAsync(1, 999999, search);
-            return this.ExportExcelByPagingViewModel(tableViewModel);
+            return this.ExportExcelByPagingViewModel(tableViewModel, null, "Id");
         }
 
         #region 创建系统左侧菜单

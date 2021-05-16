@@ -9,6 +9,7 @@ using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
 using HZY.Framework.Permission.Attributes;
 using HZY.Repository.Core.Models;
+using HZY.Framework.Filter;
 
 namespace HZY.Admin.Controllers
 {
@@ -26,6 +27,7 @@ namespace HZY.Admin.Controllers
         /// <param name="page"></param>
         /// <param name="search"></param>
         /// <returns></returns>
+        [ApiResourceCacheFilter(1)]
         [ActionDescriptor("Have")]
         [HttpPost("FindList/{size}/{page}")]
         public async Task<PagingViewModel> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] Member search)
@@ -78,6 +80,7 @@ namespace HZY.Admin.Controllers
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
+        [ApiResourceCacheFilter(5)]
         [ActionDescriptor("GetExcel")]
         [HttpPost("ExportExcel")]
         public async Task<FileContentResult> ExportExcelAsync([FromBody] Member search)

@@ -239,11 +239,13 @@ let tools = {
     },
     //保存 token
     setAuthorization(token) {
-        this.setCookie(appConsts.tokenKey, token);
+        // this.setCookie(appConsts.tokenKey, token);
+        localStorage.setItem(appConsts.tokenKey, token);
     },
     //获取 token
     getAuthorization() {
-        return this.getCookie(appConsts.tokenKey);
+        // return this.getCookie(appConsts.tokenKey);
+        return localStorage.getItem(appConsts.tokenKey);
     },
     //删除 token
     delAuthorization() {

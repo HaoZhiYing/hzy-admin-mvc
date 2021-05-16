@@ -5,7 +5,7 @@ const appConsts = {
     /**
      * token 键值
      */
-    tokenKey: "Authorization_HZY_ADMIN",
+    tokenKey: "Authorization_HZY_ADMIN_Spa",
     /**
      * 域名
      */

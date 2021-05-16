@@ -83,6 +83,7 @@ namespace HZY.Admin.Controllers.Framework
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
+        [ApiResourceCacheFilter(10)]
         [HttpPost("ExportExcel")]
         public async Task<FileContentResult> ExportExcelAsync([FromBody] SysUser search)
             => this.File(await this.DefaultService.ExportExcelAsync(search), Tools.GetFileContentType[".xls"].ToStr(),

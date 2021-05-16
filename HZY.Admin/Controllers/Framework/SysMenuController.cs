@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using HZY.Repository.Domain.Framework;
 using HZY.Framework.Permission.Attributes;
 using HZY.Repository.Core.Models;
+using HZY.Framework.Filter;
 
 namespace HZY.Admin.Controllers.Framework
 {
@@ -77,6 +78,7 @@ namespace HZY.Admin.Controllers.Framework
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
+        [ApiResourceCacheFilter(10)]
         [HttpPost("ExportExcel")]
         public async Task<FileContentResult> ExportExcelAsync([FromBody] SysMenu search)
             => this.File(await this.DefaultService.ExportExcelAsync(search), Tools.GetFileContentType[".xls"].ToStr(),

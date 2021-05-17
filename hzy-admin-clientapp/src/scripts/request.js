@@ -71,7 +71,7 @@ axios.interceptors.response.use(
     (error) => {
         tools.loadingStop();
         console.log(error);
-        if (error.response.status === 401) {
+        if (error.response.code === 401) {
             tools.notice("未授权!", "错误");
             return router.push("/login");
         } else {

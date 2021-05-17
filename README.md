@@ -3,6 +3,9 @@
 ### 后台模板
 https://gitee.com/hzy6/hzy-admin-spa-ui
 
+### WebApi 任务调度平台
+https://gitee.com/hzy6/hzy-quartz
+
 ### Java 后台框架
 
 1. https://gitee.com/hzy6/hzy-admin-thymeleaf

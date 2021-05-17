@@ -30,12 +30,6 @@ namespace HZY.Admin.Services.Framework
         }
 
         /// <summary>
-        /// 移除 Token
-        /// </summary>
-        public void RemoveToken()
-            => this._httpContext.RemoveCookie(this._appConfiguration.AuthorizationKeyName);
-
-        /// <summary>
         /// 创建 token 根据账户 id
         /// </summary>
         /// <param name="id"></param>

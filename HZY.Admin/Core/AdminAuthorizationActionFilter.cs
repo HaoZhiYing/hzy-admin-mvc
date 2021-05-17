@@ -39,11 +39,11 @@ namespace HZY.Admin.Core
 
             //拦截操作数据库的 接口
 
-            var actionList = new[] { "SaveForm", "DeleteList" };
-            if (actionList.Any(w => w.ToLower() == actionName.ToLower()))
-            {
-                MessageBox.Show("请下载源代码本地运行!");
-            }
+            //var actionList = new[] { "SaveForm", "DeleteList" };
+            //if (actionList.Any(w => w.ToLower() == actionName.ToLower()))
+            //{
+            //    MessageBox.Show("请下载源代码本地运行!");
+            //}
 
             #endregion
 

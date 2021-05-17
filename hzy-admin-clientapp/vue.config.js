@@ -2,7 +2,8 @@ const path = require('path')
 
 // vue.config.js for less-loader@6.0.0
 module.exports = {
-    publicPath: '/',
+    //静态文件地址前缀
+    publicPath: process.env.NODE_ENV == "production" ? "/client" : "/",
     devServer: {
         // development server port 8000
         port: 6877,

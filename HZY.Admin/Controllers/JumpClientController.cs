@@ -15,7 +15,7 @@ namespace HZY.Admin.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            return Redirect("/index.html");
+            return Redirect("/client/index.html");
         }
     }
 }

@@ -91,12 +91,19 @@
       </a-pagination>
     </a-card>
     <!--表单弹层-->
-    <a-modal v-model:visible="form.visible" title="编辑" centered @ok="form.visible = false" :width="800">
+    <a-modal v-model:visible="form.visible" title="编辑" centered @ok="form.visible = false" :width="800" destroyOnClose>
       <template #footer>
         <a-button type="primary" @click="infoForm.saveForm()">提交</a-button>
-        <a-button type="danger" ghost @click="visible = false">关闭</a-button>
+        <a-button type="danger" ghost @click="form.visible = false">关闭</a-button>
       </template>
-      <info v-model:formKey="form.key" ref="infoForm" />
+      <info
+        v-model:formKey="form.key"
+        ref="infoForm"
+        @onSaveSuccess="
+          findList();
+          form.visible = false;
+        "
+      />
     </a-modal>
   </div>
 </template>
@@ -186,11 +193,11 @@ export default defineComponent({
         data: [],
       },
       form: {
-        visible: true,
+        visible: false,
         key: "",
       },
     });
-
+    //表单 ref 对象
     const infoForm = ref(null);
 
     //权限

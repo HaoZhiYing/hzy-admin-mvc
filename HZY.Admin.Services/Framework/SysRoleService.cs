@@ -64,7 +64,7 @@ namespace HZY.Admin.Services.Framework
             foreach (var item in ids)
             {
                 var role = await this.Repository.FindByIdAsync(item);
-                if (role.IsDelete == 2)
+                if (role.IsDelete != 1)
                     MessageBox.Show("该信息不能删除!");
                 await this.Repository.DeleteAsync(role);
                 await this._sysUserRoleRepository.DeleteAsync(w => w.RoleId == item);

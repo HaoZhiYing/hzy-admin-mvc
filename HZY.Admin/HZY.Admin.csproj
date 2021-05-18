@@ -50,6 +50,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\client\" />
     <Folder Include="wwwroot\upload\files" />
+    <Folder Include="wwwroot\upload\files\20210518\" />
   </ItemGroup>
 
 </Project>

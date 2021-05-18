@@ -3,11 +3,7 @@
     <a-row :gutter="[15, 15]">
       <a-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
         <a-card title="菜单树" class="w100 mb-15">
-          <template #extra
-            ><a href="javascript:void(0)" @click="getFirst"
-              >查看一级</a
-            ></template
-          >
+          <template #extra><a href="javascript:void(0)" @click="getFirst">查看一级</a></template>
           <a-tree
             checkable
             v-model:expanded-keys="menuTree.expandedKeys"
@@ -20,30 +16,14 @@
         </a-card>
       </a-col>
       <a-col :xs="24" :sm="12" :md="12" :lg="19" :xl="19">
-        <a-card
-          class="w100 mb-15"
-          bodyStyle="padding:0"
-          v-show="table.search.state"
-        >
+        <a-card class="w100 mb-15" bodyStyle="padding:0" v-show="table.search.state">
           <a-row :gutter="[15, 15]" class="p-15">
             <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <a-input
-                v-model:value="table.search.vm.name"
-                placeholder="名称"
-              />
+              <a-input v-model:value="table.search.vm.name" placeholder="名称" />
             </a-col>
             <!--button-->
-            <a-col
-              :xs="24"
-              :sm="12"
-              :md="8"
-              :lg="6"
-              :xl="4"
-              style="float: right"
-            >
-              <a-button type="primary" class="mr-10" @click="findList"
-                >查询</a-button
-              >
+            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" style="float: right">
+              <a-button type="primary" class="mr-10" @click="findList">查询</a-button>
               <a-button class="mr-10" @click="onResetSearch">重置</a-button>
             </a-col>
           </a-row>
@@ -53,16 +33,9 @@
           <a-row :gutter="20" class="p-15 pb-0">
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
               <template v-if="power.search">
-                <a-button
-                  class="mr-10"
-                  @click="table.search.state = !table.search.state"
-                >
-                  <div v-if="table.search.state">
-                    <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
-                  </div>
-                  <div v-else>
-                    <AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开
-                  </div>
+                <a-button class="mr-10" @click="table.search.state = !table.search.state">
+                  <div v-if="table.search.state"><AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起</div>
+                  <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
                 </a-button>
               </template>
               <template v-if="power.insert">
@@ -74,12 +47,7 @@
                 </a-button>
               </template>
               <template v-if="power.delete">
-                <a-popconfirm
-                  title="您确定要删除吗?"
-                  @confirm="deleteList()"
-                  okText="确定"
-                  cancelText="取消"
-                >
+                <a-popconfirm title="您确定要删除吗?" @confirm="deleteList()" okText="确定" cancelText="取消">
                   <a-button type="danger" class="mr-10">
                     <template #icon>
                       <AppIcons iconName="DeleteOutlined" />
@@ -89,14 +57,7 @@
                 </a-popconfirm>
               </template>
             </a-col>
-            <a-col
-              :xs="24"
-              :sm="24"
-              :md="12"
-              :lg="12"
-              :xl="12"
-              class="pb-15 text-right"
-            >
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15 text-right">
               <!-- <a-button type="primary" class="mr-10" @click="exportExcel">
                 导出 Excel
               </a-button> -->
@@ -109,8 +70,7 @@
             :pagination="false"
             :row-selection="{
               selectedRowKeys: table.selectedRowKeys,
-              onChange: (selectedRowKeys) =>
-                (table.selectedRowKeys = selectedRowKeys),
+              onChange: (selectedRowKeys) => (table.selectedRowKeys = selectedRowKeys),
             }"
             tableLayout="fixed"
             rowKey="id"
@@ -118,18 +78,11 @@
             <template #id="{ record }">
               <div>
                 <template v-if="power.update">
-                  <a href="javascript:void(0)" @click="openForm(record.id)"
-                    >修改</a
-                  >
+                  <a href="javascript:void(0)" @click="openForm(record.id)">修改</a>
                 </template>
                 <a-divider type="vertical" />
                 <template v-if="power.delete">
-                  <a-popconfirm
-                    title="您确定要删除吗?"
-                    @confirm="deleteList(record.id)"
-                    okText="确定"
-                    cancelText="取消"
-                  >
+                  <a-popconfirm title="您确定要删除吗?" @confirm="deleteList(record.id)" okText="确定" cancelText="取消">
                     <a class="text-danger">删除</a>
                   </a-popconfirm>
                 </template>
@@ -167,18 +120,20 @@
           >
           </a-pagination>
         </a-card>
-        <info
-          v-model:propVisible="form.visible"
-          v-model:formKey="form.key"
-          @onSaveSuccess="onSaveSuccess"
-          v-model:parentMenuId="table.search.vm.parentId"
-        />
+        <!--表单弹层-->
+        <a-modal v-model:visible="form.visible" title="编辑" centered @ok="form.visible = false" :width="800" destroyOnClose>
+          <template #footer>
+            <a-button type="primary" @click="infoForm.saveForm()">提交</a-button>
+            <a-button type="danger" ghost @click="form.visible = false">关闭</a-button>
+          </template>
+          <info v-model:formKey="form.key" ref="infoForm" @onSaveSuccess="onSaveSuccess" v-model:parentMenuId="table.search.vm.parentId" />
+        </a-modal>
       </a-col>
     </a-row>
   </div>
 </template>
 <script>
-import { computed, defineComponent, onMounted, reactive, toRefs } from "vue";
+import { computed, defineComponent, onMounted, reactive, toRefs, ref } from "vue";
 import { useStore } from "vuex";
 import AppIcons from "@/components/appIcons";
 import info from "./info";
@@ -284,6 +239,8 @@ export default defineComponent({
         selectedKeys: [],
       },
     });
+    //表单 ref 对象
+    const infoForm = ref(null);
 
     //权限
     const power = computed(() => store.getters["app/getMenuPowerById"]);
@@ -313,16 +270,14 @@ export default defineComponent({
       //获取列表数据
       findList() {
         state.table.loading = true;
-        service
-          .findList(state.table.rows, state.table.page, state.table.search.vm)
-          .then((res) => {
-            let data = res.data;
-            state.table.loading = false;
-            state.table.page = data.page;
-            state.table.rows = data.size;
-            state.table.total = data.total;
-            state.table.data = data.dataSource;
-          });
+        service.findList(state.table.rows, state.table.page, state.table.search.vm).then((res) => {
+          let data = res.data;
+          state.table.loading = false;
+          state.table.page = data.page;
+          state.table.rows = data.size;
+          state.table.total = data.total;
+          state.table.data = data.dataSource;
+        });
       },
       //删除数据
       deleteList(id) {
@@ -346,6 +301,7 @@ export default defineComponent({
       },
       //表单保存成功
       onSaveSuccess() {
+        state.form.visible = false;
         methods.getMenusFunctionTree();
         methods.findList();
       },
@@ -383,6 +339,7 @@ export default defineComponent({
       ...toRefs(state),
       ...methods,
       power,
+      infoForm,
     };
   },
 });

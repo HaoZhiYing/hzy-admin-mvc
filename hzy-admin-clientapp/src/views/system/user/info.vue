@@ -1,55 +1,49 @@
 <template>
-  <div>
+  <a-form layout="vertical" :model="vm.form">
     <a-row :gutter="[15, 15]">
       <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-        <h4>真实姓名:</h4>
-        <a-input v-model:value="vm.form.name" placeholder="请输入" />
+        <a-form-item label="真实姓名">
+          <a-input v-model:value="vm.form.name" placeholder="请输入" />
+        </a-form-item>
       </a-col>
       <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-        <h4>账户名称:</h4>
-        <a-input v-model:value="vm.form.loginName" placeholder="请输入" />
+        <a-form-item label="账户名称">
+          <a-input v-model:value="vm.form.loginName" placeholder="请输入" />
+        </a-form-item>
       </a-col>
       <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-        <h4>账户密码:</h4>
-        <a-input v-model:value="vm.form.password" placeholder="请输入" />
+        <a-form-item label="账户密码">
+          <a-input v-model:value="vm.form.password" placeholder="请输入" />
+        </a-form-item>
       </a-col>
       <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-        <h4>联系电话:</h4>
-        <a-input v-model:value="vm.form.phone" placeholder="请输入" />
+        <a-form-item label="联系电话">
+          <a-input v-model:value="vm.form.phone" placeholder="请输入" />
+        </a-form-item>
       </a-col>
       <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-        <h4>邮箱地址:</h4>
-        <a-input v-model:value="vm.form.email" placeholder="请输入" />
+        <a-form-item label="邮箱地址">
+          <a-input v-model:value="vm.form.email" placeholder="请输入" />
+        </a-form-item>
       </a-col>
       <a-col :xs="24">
-        <h4>角色:</h4>
-        <a-checkbox-group v-model:value="vm.roleIds" class="w100">
-          <a-row>
-            <a-col :span="6" v-for="(item, index) in vm.allRoleList" :key="index">
-              <a-checkbox :value="item.id">
-                {{ item.name }}
-              </a-checkbox>
-            </a-col>
-          </a-row>
-        </a-checkbox-group>
+        <a-form-item label="角色">
+          <a-checkbox-group v-model:value="vm.roleIds" class="w100">
+            <a-row>
+              <a-col :span="6" v-for="(item, index) in vm.allRoleList" :key="index">
+                <a-checkbox :value="item.id">
+                  {{ item.name }}
+                </a-checkbox>
+              </a-col>
+            </a-row>
+          </a-checkbox-group>
+        </a-form-item>
       </a-col>
     </a-row>
-
-    <!-- <a-drawer
-      title="编辑"
-      placement="right"
-      :closable="false"
-      v-model:visible="visible"
-      :after-visible-change="afterVisibleChange"
-    >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-    </a-drawer>-->
-  </div>
+  </a-form>
 </template>
 <script>
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, onMounted, reactive, toRefs } from "vue";
 import tools from "@/scripts/tools";
 import service from "@/service/system/userService";
 
@@ -60,7 +54,6 @@ export default defineComponent({
   },
   setup(props, context) {
     const state = reactive({
-      // visible: props.propVisible,
       vm: {
         id: "",
         form: {},
@@ -68,23 +61,6 @@ export default defineComponent({
         allRoleList: [],
       },
     });
-
-    // watch(
-    //   () => props.propVisible,
-    //   (value) => {
-    //     state.visible = value;
-    //   }
-    // );
-
-    // watch(
-    //   () => state.visible,
-    //   (value) => {
-    //     context.emit("update:propVisible", value);
-    //     if (value) {
-    //       methods.findForm();
-    //     }
-    //   }
-    // );
 
     const methods = {
       findForm() {
@@ -101,12 +77,13 @@ export default defineComponent({
           context.emit("on-save-success");
         });
       },
-      click() {
-        alert(123);
-      },
     };
 
     context.expose({ ...methods });
+
+    onMounted(() => {
+      methods.findForm();
+    });
 
     return {
       ...toRefs(state),
@@ -115,3 +92,8 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="less" scoped>
+.ant-form-item {
+  margin-bottom: 0;
+}
+</style>

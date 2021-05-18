@@ -1,69 +1,41 @@
 <template>
-  <div>
-    <a-modal
-      v-model:visible="visible"
-      title="编辑"
-      centered
-      @ok="visible = false"
-      :width="400"
-    >
-      <template #footer>
-        <a-button type="primary" @click="saveForm()">提交</a-button>
-        <a-button type="danger" ghost @click="visible = false">关闭</a-button>
-      </template>
-      <a-row :gutter="[15, 15]">
-        <a-col :xs="24">
-          <h4>编号:</h4>
+  <a-form layout="vertical" :model="vm.form">
+    <a-row :gutter="[15, 15]">
+      <a-col :xs="24">
+        <a-form-item label="编号">
           <a-input v-model:value="vm.form.number" placeholder="请输入" />
-        </a-col>
-        <a-col :xs="24">
-          <h4>名称:</h4>
+        </a-form-item>
+      </a-col>
+      <a-col :xs="24">
+        <a-form-item label="名称">
           <a-input v-model:value="vm.form.name" placeholder="请输入" />
-        </a-col>
-        <a-col :xs="24">
-          <h4>英文名称:</h4>
+        </a-form-item>
+      </a-col>
+      <a-col :xs="24">
+        <a-form-item label="英文名称">
           <a-input v-model:value="vm.form.byName" placeholder="请输入" />
-        </a-col>
-      </a-row>
-    </a-modal>
-  </div>
+        </a-form-item>
+      </a-col>
+    </a-row>
+  </a-form>
 </template>
 <script>
-import { defineComponent, reactive, toRefs, watch } from "vue";
+import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import tools from "@/scripts/tools";
 import service from "@/service/system/functionService";
 
 export default defineComponent({
   props: {
-    propVisible: Boolean,
     formKey: String,
     onSaveSuccess: Function,
   },
   setup(props, context) {
     const state = reactive({
-      visible: props.propVisible,
       vm: {
         id: "",
         form: {},
       },
     });
-
-    watch(
-      () => props.propVisible,
-      (value) => {
-        state.visible = value;
-      }
-    );
-
-    watch(
-      () => state.visible,
-      (value) => {
-        context.emit("update:propVisible", value);
-        if (value) {
-          methods.findForm();
-        }
-      }
-    );
 
     const methods = {
       findForm() {
@@ -82,6 +54,12 @@ export default defineComponent({
       },
     };
 
+    context.expose({ ...methods });
+
+    onMounted(() => {
+      methods.findForm();
+    });
+
     return {
       ...toRefs(state),
       ...methods,
@@ -89,3 +67,8 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="less" scoped>
+.ant-form-item {
+  margin-bottom: 0;
+}
+</style>

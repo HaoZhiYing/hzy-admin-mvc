@@ -71,6 +71,9 @@ axios.interceptors.response.use(
     (error) => {
         tools.loadingStop();
         console.log(error);
+        if (error.message === 'Network Error') {
+            return tools.message('网络连接错误!', "错误");
+        }
         if (!error.response) {
             return router.push("/login");
         }

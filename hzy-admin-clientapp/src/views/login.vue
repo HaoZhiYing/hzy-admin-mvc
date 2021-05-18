@@ -5,39 +5,80 @@
       <a-card>
         <div class="login-title">{{ title }}</div>
         <div class="p-20">
-          <div class="login-input">
-            <div class="form-title">用户名</div>
-            <input type="text" v-model="userName" />
-          </div>
-          <div class="login-input">
-            <div class="form-title">密码</div>
-            <input type="password" v-model="userPassword" />
-          </div>
-          <div class="login-btn">
-            <a-button type="primary" @click="check" :loading="loading">
-              登录
-            </a-button>
-          </div>
+          <a-form layout="vertical">
+            <a-form-item>
+              <a-input
+                v-model:value="userName"
+                placeholder="请输入"
+                size="large"
+                allow-clear
+              >
+                <template #prefix>
+                  <app-icons
+                    icon-name="UserOutlined"
+                    style="color: #1890ff;font-size: 14px;"
+                  />
+                </template>
+              </a-input>
+            </a-form-item>
+            <a-form-item>
+              <a-input-password
+                type="password"
+                v-model:value="userPassword"
+                size="large"
+                ref="inputPassword"
+                @keyup.enter="check"
+              >
+                <template #prefix>
+                  <app-icons
+                    icon-name="LockOutlined"
+                    style="color: #1890ff;font-size: 14px;"
+                  />
+                </template>
+              </a-input-password>
+            </a-form-item>
+            <a-form-item>
+              <a-button
+                type="primary"
+                @click="check"
+                :loading="loading"
+                size="large"
+                block
+              >
+                登录
+              </a-button>
+            </a-form-item>
+          </a-form>
         </div>
       </a-card>
     </div>
   </div>
 </template>
 <script>
-import { computed, defineComponent, reactive, toRefs, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  reactive,
+  toRefs,
+  ref,
+  onMounted,
+} from "vue";
 //vuex
 import { useStore } from "vuex";
 import router from "@/router/index";
+import AppIcons from "@/components/appIcons";
 import tools from "@/scripts/tools";
 import loginService from "@/service/system/loginService";
 
 export default defineComponent({
+  components: { AppIcons },
   setup() {
     const state = reactive({
       userName: "admin",
       userPassword: "123456",
     });
     const loading = ref(false);
+    const inputPassword = ref(null);
 
     const store = useStore();
     const title = computed(() => store.state.app.title);
@@ -51,19 +92,24 @@ export default defineComponent({
         if (!state.userPassword) return tools.message("密码不能为空!", "警告");
         loading.value = true;
         loginService.login(state.userName, state.userPassword).then((res) => {
+          loading.value = false;
           if (res.code !== 1) return;
           tools.setAuthorization(res.data.token);
-          loading.value = false;
           router.push("/");
         });
       },
     };
+
+    onMounted(() => {
+      inputPassword.value.focus();
+    });
 
     return {
       ...toRefs(state),
       title,
       ...methods,
       loading,
+      inputPassword,
     };
   },
 });
@@ -109,53 +155,8 @@ export default defineComponent({
       text-align: left;
     }
 
-    .login-btn {
-      margin: 50px 0;
-
-      button {
-        width: 100%;
-      }
-    }
-
-    .login-input {
-      margin: 30px 0;
-
-      input {
-        font-size: 16px;
-        padding: 8px 0;
-        height: 40px;
-        width: 100%;
-        border-radius: 0;
-        border: none;
-        // border-bottom: 1px solid #303133;
-        // -webkit-box-shadow: inset 0 0 0 1000px #fff;
-        // box-shadow: inset 0 0 0 1000px #fff;
-        outline: none;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-transition: 0.3s;
-        transition: 0.3s;
-        font-weight: 200;
-        background: none;
-        border-bottom: 1px solid #409eff;
-        box-shadow: inset 0 0 0 1000px #fff;
-      }
-
-      input:focus {
-        border-bottom-color: #409eff;
-        -webkit-box-shadow: inset 0 0 0 1000px #fff;
-        box-shadow: inset 0 0 0 1000px #fff;
-      }
-    }
-
     .ant-card {
       border: 0;
-    }
-
-    button {
-      padding: 5px 20px;
-      font-size: 16px;
-      height: 40px;
     }
   }
 

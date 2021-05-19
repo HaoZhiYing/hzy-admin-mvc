@@ -20,7 +20,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 using HZY.Repository.Core.Impl;
 
-namespace HZY.Repository.Core.Provider
+namespace HZY.Repository.Core.EntityFramework
 {
     public class BaseDbContext<TDbContext> : DbContext where TDbContext : DbContext
     {

@@ -4,6 +4,57 @@
         <name>HZY.Repository</name>
     </assembly>
     <members>
+        <member name="T:HZY.Repository.Attributes.TransactionalAttribute">
+            <summary>
+            通过标记 自动 事务 适用于 控制器 Action 上标记
+            自动档 事务
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Core.EntityFramework.BaseDbContext`1.CacheEntity">
+            <summary>
+            获取实体信息缓存服务
+            </summary>
+        </member>
+        <member name="M:HZY.Repository.Core.EntityFramework.BaseDbContext`1.SavingChangesEvent(System.Object,Microsoft.EntityFrameworkCore.SavingChangesEventArgs)">
+            <summary>
+            在调用SaveChanges结束时激发的事件 
+            </summary>
+        </member>
+        <member name="M:HZY.Repository.Core.EntityFramework.BaseDbContext`1.BeginTransaction">
+            <summary>
+            事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Repository.Core.EntityFramework.BaseDbContext`1.BeginTransactionAsync">
+            <summary>
+            事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:HZY.Repository.Core.EntityFramework.BaseDbContext`1.UnitOfWork">
+            <summary>
+            工作单元
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Repository.Core.EntityFramework.BaseDbContext`1.CommitOpen">
+            <summary>
+            开启 提交
+            </summary>
+        </member>
+        <member name="M:HZY.Repository.Core.EntityFramework.BaseDbContext`1.Commit">
+            <summary>
+            提交
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Repository.Core.EntityFramework.BaseDbContext`1.CommitAsync">
+            <summary>
+            提交
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HZY.Repository.Core.Impl.CacheEntityImpl">
             <summary>
             缓存实体信息服务
@@ -188,51 +239,6 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="P:HZY.Repository.Core.Provider.BaseDbContext`1.CacheEntity">
-            <summary>
-            获取实体信息缓存服务
-            </summary>
-        </member>
-        <member name="M:HZY.Repository.Core.Provider.BaseDbContext`1.SavingChangesEvent(System.Object,Microsoft.EntityFrameworkCore.SavingChangesEventArgs)">
-            <summary>
-            在调用SaveChanges结束时激发的事件 
-            </summary>
-        </member>
-        <member name="M:HZY.Repository.Core.Provider.BaseDbContext`1.BeginTransaction">
-            <summary>
-            事务
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.Core.Provider.BaseDbContext`1.BeginTransactionAsync">
-            <summary>
-            事务
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:HZY.Repository.Core.Provider.BaseDbContext`1.UnitOfWork">
-            <summary>
-            工作单元
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.Core.Provider.BaseDbContext`1.CommitOpen">
-            <summary>
-            开启 提交
-            </summary>
-        </member>
-        <member name="M:HZY.Repository.Core.Provider.BaseDbContext`1.Commit">
-            <summary>
-            提交
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.Core.Provider.BaseDbContext`1.CommitAsync">
-            <summary>
-            提交
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:HZY.Repository.Core.Provider.DatabaseFacadeExtensions">
             <summary>
             DatabaseFacade 扩展
@@ -415,12 +421,6 @@
             <param name="rows"></param>
             <typeparam name="T"></typeparam>
             <returns></returns>
-        </member>
-        <member name="T:HZY.Repository.Attributes.TransactionalAttribute">
-            <summary>
-            通过标记 自动 事务 适用于 控制器 Action 上标记
-            自动档 事务
-            </summary>
         </member>
         <member name="T:HZY.Repository.Domain.Framework.SysFunction">
             <summary>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using HZY.Repository.Core.EntityFramework;
 using HZY.Repository.Core.Impl;
 using HZY.Repository.Core.Interface;
 using Microsoft.EntityFrameworkCore;

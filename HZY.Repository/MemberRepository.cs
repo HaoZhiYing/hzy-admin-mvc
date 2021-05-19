@@ -2,6 +2,7 @@
 using HZY.Repository.Domain;
 using HZY.Repository.Core;
 using HZY.Repository.Core.Provider;
+using HZY.Repository.Core.EntityFramework;
 
 namespace HZY.Repository
 {

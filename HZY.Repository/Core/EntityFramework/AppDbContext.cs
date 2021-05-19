@@ -3,7 +3,7 @@ using HZY.Repository.Core.Provider;
 using Microsoft.EntityFrameworkCore;
 using HZY.Repository.Core.Interface;
 
-namespace HZY.Repository.Core
+namespace HZY.Repository.Core.EntityFramework
 {
     public class AppDbContext : BaseDbContext<AppDbContext>
     {

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HZY.Common;
 using HZY.Common.ScanDIService.Interface;
+using HZY.Repository.Core.EntityFramework;
 using HZY.Repository.Core.Impl;
 using HZY.Repository.Core.Models;
 using Microsoft.EntityFrameworkCore;

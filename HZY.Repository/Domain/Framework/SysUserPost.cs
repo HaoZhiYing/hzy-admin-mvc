@@ -1,4 +1,4 @@
-﻿using HZY.Repository.Core.Models;
+﻿using HZY.Repository.AppCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

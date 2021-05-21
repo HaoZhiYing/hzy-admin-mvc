@@ -1,5 +1,5 @@
 ﻿
-using HZY.Repository.Core.Models;
+using HZY.Repository.AppCore.Models;
 
 namespace HZY.Repository.Domain.Framework
 {

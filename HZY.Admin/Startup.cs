@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using HZY.Admin.Core;
+using HZY.Admin.Filters;
 using HZY.Framework;
-using HZY.Framework.Filter;
+using HZY.Framework.Filters;
 using HZY.Framework.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,9 +17,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using HZY.Repository.Core.Provider;
 using HZY.Common.ScanDIService;
 using NLog.Extensions.Logging;
+using HZY.Repository.Core;
 
 namespace HZY.Admin
 {
@@ -69,7 +69,7 @@ namespace HZY.Admin
 
             #region 仓储注册 、 自动扫描服务注册 、 中间件注册
 
-            services.RegisterRepository(connectionString);
+            RepositoryModule.RegisterAdminRepository(services, connectionString);
             services.ScanningAppServices("HZY.");
             services.AddScoped<TakeUpTimeMiddleware>();
 

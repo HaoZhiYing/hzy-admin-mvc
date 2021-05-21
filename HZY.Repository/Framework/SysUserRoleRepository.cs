@@ -1,13 +1,13 @@
 ﻿using HZY.Repository.Domain.Framework;
-using HZY.Repository.Core;
-using HZY.Repository.Core.Provider;
-using HZY.Repository.Core.EntityFramework;
+using HZY.Repository.AppCore;
+using HZY.Repository.AppCore.Provider;
+using HZY.Repository.AppCore.DbContexts;
 
 namespace HZY.Repository.Framework
 {
-    public class SysUserRoleRepository : AppRepository<SysUserRole>
+    public class SysUserRoleRepository : AdminRepository<SysUserRole>
     {
-        public SysUserRoleRepository(AppDbContext context) : base(context)
+        public SysUserRoleRepository(AdminDbContext context) : base(context)
         {
         }
     }

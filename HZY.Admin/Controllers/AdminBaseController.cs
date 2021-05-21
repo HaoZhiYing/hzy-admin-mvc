@@ -1,6 +1,6 @@
 ﻿using HZY.Framework;
 using HZY.Framework.Controllers;
-using HZY.Framework.Filter;
+using HZY.Framework.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

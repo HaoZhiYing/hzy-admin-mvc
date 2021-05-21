@@ -7,11 +7,12 @@ using HZY.Admin.Model.Bo;
 using HZY.Admin.Model.Dto;
 using HZY.Framework.Services;
 using HZY.Repository.Domain.Framework;
-using HZY.Repository.Core.Models;
+using HZY.Repository.AppCore.Models;
 using HZY.Repository.Framework;
 using HZY.Common;
 using Microsoft.EntityFrameworkCore;
-using HZY.Repository.Core.Provider;
+using HZY.Repository.AppCore.Provider;
+using HZY.Repository.AppCore.Extensions;
 
 namespace HZY.Admin.Services.Framework
 {

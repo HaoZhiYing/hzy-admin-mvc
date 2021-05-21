@@ -230,47 +230,58 @@
             </summary>
             <param name="apiResult"></param>
         </member>
-        <member name="T:HZY.Framework.Filter.ApiExceptionFilter">
+        <member name="T:HZY.Framework.Filters.ApiCheckModelAttribute">
+            <summary>
+            对接口模型验证
+            </summary>
+        </member>
+        <member name="M:HZY.Framework.Filters.ApiCheckModelAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            每次请求Action之前发生，，在行为方法执行前执行
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:HZY.Framework.Filters.ApiExceptionFilter">
             <summary>
             异常过滤器
             </summary>
         </member>
-        <member name="T:HZY.Framework.Filter.ApiResourceCacheFilterAttribute">
+        <member name="T:HZY.Framework.Filters.ApiResourceCacheFilterAttribute">
             <summary>
             接口资源加载过滤 拦截资源做缓存
             </summary>
         </member>
-        <member name="M:HZY.Framework.Filter.ApiResourceCacheFilterAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)">
+        <member name="M:HZY.Framework.Filters.ApiResourceCacheFilterAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)">
             <summary>
             资源加载之前
             </summary>
             <param name="context"></param>
         </member>
-        <member name="M:HZY.Framework.Filter.ApiResourceCacheFilterAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)">
+        <member name="M:HZY.Framework.Filters.ApiResourceCacheFilterAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)">
             <summary>
             资源加载之后
             </summary>
             <param name="context"></param>
         </member>
-        <member name="M:HZY.Framework.Filter.ApiResourceCacheFilterAttribute.GetCacheKey(Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:HZY.Framework.Filters.ApiResourceCacheFilterAttribute.GetCacheKey(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             获取每个唯一请求的缓存 key
             </summary>
             <param name="context"></param>
             <returns></returns>
         </member>
-        <member name="T:HZY.Framework.Filter.ApiResultFilterAttribute">
+        <member name="T:HZY.Framework.Filters.ApiResultFilterAttribute">
             <summary>
             Api 结果返回包装器
             </summary>
         </member>
-        <member name="M:HZY.Framework.Filter.ApiResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)">
+        <member name="M:HZY.Framework.Filters.ApiResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)">
             <summary>
             结果 返回前
             </summary>
             <param name="context"></param>
         </member>
-        <member name="M:HZY.Framework.Filter.ApiResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
+        <member name="M:HZY.Framework.Filters.ApiResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
             <summary>
             返回结果后
             </summary>

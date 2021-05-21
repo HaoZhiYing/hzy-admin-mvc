@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using HZY.Admin.Model.Dto;
 using HZY.Admin.Services.Framework;
 using HZY.Framework.Permission.Attributes;
-using HZY.Repository.Attributes;
-using HZY.Repository.Core.Models;
+using HZY.Repository.AppCore.Attributes;
+using HZY.Repository.AppCore.Models;
 using HZY.Repository.Domain.Framework;
 using Microsoft.AspNetCore.Mvc;
 

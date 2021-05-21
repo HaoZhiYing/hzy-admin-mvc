@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HZY.Admin.Core;
+using HZY.Admin.Filters;
 using HZY.Admin.Services;
 using HZY.Repository.Domain;
-using HZY.Repository.Attributes;
 using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
 using HZY.Framework.Permission.Attributes;
-using HZY.Repository.Core.Models;
-using HZY.Framework.Filter;
+using HZY.Repository.AppCore.Models;
+using HZY.Framework.Filters;
+using HZY.Repository.AppCore.Attributes;
 
 namespace HZY.Admin.Controllers
 {
@@ -67,7 +67,7 @@ namespace HZY.Admin.Controllers
         /// <param name="form"></param>
         /// <returns></returns>
         [ActionDescriptor("Save")]
-        [AdminCheckModel]
+        [ApiCheckModel]
         [Transactional]
         [HttpPost("SaveForm")]
         public async Task<Member> SaveFormAsync([FromForm] Member form)

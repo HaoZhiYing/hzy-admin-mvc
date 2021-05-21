@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 using HZY.Admin.Model.Bo;
 using HZY.Admin.Model.Dto;
 using HZY.Admin.Services.Framework;
-using HZY.Repository.Attributes;
 using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
 using HZY.Repository.Domain.Framework;
 using HZY.Framework.Permission.Attributes;
-using HZY.Repository.Core.Models;
-using HZY.Framework.Filter;
+using HZY.Repository.AppCore.Models;
+using HZY.Framework.Filters;
+using HZY.Repository.AppCore.Attributes;
 
 namespace HZY.Admin.Controllers.Framework
 {

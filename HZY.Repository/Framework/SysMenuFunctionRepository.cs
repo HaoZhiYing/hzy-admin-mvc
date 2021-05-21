@@ -1,13 +1,13 @@
 ﻿using HZY.Repository.Domain.Framework;
-using HZY.Repository.Core;
-using HZY.Repository.Core.Provider;
-using HZY.Repository.Core.EntityFramework;
+using HZY.Repository.AppCore;
+using HZY.Repository.AppCore.Provider;
+using HZY.Repository.AppCore.DbContexts;
 
 namespace HZY.Repository.Framework
 {
-    public class SysMenuFunctionRepository : AppRepository<SysMenuFunction>
+    public class SysMenuFunctionRepository : AdminRepository<SysMenuFunction>
     {
-        public SysMenuFunctionRepository(AppDbContext context) : base(context)
+        public SysMenuFunctionRepository(AdminDbContext context) : base(context)
         {
         }
     }

@@ -5,7 +5,7 @@ using HZY.Common;
 using HZY.Common.ScanDIService.Attributes;
 using HZY.Common.ScanDIService.Interface;
 using HZY.Framework.Services;
-using HZY.Repository.Core.Models;
+using HZY.Repository.AppCore.Models;
 using NPOI.HSSF.UserModel;
 
 namespace HZY.Admin.Services.Framework

@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HZY.Admin.Model.Dto;
-using HZY.Admin.Model.Vo;
-using HZY.Framework;
-using HZY.Framework.Services;
 using HZY.Repository.Domain.Framework;
-using HZY.Repository.Core.Models;
+using HZY.Repository.AppCore.Models;
 using HZY.Repository.Framework;
 using HZY.Common;
 using Microsoft.EntityFrameworkCore;
-using HZY.Repository.Core.Provider;
 using HZY.Framework.ApiResultManage;
+using HZY.Repository.AppCore.Extensions;
 
 namespace HZY.Admin.Services.Framework
 {

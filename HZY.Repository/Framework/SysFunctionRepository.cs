@@ -1,13 +1,13 @@
 ﻿using HZY.Repository.Domain.Framework;
-using HZY.Repository.Core;
-using HZY.Repository.Core.Provider;
-using HZY.Repository.Core.EntityFramework;
+using HZY.Repository.AppCore;
+using HZY.Repository.AppCore.Provider;
+using HZY.Repository.AppCore.DbContexts;
 
 namespace HZY.Repository.Framework
 {
-    public class SysFunctionRepository : AppRepository<SysFunction>
+    public class SysFunctionRepository : AdminRepository<SysFunction>
     {
-        public SysFunctionRepository(AppDbContext context) : base(context)
+        public SysFunctionRepository(AdminDbContext context) : base(context)
         {
         }
     }

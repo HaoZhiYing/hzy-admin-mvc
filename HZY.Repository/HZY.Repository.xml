@@ -10,17 +10,17 @@
             自动档 事务
             </summary>
         </member>
-        <member name="T:HZY.Repository.AppCore.DbContexts.AdminDbContext">
+        <member name="T:HZY.Repository.AppCore.DbContexts.AdminBaseDbContext">
             <summary>
             后台权限管理系统 DbContext
             </summary>
         </member>
-        <member name="P:HZY.Repository.AppCore.DbContexts.AdminDbContext.CacheEntity">
+        <member name="P:HZY.Repository.AppCore.DbContexts.AdminBaseDbContext.CacheEntity">
             <summary>
             获取实体信息缓存服务
             </summary>
         </member>
-        <member name="M:HZY.Repository.AppCore.DbContexts.AdminDbContext.SavingChangesEvent(System.Object,Microsoft.EntityFrameworkCore.SavingChangesEventArgs)">
+        <member name="M:HZY.Repository.AppCore.DbContexts.AdminBaseDbContext.SavingChangesEvent(System.Object,Microsoft.EntityFrameworkCore.SavingChangesEventArgs)">
             <summary>
             在调用SaveChanges结束时激发的事件 
             </summary>
@@ -71,65 +71,11 @@
             DatabaseFacade 扩展
             </summary>
         </member>
-        <member name="M:HZY.Repository.AppCore.Extensions.DatabaseFacadeExtensions.ExcuteDataTable(Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade,System.String)">
+        <member name="M:HZY.Repository.AppCore.Extensions.DatabaseFacadeExtensions.GetDataConnection(Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade)">
             <summary>
-            执行 sql 返回 DataTable
+            获取连接对象
             </summary>
             <param name="databaseFacade"></param>
-            <param name="sql"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.AppCore.Extensions.DatabaseFacadeExtensions.ExcuteDataTable(Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade,System.String,System.Object[])">
-            <summary>
-            执行 sql 返回 DataTable
-            </summary>
-            <param name="databaseFacade"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.AppCore.Extensions.DatabaseFacadeExtensions.ExcuteReader(Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade,System.String)">
-            <summary>
-            执行 sql 返回 SqlDataReader
-            </summary>
-            <param name="databaseFacade"></param>
-            <param name="sql"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.AppCore.Extensions.DatabaseFacadeExtensions.ExcuteReader(Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade,System.String,System.Object[])">
-            <summary>
-            执行 sql 返回 SqlDataReader
-            </summary>
-            <param name="databaseFacade"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.AppCore.Extensions.DatabaseFacadeExtensions.ExcuteListDictionary(Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade,System.String)">
-            <summary>
-            执行 sql 返回 List[Dictionary[string,object]]
-            </summary>
-            <param name="databaseFacade"></param>
-            <param name="sql"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.AppCore.Extensions.DatabaseFacadeExtensions.ExcuteListDictionary(Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade,System.String,System.Object[])">
-            <summary>
-            执行 sql 返回 List[Dictionary[string,object]]
-            </summary>
-            <param name="databaseFacade"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.Repository.AppCore.Extensions.DatabaseFacadeExtensions.ExecuteScalar``1(Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade,System.String,System.Object[])">
-            <summary>
-            执行 sql 返回 第一行第一列值
-            </summary>
-            <param name="databaseFacade"></param>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <typeparam name="TResult"></typeparam>
             <returns></returns>
         </member>
         <member name="T:HZY.Repository.AppCore.Extensions.HzyRepositoryExtensions">
@@ -401,13 +347,13 @@
             列宽度
             </summary>
         </member>
-        <member name="T:HZY.Repository.AppCore.Provider.AdminRepository`1">
+        <member name="T:HZY.Repository.AppCore.Provider.AdminBaseRepository`1">
             <summary>
             默认基础仓储
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:HZY.Repository.AppCore.Provider.AdminRepository`1.CreateColumnHeads(HZY.Repository.AppCore.Models.PagingViewModel,System.Collections.Generic.List{System.String},System.Collections.Generic.List{HZY.Repository.AppCore.Models.TableViewColumnHead})">
+        <member name="M:HZY.Repository.AppCore.Provider.AdminBaseRepository`1.CreateColumnHeads(HZY.Repository.AppCore.Models.PagingViewModel,System.Collections.Generic.List{System.String},System.Collections.Generic.List{HZY.Repository.AppCore.Models.TableViewColumnHead})">
             <summary>
             创建列头
             </summary>
@@ -415,7 +361,7 @@
             <param name="fieldNames"></param>
             <param name="columnHeads"></param>
         </member>
-        <member name="M:HZY.Repository.AppCore.Provider.AdminRepository`1.AsPagingViewModelAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Collections.Generic.List{HZY.Repository.AppCore.Models.TableViewColumnHead})">
+        <member name="M:HZY.Repository.AppCore.Provider.AdminBaseRepository`1.AsPagingViewModelAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Collections.Generic.List{HZY.Repository.AppCore.Models.TableViewColumnHead})">
             <summary>
             查询转换为分页视图模型
             </summary>
@@ -426,7 +372,7 @@
             <typeparam name="TModel"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:HZY.Repository.AppCore.Provider.AdminRepository`1.AsPagingViewModelAsync(System.String,System.Int32,System.Int32,System.String,System.Collections.Generic.List{HZY.Repository.AppCore.Models.TableViewColumnHead},System.Object[])">
+        <member name="M:HZY.Repository.AppCore.Provider.AdminBaseRepository`1.AsPagingViewModelAsync(System.String,System.Int32,System.Int32,System.String,System.Collections.Generic.List{HZY.Repository.AppCore.Models.TableViewColumnHead},System.Object[])">
             <summary>
             查询转换为分页视图模型 支持 Sql 字符串
             </summary>

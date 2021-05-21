@@ -19,6 +19,8 @@ using HZY.Repository.AppCore.Extensions;
 using HZY.Repository.AppCore.Impl;
 using HZY.Repository.AppCore.Models;
 using Microsoft.EntityFrameworkCore;
+using Dapper;
+using System;
 
 namespace HZY.Repository.AppCore.Provider
 {
@@ -27,10 +29,10 @@ namespace HZY.Repository.AppCore.Provider
     /// </summary>
     /// <typeparam name="T"></typeparam>
     //[AppService(IgnoreCurrent = true)]
-    public class AdminRepository<T> : RepositoryImpl<T, AdminDbContext>, IDITransientSelf
+    public class AdminBaseRepository<T> : RepositoryImpl<T, AdminBaseDbContext>, IDITransientSelf
         where T : class, new()
     {
-        public AdminRepository(AdminDbContext context) : base(context)
+        public AdminBaseRepository(AdminBaseDbContext context) : base(context)
         {
         }
 
@@ -130,14 +132,30 @@ namespace HZY.Repository.AppCore.Provider
             List<TableViewColumnHead> columnHeads = default,
             params object[] parameters)
         {
-            var count = this.Orm.Database.ExecuteScalar<int>(
-                $"SELECT COUNT(1) FROM ({sql}) TAB", parameters);
+            var dbConnection = Orm.Database.GetDataConnection();
+
+            var count = await dbConnection.QuerySingleAsync<int>($"SELECT COUNT(1) FROM ({sql}) TAB", parameters);
             var pagingViewModel = new PagingViewModel { Page = page, Size = size, Total = count };
             pagingViewModel.PageCount = (pagingViewModel.Total / size);
             var offSet = size * (page - 1);
-            var data = this.Orm.Database.ExcuteDataTable(
-                $"SELECT * FROM ({sql}) TAB ORDER BY {orderBy} OFFSET {offSet} ROWS FETCH NEXT {size} ROWS ONLY",
-                parameters);
+            var sqlString = string.Empty;
+
+            if (Orm.Database.IsSqlServer())
+            {
+                sqlString = $"SELECT * FROM ({sql}) TAB ORDER BY {orderBy} OFFSET {offSet} ROWS FETCH NEXT {size} ROWS ONLY";
+            }
+            else if (Orm.Database.IsMySql())
+            {
+                sqlString = $"SELECT * FROM ({sql}) TAB ORDER BY {orderBy} LIMIT {offSet},{size}";
+            }
+            else
+            {
+                throw new Exception("查询数据库类型不支持!");
+            }
+
+            var dataReader = await dbConnection.ExecuteReaderAsync(sqlString, parameters);
+            var data = new DataTable("Dapper_Select_Table");
+            data.Load(dataReader);
 
             var fieldNames = (from DataColumn dc in data.Columns select dc.ColumnName).ToList();
 

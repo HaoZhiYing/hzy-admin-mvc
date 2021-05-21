@@ -5,9 +5,9 @@ using HZY.Repository.AppCore.DbContexts;
 
 namespace HZY.Repository.Framework
 {
-    public class SysMenuFunctionRepository : AdminRepository<SysMenuFunction>
+    public class SysMenuFunctionRepository : AdminBaseRepository<SysMenuFunction>
     {
-        public SysMenuFunctionRepository(AdminDbContext context) : base(context)
+        public SysMenuFunctionRepository(AdminBaseDbContext context) : base(context)
         {
         }
     }

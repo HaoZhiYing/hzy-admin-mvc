@@ -5,9 +5,9 @@ using HZY.Repository.AppCore.DbContexts;
 
 namespace HZY.Repository.Framework
 {
-    public class SysRoleRepository : AdminRepository<SysRole>
+    public class SysRoleRepository : AdminBaseRepository<SysRole>
     {
-        public SysRoleRepository(AdminDbContext context) : base(context)
+        public SysRoleRepository(AdminBaseDbContext context) : base(context)
         {
         }
     }

@@ -4,9 +4,9 @@ using HZY.Repository.AppCore.DbContexts;
 
 namespace HZY.Repository
 {
-    public class MemberRepository : AdminRepository<Member>
+    public class MemberRepository : AdminBaseRepository<Member>
     {
-        public MemberRepository(AdminDbContext context) : base(context)
+        public MemberRepository(AdminBaseDbContext context) : base(context)
         {
 
         }

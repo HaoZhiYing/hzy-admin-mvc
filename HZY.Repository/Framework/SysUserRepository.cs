@@ -8,9 +8,9 @@ namespace HZY.Repository.Framework
     /// <summary>
     /// 
     /// </summary>
-    public class SysUserRepository : AdminRepository<SysUser>
+    public class SysUserRepository : AdminBaseRepository<SysUser>
     {
-        public SysUserRepository(AdminDbContext context) : base(context)
+        public SysUserRepository(AdminBaseDbContext context) : base(context)
         {
         }
     }

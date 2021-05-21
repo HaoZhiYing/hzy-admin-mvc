@@ -15,10 +15,10 @@ namespace HZY.Admin.Controllers
     {
         private readonly RedisRepository _redisRepository;
 
-        public RedisController(RedisRepository redisRepository)
-        {
-            _redisRepository = redisRepository;
-        }
+        //public RedisController(RedisRepository redisRepository)
+        //{
+        //    _redisRepository = redisRepository;
+        //}
 
         /// <summary>
         /// 测试 消息订阅

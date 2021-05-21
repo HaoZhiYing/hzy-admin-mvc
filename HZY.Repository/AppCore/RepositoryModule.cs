@@ -13,17 +13,29 @@ namespace HZY.Repository.Core
 
         public static void RegisterAdminRepository(IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<AdminDbContext>(options =>
+            #region 后台 管理系统 数据库上下文
+
+            services.AddDbContext<AdminBaseDbContext>(options =>
             {
-                options
+                options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+                    //无跟踪
+                    // .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                    
+                #region SqlSever
                     .UseSqlServer(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100))
-                    .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
-                //无跟踪
-                // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                #endregion
+
+                #region MySql
+                    //.UseMySql()
+                #endregion
+
+                    ;
             });
 
+            #endregion
+
             services.AddSingleton<ICacheEntity, CacheEntityImpl>();
-            services.AddScoped(typeof(AdminRepository<>));
+            services.AddScoped(typeof(AdminBaseRepository<>));
         }
 
 

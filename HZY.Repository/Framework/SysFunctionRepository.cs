@@ -5,9 +5,9 @@ using HZY.Repository.AppCore.DbContexts;
 
 namespace HZY.Repository.Framework
 {
-    public class SysFunctionRepository : AdminRepository<SysFunction>
+    public class SysFunctionRepository : AdminBaseRepository<SysFunction>
     {
-        public SysFunctionRepository(AdminDbContext context) : base(context)
+        public SysFunctionRepository(AdminBaseDbContext context) : base(context)
         {
         }
     }

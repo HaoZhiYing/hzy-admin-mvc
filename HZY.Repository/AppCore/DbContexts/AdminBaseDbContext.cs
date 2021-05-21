@@ -22,11 +22,11 @@ namespace HZY.Repository.AppCore.DbContexts
     /// <summary>
     /// 后台权限管理系统 DbContext
     /// </summary>
-    public class AdminDbContext : BaseDbContext<AdminDbContext>
+    public class AdminBaseDbContext : BaseDbContext<AdminBaseDbContext>
     {
         private readonly ICacheEntity _cacheEntity;
 
-        public AdminDbContext(DbContextOptions<AdminDbContext> options, ICacheEntity cacheEntity) : base(options)
+        public AdminBaseDbContext(DbContextOptions<AdminBaseDbContext> options, ICacheEntity cacheEntity) : base(options)
         {
             this.SavingChanges += (sender, args) => this.SavingChangesEvent(sender, args);
             _cacheEntity = cacheEntity;

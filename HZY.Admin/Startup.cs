@@ -20,6 +20,7 @@ using Swashbuckle.AspNetCore.Filters;
 using HZY.Common.ScanDIService;
 using NLog.Extensions.Logging;
 using HZY.Repository.Core;
+using HZY.Repository.Redis.AppCore;
 
 namespace HZY.Admin
 {

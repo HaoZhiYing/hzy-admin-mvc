@@ -13,11 +13,11 @@ namespace HZY.Repository.Redis
         private readonly RedisClient _redisClient;
         private readonly ILogger _logger;
 
-        public RedisRepository(RedisClient redisClient, ILogger<RedisRepository> logger)
-        {
-            _redisClient = redisClient;
-            _logger = logger;
-        }
+        //public RedisRepository(RedisClient redisClient, ILogger<RedisRepository> logger)
+        //{
+        //    _redisClient = redisClient;
+        //    _logger = logger;
+        //}
 
         /// <summary>
         /// 设置 plc 原数据

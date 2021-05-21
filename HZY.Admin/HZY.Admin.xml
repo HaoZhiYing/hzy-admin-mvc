@@ -280,13 +280,6 @@
             <param name="search"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.RedisController.Test(System.String)">
-            <summary>
-            测试 消息订阅
-            </summary>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
         <member name="T:HZY.Admin.Filters.AdminAuthorizationActionFilter">
             <summary>
             后台 权限 管理 控制

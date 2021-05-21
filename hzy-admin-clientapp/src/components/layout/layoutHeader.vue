@@ -26,33 +26,25 @@
           <template #overlay>
             <a-menu>
               <a-menu-item @click="onLogOut">
-                <a href="javascript:;">
-                  <AppIcons iconName="LogoutOutlined" />&nbsp;&nbsp;退出登录
-                </a>
+                <a href="javascript:;"> <AppIcons iconName="LogoutOutlined" />&nbsp;&nbsp;退出登录 </a>
               </a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>
       </div>
     </div>
-    <layoutTabs
+    <!-- <layoutTabs
       v-model:propTabs="tabs"
       @close-self="closeTabSelf"
       @close-other="closeTabOther"
       @close-all="closeTabAll"
       @tab-click="tabClick"
-    />
+    /> -->
+    <layoutTabs v-model:propTabs="tabs" />
   </a-layout-header>
 </template>
 <script>
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  reactive,
-  toRefs,
-  watch,
-} from "vue";
+import { computed, defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 import AppIcons from "@/components/appIcons.vue";
 import layoutTabs from "./layoutTabs.vue";
 //vuex
@@ -136,10 +128,7 @@ export default defineComponent({
         context.emit("update:propCollapsed", state.collapsed);
       },
       onSettings() {
-        context.emit(
-          "update:propLayoutSettingsState",
-          !state.layoutSettings.state
-        );
+        context.emit("update:propLayoutSettingsState", !state.layoutSettings.state);
       },
       onLogOut() {
         //退出登录
@@ -151,9 +140,7 @@ export default defineComponent({
       //全屏事件
       onFullScreen() {
         if (!screenfull.isEnabled) {
-          return tools.message(
-            "您的浏览器无法使用全屏功能，请更换谷歌浏览器或者请手动点击F11按钮全屏展示！"
-          );
+          return tools.message("您的浏览器无法使用全屏功能，请更换谷歌浏览器或者请手动点击F11按钮全屏展示！");
         }
         screenfull.toggle();
         state.fullscreen = !screenfull.isFullscreen;

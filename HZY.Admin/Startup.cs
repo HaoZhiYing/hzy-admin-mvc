@@ -72,8 +72,8 @@ namespace HZY.Admin
 
             #region 仓储注册 、 自动扫描服务注册 、 中间件注册
 
-            RepositoryModule.RegisterAdminRepository(services, connectionString);
-            //RepositoryModule.RegisterAdminRepository(services, connectionStringMySql);
+            //RepositoryModule.RegisterAdminRepository(services, connectionString);
+            RepositoryModule.RegisterAdminRepository(services, connectionStringMySql);
             //RepositoryRedisModule.RegisterRedisRepository(services, connectionStringRedis);
             services.ScanningAppServices("HZY.");
             services.AddScoped<TakeUpTimeMiddleware>();

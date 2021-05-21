@@ -21,7 +21,7 @@ namespace HZY.Common.ScanDIService
     public static class DIServiceScanningExtensions
     {
         /// <summary>
-        /// 扫描服务 AppService 标记 自动注入服务
+        /// 扫描服务 自动注入服务
         /// </summary>
         /// <param name="serviceCollection"></param>
         /// <param name="assemblyFilter"></param>

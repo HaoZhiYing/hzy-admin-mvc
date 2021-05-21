@@ -45,7 +45,7 @@
           <router-view v-slot="{ Component }">
             <!-- <transition name="fade" mode="out-in"> -->
             <keep-alive :include="cacheViews">
-              <component :is="Component" :key="key" />
+              <component :is="Component"/>
             </keep-alive>
             <!-- </transition> -->
           </router-view>

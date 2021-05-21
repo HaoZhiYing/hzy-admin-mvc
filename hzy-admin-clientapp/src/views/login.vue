@@ -7,44 +7,21 @@
         <div class="p-20">
           <a-form layout="vertical">
             <a-form-item>
-              <a-input
-                v-model:value="userName"
-                placeholder="请输入"
-                size="large"
-                allow-clear
-              >
+              <a-input v-model:value="userName" placeholder="请输入" size="large" allow-clear>
                 <template #prefix>
-                  <app-icons
-                    icon-name="UserOutlined"
-                    style="color: #1890ff;font-size: 14px;"
-                  />
+                  <app-icons icon-name="UserOutlined" style="color:#1890ff;font-size: 14px;" />
                 </template>
               </a-input>
             </a-form-item>
             <a-form-item>
-              <a-input-password
-                type="password"
-                v-model:value="userPassword"
-                size="large"
-                ref="inputPassword"
-                @keyup.enter="check"
-              >
+              <a-input-password type="password" v-model:value="userPassword" size="large" ref="inputPassword" @keyup.enter="check">
                 <template #prefix>
-                  <app-icons
-                    icon-name="LockOutlined"
-                    style="color: #1890ff;font-size: 14px;"
-                  />
+                  <app-icons icon-name="LockOutlined" style="color: #1890ff;font-size: 14px;" />
                 </template>
               </a-input-password>
             </a-form-item>
             <a-form-item>
-              <a-button
-                type="primary"
-                @click="check"
-                :loading="loading"
-                size="large"
-                block
-              >
+              <a-button type="primary" @click="check" :loading="loading" size="large" block>
                 登录
               </a-button>
             </a-form-item>
@@ -55,14 +32,7 @@
   </div>
 </template>
 <script>
-import {
-  computed,
-  defineComponent,
-  reactive,
-  toRefs,
-  ref,
-  onMounted,
-} from "vue";
+import { computed, defineComponent, reactive, toRefs, ref, onMounted } from "vue";
 //vuex
 import { useStore } from "vuex";
 import router from "@/router/index";

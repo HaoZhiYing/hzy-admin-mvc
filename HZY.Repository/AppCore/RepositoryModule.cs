@@ -20,13 +20,17 @@ namespace HZY.Repository.Core
                 options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
                     //无跟踪
                     // .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-                    
+
                 #region SqlSever
                     .UseSqlServer(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100))
                 #endregion
 
                 #region MySql
-                    //.UseMySql()
+                    //.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion, w => w.MinBatchSize(1).MaxBatchSize(100))
+                #endregion
+
+                #region Npgsql
+                    //.UseNpgsql(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100))
                 #endregion
 
                     ;

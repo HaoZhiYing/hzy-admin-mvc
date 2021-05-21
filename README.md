@@ -19,7 +19,9 @@ https://gitee.com/hzy6/hzy-quartz
 
 前端：Vue3.x 、Antd Of Vue 2.0
 
-数据库脚本位置：根目录/doc/HzyAdminSpa.sql
+数据库脚本位置：
+    SqlServer > 根目录/doc/HzyAdminSpa.sql
+    MySql > 根目录/doc/hzyadminspa_MySql.sql
 
 #### 软件架构
 开发环境：vs2019 、 .Net5.0 、VsCode

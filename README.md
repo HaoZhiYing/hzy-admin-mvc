@@ -1,5 +1,7 @@
 # HzyAdminSpa
 
+#### 文档: https://gitee.com/hzy6/HzyAdminSpa/wikis
+
 ### 后台模板
 https://gitee.com/hzy6/hzy-admin-spa-ui
 
@@ -32,17 +34,6 @@ https://gitee.com/hzy6/hzy-quartz
     开发环境：vs2019 、 .Net5.0 、VsCode
     
     ###  **_交流群: 534584927_** 
-
-#### :cherries:  部分界面截图
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/165956_13c32f7f_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |
-|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170028_73a15756_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170112_08a760fc_1242080.png "屏幕截图.png") |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170146_cabb0425_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170200_e0337a5c_1242080.png "屏幕截图.png") |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170217_4ac494ee_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170836_76c6a157_1242080.png "屏幕截图.png") |
-
-
-
-
 
 #### 安装前提
 
@@ -81,11 +72,14 @@ https://gitee.com/hzy6/hzy-quartz
 4.  新建 Pull Request
 
 
-#### 特技
+#### :cherries:  特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/165956_13c32f7f_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |
+|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170028_73a15756_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170112_08a760fc_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170146_cabb0425_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170200_e0337a5c_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170217_4ac494ee_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170836_76c6a157_1242080.png "屏幕截图.png") |
+
+
+
+

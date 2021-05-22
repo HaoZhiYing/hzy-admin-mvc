@@ -42,7 +42,6 @@ namespace HZY.Admin
             var jwtKeyName = Configuration["AppConfiguration:JwtKeyName"];
             var jwtSecurityKey = Configuration["AppConfiguration:JwtSecurityKey"];
             var connectionString = Configuration["AppConfiguration:ConnectionString"];
-            var connectionStringMySql = Configuration["AppConfiguration:ConnectionStringMySql"];
             var connectionStringRedis = Configuration["AppConfiguration:ConnectionStringRedis"];
 
             services.AddControllers(options =>
@@ -72,8 +71,7 @@ namespace HZY.Admin
 
             #region 仓储注册 、 自动扫描服务注册 、 中间件注册
 
-            //RepositoryModule.RegisterAdminRepository(services, connectionString);
-            RepositoryModule.RegisterAdminRepository(services, connectionStringMySql);
+            RepositoryModule.RegisterAdminRepository(services, connectionString);
             //RepositoryRedisModule.RegisterRedisRepository(services, connectionStringRedis);
             services.ScanningAppServices("HZY.");
             services.AddScoped<TakeUpTimeMiddleware>();

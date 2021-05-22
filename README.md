@@ -15,16 +15,23 @@ https://gitee.com/hzy6/hzy-quartz
 #### :yellow_heart: 介绍 
 前后分离,后台通配权限管理系统！基于.Net5
 
-后端技术：.Net5、EFCore5、Vue3.x 、Antd2.0 、Swagger
+    数据库脚本位置：
 
-前端：Vue3.x 、Antd Of Vue 2.0
+        SqlServer > 根目录/doc/HzyAdminSpa.sql
 
-数据库脚本位置：根目录/doc/HzyAdminSpa.sql
+        MySql > 根目录/doc/hzyadminspa_MySql.sql
 
-#### 软件架构
-开发环境：vs2019 、 .Net5.0 、VsCode
 
-###  **_交流群: 534584927_** 
+    后端技术：.Net5、EFCore5、Vue3.x 、Antd2.0 、Swagger
+    
+    前端：Vue3.x 、Antd Of Vue 2.0
+    
+    
+    
+    #### 软件架构
+    开发环境：vs2019 、 .Net5.0 、VsCode
+    
+    ###  **_交流群: 534584927_** 
 
 #### :cherries:  部分界面截图
 | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/165956_13c32f7f_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |

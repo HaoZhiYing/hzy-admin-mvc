@@ -1,6 +1,6 @@
 # HzyAdminSpa
 
-#### 文档: https://gitee.com/hzy6/HzyAdminSpa/wikis
+#### 文档: https://gitee.com/hzy6/HzyAdminSpa/wikis/pages
 
 ### 后台模板
 https://gitee.com/hzy6/hzy-admin-spa-ui

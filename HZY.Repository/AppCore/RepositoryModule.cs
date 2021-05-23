@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace HZY.Repository.Core
+namespace HZY.Repository.AppCore
 {
     public class RepositoryModule
     {

@@ -19,8 +19,8 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using HZY.Common.ScanDIService;
 using NLog.Extensions.Logging;
-using HZY.Repository.Core;
 using HZY.Repository.Redis.AppCore;
+using HZY.Repository.AppCore;
 
 namespace HZY.Admin
 {

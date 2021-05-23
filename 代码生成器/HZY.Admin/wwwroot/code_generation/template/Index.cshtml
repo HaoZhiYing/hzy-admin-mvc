@@ -121,18 +121,29 @@
                           @@change="onChange">
             </a-pagination>
         </a-card>
-        <info v-model:propVisible="form.visible"
-              v-model:formKey="form.key"
-              @@onSaveSuccess="findList" />
+        <!--表单弹层-->
+        <a-modal v-model:visible="form.visible" title="编辑" centered @@ok="form.visible = false" :width="1200" destroyOnClose>
+          <template #footer>
+            <a-button type="primary" @@click="infoForm.saveForm()">提交</a-button>
+            <a-button type="danger" ghost @@click="form.visible = false">关闭</a-button>
+          </template>
+          <info
+            v-model:formKey="form.key"
+            ref="infoForm"
+            @@onSaveSuccess="
+              findList();
+              form.visible = false;
+            "
+          />
+        </a-modal>
     </div>
 </template>
 <script>
-import { computed, defineComponent, onMounted, reactive, toRefs } from "vue";
+import { computed, defineComponent, onMounted, reactive, toRefs, ref } from "vue";
 import { useStore } from "vuex";
 import AppIcons from "@@/components/appIcons";
 import info from "./info";
 import tools from "@@/scripts/tools";
-import appConsts from "@@/scripts/app-consts";
 import service from "@@/service/base/@(className.ToLower())Service";
 
 //列头
@@ -186,6 +197,8 @@ const columns = [
                     key: "",
                 },
             });
+            //表单 ref 对象
+            const infoForm = ref(null);
 
             //权限
             const power = computed(() => store.getters["app/getMenuPowerById"]);
@@ -258,6 +271,7 @@ const columns = [
                 ...toRefs(state),
                 power,
                 ...methods,
+                infoForm
             };
 
         }

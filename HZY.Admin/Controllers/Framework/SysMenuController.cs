@@ -31,7 +31,7 @@ namespace HZY.Admin.Controllers.Framework
         /// <param name="page"></param>
         /// <param name="search"></param>
         /// <returns></returns>
-        [ApiResourceCacheFilter(1)]
+        //[ApiResourceCacheFilter(1)]
         [HttpPost("FindList/{size}/{page}")]
         public async Task<PagingViewModel> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] SysMenu search)
         {

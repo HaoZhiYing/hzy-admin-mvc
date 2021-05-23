@@ -10,39 +10,29 @@
 }
 <pre>
 <template>
-<div>
-    <a-modal v-model:visible="visible"
-         title="编辑"
-         centered
-         @@ok="visible = false"
-         :width="400">
-    <template #footer>
-        <a-button type="primary" @@click="saveForm()">提交</a-button>
-        <a-button type="danger" ghost @@click="visible = false">关闭</a-button>
-    </template>
-    <a-row :gutter="[15, 15]">
-          @foreach (var item in tableInfos)
-          {
-              var name = item.ColName.FirstCharToLower();
-              var title = item.ColRemark;
+    <a-form layout="vertical" :model="vm.form">
+        <a-row :gutter="[15, 15]">
+            @foreach (var item in tableInfos)
+            {
+                var name = item.ColName.FirstCharToLower();
+                var title = item.ColRemark;
 
-        <a-col :xs="24">
-        <h4>@title:</h4>
-        <a-input v-model:value="vm.form.@(name)" placeholder="请输入 @(title)" />
-        </a-col>          
-          }
-    </a-row>
-    </a-modal>
-  </div>
+                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                    <a-form-item label="@title">
+                        <a-input v-model:value="vm.form.@(name)" placeholder="请输入 @title" />
+                    </a-form-item>
+                </a-col>
+            }
+        </a-row>
+  </a-form>
 </template>
 <script>
-import { defineComponent, reactive, toRefs, watch } from "vue";
+import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import tools from "@@/scripts/tools";
-import service from "@@/service/base/@(className.ToLower())Service";
+import service from "@@/service/@(className.ToLower())Service";
 
 export default defineComponent({
-  props: {
-        propVisible: Boolean,
+    props: {
         formKey: String,
         onSaveSuccess: Function,
     },
@@ -54,23 +44,6 @@ export default defineComponent({
                 form: {},
             },
         });
-
-        watch(
-            () => props.propVisible,
-            (value) => {
-                state.visible = value;
-            }
-        );
-
-        watch(
-            () => state.visible,
-            (value) => {
-                context.emit("update:propVisible", value);
-                if (value) {
-                    methods.findForm();
-                }
-            }
-        );
 
         const methods = {
             findForm() {
@@ -89,6 +62,12 @@ export default defineComponent({
             },
         };
 
+        context.expose({ ...methods });
+
+        onMounted(() => {
+            methods.findForm();
+        });
+
         return {
             ...toRefs(state),
             ...methods,
@@ -96,5 +75,11 @@ export default defineComponent({
     }
 });
 </script>
+
+<style lang="less" scoped>
+    .ant-form-item {
+        margin-bottom: 0;
+    }
+</style>
 
 </pre>

@@ -18,7 +18,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using HZY.Common.ScanDIService;
-using NLog.Extensions.Logging;
 using HZY.Repository.Redis.AppCore;
 using HZY.Repository.AppCore;
 
@@ -161,11 +160,6 @@ namespace HZY.Admin
             //services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/dist");
             #endregion
 
-            #region NLog 日志配置 ILogger 对象日志可以自动存入 nlog 文件中
-
-            services.AddLogging(w => w.AddNLog());
-
-            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

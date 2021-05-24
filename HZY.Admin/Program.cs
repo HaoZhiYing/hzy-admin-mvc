@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using HZY.Common;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using HZY.Framework.ApiResultManage;
+using NLog.Web;
 
 namespace HZY.Admin
 {
@@ -38,6 +40,13 @@ namespace HZY.Admin
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(LogLevel.Trace);
+                })
+                .UseNLog()  // NLog: Setup NLog for Dependency injection
+            ;
     }
 }

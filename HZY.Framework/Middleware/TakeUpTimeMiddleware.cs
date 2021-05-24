@@ -13,7 +13,7 @@ namespace HZY.Framework.Middleware
     public class TakeUpTimeMiddleware : IMiddleware
     {
         private readonly Stopwatch _stopwatch;
-        private readonly ILogger<TakeUpTimeMiddleware> _logger;
+        private readonly ILogger _logger;
 
         public TakeUpTimeMiddleware(ILogger<TakeUpTimeMiddleware> logger)
         {

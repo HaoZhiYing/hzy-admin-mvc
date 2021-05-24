@@ -17,7 +17,8 @@ https://gitee.com/hzy6/hzy-quartz
 #### :yellow_heart: 介绍 
 前后分离,后台通配权限管理系统！基于.Net5
 
-    数据库脚本位置：
+    数据库脚本位置(默认 PostgreSql 数据库)：
+        PostgreSql > 根目录/doc/HzyAdminSpa_PostgreSql.sql
 
         SqlServer > 根目录/doc/HzyAdminSpa.sql
 

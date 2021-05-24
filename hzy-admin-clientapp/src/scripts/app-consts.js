@@ -9,7 +9,7 @@ const appConsts = {
     /**
      * 域名
      */
-    domainName: process.env.NODE_ENV == "production" ? "" : "https://localhost:5601",
+    domainName: process.env.NODE_ENV == "production" ? "" : "http://localhost:5600",
 
     /**
      * Guid Empty String

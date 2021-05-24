@@ -26,11 +26,11 @@ namespace HZY.Repository.AppCore
                 #endregion
 
                 #region MySql
-                    .UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion, w => w.MinBatchSize(1).MaxBatchSize(100))
+                    //.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion, w => w.MinBatchSize(1).MaxBatchSize(100))
                 #endregion
 
                 #region Npgsql
-                    //.UseNpgsql(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100))
+                    .UseNpgsql(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100))
                 #endregion
 
                     ;

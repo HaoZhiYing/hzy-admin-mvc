@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HZY.Repository.AppCore.Models
+namespace HZY.Repository.Domain.Core
 {
     /// <summary>
-    /// String Key
+    /// Int Key
     /// </summary>
-    public class StringKeyBaseModel : BaseModel
+    public class LongKeyBaseModel : BaseModel
     {
         /// <summary>
         /// Id
         /// </summary>
         [Key]
-        public string Id { get; set; } = string.Empty;
+        public long Id { get; set; } = 0;
     }
 }

@@ -10,6 +10,12 @@ namespace HZY.Framework.Filters
     /// </summary>
     public class ApiResultFilterAttribute : Attribute, IResultFilter
     {
+        public bool Ignore { get; set; }
+
+        public ApiResultFilterAttribute(bool ignore = false)
+        {
+            Ignore = ignore;
+        }
 
         /// <summary>
         /// 结果 返回前
@@ -17,6 +23,8 @@ namespace HZY.Framework.Filters
         /// <param name="context"></param>
         public void OnResultExecuting(ResultExecutingContext context)
         {
+            if (Ignore) return;
+
             if (context.Result == null)
             {
                 return;

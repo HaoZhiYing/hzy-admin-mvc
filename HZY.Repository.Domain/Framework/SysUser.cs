@@ -1,4 +1,4 @@
-﻿using HZY.Repository.AppCore.Models;
+﻿using HZY.Repository.Domain.Core;
 using System;
 
 namespace HZY.Repository.Domain.Framework

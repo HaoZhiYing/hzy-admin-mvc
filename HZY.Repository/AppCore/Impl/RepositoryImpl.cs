@@ -15,7 +15,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using HZY.Repository.AppCore.Extensions;
 using HZY.Repository.AppCore.Interface;
-using HZY.Repository.AppCore.Provider;
 using Microsoft.EntityFrameworkCore;
 
 namespace HZY.Repository.AppCore.Impl

@@ -44,14 +44,14 @@ namespace HZY.Repository.AppCore.Provider
         /// <param name="columnHeads"></param>
         private void CreateColumnHeads(PagingViewModel pagingViewModel,
             List<string> fieldNames,
-            List<TableViewColumnHead> columnHeads)
+            List<TableViewColumn> columnHeads)
         {
             var entityInfos = this.Orm.CacheEntity.GetEntityInfos(typeof(T).Name);
 
             foreach (var item in fieldNames)
             {
                 var title = entityInfos.Find(w => w.Name == item)?.Remark ?? item;
-                pagingViewModel.Columns.Add(new TableViewColumnHead(item.FirstCharToLower(), title));
+                pagingViewModel.Columns.Add(new TableViewColumn(item.FirstCharToLower(), title));
             }
 
             //如果 传入了 头信息 则 覆盖
@@ -80,7 +80,7 @@ namespace HZY.Repository.AppCore.Provider
         public virtual async Task<PagingViewModel> AsPagingViewModelAsync<TModel>(IQueryable<TModel> query,
             int page,
             int size,
-            List<TableViewColumnHead> columnHeads = default)
+            List<TableViewColumn> columnHeads = default)
         {
             var pagingViewModel = new PagingViewModel { Page = page, Size = size, Total = await query.CountAsync() };
             pagingViewModel.PageCount = (pagingViewModel.Total / size);
@@ -129,7 +129,7 @@ namespace HZY.Repository.AppCore.Provider
             int page,
             int size,
             string orderBy = "1",
-            List<TableViewColumnHead> columnHeads = default,
+            List<TableViewColumn> columnHeads = default,
             params object[] parameters)
         {
             var dbConnection = Orm.Database.GetDataConnection();

@@ -10,12 +10,12 @@
 
 using System;
 using System.Linq;
-using HZY.Repository.Domain.Framework;
 using HZY.Repository.AppCore.Interface;
-using HZY.Repository.AppCore.Models;
+using HZY.Repository.Domain;
+using HZY.Repository.Domain.Core;
+using HZY.Repository.Domain.Framework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using HZY.Repository.Domain;
 
 namespace HZY.Repository.AppCore.DbContexts
 {

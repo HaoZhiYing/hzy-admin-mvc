@@ -3,9 +3,9 @@
     /// <summary>
     /// 列头信息
     /// </summary>
-    public class TableViewColumnHead
+    public class TableViewColumn
     {
-        public TableViewColumnHead(string fieldName, string title)
+        public TableViewColumn(string fieldName, string title)
         {
             this.FieldName = fieldName;
             this.Title = title;
@@ -19,7 +19,7 @@
             }
         }
 
-        public TableViewColumnHead(string fieldName, string title, int width)
+        public TableViewColumn(string fieldName, string title, int width)
         {
             this.FieldName = fieldName;
             this.Title = title;
@@ -35,7 +35,7 @@
             this.Width = width.ToString();
         }
 
-        public TableViewColumnHead(string fieldName, string title, bool show, int width)
+        public TableViewColumn(string fieldName, string title, bool show, int width)
         {
             this.FieldName = fieldName;
             this.Title = title;

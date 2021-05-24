@@ -173,7 +173,7 @@ namespace HZY.Admin.Services.Framework
 
             var sysMenuList = await (
                 from t1 in this.Repository.Orm.SysRoleMenuFunction
-                from t2 in this.Repository.Orm.SysFunction.Where(w => w.Id == t1.FunctionId && w.ByName == AppConst.Function_Display).DefaultIfEmpty()
+                from t2 in this.Repository.Orm.SysFunction.Where(w => w.Id == t1.FunctionId && w.ByName == AppConsts.Function_Display).DefaultIfEmpty()
                 from t3 in this.Repository.Orm.SysMenu.Where(w => w.Id == t1.MenuId).DefaultIfEmpty()
                 where this._accountInfo.Roles.Contains(t1.RoleId) && t3.Show == 1
                 select t3)
@@ -259,7 +259,7 @@ namespace HZY.Admin.Services.Framework
 
                         var isPower = sysMenuFunctionList
                             .Any(w => w.MenuId == item.Id && w.FunctionId == sysFunction.Id);
-                        if (sysFunction.ByName == AppConst.Function_Display || item.ParentId == this._appConfiguration.SysMenuId)
+                        if (sysFunction.ByName == AppConsts.Function_Display || item.ParentId == this._appConfiguration.SysMenuId)
                             isPower = true;
                         power.Add(sysFunction.ByName, isPower);
                     }
@@ -321,7 +321,7 @@ namespace HZY.Admin.Services.Framework
                     if (string.IsNullOrWhiteSpace(item.ByName)) continue;
 
                     var isPower = sysMenuFunctionList.Any(w => w.MenuId == menuId && w.FunctionId == item.Id);
-                    if (item.ByName == AppConst.Function_Display || sysMenu.ParentId == this._appConfiguration.SysMenuId)
+                    if (item.ByName == AppConsts.Function_Display || sysMenu.ParentId == this._appConfiguration.SysMenuId)
                         isPower = true;
                     power.Add(item.ByName, isPower);
                 }

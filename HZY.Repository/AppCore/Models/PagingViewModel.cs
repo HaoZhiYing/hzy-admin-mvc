@@ -10,7 +10,7 @@ namespace HZY.Repository.AppCore.Models
         /// <summary>
         /// 列信息
         /// </summary>
-        public List<TableViewColumnHead> Columns { get; set; } = new List<TableViewColumnHead>();
+        public List<TableViewColumn> Columns { get; set; } = new List<TableViewColumn>();
 
         /// <summary>
         /// 转换后数据

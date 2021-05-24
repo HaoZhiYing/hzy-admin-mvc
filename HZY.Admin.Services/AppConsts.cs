@@ -9,7 +9,7 @@ namespace HZY.Admin.Services
     /// <summary>
     /// app 常量定义类
     /// </summary>
-    public class AppConst
+    public class AppConsts
     {
         /// <summary>
         /// 功能常量 添加

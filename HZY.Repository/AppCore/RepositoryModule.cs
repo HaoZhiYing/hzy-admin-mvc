@@ -11,29 +11,38 @@ namespace HZY.Repository.AppCore
     public class RepositoryModule
     {
 
-        public static void RegisterAdminRepository(IServiceCollection services, string connectionString)
+        public static void RegisterAdminRepository(IServiceCollection services, string connectionString, DefaultDatabaseType defaultDatabaseType)
         {
             #region 后台 管理系统 数据库上下文
 
             services.AddDbContext<AdminBaseDbContext>(options =>
             {
-                options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
-                    //无跟踪
-                    // .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 
-                #region SqlSever
-                    //.UseSqlServer(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100))
-                #endregion
+                options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
+                //无跟踪
+                // .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 
-                #region MySql
-                    //.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion, w => w.MinBatchSize(1).MaxBatchSize(100))
-                #endregion
+                if (defaultDatabaseType == DefaultDatabaseType.SqlServer)
+                {
+                    #region SqlSever
+                    options.UseSqlServer(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100));
+                    #endregion
+                }
 
-                #region Npgsql
-                    .UseNpgsql(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100))
-                #endregion
+                if (defaultDatabaseType == DefaultDatabaseType.MySql)
+                {
+                    #region MySql
+                    options.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion, w => w.MinBatchSize(1).MaxBatchSize(100));
+                    #endregion
+                }
 
-                    ;
+                if (defaultDatabaseType == DefaultDatabaseType.PostgreSql)
+                {
+                    #region Npgsql
+                    options.UseNpgsql(connectionString, w => w.MinBatchSize(1).MaxBatchSize(100));
+                    #endregion
+                }
+
             });
 
             #endregion
@@ -46,4 +55,15 @@ namespace HZY.Repository.AppCore
 
 
     }
+
+    /// <summary>
+    /// 默认数据库类型
+    /// </summary>
+    public enum DefaultDatabaseType
+    {
+        SqlServer,
+        MySql,
+        PostgreSql
+    }
+
 }

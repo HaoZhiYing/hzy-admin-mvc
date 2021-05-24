@@ -384,6 +384,11 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
+        <member name="T:HZY.Repository.AppCore.DefaultDatabaseType">
+            <summary>
+            默认数据库类型
+            </summary>
+        </member>
         <member name="T:HZY.Repository.Domain.Framework.SysFunction">
             <summary>
             功能

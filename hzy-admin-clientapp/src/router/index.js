@@ -15,7 +15,7 @@ let router = createRouter({
 //监听路由
 router.beforeEach((to, from, next) => {
     tools.loadingStart();
-    // console.log('路由拦截器=>', from, to);
+    console.log('路由拦截器=>', from, to);
 
     if (to.name === "/login") {
         return next();
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
                 next('/login');
             }
         } else {
-            next('/')
+            next(to.fullPath)
         }
     });
 });

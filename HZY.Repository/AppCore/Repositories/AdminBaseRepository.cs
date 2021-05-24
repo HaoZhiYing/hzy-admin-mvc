@@ -144,9 +144,9 @@ namespace HZY.Repository.AppCore.Provider
             {
                 sqlString = $"SELECT * FROM ({sql}) TAB ORDER BY {orderBy} OFFSET {offSet} ROWS FETCH NEXT {size} ROWS ONLY";
             }
-            else if (Orm.Database.IsMySql())
+            else if (Orm.Database.IsMySql() && Orm.Database.IsNpgsql())
             {
-                sqlString = $"SELECT * FROM ({sql}) TAB ORDER BY {orderBy} LIMIT {offSet},{size}";
+                sqlString = $"SELECT * FROM ({sql}) TAB ORDER BY {orderBy} LIMIT {size} OFFSET {offSet}";
             }
             else
             {

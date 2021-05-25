@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HZY.Repository.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:HZY.Repository.Domain.Core.BaseModel">
+            <summary>
+            基础模型
+            包含属性 Id、UpdateTime、CreateTime
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Core.BaseModel.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Core.BaseModel.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Core.GuidKeyBaseModel">
+            <summary>
+            Guid Key
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Core.GuidKeyBaseModel.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Core.LongKeyBaseModel">
+            <summary>
+            Int Key
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Core.LongKeyBaseModel.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Core.StringKeyBaseModel">
+            <summary>
+            String Key
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Core.StringKeyBaseModel.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysFunction">
+            <summary>
+            功能
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysFunction.Number">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysFunction.Name">
+            <summary>
+            功能名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysFunction.ByName">
+            <summary>
+            功能标识
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysFunction.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysMenu">
+            <summary>
+            菜单
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.Number">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.Name">
+            <summary>
+            菜单名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.ComponentName">
+            <summary>
+            Vue组件名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.Url">
+            <summary>
+            菜单地址
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.Router">
+            <summary>
+            路由地址
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.Icon">
+            <summary>
+            菜单图标
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.ParentId">
+            <summary>
+            父级Id
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.Show">
+            <summary>
+            是否显示菜单
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysMenu.Close">
+            <summary>
+            是否可关闭
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysMenuFunction">
+            <summary>
+            菜单与功能绑定
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Name">
+            <summary>
+            部门名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.OrderNumber">
+            <summary>
+            部门排序号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Leader">
+            <summary>
+            负责人
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Phone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysOrganization.ParentId">
+            <summary>
+            父级Id
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysPost">
+            <summary>
+            岗位
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.Number">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.Code">
+            <summary>
+            岗位编码
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.Name">
+            <summary>
+            岗位名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.StateEnum">
+            <summary>
+            状态 枚举
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysRole">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysRole.Number">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysRole.Name">
+            <summary>
+            角色名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysRole.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysRole.IsDelete">
+            <summary>
+            能否删除
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysRoleMenuFunction">
+            <summary>
+            角色菜单功能绑定
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysUser">
+            <summary>
+            系统账号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUser.Name">
+            <summary>
+            账户名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUser.LoginName">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUser.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUser.Phone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUser.Email">
+            <summary>
+            账户邮件地址
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUser.IsDelete">
+            <summary>
+            能否删除
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUser.OrganizationId">
+            <summary>
+            组织Id
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysUserPost">
+            <summary>
+            用户鱼岗位绑定表
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUserPost.UserId">
+            <summary>
+            账户Id
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysUserPost.PostId">
+            <summary>
+            岗位Id
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysUserRole">
+            <summary>
+            用户与角色绑定
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Domain.Member">
+            <summary>
+            member
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.Number">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.Name">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.Phone">
+            <summary>
+            电话号码
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.Photo">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.Introduce">
+            <summary>
+            简介
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.FilePath">
+            <summary>
+            文件
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Member.UserId">
+            <summary>
+            账户Id
+            </summary>
+        </member>
+    </members>
+</doc>

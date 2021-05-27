@@ -12,7 +12,7 @@
  Target Server Version : 100017
  File Encoding         : 65001
 
- Date: 27/05/2021 22:46:21
+ Date: 27/05/2021 23:11:21
 */
 
 
@@ -389,8 +389,8 @@ CREATE TABLE "public"."SysUser" (
 -- ----------------------------
 -- Records of SysUser
 -- ----------------------------
-INSERT INTO "public"."SysUser" VALUES ('ac18f496-e93d-42f0-b59e-e321acc85335', '用户', 'user', '123', '456456456', '18123456789@live.com', 1, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-04-18 22:08:12', '2017-04-06 19:55:53');
-INSERT INTO "public"."SysUser" VALUES ('0198459e-2034-4533-b843-5d227ad20740', '超级管理员', 'admin', '123456', '123123123', '1396510655@qq.com', 2, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-05-24 10:52:53.390604', '2017-04-06 19:55:53');
+INSERT INTO "public"."SysUser" VALUES ('ac18f496-e93d-42f0-b59e-e321acc85335', '用户', 'user', '123', '456456456', '18123456789@live.com', 1, 'f23777dd-2c03-449f-953b-df91c19dee5b', '2021-04-18 22:08:12', '2017-04-06 19:55:53');
+INSERT INTO "public"."SysUser" VALUES ('0198459e-2034-4533-b843-5d227ad20740', '超级管理员', 'admin', '123456', '123123123', '1396510655@qq.com', 2, 'f23777dd-2c03-449f-953b-df91c19dee5b', '2021-05-24 10:52:53.390604', '2017-04-06 19:55:53');
 
 -- ----------------------------
 -- Table structure for SysUserPost

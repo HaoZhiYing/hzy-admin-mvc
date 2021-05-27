@@ -141,19 +141,19 @@ const columns = [
     title: "真实姓名",
     dataIndex: "name",
     ellipsis: true,
-    width: 200,
+    width: 150,
   },
   {
     title: "账号",
     dataIndex: "loginName",
     ellipsis: true,
-    width: 200,
+    width: 150,
   },
   {
     title: "所属角色",
     dataIndex: "所属角色",
     ellipsis: true,
-    width: 200,
+    // width: 200,
   },
   // {
   //   title: "联系电话",
@@ -171,7 +171,7 @@ const columns = [
     title: "所属部门",
     dataIndex: "organizationName",
     ellipsis: true,
-    width: 200,
+    width: 150,
   },
   {
     title: "更新时间",
@@ -296,7 +296,7 @@ export default defineComponent({
           let data = res.data;
           state.tree.data = data.rows;
           state.tree.expandedKeys = data.expandedRowKeys;
-          // state.table.search.vm.organizationId = data.rows[0].key;
+          state.table.search.vm.organizationId = data.rows[0].key;
           methods.findList();
         });
       },

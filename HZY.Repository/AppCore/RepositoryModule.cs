@@ -26,7 +26,9 @@ namespace HZY.Repository.AppCore
             services.AddDbContext<AdminBaseDbContext>(options =>
             {
 
-                options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
+                options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+                .UseLazyLoadingProxies()
+                ;
                 //无跟踪
                 // .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 

@@ -120,6 +120,40 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:HZY.Admin.Controllers.Framework.SysOrganizationController">
+            <summary>
+            组织机构控制器
+            </summary>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysOrganizationController.FindListAsync(HZY.Repository.Domain.Framework.SysOrganization)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysOrganizationController.DeleteListAsync(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据id数组删除
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysOrganizationController.FindFormAsync(System.Guid,System.Guid)">
+            <summary>
+            查询表单数据
+            </summary>
+            <param name="id"></param>
+            <param name="parentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysOrganizationController.SaveFormAsync(HZY.Repository.Domain.Framework.SysOrganization)">
+            <summary>
+            保存
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
         <member name="T:HZY.Admin.Controllers.Framework.SysPostController">
             <summary>
             岗位控制器
@@ -266,6 +300,12 @@
         <member name="M:HZY.Admin.Controllers.Framework.SysUserController.GetUserInfoAsync">
             <summary>
             获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysUserController.GetSysDepartmentTreeAsync">
+            <summary>
+            获取部门树
             </summary>
             <returns></returns>
         </member>

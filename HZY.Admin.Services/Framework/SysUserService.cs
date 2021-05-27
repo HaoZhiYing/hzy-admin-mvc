@@ -41,23 +41,27 @@ namespace HZY.Admin.Services.Framework
         /// <returns></returns>
         public async Task<PagingViewModel> FindListAsync(int page, int size, SysUser search)
         {
-            var query = this.Repository.Select
-                    .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), w => w.Name.Contains(search.Name))
-                    .WhereIf(!string.IsNullOrWhiteSpace(search?.LoginName), w => w.LoginName.Contains(search.LoginName))
-                    .OrderByDescending(w => w.CreateTime)
+            var query = (from sysUser in this.Repository.Orm.SysUser
+                         from sysOrganization in this.Repository.Orm.SysOrganization.Where(w => w.Id == sysUser.OrganizationId).DefaultIfEmpty()
+                         select new { t1 = sysUser, t2 = sysOrganization })
+                    .WhereIf(search.OrganizationId.ToGuid() != Guid.Empty, w => w.t1.OrganizationId == search.OrganizationId)
+                    .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), w => w.t1.Name.Contains(search.Name))
+                    .WhereIf(!string.IsNullOrWhiteSpace(search?.LoginName), w => w.t1.LoginName.Contains(search.LoginName))
+                    .OrderByDescending(w => w.t1.CreateTime)
                     .Select(w => new
                     {
-                        w.Id,
-                        w.Name,
-                        w.LoginName,
+                        w.t1.Id,
+                        w.t1.Name,
+                        w.t1.LoginName,
                         所属角色 = string.Join(",", from userRole in this.Repository.Orm.SysUserRole
                                                 join role in this.Repository.Orm.SysRole on userRole.RoleId equals role.Id
-                                                where userRole.UserId == w.Id
+                                                where userRole.UserId == w.t1.Id
                                                 select role.Name),
-                        w.Phone,
-                        w.Email,
-                        UpdateTime = w.UpdateTime.ToString("yyyy-MM-dd"),
-                        CreateTime = w.CreateTime.ToString("yyyy-MM-dd")
+                        OrganizationName = w.t2.Name,
+                        w.t1.Phone,
+                        w.t1.Email,
+                        UpdateTime = w.t1.UpdateTime.ToString("yyyy-MM-dd"),
+                        CreateTime = w.t1.CreateTime.ToString("yyyy-MM-dd")
                     })
                 ;
 
@@ -207,5 +211,28 @@ namespace HZY.Admin.Services.Framework
             sysUser.Password = newPassword;
             return await this.Repository.UpdateAsync(sysUser);
         }
+
+        /// <summary>
+        /// 对 部门树 加工树结构
+        /// </summary>
+        /// <param name="tree"></param>
+        /// <returns></returns>
+        public async Task<List<Dictionary<string, object>>> GetSysDepartmentTreeAsync(IEnumerable<SysOrganization> tree)
+        {
+            var res = new List<Dictionary<string, object>>();
+
+            foreach (var item in tree)
+            {
+                res.Add(new Dictionary<string, object>()
+                {
+                    ["key"] = item.Id,
+                    ["title"] = item.Name,
+                    ["children"] = item.Children.Count > 0 ? await this.GetSysDepartmentTreeAsync(item.Children) : null
+                });
+            }
+
+            return res;
+        }
+
     }
 }

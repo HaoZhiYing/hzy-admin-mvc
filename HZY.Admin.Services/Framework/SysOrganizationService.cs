@@ -22,23 +22,18 @@ namespace HZY.Admin.Services.Framework
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
-        public async Task<List<SysOrganization>> FindListAsync(SysOrganization search)
+        public async Task<(List<Guid> expandedRowKeys, List<SysOrganization> res)> FindListAsync(SysOrganization search)
         {
-            //var expandedRowKeys = await this.Repository.Select
-            //    .WhereIf(search?.State == null, w => w.State == StateEnum.正常)
-            //    .WhereIf(search?.State != null, w => w.State == search.State)
-            //    .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), w => w.Name.Contains(search.Name))
-            //    .ToListAsync(w => w.Id);
-
-            var data = await this.Repository.Select
-                    .WhereIf(search?.State == null, w => w.State == StateEnum.正常)
-                    .WhereIf(search?.State != null, w => w.State == search.State)
-                    .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), w => w.Name.Contains(search.Name))
-                    .OrderBy(w => w.OrderNumber)
-                    .ToListAsync()
+            var query = this.Repository.Select
+                .WhereIf(search?.State == null, w => w.State == StateEnum.正常)
+                .WhereIf(search?.State != null, w => w.State == search.State)
+                .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), w => w.Name.Contains(search.Name))
                 ;
+            var expandedRowKeys = await query.Select(w => w.Id).ToListAsync();
 
-            return data;
+            var data = await query.Where(w => w.ParentId == null).OrderBy(w => w.OrderNumber).ToListAsync();
+
+            return (expandedRowKeys, data);
         }
 
         /// <summary>
@@ -69,7 +64,7 @@ namespace HZY.Admin.Services.Framework
                     .WhereIf(parentId == Guid.Empty, w => w.ParentId == null)
                     .WhereIf(parentId != Guid.Empty, w => w.ParentId == parentId)
                     .MaxAsync(w => w.OrderNumber);
-                form.OrderNumber = maxNum + 1;
+                form.OrderNumber = (maxNum ?? 0) + 1;
             }
 
             res[nameof(id)] = id == Guid.Empty ? "" : id;

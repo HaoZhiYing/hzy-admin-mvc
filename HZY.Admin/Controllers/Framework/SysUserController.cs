@@ -22,11 +22,13 @@ namespace HZY.Admin.Controllers.Framework
     {
         private readonly AccountService _accountService;
         private readonly SysMenuService _sysMenuService;
+        private readonly SysOrganizationService _sysOrganizationService;
 
-        public SysUserController(SysUserService defaultService, AccountService accountService, SysMenuService sysMenuService) : base(defaultService)
+        public SysUserController(SysUserService defaultService, AccountService accountService, SysMenuService sysMenuService, SysOrganizationService sysOrganizationService) : base(defaultService)
         {
             _accountService = accountService;
             _sysMenuService = sysMenuService;
+            _sysOrganizationService = sysOrganizationService;
         }
 
         /// <summary>
@@ -107,5 +109,23 @@ namespace HZY.Admin.Controllers.Framework
             userInfo.MenuPowers = await this._sysMenuService.GetPowerByMenusAsync(sysMenus);
             return userInfo;
         }
+
+        /// <summary>
+        /// 获取部门树
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("SysOrganizationTree")]
+        public async Task<dynamic> GetSysDepartmentTreeAsync()
+        {
+            var (expandedRowKeys, data) = await this._sysOrganizationService.FindListAsync(null);
+
+            return new
+            {
+                expandedRowKeys,
+                rows = await this.DefaultService.GetSysDepartmentTreeAsync(data)
+            };
+        }
+
+
     }
 }

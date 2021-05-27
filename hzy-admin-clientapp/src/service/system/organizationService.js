@@ -1,25 +1,15 @@
 import { get, post, download } from '@/scripts/request';
 import tools from "@/scripts/tools";
 
-const controllerName = "SysUser";
+const controllerName = "SysOrganization";
 
 export default {
     /**
-     * 获取用户和菜单信息
-     *
-     * @returns {Promise}
-     */
-    getUserInfo() {
-        return get(`${controllerName}/info`);
-    },
-    /**
      * 查询列表
      * 
-     * @param {一页显示多少行} rows 
-     * @param {当前页码} page 
      */
-    findList(rows, page, search = {}) {
-        return post(`${controllerName}/findList/${rows}/${page}`, search, false);
+    findList(search = {}) {
+        return post(`${controllerName}/findList/`, search, false);
     },
     /**
      * 删除数据
@@ -38,8 +28,8 @@ export default {
      * 
      * @param {*} id 
      */
-    findForm(id) {
-        return get(`${controllerName}/findForm${(id ? '/' + id : '')}`);
+    findForm(id, parentId) {
+        return get(`${controllerName}/findForm/${(id ? id : tools.guidEmpty)}/${(parentId ? parentId : '')}`);
     },
     /**
      * 保存表单
@@ -55,12 +45,5 @@ export default {
      */
     exportExcel(search) {
         return download(`${controllerName}/exportExcel`, search);
-    },
-    /**
-     * search
-     * @param {*} search 
-     */
-    sysOrganizationTree() {
-        return post(`${controllerName}/sysOrganizationTree`);
     }
 };

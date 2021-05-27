@@ -68,8 +68,8 @@ namespace HZY.Admin.Services.Framework
 
             if (id == Guid.Empty)
             {
-                var maxNum = await this.Repository.Select.MaxAsync(w => w.Number ?? 0);
-                form.Number = maxNum + 1;
+                var maxNum = await this.Repository.Select.MaxAsync(w => w.Number);
+                form.Number = (maxNum ?? 0) + 1;
             }
 
             res[nameof(id)] = id == Guid.Empty ? "" : id;

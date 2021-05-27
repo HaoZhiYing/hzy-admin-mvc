@@ -1,95 +1,115 @@
 <template>
   <div class="p-15">
-    <a-card class="w100 mb-15" bodyStyle="padding:0" v-show="table.search.state">
-      <a-row :gutter="[15, 15]" class="p-15">
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-          <a-input v-model:value="table.search.vm.name" placeholder="真实名称" />
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-          <a-input v-model:value="table.search.vm.loginName" placeholder="账户名称" />
-        </a-col>
-        <!--button-->
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" style="float: right">
-          <a-button type="primary" class="mr-10" @click="findList">查询</a-button>
-          <a-button class="mr-10" @click="onResetSearch">重置</a-button>
-        </a-col>
-      </a-row>
-    </a-card>
-    <a-card class="w100" bodyStyle="padding:0">
-      <a-row :gutter="20" class="p-15 pb-0">
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
-          <template v-if="power.search">
-            <a-button class="mr-10" @click="table.search.state = !table.search.state">
-              <div v-if="table.search.state"><AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起</div>
-              <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
-            </a-button>
+    <a-row :gutter="[15, 15]">
+      <a-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
+        <a-card title="部门树" class="w100 mb-15">
+          <template #extra>
+            <a href="javascript:void(0)" @click="getFirst">查看一级</a>
           </template>
-          <template v-if="power.insert">
-            <a-button type="primary" class="mr-10" @click="openForm()">
-              <template #icon>
-                <AppIcons iconName="PlusOutlined" />
+          <a-tree
+            v-model:expanded-keys="tree.expandedKeys"
+            v-model:selectedKeys="tree.selectedKeys"
+            :tree-data="tree.data"
+            @select="onSelect"
+            autoExpandParent
+          >
+          </a-tree>
+        </a-card>
+      </a-col>
+      <a-col :xs="24" :sm="12" :md="12" :lg="19" :xl="19">
+        <a-card class="w100 mb-15" bodyStyle="padding:0" v-show="table.search.state">
+          <a-row :gutter="[15, 15]" class="p-15">
+            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+              <a-input v-model:value="table.search.vm.name" placeholder="真实名称" />
+            </a-col>
+            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+              <a-input v-model:value="table.search.vm.loginName" placeholder="账户名称" />
+            </a-col>
+            <!--button-->
+            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" style="float: right">
+              <a-button type="primary" class="mr-10" @click="findList">查询</a-button>
+              <a-button class="mr-10" @click="onResetSearch">重置</a-button>
+            </a-col>
+          </a-row>
+        </a-card>
+        <a-card class="w100" bodyStyle="padding:0">
+          <a-row :gutter="20" class="p-15 pb-0">
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
+              <template v-if="power.search">
+                <a-button class="mr-10" @click="table.search.state = !table.search.state">
+                  <div v-if="table.search.state"><AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起</div>
+                  <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
+                </a-button>
               </template>
-              新建
-            </a-button>
-          </template>
-          <template v-if="power.delete">
-            <a-popconfirm title="您确定要删除吗?" @confirm="deleteList()" okText="确定" cancelText="取消">
-              <a-button type="danger" class="mr-10">
-                <template #icon>
-                  <AppIcons iconName="DeleteOutlined" />
-                </template>
-                批量删除
+              <template v-if="power.insert">
+                <a-button type="primary" class="mr-10" @click="openForm()">
+                  <template #icon>
+                    <AppIcons iconName="PlusOutlined" />
+                  </template>
+                  新建
+                </a-button>
+              </template>
+              <template v-if="power.delete">
+                <a-popconfirm title="您确定要删除吗?" @confirm="deleteList()" okText="确定" cancelText="取消">
+                  <a-button type="danger" class="mr-10">
+                    <template #icon>
+                      <AppIcons iconName="DeleteOutlined" />
+                    </template>
+                    批量删除
+                  </a-button>
+                </a-popconfirm>
+              </template>
+            </a-col>
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15 text-right">
+              <a-button type="primary" class="mr-10" @click="exportExcel">
+                导出 Excel
               </a-button>
-            </a-popconfirm>
-          </template>
-        </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15 text-right">
-          <a-button type="primary" class="mr-10" @click="exportExcel">
-            导出 Excel
-          </a-button>
-        </a-col>
-      </a-row>
-      <a-table
-        :columns="table.columns"
-        :data-source="table.data"
-        :loading="table.loading"
-        :pagination="false"
-        :row-selection="{
-          selectedRowKeys: table.selectedRowKeys,
-          onChange: (selectedRowKeys) => (table.selectedRowKeys = selectedRowKeys),
-        }"
-        tableLayout="fixed"
-        rowKey="id"
-      >
-        <template #id="{ record }">
-          <div>
-            <template v-if="power.update">
-              <a href="javascript:void(0)" @click="openForm(record.id)">修改</a>
+            </a-col>
+          </a-row>
+          <a-table
+            :columns="table.columns"
+            :data-source="table.data"
+            :loading="table.loading"
+            :pagination="false"
+            :row-selection="{
+              selectedRowKeys: table.selectedRowKeys,
+              onChange: (selectedRowKeys) => (table.selectedRowKeys = selectedRowKeys),
+            }"
+            tableLayout="fixed"
+            rowKey="id"
+          >
+            <template #id="{ record }">
+              <div>
+                <template v-if="power.update">
+                  <a href="javascript:void(0)" @click="openForm(record.id)">修改</a>
+                </template>
+                <a-divider type="vertical" />
+                <template v-if="power.delete">
+                  <a-popconfirm title="您确定要删除吗?" @confirm="deleteList(record.id)" okText="确定" cancelText="取消">
+                    <a class="text-danger">删除</a>
+                  </a-popconfirm>
+                </template>
+              </div>
             </template>
-            <a-divider type="vertical" />
-            <template v-if="power.delete">
-              <a-popconfirm title="您确定要删除吗?" @confirm="deleteList(record.id)" okText="确定" cancelText="取消">
-                <a class="text-danger">删除</a>
-              </a-popconfirm>
-            </template>
-          </div>
-        </template>
-      </a-table>
-      <a-pagination
-        class="p-20"
-        size="small"
-        showSizeChanger
-        showQuickJumper
-        :pageSizeOptions="table.pageSizeOptions"
-        v-model:total="table.total"
-        v-model:defaultCurrent="table.page"
-        v-model:pageSize="table.rows"
-        :showTotal="(total) => `共计 ${total} 条`"
-        @showSizeChange="onShowSizeChange"
-        @change="onChange"
-      >
-      </a-pagination>
-    </a-card>
+          </a-table>
+          <a-pagination
+            class="p-20"
+            size="small"
+            showSizeChanger
+            showQuickJumper
+            :pageSizeOptions="table.pageSizeOptions"
+            v-model:total="table.total"
+            v-model:defaultCurrent="table.page"
+            v-model:pageSize="table.rows"
+            :showTotal="(total) => `共计 ${total} 条`"
+            @showSizeChange="onShowSizeChange"
+            @change="onChange"
+          >
+          </a-pagination>
+        </a-card>
+      </a-col>
+    </a-row>
+
     <!--表单弹层-->
     <a-modal v-model:visible="form.visible" title="编辑" centered @ok="form.visible = false" :width="800" destroyOnClose>
       <template #footer>
@@ -135,15 +155,21 @@ const columns = [
     ellipsis: true,
     width: 200,
   },
+  // {
+  //   title: "联系电话",
+  //   dataIndex: "phone",
+  //   ellipsis: true,
+  //   width: 200,
+  // },
+  // {
+  //   title: "邮件地址",
+  //   dataIndex: "email",
+  //   ellipsis: true,
+  //   width: 200,
+  // },
   {
-    title: "联系电话",
-    dataIndex: "phone",
-    ellipsis: true,
-    width: 200,
-  },
-  {
-    title: "邮件地址",
-    dataIndex: "email",
+    title: "所属部门",
+    dataIndex: "organizationName",
     ellipsis: true,
     width: 200,
   },
@@ -181,6 +207,7 @@ export default defineComponent({
           vm: {
             name: "",
             loginName: "",
+            organizationId: null,
           },
         },
         loading: false,
@@ -195,6 +222,11 @@ export default defineComponent({
       form: {
         visible: false,
         key: "",
+      },
+      tree: {
+        data: [],
+        expandedKeys: [],
+        selectedKeys: [],
       },
     });
     //表单 ref 对象
@@ -258,10 +290,33 @@ export default defineComponent({
       exportExcel() {
         service.exportExcel(state.table.search.vm);
       },
+      //获取部门树
+      sysOrganizationTree() {
+        service.sysOrganizationTree().then((res) => {
+          let data = res.data;
+          state.tree.data = data.rows;
+          state.tree.expandedKeys = data.expandedRowKeys;
+          // state.table.search.vm.organizationId = data.rows[0].key;
+          methods.findList();
+        });
+      },
+      //选中菜单树项
+      onSelect(selectedKeys, info) {
+        console.log(info);
+        state.tree.selectedKeys = selectedKeys;
+        state.table.search.vm.organizationId = selectedKeys[0];
+        methods.findList();
+      },
+      //获取一级菜单
+      getFirst() {
+        state.tree.selectedKeys = [];
+        state.table.search.vm.organizationId = state.tree.data[0].key;
+        methods.findList();
+      },
     };
 
     onMounted(() => {
-      methods.findList();
+      methods.sysOrganizationTree();
     });
 
     return {

@@ -48,6 +48,10 @@ namespace HZY.Admin
                     options.Filters.Add<ApiExceptionFilter>();
                     options.Filters.Add<AdminAuthorizationActionFilter>();
                 })
+                //.AddNewtonsoftJson(options =>
+                //{
+                //    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                //})
                 .AddJsonOptions(options =>
                 {
                     //设置 如果是 Dictionary 那么 在 json 序列化 是 key 的字符 采用 小驼峰 命名

@@ -1,18 +1,18 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本机_postgresql
+ Source Server         : 本地_5432
  Source Server Type    : PostgreSQL
- Source Server Version : 130003
+ Source Server Version : 100017
  Source Host           : localhost:5432
  Source Catalog        : HzyAdminSpa
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
- Target Server Version : 130003
+ Target Server Version : 100017
  File Encoding         : 65001
 
- Date: 27/05/2021 18:38:59
+ Date: 27/05/2021 22:46:21
 */
 
 
@@ -113,6 +113,7 @@ INSERT INTO "public"."SysMenu" VALUES ('60ae9382-31ab-4276-a379-d3876e9bb783', 1
 INSERT INTO "public"."SysMenu" VALUES ('f35d64ae-ecb7-4d06-acfb-d91595966d9e', 150, '修改密码', 'views/system/changePassword/index', '/system/change/password', 'system_change_password', NULL, '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-01-01 18:57:08', '2018-03-10 12:16:38');
 INSERT INTO "public"."SysMenu" VALUES ('1ec76c4c-b9b3-4517-9854-f08cd11d653d', 90, '基础信息', NULL, NULL, NULL, 'GoldOutlined', NULL, 1, 1, '2021-01-18 19:33:46', '2018-03-10 12:16:38');
 INSERT INTO "public"."SysMenu" VALUES ('d29fde94-0d6a-4a64-8446-55ee63df5885', 170, '岗位管理', 'views/system/post/index', '/system/post', 'system_post', NULL, '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-27 17:43:23.999818', '2021-05-27 17:29:48.78474');
+INSERT INTO "public"."SysMenu" VALUES ('0abfd53b-6bde-42c6-9f99-e32775bc31dd', 180, '组织机构', 'views/system/organization/index', '/system/organization', 'system_organization', NULL, '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-27 20:29:30.338029', '2021-05-27 20:27:55.571105');
 
 -- ----------------------------
 -- Table structure for SysMenuFunction
@@ -198,6 +199,12 @@ INSERT INTO "public"."SysMenuFunction" VALUES ('4767edaa-c281-4ff3-8829-7d6a8129
 INSERT INTO "public"."SysMenuFunction" VALUES ('37f4c9f3-d021-451e-816b-ab680dc4233c', 'd29fde94-0d6a-4a64-8446-55ee63df5885', '9c388461-2704-4c5e-a729-72c17e9018e1', '2021-05-27 17:43:24.119905', '2021-05-27 17:43:24.119904');
 INSERT INTO "public"."SysMenuFunction" VALUES ('f0c13bd7-fbd5-42ff-8fee-afde4a428d48', 'd29fde94-0d6a-4a64-8446-55ee63df5885', '383e7ee2-7690-46ac-9230-65155c84aa30', '2021-05-27 17:43:24.122162', '2021-05-27 17:43:24.122161');
 INSERT INTO "public"."SysMenuFunction" VALUES ('1c2a7bb6-c060-482f-b10a-16424db624a6', 'd29fde94-0d6a-4a64-8446-55ee63df5885', 'f27ecb0a-197d-47b1-b243-59a8c71302bf', '2021-05-27 17:43:24.124428', '2021-05-27 17:43:24.124426');
+INSERT INTO "public"."SysMenuFunction" VALUES ('f7b793cf-7ac2-47af-925d-ace8aab3b13e', '0abfd53b-6bde-42c6-9f99-e32775bc31dd', 'c9518758-b2e1-4f51-b517-5282e273889c', '2021-05-27 20:29:30.357227', '2021-05-27 20:29:30.357226');
+INSERT INTO "public"."SysMenuFunction" VALUES ('01f82669-895e-406b-a6c3-aa90a343629e', '0abfd53b-6bde-42c6-9f99-e32775bc31dd', 'bffefb1c-8988-4ddf-b4ac-81c2b30e80cd', '2021-05-27 20:29:30.363431', '2021-05-27 20:29:30.36343');
+INSERT INTO "public"."SysMenuFunction" VALUES ('0ded03a7-7d0f-4537-9f7a-8205ff1915f8', '0abfd53b-6bde-42c6-9f99-e32775bc31dd', 'e7ef2a05-8317-41c3-b588-99519fe88bf9', '2021-05-27 20:29:30.365462', '2021-05-27 20:29:30.365461');
+INSERT INTO "public"."SysMenuFunction" VALUES ('f249e624-bb30-47c2-a7ca-7de830a1511b', '0abfd53b-6bde-42c6-9f99-e32775bc31dd', '9c388461-2704-4c5e-a729-72c17e9018e1', '2021-05-27 20:29:30.367291', '2021-05-27 20:29:30.367289');
+INSERT INTO "public"."SysMenuFunction" VALUES ('73dbff37-5dd5-414c-8418-1ebb411e2a44', '0abfd53b-6bde-42c6-9f99-e32775bc31dd', '383e7ee2-7690-46ac-9230-65155c84aa30', '2021-05-27 20:29:30.372082', '2021-05-27 20:29:30.372081');
+INSERT INTO "public"."SysMenuFunction" VALUES ('1dde5e08-e16a-4435-acc6-4bd896632f69', '0abfd53b-6bde-42c6-9f99-e32775bc31dd', 'f27ecb0a-197d-47b1-b243-59a8c71302bf', '2021-05-27 20:29:30.374136', '2021-05-27 20:29:30.374135');
 
 -- ----------------------------
 -- Table structure for SysOrganization
@@ -220,6 +227,16 @@ CREATE TABLE "public"."SysOrganization" (
 -- ----------------------------
 -- Records of SysOrganization
 -- ----------------------------
+INSERT INTO "public"."SysOrganization" VALUES ('f23777dd-2c03-449f-953b-df91c19dee5b', '阿里巴巴集团', 1, 'hzy', '18410912184', '18410912184@qq.com', 1, NULL, '2021-05-27 20:50:30.887062', '2021-05-27 20:50:30.88706');
+INSERT INTO "public"."SysOrganization" VALUES ('47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '成都分部', 2, '成都分部', '123123123', '123@qq.com', 1, 'f23777dd-2c03-449f-953b-df91c19dee5b', '2021-05-27 22:31:45.3727', '2021-05-27 21:01:49.667923');
+INSERT INTO "public"."SysOrganization" VALUES ('a5e87436-53d5-4fff-8f2e-0af511db9ba4', '研发部门', 1, '研发部门', '1234323423', '12312@qq.com', 1, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-05-27 22:32:28.605359', '2021-05-27 22:32:07.53192');
+INSERT INTO "public"."SysOrganization" VALUES ('05e55b19-261a-4df8-aea0-83a56f1aeb7a', '市场部门', 2, '市场部门', '123213', '123@qq.com', 1, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-05-27 22:32:46.230341', '2021-05-27 22:32:39.872389');
+INSERT INTO "public"."SysOrganization" VALUES ('9cf32211-f255-4c2e-9c53-4258755e43c5', '测试部门', 3, '测试部门', '12313', '123123@qq.com', 1, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-05-27 22:32:58.914669', '2021-05-27 22:32:58.914666');
+INSERT INTO "public"."SysOrganization" VALUES ('e898e8ad-2de7-46e0-b6f3-08f5fb9662ed', '财务部门', 4, '财务部门', '12323452345', '12312@qq.com', 1, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-05-27 22:33:13.1293', '2021-05-27 22:33:13.129298');
+INSERT INTO "public"."SysOrganization" VALUES ('eb913607-932f-433b-8321-dfe35258bb88', '运维部门', 5, '运维部门', '1232133452', '12341@qq.com', 1, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-05-27 22:33:25.149334', '2021-05-27 22:33:25.149332');
+INSERT INTO "public"."SysOrganization" VALUES ('1b001a4d-bce5-4e09-bc96-4e7da7686c48', '北京分部', 3, '北京分部', '132123', '13131', 1, 'f23777dd-2c03-449f-953b-df91c19dee5b', '2021-05-27 22:33:43.962922', '2021-05-27 22:33:43.962921');
+INSERT INTO "public"."SysOrganization" VALUES ('6e36f7eb-3d03-417d-8815-c0e0f19ce6e6', '市场部门', 1, '市场部门', '234124234', '234234@qq.com', 1, '1b001a4d-bce5-4e09-bc96-4e7da7686c48', '2021-05-27 22:33:56.51131', '2021-05-27 22:33:56.511308');
+INSERT INTO "public"."SysOrganization" VALUES ('aea25949-b0a0-49a3-9fbc-e80224b75fc1', '财务部门', 2, '财务部门', '435543535', '123@qq.com', 1, '1b001a4d-bce5-4e09-bc96-4e7da7686c48', '2021-05-27 22:34:10.854918', '2021-05-27 22:34:10.854917');
 
 -- ----------------------------
 -- Table structure for SysPost
@@ -240,6 +257,10 @@ CREATE TABLE "public"."SysPost" (
 -- ----------------------------
 -- Records of SysPost
 -- ----------------------------
+INSERT INTO "public"."SysPost" VALUES ('96927c30-41d0-4ced-8e29-cbed35c90fb0', 1, 'ceo', '董事长', 1, NULL, '2021-05-27 20:26:21.909259', '2021-05-27 20:26:21.909257');
+INSERT INTO "public"."SysPost" VALUES ('0716b4b0-9a06-43e9-8ae8-82c74875f83e', 2, 'se', '项目经理', 1, NULL, '2021-05-27 20:26:34.972365', '2021-05-27 20:26:34.972363');
+INSERT INTO "public"."SysPost" VALUES ('f0c67537-8094-429a-b474-f54ac518609e', 3, 'hr', '人力资源', 1, NULL, '2021-05-27 20:26:44.009964', '2021-05-27 20:26:44.009961');
+INSERT INTO "public"."SysPost" VALUES ('e46af329-6d08-442c-9837-f22cff954411', 4, 'user', '普通员工', 1, NULL, '2021-05-27 20:26:52.093087', '2021-05-27 20:26:52.093085');
 
 -- ----------------------------
 -- Table structure for SysRole
@@ -368,8 +389,8 @@ CREATE TABLE "public"."SysUser" (
 -- ----------------------------
 -- Records of SysUser
 -- ----------------------------
-INSERT INTO "public"."SysUser" VALUES ('ac18f496-e93d-42f0-b59e-e321acc85335', '用户', 'user', '123', '456456456', '18123456789@live.com', 1, NULL, '2021-04-18 22:08:12', '2017-04-06 19:55:53');
-INSERT INTO "public"."SysUser" VALUES ('0198459e-2034-4533-b843-5d227ad20740', '超级管理员', 'admin', '123456', '123123123', '1396510655@qq.com', 2, NULL, '2021-05-24 10:52:53.390604', '2017-04-06 19:55:53');
+INSERT INTO "public"."SysUser" VALUES ('ac18f496-e93d-42f0-b59e-e321acc85335', '用户', 'user', '123', '456456456', '18123456789@live.com', 1, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-04-18 22:08:12', '2017-04-06 19:55:53');
+INSERT INTO "public"."SysUser" VALUES ('0198459e-2034-4533-b843-5d227ad20740', '超级管理员', 'admin', '123456', '123123123', '1396510655@qq.com', 2, '47c547ea-e07a-4475-a4f7-ae09e3d8fafc', '2021-05-24 10:52:53.390604', '2017-04-06 19:55:53');
 
 -- ----------------------------
 -- Table structure for SysUserPost

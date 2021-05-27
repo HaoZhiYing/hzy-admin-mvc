@@ -24,9 +24,9 @@ namespace HZY.Repository.Core
         /// <param name="services"></param>
         /// <param name="connectionString"></param>
         /// <param name="assemblyFilter"></param>
-        public static void RegisterRepository(this IServiceCollection services, string connectionString, string assemblyFilter = "HZY.Repository")
+        public static void RegisterRepository(this IServiceCollection services, string connectionString, DataType dataType = DataType.SqlServer, string assemblyFilter = "HZY.Repository")
         {
-            var freeSql = CreateFreeSql(connectionString);
+            var freeSql = CreateFreeSql(connectionString, dataType);
             services.AddSingleton(freeSql);
             services.AddScoped<UnitOfWorkManager>();
             services.AddFreeRepository(null, ServiceScanningExtensions.GetAssemblyList(w =>
@@ -41,10 +41,10 @@ namespace HZY.Repository.Core
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        private static IFreeSql CreateFreeSql(string connectionString)
+        private static IFreeSql CreateFreeSql(string connectionString, DataType dataType)
         {
             var freeSql = new FreeSql.FreeSqlBuilder()
-                .UseConnectionString(FreeSql.DataType.SqlServer, connectionString)
+                .UseConnectionString(dataType, connectionString)
                 .UseAutoSyncStructure(true) //自动迁移实体的结构到数据库
                 .Build(); //请务必定义成 Singleton 单例模式
 
@@ -55,6 +55,7 @@ namespace HZY.Repository.Core
                 stringBuilder.Append($"\r\n====[Sql Start 耗时: {curdAfter.ElapsedMilliseconds}]=========");
                 stringBuilder.Append($"\r\n{curdAfter.Sql}");
                 stringBuilder.Append($"\r\n====[Sql End 线程Id:{Thread.CurrentThread.ManagedThreadId}]=========");
+                LogUtil.Write(stringBuilder.ToString());
                 Console.WriteLine(stringBuilder);
             };
 

@@ -22,15 +22,16 @@ namespace HZY.Admin.Controllers
         {
             this._webRootPath = webHostEnvironment.WebRootPath;
             _defaultService = defaultService;
+            this._defaultService.InitializationAsync().Wait();
         }
         /// <summary>
         /// Index
         /// </summary>
         /// <returns></returns>
         [HttpGet(nameof(Index))]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            await this._defaultService.InitializationAsync();
+            //await this._defaultService.InitializationAsync();
             return View();
         }
         /// <summary>

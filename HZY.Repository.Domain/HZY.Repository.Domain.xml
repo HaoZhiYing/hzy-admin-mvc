@@ -130,14 +130,19 @@
             菜单与功能绑定
             </summary>
         </member>
+        <member name="T:HZY.Repository.Domain.Framework.SysOrganization">
+            <summary>
+            组织机构
+            </summary>
+        </member>
         <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Name">
             <summary>
-            部门名称
+            组织名称
             </summary>
         </member>
         <member name="P:HZY.Repository.Domain.Framework.SysOrganization.OrderNumber">
             <summary>
-            部门排序号
+            组织排序号
             </summary>
         </member>
         <member name="P:HZY.Repository.Domain.Framework.SysOrganization.Leader">
@@ -188,6 +193,11 @@
         <member name="P:HZY.Repository.Domain.Framework.SysPost.State">
             <summary>
             状态
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.Domain.Framework.SysPost.Remarks">
+            <summary>
+            备注
             </summary>
         </member>
         <member name="T:HZY.Repository.Domain.Framework.StateEnum">

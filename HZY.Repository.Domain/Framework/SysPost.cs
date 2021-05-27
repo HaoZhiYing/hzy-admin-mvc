@@ -1,9 +1,4 @@
 ﻿using HZY.Repository.Domain.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HZY.Repository.Domain.Framework
 {
@@ -31,6 +26,11 @@ namespace HZY.Repository.Domain.Framework
         /// 状态
         /// </summary>
         public StateEnum State { get; set; } = StateEnum.正常;
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remarks { get; set; }
     }
 
     /// <summary>

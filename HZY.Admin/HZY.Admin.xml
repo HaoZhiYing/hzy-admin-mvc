@@ -120,6 +120,48 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:HZY.Admin.Controllers.Framework.SysPostController">
+            <summary>
+            岗位控制器
+            </summary>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysPostController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Framework.SysPost)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="size"></param>
+            <param name="page"></param>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysPostController.DeleteListAsync(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据id数组删除
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysPostController.FindFormAsync(System.Guid)">
+            <summary>
+            查询表单数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysPostController.SaveFormAsync(HZY.Repository.Domain.Framework.SysPost)">
+            <summary>
+            保存
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Framework.SysPostController.ExportExcelAsync(HZY.Repository.Domain.Framework.SysPost)">
+            <summary>
+            导出Excel
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
         <member name="M:HZY.Admin.Controllers.Framework.SysRoleController.FindListAsync(System.Int32,System.Int32,HZY.Repository.Domain.Framework.SysRole)">
             <summary>
             获取列表

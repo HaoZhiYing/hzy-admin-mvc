@@ -42,6 +42,9 @@ namespace HZY.Repository.AppCore.DbContexts
         public DbSet<SysRoleMenuFunction> SysRoleMenuFunction { get; set; }
         public DbSet<SysUser> SysUser { get; set; }
         public DbSet<SysUserRole> SysUserRole { get; set; }
+        public DbSet<SysOrganization> SysOrganization { get; set; }
+        public DbSet<SysPost> SysPost { get; set; }
+        public DbSet<SysUserPost> SysUserPost { get; set; }
         #endregion
 
         #region 业务
@@ -62,6 +65,17 @@ namespace HZY.Repository.AppCore.DbContexts
         {
             //扫描表 并 缓存 属性 xml 信息
             _cacheEntity.Set(modelBuilder.Model.GetEntityTypes().Select(item => item.ClrType));
+
+            //单表树状结构
+            modelBuilder.Entity<SysOrganization>()
+                //主语this，拥有Children
+                .HasMany(x => x.Children)
+                //主语Children，每个Child拥有一个Parent
+                .WithOne(x => x.Parent)
+                //主语Children，每个Child的外键是ParentId
+                .HasForeignKey(x => x.ParentId)
+                //这里必须是非强制关联，否则报错：Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

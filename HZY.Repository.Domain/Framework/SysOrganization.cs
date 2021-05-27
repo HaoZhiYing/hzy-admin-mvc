@@ -1,21 +1,22 @@
 ﻿using HZY.Repository.Domain.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HZY.Repository.Domain.Framework
 {
+    /// <summary>
+    /// 组织机构
+    /// </summary>
     public class SysOrganization : GuidKeyBaseModel
     {
         /// <summary>
-        /// 部门名称
+        /// 组织名称
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// 部门排序号
+        /// 组织排序号
         /// </summary>
         public int? OrderNumber { get; set; }
 
@@ -44,7 +45,8 @@ namespace HZY.Repository.Domain.Framework
         /// </summary>
         public Guid? ParentId { get; set; }
 
-        // [Navigate(nameof(ParentId))] public SysDepartment Parent { get; set; }
-        //[Navigate(nameof(ParentId))] public List<SysDepartment> Children { get; set; }
+        public virtual SysOrganization Parent { get; set; }
+        public virtual List<SysOrganization> Children { get; set; }
+
     }
 }

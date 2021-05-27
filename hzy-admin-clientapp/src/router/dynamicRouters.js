@@ -1,5 +1,4 @@
 import router from '@/router/index'
-import vueRouter from "@/router/index";
 
 let dynamicRouters = [];
 
@@ -37,7 +36,7 @@ function createDynamicRouters(data) {
  */
 export function getDynamicRouters(data) {
     createDynamicRouters(data);
-    let hasRouteLayout = vueRouter.hasRoute("appLayout");
+    let hasRouteLayout = router.hasRoute("appLayout");
     if (!hasRouteLayout) {
         router.addRoute({
             name: 'appLayout',

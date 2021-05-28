@@ -76,7 +76,7 @@ https://gitee.com/hzy6/hzy-quartz
 
 #### :cherries:  特技
 
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/165956_13c32f7f_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/155729_75be773c_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |
 |-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170028_73a15756_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170112_08a760fc_1242080.png "屏幕截图.png") |
 | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170146_cabb0425_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170200_e0337a5c_1242080.png "屏幕截图.png") |

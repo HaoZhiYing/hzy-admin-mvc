@@ -3,7 +3,6 @@
 </template>
 <script>
 import { defineComponent } from "vue";
-<LockOutlined />;
 //程序中所有的 ant 图标 都需要在这个组件中 注册 且通过这个组件使用 图标
 import {
   HomeOutlined,
@@ -47,6 +46,7 @@ import {
   IdcardOutlined,
   ClusterOutlined,
   UsergroupAddOutlined,
+  MoreOutlined,
   //tab 选项卡
 } from "@ant-design/icons-vue";
 
@@ -97,6 +97,7 @@ export default defineComponent({
     IdcardOutlined,
     ClusterOutlined,
     UsergroupAddOutlined,
+    MoreOutlined,
   },
 });
 </script>

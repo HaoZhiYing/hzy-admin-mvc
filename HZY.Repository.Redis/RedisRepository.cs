@@ -1,5 +1,5 @@
-﻿using FreeRedis;
-using HZY.Common.ScanDIService.Interface;
+﻿using HZY.Common.ScanDIService.Interface;
+using HZY.Redis.Service;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -10,12 +10,12 @@ namespace HZY.Repository.Redis
     /// </summary>
     public class RedisRepository : IDITransientSelf
     {
-        private readonly RedisClient _redisClient;
+        private readonly IRedisService _redisService;
         private readonly ILogger _logger;
 
-        //public RedisRepository(RedisClient redisClient, ILogger<RedisRepository> logger)
+        //public RedisRepository(IRedisService redisService, ILogger<RedisRepository> logger)
         //{
-        //    _redisClient = redisClient;
+        //    _redisService = redisService;
         //    _logger = logger;
         //}
 
@@ -26,7 +26,7 @@ namespace HZY.Repository.Redis
         /// <param name="data"></param>
         public void SetPlcOriginalData(string key, string data)
         {
-            _redisClient.Publish(key, data);
+            _redisService.Database.Publish(key, data);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace HZY.Repository.Redis
         /// <param name="key"></param>
         public void Listener(string key)
         {
-            _redisClient.Subscribe(key, (message, data) =>
+            _redisService.Multiplexer.GetSubscriber().Subscribe(key, (message, data) =>
             {
                 _logger.LogInformation($"Message={message} Data={JsonConvert.SerializeObject(data)}");
             });

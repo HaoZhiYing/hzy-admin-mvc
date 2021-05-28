@@ -2,10 +2,6 @@
 using HZY.Framework.Filters;
 using HZY.Repository.Redis;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HZY.Admin.Controllers
 {

@@ -37,6 +37,19 @@ https://gitee.com/hzy6/hzy-quartz
     
     ###  **_交流群: 534584927_** 
 
+
+
+#### :cherries:  特技
+
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/155729_75be773c_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |
+|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170028_73a15756_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170112_08a760fc_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170146_cabb0425_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170200_e0337a5c_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170217_4ac494ee_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170836_76c6a157_1242080.png "屏幕截图.png") |
+
+
+
+
 #### 安装前提
 
 1、安装 nodejs
@@ -56,6 +69,7 @@ https://gitee.com/hzy6/hzy-quartz
 4、命令 npm run build 打包后使用 iis 或者 nginx 部署前端 ui
 
 
+
 ####  :heart: 捐赠 兄弟们就当打发要饭的吧！
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/1216/105734_96c2122c_1242080.png "未标题-1.png")
 
@@ -72,15 +86,6 @@ https://gitee.com/hzy6/hzy-quartz
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
-
-
-#### :cherries:  特技
-
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/155729_75be773c_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |
-|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170028_73a15756_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170112_08a760fc_1242080.png "屏幕截图.png") |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170146_cabb0425_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170200_e0337a5c_1242080.png "屏幕截图.png") |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170217_4ac494ee_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170836_76c6a157_1242080.png "屏幕截图.png") |
 
 
 

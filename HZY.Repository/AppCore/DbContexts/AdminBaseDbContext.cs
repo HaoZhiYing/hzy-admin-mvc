@@ -55,11 +55,6 @@ namespace HZY.Repository.AppCore.DbContexts
 
         #endregion
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseLazyLoadingProxies();
-        }
-
         /// <summary>
         /// 获取实体信息缓存服务
         /// </summary>

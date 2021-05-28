@@ -27,7 +27,6 @@ namespace HZY.Repository.AppCore
             {
 
                 options.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
-                .UseLazyLoadingProxies()
                 ;
                 //无跟踪
                 // .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)

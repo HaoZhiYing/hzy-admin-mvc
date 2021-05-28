@@ -12,5 +12,8 @@ namespace HZY.Admin.Model.Dto
         public SysUser Form { get; set; }
         public List<Guid> RoleIds { get; set; }
         public List<SysRole> AllRoleList { get; set; }
+        public List<Guid> PostIds { get; set; }
+        public List<SysPost> AllPostList { get; set; }
+
     }
 }

@@ -2,30 +2,14 @@
   <div class="p-15">
     <a-row :gutter="[15, 15]">
       <a-col :xs="24" :sm="10" :md="10" :lg="10" :xl="10">
-        <a-card
-          class="w100 mb-15"
-          bodyStyle="padding:0"
-          v-show="table.search.state"
-        >
+        <a-card class="w100 mb-15" bodyStyle="padding:0" v-show="table.search.state">
           <a-row :gutter="[15, 15]" class="p-15">
             <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-              <a-input
-                v-model:value="table.search.vm.name"
-                placeholder="名称"
-              />
+              <a-input v-model:value="table.search.vm.name" placeholder="名称" />
             </a-col>
             <!--button-->
-            <a-col
-              :xs="24"
-              :sm="12"
-              :md="8"
-              :lg="6"
-              :xl="6"
-              style="float: right"
-            >
-              <a-button type="primary" class="mr-10" @click="findList"
-                >查询</a-button
-              >
+            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6" style="float: right">
+              <a-button type="primary" class="mr-10" @click="findList">查询</a-button>
               <a-button class="mr-10" @click="onResetSearch">重置</a-button>
             </a-col>
           </a-row>
@@ -34,33 +18,17 @@
           <a-row :gutter="20" class="p-15 pb-0">
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
               <template v-if="power.search">
-                <a-button
-                  class="mr-10"
-                  @click="table.search.state = !table.search.state"
-                >
-                  <div v-if="table.search.state">
-                    <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
-                  </div>
-                  <div v-else>
-                    <AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开
-                  </div>
+                <a-button class="mr-10" @click="table.search.state = !table.search.state">
+                  <div v-if="table.search.state"><AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起</div>
+                  <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
                 </a-button>
               </template>
             </a-col>
           </a-row>
-          <a-table
-            :columns="table.columns"
-            :data-source="table.data"
-            :loading="table.loading"
-            :pagination="false"
-            tableLayout="fixed"
-            rowKey="id"
-          >
+          <a-table :columns="table.columns" :data-source="table.data" :loading="table.loading" :pagination="false" tableLayout="fixed" rowKey="id">
             <template #id="{ record }">
               <span>
-                <a href="javascript:void(0)" @click="goSetUp(record.id)"
-                  >去设置</a
-                >
+                <a href="javascript:void(0)" @click="goSetUp(record.id)">去设置</a>
               </span>
             </template>
           </a-table>
@@ -94,16 +62,10 @@
               <a-checkbox-group
                 style="display: block"
                 v-model:value="record.checkFunction"
-                @change="
-                  (values) => onChangeCheckbox({ values, id: record.id })
-                "
+                @change="(values) => onChangeCheckbox({ values, id: record.id })"
               >
                 <a-row>
-                  <a-col
-                    :span="4"
-                    v-for="item in record.functions"
-                    :key="item.id"
-                  >
+                  <a-col :span="4" v-for="item in record.functions" :key="item.id">
                     <a-checkbox :value="item.id">{{ item.label }}</a-checkbox>
                   </a-col>
                 </a-row>
@@ -116,14 +78,7 @@
   </div>
 </template>
 <script>
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  reactive,
-  toRefs,
-  watch,
-} from "vue";
+import { computed, defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 import { useStore } from "vuex";
 import AppIcons from "@/components/appIcons";
 import tools from "@/scripts/tools";
@@ -143,12 +98,12 @@ const columns = [
     ellipsis: true,
     width: 150,
   },
-  {
-    title: "能否删除",
-    dataIndex: "isDelete",
-    ellipsis: true,
-    width: 100,
-  },
+  // {
+  //   title: "能否删除",
+  //   dataIndex: "isDelete",
+  //   ellipsis: true,
+  //   width: 100,
+  // },
   {
     title: "备注",
     dataIndex: "remark",
@@ -266,17 +221,15 @@ export default defineComponent({
       //获取列表数据
       findList() {
         state.table.loading = true;
-        service
-          .findList(state.table.rows, state.table.page, state.table.search.vm)
-          .then((res) => {
-            let data = res.data;
-            state.table.loading = false;
-            state.table.page = data.page;
-            state.table.rows = data.size;
-            state.table.total = data.total;
-            state.table.data = data.dataSource;
-            state.tree.roleId = data.dataSource[0].id;
-          });
+        service.findList(state.table.rows, state.table.page, state.table.search.vm).then((res) => {
+          let data = res.data;
+          state.table.loading = false;
+          state.table.page = data.page;
+          state.table.rows = data.size;
+          state.table.total = data.total;
+          state.table.data = data.dataSource;
+          state.tree.roleId = data.dataSource[0].id;
+        });
       },
       //删除数据
       deleteList(id) {

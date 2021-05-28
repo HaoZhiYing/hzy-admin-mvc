@@ -199,10 +199,6 @@ namespace HZY.Repository.AppCore.Impl
 
         public virtual int DeleteById<TKey>(TKey key)
         {
-            if (key.GetType().Name == "List`1")
-            {
-                return DeleteByIds((IEnumerable<TKey>)key);
-            }
             var exp = HzyRepositoryExtensions.CreateEqualExpression<T, TKey>(_keyPropertyInfo.Name, key);
             return this.Delete(this._dbSet.FirstOrDefault(exp));
         }
@@ -230,10 +226,6 @@ namespace HZY.Repository.AppCore.Impl
 
         public virtual async Task<int> DeleteByIdAsync<TKey>(TKey key)
         {
-            if (key.GetType().Name == "List`1")
-            {
-                return await DeleteByIdsAsync((IEnumerable<TKey>)key);
-            }
             var exp = HzyRepositoryExtensions.CreateEqualExpression<T, TKey>(_keyPropertyInfo.Name, key);
             return await this.DeleteAsync(await this._dbSet.FirstOrDefaultAsync(exp));
         }

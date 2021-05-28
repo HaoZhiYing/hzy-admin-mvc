@@ -6,7 +6,27 @@
         <AppIcons iconName="MenuFoldOutlined" v-else />
       </div>
       <!-- <div class="hzy-header-btn logo" v-if="!isMobile">{{ title }}</div> -->
-      <div style="flex: 1 1 0%"></div>
+      <div style="flex: 1 1 0%">
+        <a-menu v-model:selectedKeys="selectedKeys" mode="horizontal" @select="onMenuSelected">
+          <a-menu-item v-for="item in oneLevels" :key="item.componentName ? item.componentName : item.id">
+            <AppIcons :iconName="item.icon" />
+            {{ item.name }}
+          </a-menu-item>
+
+          <!-- <a-menu-item key="mail1">
+            <mail-outlined />
+            系统管理
+          </a-menu-item>
+          <a-menu-item key="mail2">
+            <mail-outlined />
+            系统管理
+          </a-menu-item>
+          <a-menu-item key="mail3">
+            <mail-outlined />
+            系统管理
+          </a-menu-item> -->
+        </a-menu>
+      </div>
       <div class="hzy-header-btn" @click="onReload">
         <AppIcons iconName="ReloadOutlined" />
       </div>
@@ -65,6 +85,7 @@ export default defineComponent({
     layoutTabs,
   },
   setup(props, context) {
+    const routeName = router.currentRoute.value.name;
     const state = reactive({
       collapsed: props.propCollapsed,
       headerTheme: props.propHeaderTheme,
@@ -74,9 +95,10 @@ export default defineComponent({
       },
       screenWidth: 0,
       screenHeight: 0,
-      // isMobile: screenWidth < 992,
       isMobile: false,
       tabs: [],
+      oneLevels: [],
+      selectedKeys: [routeName],
     });
 
     watch(
@@ -103,11 +125,8 @@ export default defineComponent({
     const store = useStore();
     const title = computed(() => store.state.app.title);
     const userName = computed(() => store.state.app.userInfo.name);
-
-    //页面加载 钩子函数
-    onMounted(() => {
-      methods.calcScreen();
-    });
+    const menus = computed(() => store.state.app.userInfo.menus);
+    const topMenuId = computed(() => store.getters["app/getTopMenuByLastId"]);
 
     const methods = {
       //实时计算监听 宽高
@@ -145,7 +164,40 @@ export default defineComponent({
         screenfull.toggle();
         state.fullscreen = !screenfull.isFullscreen;
       },
+      //初始化 一级菜单
+      initTopMenu() {
+        methods.getOneLevelsMenu();
+        //如果当前路由 父级菜单 有 则切换到这个菜单上去
+        if (topMenuId.value) {
+          state.selectedKeys = [topMenuId.value];
+          methods.onMenuSelected({ key: topMenuId.value });
+        } else {
+          if (state.oneLevels.length > 0) {
+            var menu = state.oneLevels[0];
+            state.selectedKeys = [menu.componentName ? menu.componentName : menu.id];
+            methods.onMenuSelected({ key: menu.componentName ? menu.componentName : menu.id });
+          }
+        }
+      },
+      //获取第一级菜单
+      getOneLevelsMenu() {
+        state.oneLevels = menus.value.filter((w) => w.parentId == null || w.parentId == "");
+      },
+      //菜单选中
+      onMenuSelected(obj) {
+        if (router.hasRoute(obj.key)) {
+          router.push({ name: obj.key });
+        } else {
+          store.commit("app/setSubmenu", obj.key);
+        }
+      },
     };
+
+    //页面加载 钩子函数
+    onMounted(() => {
+      methods.calcScreen();
+      methods.initTopMenu();
+    });
 
     return {
       ...toRefs(state),

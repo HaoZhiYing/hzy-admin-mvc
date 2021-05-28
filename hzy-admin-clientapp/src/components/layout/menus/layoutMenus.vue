@@ -1,11 +1,5 @@
 <template>
-  <a-menu
-    :theme="menuTheme"
-    v-model:selectedKeys="selectedKeys"
-    v-model:openKeys="openKeys"
-    mode="inline"
-    @select="onMenuSelected"
-  >
+  <a-menu :theme="menuTheme" v-model:selectedKeys="selectedKeys" v-model:openKeys="openKeys" mode="inline" @select="onMenuSelected">
     <!-- <a-menu-item key="/home" title="首页">
       <desktop-outlined />
       <span>首页</span>
@@ -27,11 +21,7 @@
 
     <!-- 动态生成-->
     <template v-for="item in menus">
-      <a-menu-item
-        v-if="item.children.length === 0"
-        :key="item.componentName"
-        :title="item.name"
-      >
+      <a-menu-item v-if="item.children.length === 0" :key="item.componentName" :title="item.name">
         <AppIcons :iconName="item.icon" />
         <span>{{ item.name }}</span>
       </a-menu-item>
@@ -88,7 +78,8 @@ export default defineComponent({
     );
 
     const store = useStore();
-    const menus = computed(() => store.state.app.userInfo.menus);
+    // const menus = computed(() => store.state.app.userInfo.menus);
+    const menus = computed(() => store.state.app.submenus);
 
     //菜单选中
     const onMenuSelected = (obj) => {

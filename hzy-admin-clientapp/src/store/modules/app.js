@@ -19,7 +19,8 @@ export default {
         //缓存视图
         cacheViews: ["home"],
         title: "HzyAdminSpa",
-        userInfo: {}
+        userInfo: {},
+        submenus: []
     }),
     mutations: {
         //添加缓存视图
@@ -117,6 +118,13 @@ export default {
         setUserInfo(state, value) {
             state.userInfo = value;
         },
+        //设置子菜单
+        setSubmenu(state, parentId) {
+            var menus = state.userInfo.menus.filter((w) => w.id == parentId);
+            if (menus.length > 0) {
+                state.submenus = menus[0].children;
+            }
+        }
     },
     getters: {
         /**
@@ -128,6 +136,33 @@ export default {
             let route = router.currentRoute.value;
             const data = state.userInfo.menuPowers.find(w => w.menuId == route.meta.menuId);
             return data ? data : {};
+        },
+        /**
+         * 根据最后id 查找 最上级 id
+         */
+        getTopMenuByLastId(state) {
+            let route = router.currentRoute.value;
+            let currentMenuId = route.meta.menuId;
+            let allMenus = state.userInfo.menus;
+            let topMenuId = null;
+
+            const findId = (menus, id) => {
+                for (let index = 0; index < menus.length; index++) {
+                    const element = menus[index];
+                    if (element.id == currentMenuId) {
+                        console.log(id);
+                        topMenuId = id;
+                        break;
+                    }
+                    if (element.children.length > 0) {
+                        findId(element.children, element.parentId ? null : element.id);
+                    }
+                }
+            }
+
+            findId(allMenus, null);
+
+            return topMenuId;
         }
     },
     actions: {

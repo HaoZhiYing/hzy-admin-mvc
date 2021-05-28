@@ -38,6 +38,15 @@ import {
   GoldOutlined,
   DesktopOutlined,
   LockOutlined,
+  TeamOutlined,
+  ControlOutlined,
+  MenuOutlined,
+  UserSwitchOutlined,
+  FormOutlined,
+  FileSearchOutlined,
+  IdcardOutlined,
+  ClusterOutlined,
+  UsergroupAddOutlined,
   //tab 选项卡
 } from "@ant-design/icons-vue";
 
@@ -79,6 +88,15 @@ export default defineComponent({
     GoldOutlined,
     DesktopOutlined,
     LockOutlined,
+    TeamOutlined,
+    ControlOutlined,
+    MenuOutlined,
+    UserSwitchOutlined,
+    FormOutlined,
+    FileSearchOutlined,
+    IdcardOutlined,
+    ClusterOutlined,
+    UsergroupAddOutlined,
   },
 });
 </script>

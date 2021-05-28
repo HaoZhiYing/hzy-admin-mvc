@@ -26,7 +26,7 @@
           <a-input v-model:value="vm.form.email" placeholder="请输入" />
         </a-form-item>
       </a-col>
-      <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+      <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         <a-form-item label="所属岗位">
           <a-checkbox-group v-model:value="vm.postIds" class="w100">
             <a-row>
@@ -40,7 +40,7 @@
         </a-form-item>
       </a-col>
       <a-col :xs="24">
-        <a-form-item label="角色">
+        <a-form-item label="所属角色">
           <a-checkbox-group v-model:value="vm.roleIds" class="w100">
             <a-row>
               <a-col :span="6" v-for="(item, index) in vm.allRoleList" :key="index">

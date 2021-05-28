@@ -75,6 +75,9 @@
             tableLayout="fixed"
             rowKey="id"
           >
+            <template #icon="{text}">
+              <AppIcons :iconName="text" />
+            </template>
             <template #id="{ record }">
               <div>
                 <template v-if="power.update">
@@ -158,17 +161,18 @@ const columns = [
     title: "组件名称",
     dataIndex: "componentName",
     ellipsis: true,
+    width: 150,
   },
   {
-    title: "菜单物理地址",
+    title: "组件地址",
     dataIndex: "url",
     ellipsis: true,
   },
-  {
-    title: "菜单路由地址",
-    dataIndex: "router",
-    ellipsis: true,
-  },
+  // {
+  //   title: "路由地址",
+  //   dataIndex: "router",
+  //   ellipsis: true,
+  // },
   // {
   //   title: "父级菜单",
   //   dataIndex: "父级菜单",
@@ -179,7 +183,8 @@ const columns = [
     title: "图标",
     dataIndex: "icon",
     ellipsis: true,
-    width: 200,
+    width: 80,
+    slots: { customRender: "icon" },
   },
   // {
   //   title: "更新时间",

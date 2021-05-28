@@ -58,6 +58,10 @@
         tableLayout="fixed"
         rowKey="id"
       >
+        <template #state="{ text }">
+          <a-tag color="success" v-if="text == 1">正常</a-tag>
+          <a-tag color="warning" v-else>停用</a-tag>
+        </template>
         <template #id="{ record }">
           <div>
             <template v-if="power.update">

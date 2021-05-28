@@ -2,7 +2,7 @@
   <div class="p-15">
     <a-row :gutter="[15, 15]">
       <a-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
-        <a-card title="部门树" class="w100 mb-15">
+        <a-card title="组织架构" class="w100 mb-15">
           <template #extra>
             <a href="javascript:void(0)" @click="getFirst">查看一级</a>
           </template>
@@ -168,7 +168,7 @@ const columns = [
   //   width: 200,
   // },
   {
-    title: "所属部门",
+    title: "所属组织",
     dataIndex: "organizationName",
     ellipsis: true,
     width: 150,

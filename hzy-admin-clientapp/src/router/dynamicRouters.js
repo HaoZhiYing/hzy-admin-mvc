@@ -20,11 +20,17 @@ function createDynamicRouters(data) {
             createDynamicRouters(item.children);
         } else {
             dynamicRouters.push({
-                path: item.router ? item.router : '',
-                name: item.componentName,
+                path: !item.router && !item.url ? '/NotFound' : item.router,
+                name: item.componentName ? item.componentName : item.id,
                 component: () =>
                     import('@/' + item.url),
-                meta: { title: item.name, close: item.close, keepAlive: true, menuId: item.id },
+                meta: {
+                    title: item.name,
+                    close: item.close,
+                    keepAlive: true,
+                    menuId: item.id,
+                    parentId: item.parentId
+                },
             })
         }
     }

@@ -16,17 +16,16 @@ export default [
             component: redirect,
         }]
     },
-    // {
-    //     path: '',
-    //     component: layout,
-    //     name: "appLayout",
-    //     children: [{
-    //         path: '',
-    //         name: "home",
-    //         component: () => import('@/views/home'),
-    //         meta: {title: '首页', close: false, keepAlive: true},
-    //     }]
-    // },
+    {
+        path: '',
+        component: layout,
+        children: [{
+            path: '',
+            name: "home",
+            component: () => import('@/views/home'),
+            meta: { title: '首页', close: false, keepAlive: true },
+        }]
+    },
     // {
     //     component: layout,
     //     children: [{

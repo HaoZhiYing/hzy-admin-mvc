@@ -58,6 +58,10 @@
         tableLayout="fixed"
         rowKey="id"
       >
+        <template #isDelete="{ text }">
+          <a-tag color="success" v-if="text == 1">能</a-tag>
+          <a-tag color="warning" v-else>否</a-tag>
+        </template>
         <template #id="{ record }">
           <div>
             <template v-if="power.update">
@@ -131,6 +135,7 @@ const columns = [
     dataIndex: "isDelete",
     ellipsis: true,
     width: 200,
+    slots: { customRender: "isDelete" },
   },
   {
     title: "备注",

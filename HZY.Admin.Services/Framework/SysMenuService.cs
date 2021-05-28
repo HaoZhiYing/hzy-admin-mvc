@@ -87,7 +87,7 @@ namespace HZY.Admin.Services.Framework
         {
             await this._sysRoleMenuFunctionRepository.DeleteAsync(w => ids.Contains(w.MenuId));
             await this._sysMenuFunctionRepository.DeleteAsync(w => ids.Contains(w.MenuId));
-            await this.Repository.DeleteByIdAsync(ids);
+            await this.Repository.DeleteByIdsAsync(ids);
         }
 
         /// <summary>
@@ -227,6 +227,7 @@ namespace HZY.Admin.Services.Framework
                 ["router"] = item.Router,
                 ["icon"] = item.Icon,
                 ["close"] = item.Close,
+                ["parentId"] = item.ParentId,
                 ["children"] = this.CreateMenus(item.Id.ToGuid(), sysMenuList)
             })
                 .ToList();

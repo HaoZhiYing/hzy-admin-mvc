@@ -21,15 +21,21 @@ namespace HZY.Admin.Services.Framework
         private readonly AccountService _accountService;
         private readonly SysUserRoleRepository _sysUserRoleRepository;
         private readonly SysRoleRepository _sysRoleRepository;
+        private readonly SysUserPostRepository _sysUserPostRepository;
+        private readonly SysPostRepository _sysPostRepository;
 
         public SysUserService(SysUserRepository repository,
             AccountService accountService,
             SysUserRoleRepository sysUserRoleRepository,
-            SysRoleRepository sysRoleRepository) : base(repository)
+            SysRoleRepository sysRoleRepository,
+            SysUserPostRepository sysUserPostRepository,
+            SysPostRepository sysPostRepository) : base(repository)
         {
             _accountService = accountService;
             _sysUserRoleRepository = sysUserRoleRepository;
             _sysRoleRepository = sysRoleRepository;
+            _sysUserPostRepository = sysUserPostRepository;
+            _sysPostRepository = sysPostRepository;
         }
 
         /// <summary>
@@ -95,16 +101,27 @@ namespace HZY.Admin.Services.Framework
             var res = new Dictionary<string, object>();
 
             var form = (await this.Repository.FindByIdAsync(id)).NullSafe();
+            //角色信息
             var roleIds = await this._sysUserRoleRepository.Select
                 .Where(w => w.UserId == id)
                 .Select(w => w.RoleId)
                 .ToListAsync();
             var allRoleList = await this._sysRoleRepository.Select.ToListAsync();
+            //岗位信息
+            var postIds = await this._sysUserPostRepository.Select
+                    .Where(w => w.UserId == id)
+                    .Select(w => w.PostId)
+                    .ToListAsync()
+                ;
+            var allPostList = await this._sysPostRepository.Select.ToListAsync();
 
             res[nameof(id)] = id == Guid.Empty ? "" : id;
             res[nameof(form)] = form;
             res[nameof(roleIds)] = roleIds;
             res[nameof(allRoleList)] = allRoleList;
+            //
+            res[nameof(postIds)] = postIds;
+            res[nameof(allPostList)] = allPostList;
             return res;
         }
 
@@ -116,7 +133,6 @@ namespace HZY.Admin.Services.Framework
         public async Task<SysUser> SaveFormAsync(SysUserFormDto form)
         {
             var model = form.Form;
-            var roleIds = form.RoleIds;
 
             if (string.IsNullOrWhiteSpace(model.Password))
                 MessageBox.Show("密码不能为空！");
@@ -145,6 +161,26 @@ namespace HZY.Admin.Services.Framework
                     sysUserRole.RoleId = item;
                     sysUserRole.UserId = model.Id;
                     await this._sysUserRoleRepository.InsertAsync(sysUserRole);
+                }
+            }
+
+            //处理岗位信息
+            if (form.PostIds.Count > 0)
+            {
+                var sysUserPosts = await this._sysUserPostRepository.Select
+                        .Where(w => w.UserId == model.Id)
+                        .ToListAsync()
+                    ;
+
+                await this._sysUserPostRepository.DeleteAsync(w => w.UserId == model.Id);
+                foreach (var item in form.PostIds)
+                {
+                    var sysUserPost = sysUserPosts.FirstOrDefault(w => w.PostId == item).NullSafe();
+
+                    sysUserPost.Id = Guid.NewGuid();
+                    sysUserPost.PostId = item;
+                    sysUserPost.UserId = model.Id;
+                    await this._sysUserPostRepository.InsertAsync(sysUserPost);
                 }
             }
 

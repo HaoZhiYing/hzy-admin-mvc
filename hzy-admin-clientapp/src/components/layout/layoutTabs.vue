@@ -1,19 +1,7 @@
 <template>
   <div class="app-tabs">
-    <a-tabs
-      hide-add
-      tabPosition="top"
-      type="editable-card"
-      :tabBarGutter="0"
-      @edit="onEdit"
-      @tabClick="tabClick"
-      v-model:activeKey="activeKey"
-    >
-      <a-tab-pane
-        v-for="item in tabList"
-        :key="item.name"
-        :closable="item.meta.close == 1"
-      >
+    <a-tabs hide-add tabPosition="top" type="editable-card" :tabBarGutter="0" @edit="onEdit" @tabClick="tabClick" v-model:activeKey="activeKey">
+      <a-tab-pane v-for="item in tabList" :key="item.name" :closable="item.meta.close == 1">
         <template #tab>
           <a-dropdown>
             <AppIcons iconName="EllipsisOutlined" class="tab-more" />
@@ -25,9 +13,7 @@
                 <a-menu-item key="2" @click="closeTabOther(item.name)">
                   关闭其他
                 </a-menu-item>
-                <a-menu-item key="3" @click="closeTabAll()"
-                  >关闭全部</a-menu-item
-                >
+                <a-menu-item key="3" @click="closeTabAll()">关闭全部</a-menu-item>
               </a-menu>
             </template>
           </a-dropdown>

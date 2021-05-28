@@ -55,7 +55,7 @@ namespace HZY.Admin.Services.Framework
         /// <returns></returns>
         public async Task DeleteListAsync(List<Guid> ids)
         {
-            await this.Repository.DeleteByIdAsync(ids);
+            await this.Repository.DeleteByIdsAsync(ids);
         }
 
         /// <summary>

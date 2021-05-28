@@ -41,11 +41,11 @@ https://gitee.com/hzy6/hzy-quartz
 
 #### :cherries:  特技
 
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/155729_75be773c_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170014_a71beb6c_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/155729_75be773c_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185359_45c10fc9_1242080.png "屏幕截图.png") |
 |-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170028_73a15756_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170112_08a760fc_1242080.png "屏幕截图.png") |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170146_cabb0425_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170200_e0337a5c_1242080.png "屏幕截图.png") |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170217_4ac494ee_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/170836_76c6a157_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185433_ef82bd42_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185506_3b83a405_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185540_4413085e_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185607_28ae4ec3_1242080.png "屏幕截图.png") |
+| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185635_47a24fd9_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185701_b96e2f6c_1242080.png "屏幕截图.png") |
 
 
 

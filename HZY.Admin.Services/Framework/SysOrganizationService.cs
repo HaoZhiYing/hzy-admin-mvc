@@ -31,7 +31,11 @@ namespace HZY.Admin.Services.Framework
                 ;
             var expandedRowKeys = await query.Select(w => w.Id).ToListAsync();
 
-            var data = await query.Where(w => w.ParentId == null).OrderBy(w => w.OrderNumber).ToListAsync();
+            var data = await query.Where(w => w.ParentId == null)
+                .OrderBy(w => w.OrderNumber)
+                .Include(w => w.Children)
+                .ToListAsync()
+                ;
 
             return (expandedRowKeys, data);
         }
@@ -43,7 +47,17 @@ namespace HZY.Admin.Services.Framework
         /// <returns></returns>
         public async Task DeleteListAsync(List<Guid> ids)
         {
-            await this.Repository.DeleteAsync(w => ids.Contains(w.Id));
+            var sysOrganizations = await this.Repository.Select.Where(w => ids.Contains(w.Id)).Include(w => w.Children).ToListAsync();
+            await DelTreeSysOrganizationsAsync(sysOrganizations);
+        }
+        private async Task DelTreeSysOrganizationsAsync(List<SysOrganization> list)
+        {
+            foreach (var item in list)
+            {
+                if (item.Children.Count > 0)
+                    await DelTreeSysOrganizationsAsync(item.Children.ToList());
+                await this.Repository.DeleteByIdAsync(item.Id);
+            }
         }
 
         /// <summary>

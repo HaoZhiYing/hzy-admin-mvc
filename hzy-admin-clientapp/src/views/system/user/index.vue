@@ -118,6 +118,7 @@
       </template>
       <info
         v-model:formKey="form.key"
+        :organizationId="table.search.vm.organizationId"
         ref="infoForm"
         @onSaveSuccess="
           findList();
@@ -296,7 +297,8 @@ export default defineComponent({
           let data = res.data;
           state.tree.data = data.rows;
           state.tree.expandedKeys = data.expandedRowKeys;
-          state.table.search.vm.organizationId = data.rows[0].key;
+          state.tree.selectedKeys = [data.rows[0].key];
+          state.table.search.vm.organizationId = state.tree.selectedKeys[0];
           methods.findList();
         });
       },

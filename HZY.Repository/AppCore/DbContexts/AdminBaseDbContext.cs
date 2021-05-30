@@ -68,13 +68,14 @@ namespace HZY.Repository.AppCore.DbContexts
             //单表树状结构
             modelBuilder.Entity<SysOrganization>()
                 //主语this，拥有Children
-                .HasMany(x => x.Children);
+                //.HasMany(x => x.Children)
                 //主语Children，每个Child拥有一个Parent
                 //.WithOne(x => x.Parent)
                 //主语Children，每个Child的外键是ParentId
                 //.HasForeignKey(x => x.ParentId)
                 //这里必须是非强制关联，否则报错：Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
-                //.OnDelete(DeleteBehavior.ClientSetNull);
+                //.OnDelete(DeleteBehavior.ClientSetNull)
+                ;
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,6 +1,7 @@
 <template>
   <a-form layout="vertical" :model="vm.form">
     <a-row :gutter="[15, 15]">
+      <!-- {{ vm.form.organizationId }} -->
       <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
         <a-form-item label="真实姓名">
           <a-input v-model:value="vm.form.name" placeholder="请输入" />
@@ -64,6 +65,7 @@ export default defineComponent({
   props: {
     formKey: String,
     onSaveSuccess: Function,
+    organizationId: String,
   },
   setup(props, context) {
     const state = reactive({
@@ -72,6 +74,7 @@ export default defineComponent({
         form: {},
         roleIds: [],
         allRoleList: [],
+        allPostList: [],
       },
     });
 
@@ -83,6 +86,10 @@ export default defineComponent({
         });
       },
       saveForm() {
+        if (!props.organizationId) {
+          return tools.message("请选择组织", "警告");
+        }
+        state.vm.form.organizationId = props.organizationId;
         service.saveForm(state.vm).then((res) => {
           if (res.code != 1) return;
           tools.message("操作成功!", "成功");

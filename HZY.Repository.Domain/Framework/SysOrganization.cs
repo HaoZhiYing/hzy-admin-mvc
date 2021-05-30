@@ -45,9 +45,6 @@ namespace HZY.Repository.Domain.Framework
         /// </summary>
         public Guid? ParentId { get; set; }
 
-        //[ForeignKey(nameof(ParentId))]
-        //public virtual SysOrganization Parent { get; set; }
-
         [ForeignKey(nameof(ParentId))]
         public virtual ICollection<SysOrganization> Children { get; set; } = new List<SysOrganization>();
 

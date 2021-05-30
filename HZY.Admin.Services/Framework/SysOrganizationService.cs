@@ -33,7 +33,6 @@ namespace HZY.Admin.Services.Framework
 
             var data = await query.Where(w => w.ParentId == null)
                 .OrderBy(w => w.OrderNumber)
-                .Include(w => w.Children)
                 .ToListAsync()
                 ;
 
@@ -47,7 +46,7 @@ namespace HZY.Admin.Services.Framework
         /// <returns></returns>
         public async Task DeleteListAsync(List<Guid> ids)
         {
-            var sysOrganizations = await this.Repository.Select.Where(w => ids.Contains(w.Id)).Include(w => w.Children).ToListAsync();
+            var sysOrganizations = await this.Repository.Select.Where(w => ids.Contains(w.Id)).ToListAsync();
             await DelTreeSysOrganizationsAsync(sysOrganizations);
         }
         private async Task DelTreeSysOrganizationsAsync(List<SysOrganization> list)

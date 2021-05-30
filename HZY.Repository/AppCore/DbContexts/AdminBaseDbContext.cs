@@ -64,29 +64,7 @@ namespace HZY.Repository.AppCore.DbContexts
         {
             //扫描表 并 缓存 属性 xml 信息
             _cacheEntity.Set(modelBuilder.Model.GetEntityTypes().Select(item => item.ClrType));
-
-            //单表树状结构
-            modelBuilder.Entity<SysOrganization>()
-                //主语this，拥有Children
-                //.HasMany(x => x.Children)
-                //主语Children，每个Child拥有一个Parent
-                //.WithOne(x => x.Parent)
-                //主语Children，每个Child的外键是ParentId
-                //.HasForeignKey(x => x.ParentId)
-                //这里必须是非强制关联，否则报错：Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
-                //.OnDelete(DeleteBehavior.ClientSetNull)
-                ;
         }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder
-        //        .EnableSensitiveDataLogging()
-        //        .ConfigureWarnings(b => b.Ignore(CoreEventId.DetachedLazyLoadingWarning))
-        //        .LogTo(message => LogUtil.WriteDebug(message), LogLevel.Information, DbContextLoggerOptions.UtcTime | DbContextLoggerOptions.SingleLine)
-        //        ;
-        //    base.OnConfiguring(optionsBuilder);
-        //}
 
         /// <summary>
         /// 在调用SaveChanges结束时激发的事件 

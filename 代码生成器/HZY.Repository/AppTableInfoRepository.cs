@@ -5,6 +5,7 @@ using FreeSql;
 using HZY.Repository.Core;
 using HZY.Repository.Entity;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace HZY.Repository
 {
@@ -13,8 +14,10 @@ namespace HZY.Repository
     /// </summary>
     public class AppTableInfoRepository : HzyBaseRepository<AppTableInfo>
     {
+        
         public AppTableInfoRepository(IFreeSql freeSql) : base(freeSql)
         {
+
         }
 
         /// <summary>
@@ -42,7 +45,7 @@ namespace HZY.Repository
                     ColMaxLength = co.MaxLength,
                     ColName = co.Name,
                     ColRemark = co.Coment,
-                    CsType=co.CsType.Name
+                    CsType = co.CsType.Name,
                 }));
 
             });

@@ -31,16 +31,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HZY.Admin.Services.Framework;
-using HZY.Repository.Domain;
-using HZY.Repository;
-using HZY.Repository.AppCore.Models;
-using HZY.Repository.Framework;
-using HZY.Common;
+using @(Model.Namespace).Admin.Services.Framework;
+using @(Model.Namespace).Repository.Domain;
+using @(Model.Namespace).Repository;
+using @(Model.Namespace).Repository.AppCore.Models;
+using @(Model.Namespace).Repository.Framework;
+using @(Model.Namespace).Common;
 using Microsoft.AspNetCore.Http;
-using HZY.Repository.AppCore.Extensions;
+using @(Model.Namespace).Repository.AppCore.Extensions;
 
-namespace HZY.Admin.Services
+namespace @(Model.Namespace).Admin.Services
 {
     /// <summary>
     /// 服务 @(className)Service
@@ -62,7 +62,7 @@ namespace HZY.Admin.Services
         /// <returns></returns>
         public async Task<@("PagingViewModel")> FindListAsync(int page, int size, @(className) search)
         {
-            var query = await this.Repository.Select
+            var query = this.Repository.Select
                     @if (!string.IsNullOrWhiteSpace(searchKeyWord))
                     {
 <pre>.WhereIf(!string.IsNullOrWhiteSpace(search?.@(searchKeyWord)), w => w.@(searchKeyWord).Contains(search.@(searchKeyWord)))</pre>
@@ -122,7 +122,7 @@ namespace HZY.Admin.Services
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
-        public async Task<@("byte[]")> ExportExcelAsync(Member search)
+        public async Task<@("byte[]")> ExportExcelAsync(@className search)
         {
             var tableViewModel = await this.FindListAsync(1, 999999, search);
             return this.ExportExcelByPagingViewModel(tableViewModel);

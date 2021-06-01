@@ -15,17 +15,17 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HZY.Admin.Filters;
-using HZY.Admin.Services;
-using HZY.Repository.Domain;
-using HZY.Common;
+using @(Model.Namespace).Admin.Filters;
+using @(Model.Namespace).Admin.Services;
+using @(Model.Namespace).Repository.Domain;
+using @(Model.Namespace).Common;
 using Microsoft.AspNetCore.Mvc;
-using HZY.Framework.Permission.Attributes;
-using HZY.Repository.AppCore.Models;
-using HZY.Framework.Filters;
-using HZY.Repository.AppCore.Attributes;
+using @(Model.Namespace).Framework.Permission.Attributes;
+using @(Model.Namespace).Repository.AppCore.Models;
+using @(Model.Namespace).Framework.Filters;
+using @(Model.Namespace).Repository.AppCore.Attributes;
 
-namespace HZY.Admin.Controllers
+namespace @(Model.Namespace).Admin.Controllers
 {
     [ControllerDescriptor("请设置菜单Id 系统菜单表中查找")]
     public class @(className)Controller : AdminBaseController<@($"{className}Service")>
@@ -46,7 +46,7 @@ namespace HZY.Admin.Controllers
         [HttpPost("FindList/{size}/{page}")]
         public async Task<@("PagingViewModel")> FindListAsync([FromRoute] int size, [FromRoute] int page, [FromBody] @(className) search)
         {
-            return this.ResultOk(await this.DefaultService.FindListAsync(page, size, search));
+            return await this.DefaultService.FindListAsync(page, size, search);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace HZY.Admin.Controllers
         [HttpGet("FindForm/{id?}")]
         public async Task<@("Dictionary<string, object>")> FindFormAsync([FromRoute] Guid id)
         {
-            return this.ResultOk(await this.DefaultService.FindFormAsync(id));
+            return await this.DefaultService.FindFormAsync(id);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace HZY.Admin.Controllers
         [HttpPost("SaveForm")]
         public async Task<@(className)> SaveFormAsync([FromBody] @(className) form)
         {
-            return this.ResultOk(await this.DefaultService.SaveFormAsync(form));
+            return await this.DefaultService.SaveFormAsync(form);
         }
 
         /// <summary>

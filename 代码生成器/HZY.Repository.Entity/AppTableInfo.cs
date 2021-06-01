@@ -93,5 +93,10 @@ namespace HZY.Repository.Entity
         /// 映射到C#的类型
         /// </summary>
         public string CsType { set; get; }
+
+        /// <summary>
+        /// 命名空间
+        /// </summary>
+        public string Namespace { get; set; }
     }
 }

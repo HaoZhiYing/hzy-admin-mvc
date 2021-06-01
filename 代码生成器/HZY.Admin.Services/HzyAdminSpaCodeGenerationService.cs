@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using HZY.Toolkit.Razor;
 using HZY.Repository.Entity;
 using HZY.Admin.Model;
+using Microsoft.Extensions.Configuration;
 
 namespace HZY.Admin.Services
 {
@@ -23,14 +24,17 @@ namespace HZY.Admin.Services
         private const string ZipRootPath = "/code_generation/zip";
         private static List<AppTableInfo> _appTableInfos;
         private readonly IRazorViewRender _razorViewRender;
+        private readonly string Namespace;
 
         public HzyAdminSpaCodeGenerationService(AppTableInfoRepository repository,
             IRazorViewRender razorViewRender,
-            IWebHostEnvironment webHostEnvironment) : base(
-            repository)
+            IWebHostEnvironment webHostEnvironment,
+            IConfiguration configuration)
+            : base(repository)
         {
             _razorViewRender = razorViewRender;
             this._webRootPath = webHostEnvironment.WebRootPath;
+            Namespace = configuration["AppConfiguration:Namespace"];
         }
 
         /// <summary>
@@ -100,7 +104,7 @@ namespace HZY.Admin.Services
         {
             var path = $"{TemplateRootPath}/Model.cshtml";
             var appTableInfos = _appTableInfos.Where(w => w.TabName == tableName).ToList();
-            var codeGenerationModel = new CodeGenerationModel(tableName, appTableInfos);
+            var codeGenerationModel = new CodeGenerationModel(tableName, Namespace, appTableInfos);
             var codeString = await this._razorViewRender.RenderAsync(path, codeGenerationModel);
             return ClearSymbol(codeString);
         }
@@ -112,7 +116,7 @@ namespace HZY.Admin.Services
         {
             var path = $"{TemplateRootPath}/Repository.cshtml";
             var appTableInfos = _appTableInfos.Where(w => w.TabName == tableName).ToList();
-            var codeGenerationModel = new CodeGenerationModel(tableName, appTableInfos);
+            var codeGenerationModel = new CodeGenerationModel(tableName, Namespace, appTableInfos);
             var codeString = await this._razorViewRender.RenderAsync(path, codeGenerationModel);
             return ClearSymbol(codeString);
         }
@@ -125,7 +129,7 @@ namespace HZY.Admin.Services
         {
             var path = $"{TemplateRootPath}/Service.cshtml";
             var appTableInfos = _appTableInfos.Where(w => w.TabName == tableName).ToList();
-            var codeGenerationModel = new CodeGenerationModel(tableName, appTableInfos);
+            var codeGenerationModel = new CodeGenerationModel(tableName, Namespace, appTableInfos);
             var codeString = await this._razorViewRender.RenderAsync(path, codeGenerationModel);
             return ClearSymbol(codeString);
         }
@@ -137,7 +141,7 @@ namespace HZY.Admin.Services
         {
             var path = $"{TemplateRootPath}/ClientService.cshtml";
             var appTableInfos = _appTableInfos.Where(w => w.TabName == tableName).ToList();
-            var codeGenerationModel = new CodeGenerationModel(tableName, appTableInfos);
+            var codeGenerationModel = new CodeGenerationModel(tableName, Namespace, appTableInfos);
             var codeString = await this._razorViewRender.RenderAsync(path, codeGenerationModel);
             return ClearSymbol(codeString);
         }
@@ -150,7 +154,7 @@ namespace HZY.Admin.Services
         {
             var path = $"{TemplateRootPath}/Controller.cshtml";
             var appTableInfos = _appTableInfos.Where(w => w.TabName == tableName).ToList();
-            var codeGenerationModel = new CodeGenerationModel(tableName, appTableInfos);
+            var codeGenerationModel = new CodeGenerationModel(tableName, Namespace, appTableInfos);
             var codeString = await this._razorViewRender.RenderAsync(path, codeGenerationModel);
             return ClearSymbol(codeString);
         }
@@ -163,7 +167,7 @@ namespace HZY.Admin.Services
         {
             var path = $"{TemplateRootPath}/Index.cshtml";
             var appTableInfos = _appTableInfos.Where(w => w.TabName == tableName).ToList();
-            var codeGenerationModel = new CodeGenerationModel(tableName, appTableInfos);
+            var codeGenerationModel = new CodeGenerationModel(tableName, Namespace, appTableInfos);
             var codeString = await this._razorViewRender.RenderAsync(path, codeGenerationModel);
             return ClearSymbol(codeString);
         }
@@ -175,7 +179,7 @@ namespace HZY.Admin.Services
         {
             var path = $"{TemplateRootPath}/Info.cshtml";
             var appTableInfos = _appTableInfos.Where(w => w.TabName == tableName).ToList();
-            var codeGenerationModel = new CodeGenerationModel(tableName, appTableInfos);
+            var codeGenerationModel = new CodeGenerationModel(tableName, Namespace, appTableInfos);
             var codeString = await this._razorViewRender.RenderAsync(path, codeGenerationModel);
             return ClearSymbol(codeString);
         }

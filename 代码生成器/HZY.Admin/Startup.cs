@@ -38,7 +38,7 @@ namespace HZY.Admin
                 ;
 
             services.AddControllersWithViews();
-            services.RegisterRepository(Configuration["AppConfiguration:AdminConnectionString"], FreeSql.DataType.PostgreSQL);
+            services.RegisterRepository(Configuration["AppConfiguration:AdminConnectionString"], FreeSql.DataType.MySql);
             services.ScanAppServices();
 
             //razor 解决中文被编码

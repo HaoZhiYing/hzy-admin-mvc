@@ -98,6 +98,9 @@ export default defineComponent({
   z-index: 6;
   // box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
+  .ant-tabs-nav-container {
+    margin-bottom: 0;
+  }
   .ant-tabs-bar {
     margin: 0 !important;
     border-bottom: 0 !important;

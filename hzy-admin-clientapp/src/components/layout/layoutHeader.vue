@@ -1,5 +1,5 @@
 <template>
-  <a-layout-header style="padding: 0; height: 87px; background: #fff">
+  <a-layout-header style="padding: 0; height: 98px; background: #fff">
     <div class="hzy-layout-header" :class="headerTheme">
       <div class="hzy-header-btn" @click="onCollapsed">
         <AppIcons iconName="MenuUnfoldOutlined" v-if="collapsed" />
@@ -7,24 +7,11 @@
       </div>
       <!-- <div class="hzy-header-btn logo" v-if="!isMobile">{{ title }}</div> -->
       <div style="flex: 1 1 0%">
-        <a-menu v-model:selectedKeys="selectedKeys" mode="horizontal" @select="onMenuSelected">
+        <a-menu v-model:selectedKeys="selectedKeys" mode="horizontal" @select="onMenuSelected" style="line-height:57px">
           <a-menu-item v-for="item in oneLevels" :key="item.componentName ? item.componentName : item.id">
             <AppIcons :iconName="item.icon" />
             {{ item.name }}
           </a-menu-item>
-
-          <!-- <a-menu-item key="mail1">
-            <mail-outlined />
-            系统管理
-          </a-menu-item>
-          <a-menu-item key="mail2">
-            <mail-outlined />
-            系统管理
-          </a-menu-item>
-          <a-menu-item key="mail3">
-            <mail-outlined />
-            系统管理
-          </a-menu-item> -->
         </a-menu>
       </div>
       <div class="hzy-header-btn" @click="onReload">
@@ -216,7 +203,7 @@ export default defineComponent({
     left: 0;
     z-index: 6;
     width: 100%;
-    line-height: 48px;
+    line-height: 60px;
   }
 
   //=======// 头部
@@ -225,7 +212,8 @@ export default defineComponent({
     position: relative;
     display: flex;
     align-items: center;
-    height: 48px;
+    // height: 48px;
+    height: 58px;
     // padding: 0 20px;
     border-bottom: 1px solid #f0f2f5;
     // box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
@@ -253,6 +241,10 @@ export default defineComponent({
 
     .ant-dropdown-trigger {
       color: #fff;
+    }
+
+    .ant-menu {
+      background: none !important;
     }
   }
 

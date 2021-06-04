@@ -6,14 +6,9 @@
           <template #extra>
             <a href="javascript:void(0)" @click="getFirst">查看一级</a>
           </template>
-          <a-tree
-            v-model:expanded-keys="tree.expandedKeys"
-            v-model:selectedKeys="tree.selectedKeys"
-            :tree-data="tree.data"
-            @select="onSelect"
-            autoExpandParent
-          >
-          </a-tree>
+          <a-spin :spinning="tree.loadingTree">
+            <a-tree v-model:expanded-keys="tree.expandedKeys" v-model:selectedKeys="tree.selectedKeys" :tree-data="tree.data" @select="onSelect" autoExpandParent> </a-tree>
+          </a-spin>
         </a-card>
       </a-col>
       <a-col :xs="24" :sm="12" :md="12" :lg="19" :xl="19">
@@ -228,6 +223,7 @@ export default defineComponent({
         data: [],
         expandedKeys: [],
         selectedKeys: [],
+        loadingTree: false,
       },
     });
     //表单 ref 对象
@@ -293,12 +289,14 @@ export default defineComponent({
       },
       //获取部门树
       sysOrganizationTree() {
+        state.tree.loadingTree = true;
         service.sysOrganizationTree().then((res) => {
           let data = res.data;
           state.tree.data = data.rows;
           state.tree.expandedKeys = data.expandedRowKeys;
           state.tree.selectedKeys = [data.rows[0].key];
           state.table.search.vm.organizationId = state.tree.selectedKeys[0];
+          state.tree.loadingTree = false;
           methods.findList();
         });
       },

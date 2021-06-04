@@ -4,15 +4,17 @@
       <a-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
         <a-card title="菜单树" class="w100 mb-15">
           <template #extra><a href="javascript:void(0)" @click="getFirst">查看一级</a></template>
-          <a-tree
-            checkable
-            v-model:expanded-keys="menuTree.expandedKeys"
-            v-model:auto-expand-parent="menuTree.autoExpandParent"
-            v-model:checkedKeys="menuTree.checkedKeys"
-            v-model:selectedKeys="menuTree.selectedKeys"
-            :tree-data="menuTree.data"
-            @select="onSelect"
-          />
+          <a-spin :spinning="menuTree.loadingTree">
+            <a-tree
+              checkable
+              v-model:expanded-keys="menuTree.expandedKeys"
+              v-model:auto-expand-parent="menuTree.autoExpandParent"
+              v-model:checkedKeys="menuTree.checkedKeys"
+              v-model:selectedKeys="menuTree.selectedKeys"
+              :tree-data="menuTree.data"
+              @select="onSelect"
+            />
+          </a-spin>
         </a-card>
       </a-col>
       <a-col :xs="24" :sm="12" :md="12" :lg="19" :xl="19">
@@ -242,6 +244,7 @@ export default defineComponent({
         autoExpandParent: true,
         checkedKeys: [],
         selectedKeys: [],
+        loadingTree: false,
       },
     });
     //表单 ref 对象
@@ -312,12 +315,14 @@ export default defineComponent({
       },
       //获取菜单树
       getMenusFunctionTree() {
+        state.menuTree.loadingTree = true;
         service.getMenusFunctionTree().then((res) => {
           if (res.code != 1) return;
           let data = res.data;
           state.menuTree.data = data.tree;
           state.menuTree.expandedKeys = data.defaultExpandedKeys;
           state.menuTree.checkedKeys = data.defaultCheckedKeys;
+          state.menuTree.loadingTree = false;
         });
       },
       //选中菜单树项

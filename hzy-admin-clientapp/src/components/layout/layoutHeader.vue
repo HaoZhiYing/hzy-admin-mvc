@@ -7,10 +7,10 @@
       </div>
       <!-- <div class="hzy-header-btn logo" v-if="!isMobile">{{ title }}</div> -->
       <div style="flex: 1 1 0%">
-        <a-menu v-model:selectedKeys="selectedKeys" mode="horizontal" @select="onMenuSelected" style="line-height:57px">
+        <a-menu v-model:selectedKeys="selectedKeys" mode="horizontal" @select="onMenuSelected" style="line-height:57px" v-if="topNavValue">
           <a-menu-item v-for="item in oneLevels" :key="item.componentName ? item.componentName : item.id">
             <AppIcons :iconName="item.icon" />
-            {{ item.name }}
+            <span class="title">{{ item.name }}</span>
           </a-menu-item>
         </a-menu>
       </div>
@@ -32,21 +32,17 @@
           </div>
           <template #overlay>
             <a-menu>
-              <a-menu-item @click="onLogOut">
-                <a href="javascript:;"> <AppIcons iconName="LogoutOutlined" />&nbsp;&nbsp;退出登录 </a>
+              <a-menu-item>
+                <router-link to="/system/personal/center"> <AppIcons iconName="FormOutlined" />&nbsp;&nbsp;个人中心</router-link>
+              </a-menu-item>
+              <a-menu-item>
+                <router-link to="/login"> <AppIcons iconName="LogoutOutlined" />&nbsp;&nbsp;退出登录 </router-link>
               </a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>
       </div>
     </div>
-    <!-- <layoutTabs
-      v-model:propTabs="tabs"
-      @close-self="closeTabSelf"
-      @close-other="closeTabOther"
-      @close-all="closeTabAll"
-      @tab-click="tabClick"
-    /> -->
     <layoutTabs v-model:propTabs="tabs" />
   </a-layout-header>
 </template>
@@ -73,6 +69,12 @@ export default defineComponent({
   },
   setup(props, context) {
     const routeName = router.currentRoute.value.name;
+    const store = useStore();
+    const title = computed(() => store.state.app.title);
+    const userName = computed(() => store.state.app.userInfo.name);
+    const menus = computed(() => store.state.app.userInfo.menus);
+    const topMenuId = computed(() => store.getters["app/getTopMenuByLastId"]);
+    const topNavValue = computed(() => store.state.app.topNav);
     const state = reactive({
       collapsed: props.propCollapsed,
       headerTheme: props.propHeaderTheme,
@@ -109,12 +111,6 @@ export default defineComponent({
       }
     );
 
-    const store = useStore();
-    const title = computed(() => store.state.app.title);
-    const userName = computed(() => store.state.app.userInfo.name);
-    const menus = computed(() => store.state.app.userInfo.menus);
-    const topMenuId = computed(() => store.getters["app/getTopMenuByLastId"]);
-
     const methods = {
       //实时计算监听 宽高
       calcScreen() {
@@ -135,10 +131,6 @@ export default defineComponent({
       },
       onSettings() {
         context.emit("update:propLayoutSettingsState", !state.layoutSettings.state);
-      },
-      onLogOut() {
-        //退出登录
-        router.push("/login");
       },
       onReload(dom) {
         context.emit("reload", dom);
@@ -191,6 +183,7 @@ export default defineComponent({
       ...methods,
       title,
       userName,
+      topNavValue,
     };
   },
 });
@@ -236,7 +229,7 @@ export default defineComponent({
 
     .anticon {
       color: #fff;
-      font-size: 15px;
+      font-size: 16px;
     }
 
     .ant-dropdown-trigger {
@@ -272,46 +265,73 @@ export default defineComponent({
   //=======// 头部 暗色
   .hzy-layout-header-dark {
     background: #001529;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 
   //=======// 头部 蓝色
   .hzy-layout-header-blue {
     background: #1890ff;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 
   //=======// 头部 红色
-  .hzy-layout-header-red {
-    background: #f5222d;
+  .hzy-layout-header-1 {
+    background: #997b71;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 
   //=======// 头部 橙色
-  .hzy-layout-header-orange {
-    background: #fa541c;
+  .hzy-layout-header-2 {
+    background: #11c26d;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 
   //=======// 头部 黄色
-  .hzy-layout-header-yellow {
-    background: #faad14;
+  .hzy-layout-header-3 {
+    background: #667afa;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 
   //=======// 头部 青色
-  .hzy-layout-header-cyan {
-    background: #13c2c2;
+  .hzy-layout-header-4 {
+    background: #f74584;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 
   //=======// 头部 绿色
-  .hzy-layout-header-green {
-    background: #52c41a;
+  .hzy-layout-header-5 {
+    background: #9463f7;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 
   //=======// 头部 深蓝色
-  .hzy-layout-header-dark-blue {
-    background: #2f54eb;
+  .hzy-layout-header-6 {
+    background: #ffcd17;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 
   //=======// 头部 紫色
-  .hzy-layout-header-violet {
-    background: #722ed1;
+  .hzy-layout-header-7 {
+    background: #ff4c52;
+    .ant-menu-item span {
+      color: #fff;
+    }
   }
 }
 </style>

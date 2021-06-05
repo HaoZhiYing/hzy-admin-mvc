@@ -175,7 +175,7 @@ namespace HZY.Admin.Services.Framework
                 from t1 in this.Repository.Orm.SysRoleMenuFunction
                 from t2 in this.Repository.Orm.SysFunction.Where(w => w.Id == t1.FunctionId && w.ByName == AppConsts.Function_Display).DefaultIfEmpty()
                 from t3 in this.Repository.Orm.SysMenu.Where(w => w.Id == t1.MenuId).DefaultIfEmpty()
-                where this._accountInfo.Roles.Contains(t1.RoleId) && t3.Show == 1
+                where this._accountInfo.SysRoles.Select(w => w.Id).Contains(t1.RoleId) && t3.Show == 1
                 select t3)
                 .ToListAsync()
                 ;
@@ -243,7 +243,7 @@ namespace HZY.Admin.Services.Framework
             var sysFunctionList = await this._sysFunctionRepository.Select.OrderBy(w => w.Number).ToListAsync();
             var sysMenuFunctionList = await this._sysMenuFunctionRepository.Select.ToListAsync();
             var sysRoleMenuFunctionList = await this._sysRoleMenuFunctionRepository.Select
-                .Where(w => this._accountInfo.Roles.Contains(w.RoleId))
+                .Where(w => this._accountInfo.SysRoles.Select(w => w.Id).Contains(w.RoleId))
                 .ToListAsync();
 
             var res = new List<Dictionary<string, object>>();
@@ -279,11 +279,11 @@ namespace HZY.Admin.Services.Framework
                 {
                     if (string.IsNullOrWhiteSpace(sysFunction.ByName)) continue;
 
-                    if (this._accountInfo.Roles?.Count > 0)
+                    if (this._accountInfo.SysRoles.Select(w => w.Id).Count() > 0)
                     {
                         var isPower = sysRoleMenuFunctionList
                             .Any(w =>
-                                this._accountInfo.Roles.Contains(w.RoleId) && w.MenuId == item.Id &&
+                                this._accountInfo.SysRoles.Select(w => w.Id).Contains(w.RoleId) && w.MenuId == item.Id &&
                                 w.FunctionId == sysFunction.Id);
                         power.Add(sysFunction.ByName, isPower);
                     }
@@ -310,7 +310,7 @@ namespace HZY.Admin.Services.Framework
             var sysFunctionList = await this._sysFunctionRepository.Select.OrderBy(w => w.Number).ToListAsync();
             var sysMenuFunctionList = await this._sysMenuFunctionRepository.Select.ToListAsync();
             var sysRoleMenuFunctionList = await this._sysRoleMenuFunctionRepository.Select
-                .Where(w => this._accountInfo.Roles.Contains(w.RoleId))
+                .Where(w => this._accountInfo.SysRoles.Select(w => w.Id).Contains(w.RoleId))
                 .ToListAsync();
 
             var power = new Dictionary<string, bool>();
@@ -334,10 +334,10 @@ namespace HZY.Admin.Services.Framework
             {
                 if (string.IsNullOrWhiteSpace(item.ByName)) continue;
 
-                if (this._accountInfo.Roles?.Count > 0)
+                if (this._accountInfo.SysRoles.Select(w => w.Id).Count() > 0)
                 {
                     var isPower = sysRoleMenuFunctionList
-                        .Any(w => this._accountInfo.Roles.Contains(w.RoleId) && w.MenuId == menuId &&
+                        .Any(w => this._accountInfo.SysRoles.Select(w => w.Id).Contains(w.RoleId) && w.MenuId == menuId &&
                                   w.FunctionId == item.Id);
                     power.Add(item.ByName, isPower);
                 }

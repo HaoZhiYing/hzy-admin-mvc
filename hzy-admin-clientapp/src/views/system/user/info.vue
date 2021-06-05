@@ -1,7 +1,6 @@
 <template>
   <a-form layout="vertical" :model="vm.form">
     <a-row :gutter="[15, 15]">
-      <!-- {{ vm.form.organizationId }} -->
       <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
         <a-form-item label="真实姓名">
           <a-input v-model:value="vm.form.name" placeholder="请输入" />

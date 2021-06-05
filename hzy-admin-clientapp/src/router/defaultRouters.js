@@ -25,7 +25,7 @@ export default [
             component: () => import('@/views/home'),
             meta: { title: '首页', close: false, keepAlive: true },
         }]
-    },
+    }
     // {
     //     component: layout,
     //     children: [{

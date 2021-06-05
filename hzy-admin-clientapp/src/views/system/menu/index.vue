@@ -4,15 +4,14 @@
       <a-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
         <a-card title="菜单树" class="w100 mb-15">
           <template #extra><a href="javascript:void(0)" @click="getFirst">查看一级</a></template>
-          <a-spin :spinning="menuTree.loadingTree">
+          <a-spin :spinning="tree.loadingTree">
             <a-tree
               checkable
-              v-model:expanded-keys="menuTree.expandedKeys"
-              v-model:auto-expand-parent="menuTree.autoExpandParent"
-              v-model:checkedKeys="menuTree.checkedKeys"
-              v-model:selectedKeys="menuTree.selectedKeys"
-              :tree-data="menuTree.data"
-              @select="onSelect"
+              v-model:expanded-keys="tree.expandedKeys"
+              v-model:auto-expand-parent="tree.autoExpandParent"
+              v-model:checkedKeys="tree.checkedKeys"
+              v-model:selectedKeys="tree.selectedKeys"
+              :tree-data="tree.data"
             />
           </a-spin>
         </a-card>
@@ -138,7 +137,7 @@
   </div>
 </template>
 <script>
-import { computed, defineComponent, onMounted, reactive, toRefs, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive, toRefs, ref, watch } from "vue";
 import { useStore } from "vuex";
 import AppIcons from "@/components/appIcons";
 import info from "./info";
@@ -238,7 +237,7 @@ export default defineComponent({
         visible: false,
         key: "",
       },
-      menuTree: {
+      tree: {
         data: [],
         expandedKeys: [],
         autoExpandParent: true,
@@ -315,30 +314,31 @@ export default defineComponent({
       },
       //获取菜单树
       getMenusFunctionTree() {
-        state.menuTree.loadingTree = true;
+        state.tree.loadingTree = true;
         service.getMenusFunctionTree().then((res) => {
           if (res.code != 1) return;
           let data = res.data;
-          state.menuTree.data = data.tree;
-          state.menuTree.expandedKeys = data.defaultExpandedKeys;
-          state.menuTree.checkedKeys = data.defaultCheckedKeys;
-          state.menuTree.loadingTree = false;
+          state.tree.data = data.tree;
+          state.tree.expandedKeys = data.defaultExpandedKeys;
+          state.tree.checkedKeys = data.defaultCheckedKeys;
+          state.tree.loadingTree = false;
         });
-      },
-      //选中菜单树项
-      onSelect(selectedKeys, info) {
-        console.log(info);
-        state.menuTree.selectedKeys = selectedKeys;
-        state.table.search.vm.parentId = selectedKeys[0];
-        methods.findList();
       },
       //获取一级菜单
       getFirst() {
-        state.menuTree.selectedKeys = [];
+        state.tree.selectedKeys = [];
         state.table.search.vm.parentId = "";
         methods.findList();
       },
     };
+
+    watch(
+      () => state.tree.selectedKeys,
+      (value) => {
+        state.table.search.vm.parentId = value[0];
+        methods.findList();
+      }
+    );
 
     onMounted(() => {
       methods.getMenusFunctionTree();

@@ -1,5 +1,6 @@
 // import { createStore } from 'vuex';
 //属性状态管理
+import tools from '@/scripts/tools'
 import store from '@/store/index'
 import router from '@/router/index'
 import userService from "@/service/system/userService";
@@ -19,6 +20,7 @@ export default {
         //缓存视图
         cacheViews: ["home"],
         title: "HzyAdminSpa",
+        topNav: tools.getTopNav(),
         userInfo: {},
         submenus: []
     }),
@@ -124,7 +126,15 @@ export default {
             if (menus.length > 0) {
                 state.submenus = menus[0].children;
             }
-        }
+        },
+        //设置 TopNav
+        setTopNav(state, value) {
+            state.topNav = value;
+            tools.setTopNav(value);
+        },
+        // getTopNav(){
+
+        // }
     },
     getters: {
         /**
@@ -150,7 +160,6 @@ export default {
                 for (let index = 0; index < menus.length; index++) {
                     const element = menus[index];
                     if (element.id == currentMenuId) {
-                        console.log(id);
                         topMenuId = id;
                         break;
                     }
@@ -173,19 +182,25 @@ export default {
             })
         },
         //获取用户信息 与 菜单
-        getUserInfo({ commit, state }) {
+        getUserInfo({ state }) {
             return new Promise(resolve => {
-                if (Object.prototype.hasOwnProperty.call(state.userInfo, 'roles')) {
-                    resolve(state.userInfo)
-                } else {
-                    userService.getUserInfo().then(res => {
-                        let data = res.data;
-                        commit('setUserInfo', data);
-                        resolve(data)
-                    });
+                if (Object.prototype.hasOwnProperty.call(state.userInfo, 'sysRoles')) {
+                    return resolve(state.userInfo)
                 }
+                store.dispatch("app/refreshUserInfo").then(data => {
+                    resolve(data)
+                });
             })
-
+        },
+        //刷新用户信息
+        refreshUserInfo({ commit }) {
+            return new Promise(resolve => {
+                userService.getUserInfo().then(res => {
+                    let data = res.data;
+                    commit('setUserInfo', data);
+                    resolve(data)
+                });
+            })
         }
     }
 }

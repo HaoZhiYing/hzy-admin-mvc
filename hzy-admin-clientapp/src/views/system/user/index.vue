@@ -2,12 +2,12 @@
   <div class="p-15">
     <a-row :gutter="[15, 15]">
       <a-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
-        <a-card title="组织架构" class="w100 mb-15">
+        <a-card title="组织架构" class="w100 mb-15 min-height">
           <template #extra>
             <a href="javascript:void(0)" @click="getFirst">查看一级</a>
           </template>
           <a-spin :spinning="tree.loadingTree">
-            <a-tree v-model:expanded-keys="tree.expandedKeys" v-model:selectedKeys="tree.selectedKeys" :tree-data="tree.data" @select="onSelect" autoExpandParent> </a-tree>
+            <a-tree v-model:expandedKeys="tree.expandedKeys" v-model:selectedKeys="tree.selectedKeys" :tree-data="tree.data" />
           </a-spin>
         </a-card>
       </a-col>
@@ -124,7 +124,7 @@
   </div>
 </template>
 <script>
-import { computed, defineComponent, onMounted, reactive, toRefs, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive, toRefs, ref, watch } from "vue";
 import { useStore } from "vuex";
 import AppIcons from "@/components/appIcons";
 import info from "./info";
@@ -300,13 +300,6 @@ export default defineComponent({
           methods.findList();
         });
       },
-      //选中菜单树项
-      onSelect(selectedKeys, info) {
-        console.log(info);
-        state.tree.selectedKeys = selectedKeys;
-        state.table.search.vm.organizationId = selectedKeys[0];
-        methods.findList();
-      },
       //获取一级菜单
       getFirst() {
         state.tree.selectedKeys = [];
@@ -314,6 +307,14 @@ export default defineComponent({
         methods.findList();
       },
     };
+
+    watch(
+      () => state.tree.selectedKeys,
+      (value) => {
+        state.table.search.vm.organizationId = value[0];
+        methods.findList();
+      }
+    );
 
     onMounted(() => {
       methods.sysOrganizationTree();
@@ -328,3 +329,8 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped lang="less">
+.min-height {
+  min-height: calc(100vh - 130px);
+}
+</style>

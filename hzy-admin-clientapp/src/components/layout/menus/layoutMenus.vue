@@ -19,13 +19,25 @@
       <a-menu-item key="/list" title="标准列表">标准列表</a-menu-item>
     </a-sub-menu> -->
 
-    <!-- 动态生成-->
-    <template v-for="item in menus">
-      <a-menu-item v-if="item.children.length === 0" :key="item.componentName" :title="item.name">
-        <AppIcons :iconName="item.icon" />
-        <span>{{ item.name }}</span>
-      </a-menu-item>
-      <SubMenus v-else :menu-info="item" :key="item.id" />
+    <!-- 动态生成 topnav-->
+    <template v-if="topNavValue">
+      <template v-for="item in subMenus">
+        <a-menu-item v-if="item.children.length === 0" :key="item.componentName" :title="item.name">
+          <AppIcons :iconName="item.icon" />
+          <span>{{ item.name }}</span>
+        </a-menu-item>
+        <SubMenus v-else :menu-info="item" :key="item.id" />
+      </template>
+    </template>
+
+    <template v-else>
+      <template v-for="item in menus">
+        <a-menu-item v-if="item.children.length === 0" :key="item.componentName" :title="item.name">
+          <AppIcons :iconName="item.icon" />
+          <span>{{ item.name }}</span>
+        </a-menu-item>
+        <SubMenus v-else :menu-info="item" :key="item.id" />
+      </template>
     </template>
   </a-menu>
 </template>
@@ -46,9 +58,13 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const store = useStore();
     const routeName = router.currentRoute.value.name;
     const openKeysString = localStorage.getItem("openKeys") ?? "";
     const openKeys = openKeysString ? JSON.parse(openKeysString) ?? [] : [];
+    const topNavValue = computed(() => store.state.app.topNav);
+    const subMenus = computed(() => store.state.app.submenus); //topnav 菜单
+    const menus = computed(() => store.state.app.userInfo.menus);
 
     const state = reactive({
       defaultSelectedKeys: [routeName],
@@ -77,10 +93,6 @@ export default defineComponent({
       }
     );
 
-    const store = useStore();
-    // const menus = computed(() => store.state.app.userInfo.menus);
-    const menus = computed(() => store.state.app.submenus);
-
     //菜单选中
     const onMenuSelected = (obj) => {
       router.push({ name: obj.key });
@@ -89,6 +101,8 @@ export default defineComponent({
     return {
       ...toRefs(state),
       onMenuSelected,
+      topNavValue,
+      subMenus,
       menus,
     };
   },

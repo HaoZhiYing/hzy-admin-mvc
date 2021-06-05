@@ -1,27 +1,14 @@
 <template>
   <div class="p-15">
     <a-row :gutter="[15, 15]">
-      <a-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
-        <a-card title="组织架构" class="w100 mb-15">
-          <template #extra>
-            <a href="javascript:void(0)" @click="getFirst">查看一级</a>
-          </template>
-          <a-spin :spinning="tree.loadingTree">
-            <a-tree v-model:expanded-keys="tree.expandedKeys" v-model:selectedKeys="tree.selectedKeys" :tree-data="tree.data" @select="onSelect" autoExpandParent> </a-tree>
-          </a-spin>
-        </a-card>
-      </a-col>
-      <a-col :xs="24" :sm="12" :md="12" :lg="19" :xl="19">
+      <a-col :xs="24" :sm="6" :md="6" :lg="6" :xl="6">
         <a-card class="w100 mb-15" bodyStyle="padding:0" v-show="table.search.state">
           <a-row :gutter="[15, 15]" class="p-15">
-            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <a-input v-model:value="table.search.vm.name" placeholder="真实名称" />
-            </a-col>
-            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <a-input v-model:value="table.search.vm.loginName" placeholder="账户名称" />
+            <a-col :xs="24" :sm="14" :md="14" :lg="14" :xl="14">
+              <a-input v-model:value="table.search.vm.name" placeholder="名称" />
             </a-col>
             <!--button-->
-            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" style="float: right">
+            <a-col :xs="24" :sm="10" :md="10" :lg="10" :xl="10" style="float: right">
               <a-button type="primary" class="mr-10" @click="findList">查询</a-button>
               <a-button class="mr-10" @click="onResetSearch">重置</a-button>
             </a-col>
@@ -36,55 +23,13 @@
                   <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
                 </a-button>
               </template>
-              <template v-if="power.insert">
-                <a-button type="primary" class="mr-10" @click="openForm()">
-                  <template #icon>
-                    <AppIcons iconName="PlusOutlined" />
-                  </template>
-                  新建
-                </a-button>
-              </template>
-              <template v-if="power.delete">
-                <a-popconfirm title="您确定要删除吗?" @confirm="deleteList()" okText="确定" cancelText="取消">
-                  <a-button type="danger" class="mr-10">
-                    <template #icon>
-                      <AppIcons iconName="DeleteOutlined" />
-                    </template>
-                    批量删除
-                  </a-button>
-                </a-popconfirm>
-              </template>
-            </a-col>
-            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15 text-right">
-              <a-button type="primary" class="mr-10" @click="exportExcel">
-                导出 Excel
-              </a-button>
             </a-col>
           </a-row>
-          <a-table
-            :columns="table.columns"
-            :data-source="table.data"
-            :loading="table.loading"
-            :pagination="false"
-            :row-selection="{
-              selectedRowKeys: table.selectedRowKeys,
-              onChange: (selectedRowKeys) => (table.selectedRowKeys = selectedRowKeys),
-            }"
-            tableLayout="fixed"
-            rowKey="id"
-          >
+          <a-table :columns="table.columns" :data-source="table.data" :loading="table.loading" :pagination="false" tableLayout="fixed" rowKey="id">
             <template #id="{ record }">
-              <div>
-                <template v-if="power.update">
-                  <a href="javascript:void(0)" @click="openForm(record.id)">修改</a>
-                </template>
-                <a-divider type="vertical" />
-                <template v-if="power.delete">
-                  <a-popconfirm title="您确定要删除吗?" @confirm="deleteList(record.id)" okText="确定" cancelText="取消">
-                    <a class="text-danger">删除</a>
-                  </a-popconfirm>
-                </template>
-              </div>
+              <span>
+                <a href="javascript:void(0)" @click="goSetUp(record.id)">去设置</a>
+              </span>
             </template>
           </a-table>
           <a-pagination
@@ -103,83 +48,43 @@
           </a-pagination>
         </a-card>
       </a-col>
+      <a-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
+        <a-table rowKey="id" :columns="tree.columns" :data-source="tree.data" :pagination="false" :expandedRowKeys="tree.expandedRowKeys" size="small">
+          <template #action="{ record }">
+            <div>
+              <a-checkbox-group style="display: block" v-model:value="record.checkFunction" @change="(values) => onChangeCheckbox({ values, id: record.id })">
+                <a-row>
+                  <a-col :span="3" v-for="item in record.functions" :key="item.id">
+                    <a-checkbox :value="item.id">{{ item.label }}</a-checkbox>
+                  </a-col>
+                </a-row>
+              </a-checkbox-group>
+            </div>
+          </template>
+        </a-table>
+      </a-col>
     </a-row>
-
-    <!--表单弹层-->
-    <a-modal v-model:visible="form.visible" title="编辑" centered @ok="form.visible = false" :width="800" destroyOnClose>
-      <template #footer>
-        <a-button type="primary" @click="infoForm.saveForm()">提交</a-button>
-        <a-button type="danger" ghost @click="form.visible = false">关闭</a-button>
-      </template>
-      <info
-        v-model:formKey="form.key"
-        :organizationId="table.search.vm.organizationId"
-        ref="infoForm"
-        @onSaveSuccess="
-          findList();
-          form.visible = false;
-        "
-      />
-    </a-modal>
   </div>
 </template>
 <script>
-import { computed, defineComponent, onMounted, reactive, toRefs, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 import { useStore } from "vuex";
 import AppIcons from "@/components/appIcons";
-import info from "./info";
 import tools from "@/scripts/tools";
-import service from "@/service/system/userService";
+import service from "@/service/system/rolefunctionService";
 
 //列头
 const columns = [
   {
-    title: "真实姓名",
+    title: "角色名称",
     dataIndex: "name",
     ellipsis: true,
     width: 150,
   },
   {
-    title: "账号",
-    dataIndex: "loginName",
+    title: "备注",
+    dataIndex: "remark",
     ellipsis: true,
-    width: 150,
-  },
-  {
-    title: "所属角色",
-    dataIndex: "所属角色",
-    ellipsis: true,
-    // width: 200,
-  },
-  // {
-  //   title: "联系电话",
-  //   dataIndex: "phone",
-  //   ellipsis: true,
-  //   width: 200,
-  // },
-  // {
-  //   title: "邮件地址",
-  //   dataIndex: "email",
-  //   ellipsis: true,
-  //   width: 200,
-  // },
-  {
-    title: "所属组织",
-    dataIndex: "organizationName",
-    ellipsis: true,
-    width: 150,
-  },
-  {
-    title: "更新时间",
-    dataIndex: "updateTime",
-    ellipsis: true,
-    width: 200,
-  },
-  {
-    title: "创建时间",
-    dataIndex: "createTime",
-    ellipsis: true,
-    width: 200,
   },
   {
     title: "操作",
@@ -191,8 +96,8 @@ const columns = [
 ];
 
 export default defineComponent({
-  name: "system_user",
-  components: { AppIcons, info },
+  name: "system_role_function",
+  components: { AppIcons },
   setup() {
     const store = useStore();
     const state = reactive({
@@ -200,10 +105,9 @@ export default defineComponent({
         //检索
         search: {
           state: false,
+          fieldCount: 2,
           vm: {
             name: "",
-            loginName: "",
-            organizationId: null,
           },
         },
         loading: false,
@@ -215,22 +119,48 @@ export default defineComponent({
         columns,
         data: [],
       },
-      form: {
-        visible: false,
-        key: "",
-      },
       tree: {
-        data: [],
-        expandedKeys: [],
-        selectedKeys: [],
-        loadingTree: false,
+        roleId: "",
+        columns: [
+          {
+            title: "菜单",
+            dataIndex: "label",
+            key: "label",
+            width: "200px",
+          },
+          {
+            title: "权限",
+            dataIndex: "id",
+            key: "id",
+            // width: "70%",
+            slots: { customRender: "action" },
+          },
+        ],
+        data: [
+          {
+            checkAll: false,
+            checkFunction: [],
+            children: [],
+            functions: [],
+            id: "",
+            label: "",
+          },
+        ],
+        expandedRowKeys: [],
+        checkAll: false,
       },
     });
-    //表单 ref 对象
-    const infoForm = ref(null);
 
     //权限
     const power = computed(() => store.getters["app/getMenuPowerById"]);
+
+    watch(
+      () => state.tree.roleId,
+      (value) => {
+        state.tree.roleId = value;
+        methods.getRoleMenuFunctionTree();
+      }
+    );
 
     const methods = {
       onChange(page, rows) {
@@ -263,6 +193,7 @@ export default defineComponent({
           state.table.rows = data.size;
           state.table.total = data.total;
           state.table.data = data.dataSource;
+          state.tree.roleId = data.dataSource[0].id;
         });
       },
       //删除数据
@@ -285,45 +216,46 @@ export default defineComponent({
         state.form.key = id;
       },
       exportExcel() {
-        service.exportExcel(state.table.search.vm);
+        tools.notice("导出Excel成功!", "成功", "提醒");
       },
-      //获取部门树
-      sysOrganizationTree() {
-        state.tree.loadingTree = true;
-        service.sysOrganizationTree().then((res) => {
+      exportPdf() {
+        tools.notice("导出Pdf成功!", "成功", "提醒");
+      },
+      //获取角色菜单功能树
+      getRoleMenuFunctionTree() {
+        service.getRoleMenuFunctionTree(state.tree.roleId).then((res) => {
           let data = res.data;
-          state.tree.data = data.rows;
-          state.tree.expandedKeys = data.expandedRowKeys;
-          state.tree.selectedKeys = [data.rows[0].key];
-          state.table.search.vm.organizationId = state.tree.selectedKeys[0];
-          state.tree.loadingTree = false;
-          methods.findList();
+          state.tree.data = data.list;
+          state.tree.expandedRowKeys = data.expandedRowKeys;
         });
       },
-      //选中菜单树项
-      onSelect(selectedKeys, info) {
-        console.log(info);
-        state.tree.selectedKeys = selectedKeys;
-        state.table.search.vm.organizationId = selectedKeys[0];
-        methods.findList();
+      //去设置
+      goSetUp(id) {
+        state.tree.roleId = id;
+        methods.getRoleMenuFunctionTree();
       },
-      //获取一级菜单
-      getFirst() {
-        state.tree.selectedKeys = [];
-        state.table.search.vm.organizationId = state.tree.data[0].key;
-        methods.findList();
+      //点击复选框事件
+      onChangeCheckbox(data) {
+        service
+          .saveForm({
+            roleId: state.tree.roleId,
+            menuId: data.id,
+            functionIds: data.values,
+          })
+          .then(() => {
+            methods.getRoleMenuFunctionTree();
+          });
       },
     };
 
     onMounted(() => {
-      methods.sysOrganizationTree();
+      methods.findList();
     });
 
     return {
       ...toRefs(state),
       ...methods,
       power,
-      infoForm,
     };
   },
 });

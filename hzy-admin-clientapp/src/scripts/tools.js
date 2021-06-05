@@ -267,6 +267,15 @@ let tools = {
     getMenuTheme() {
         let theme = localStorage.getItem("hzyAntdVue-MenuTheme");
         return theme ? theme : "dark";
+    },
+    //设置 topNav
+    setTopNav(topNav) {
+        localStorage.setItem("hzyAntdVue-TopNav", topNav ? "1" : "0");
+    },
+    //获取 topNav
+    getTopNav() {
+        let value = localStorage.getItem("hzyAntdVue-TopNav");
+        return value ? (value == "1" ? true : false) : true;
     }
 
 };

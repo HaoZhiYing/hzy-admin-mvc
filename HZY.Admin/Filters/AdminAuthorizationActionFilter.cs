@@ -39,7 +39,7 @@ namespace HZY.Admin.Filters
 
             //拦截操作数据库的 接口
 
-            //var actionList = new[] { "SaveForm", "DeleteList" };
+            //var actionList = new[] { "SaveForm", "DeleteList", "ChangePassword" };
             //if (actionList.Any(w => w.ToLower() == actionName.ToLower()))
             //{
             //    MessageBox.Show("请下载源代码本地运行!");

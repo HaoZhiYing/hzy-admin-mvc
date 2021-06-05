@@ -7,56 +7,27 @@ namespace HZY.Admin.Model.Bo
     /// <summary>
     /// 账户 业务对象
     /// </summary>
-    public class AccountInfo
+    public class AccountInfo : SysUser
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sysUser"></param>
-        /// <param name="userId"></param>
-        /// <param name="name"></param>
-        /// <param name="isAdministrator"></param>
-        /// <param name="avatar"></param>
-        /// <param name="roles"></param>
-        public AccountInfo(SysUser sysUser, Guid userId, string name, bool isAdministrator, string avatar, List<Guid> roles)
-        {
-            IsAdministrator = isAdministrator;
-            SysUser = sysUser;
-            Name = name;
-            Avatar = avatar;
-            Roles = roles;
-            UserId = userId;
-        }
-
-        /// <summary>
-        /// 用户名称
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 头像
-        /// </summary>
-        public string Avatar { get; set; }
-
         /// <summary>
         /// 角色 集合
         /// </summary>
-        public List<Guid> Roles { get; set; }
+        public List<SysRole> SysRoles { get; set; }
 
         /// <summary>
-        /// 用户 Id
+        /// 所属岗位
         /// </summary>
-        public Guid UserId { get; set; }
+        public List<SysPost> SysPosts { get; set; }
+
+        /// <summary>
+        /// 所属组织
+        /// </summary>
+        public SysOrganization SysOrganization { get; set; }
 
         /// <summary>
         /// 是否超级管理员
         /// </summary>
         public bool IsAdministrator { get; set; }
-
-        /// <summary>
-        /// 用户信息
-        /// </summary>
-        public SysUser SysUser { get; set; }
 
         /// <summary>
         /// 菜单集合

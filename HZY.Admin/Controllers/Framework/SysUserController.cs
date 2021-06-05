@@ -96,7 +96,7 @@ namespace HZY.Admin.Controllers.Framework
         /// 获取用户信息
         /// </summary>
         /// <returns></returns>
-        [ApiResourceCacheFilter]
+        [ApiResourceCacheFilter(2)]
         [HttpGet("info")]
         public async Task<AccountInfo> GetUserInfoAsync()
         {
@@ -107,6 +107,7 @@ namespace HZY.Admin.Controllers.Framework
             userInfo.Menus = sysMenusMap;
             //设置菜单权限
             userInfo.MenuPowers = await this._sysMenuService.GetPowerByMenusAsync(sysMenus);
+
             return userInfo;
         }
 

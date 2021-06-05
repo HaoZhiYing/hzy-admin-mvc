@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0dd83e"],{"825c":function(n,c,e){"use strict";e.r(c);var o=e("356f"),t="PersonalCenter";c["default"]={changePassword:function(n){return Object(o["post"])("".concat(t,"/changePassword"),n)},saveForm:function(n){return Object(o["post"])("".concat(t,"/saveForm"),n)}}}}]);
+//# sourceMappingURL=chunk-2d0dd83e.b45dae5f.js.map

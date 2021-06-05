@@ -113,7 +113,7 @@ namespace HZY.Admin.Services.Framework
                     .Select(w => w.PostId)
                     .ToListAsync()
                 ;
-            var allPostList = await this._sysPostRepository.Select.ToListAsync();
+            var allPostList = await this._sysPostRepository.Select.OrderBy(w => w.Number).ToListAsync();
 
             res[nameof(id)] = id == Guid.Empty ? "" : id;
             res[nameof(form)] = form;
@@ -139,8 +139,7 @@ namespace HZY.Admin.Services.Framework
 
             if (model.Id == Guid.Empty)
             {
-                model.Password =
-                    string.IsNullOrWhiteSpace(model.Password) ? "123" : model.Password; //Tools.MD5Encrypt("123");
+                model.Password = string.IsNullOrWhiteSpace(model.Password) ? "123qwe" : model.Password; //Tools.MD5Encrypt("123");
             }
 
             await this.Repository.InsertOrUpdateAsync(form.Form);
@@ -242,7 +241,7 @@ namespace HZY.Admin.Services.Framework
         {
             if (string.IsNullOrEmpty(oldPassword)) MessageBox.Show("旧密码不能为空！");
             if (string.IsNullOrEmpty(newPassword)) MessageBox.Show("新密码不能为空！");
-            var sysUser = await this.Repository.FindByIdAsync(this._accountService.GetAccountInfo().UserId);
+            var sysUser = await this.Repository.FindByIdAsync(this._accountService.GetAccountInfo().Id);
             if (sysUser.Password != oldPassword) MessageBox.Show("旧密码不正确！");
             sysUser.Password = newPassword;
             return await this.Repository.UpdateAsync(sysUser);

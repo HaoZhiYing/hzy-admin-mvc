@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using HZY.Admin.Model.Bo;
-using HZY.Framework.Services;
 using HZY.Repository.Framework;
 using HZY.Common;
 using Microsoft.AspNetCore.Http;
+using HZY.Repository.Domain.Framework;
 
 namespace HZY.Admin.Services.Framework
 {
@@ -16,15 +16,12 @@ namespace HZY.Admin.Services.Framework
         private readonly AccountInfo _accountInfo;
         private readonly AppConfiguration _appConfiguration;
         private readonly HttpContext _httpContext;
-        private readonly SysUserRoleRepository _sysUserRoleRepository;
 
         public AccountService(SysUserRepository repository,
             AppConfiguration appConfiguration,
-            IHttpContextAccessor httpContextAccessor,
-            SysUserRoleRepository sysUserRoleRepository) : base(repository)
+            IHttpContextAccessor httpContextAccessor) : base(repository)
         {
             _appConfiguration = appConfiguration;
-            _sysUserRoleRepository = sysUserRoleRepository;
             _httpContext = httpContextAccessor.HttpContext;
             this._accountInfo = this.FindAccountInfoByToken();
         }
@@ -65,17 +62,30 @@ namespace HZY.Admin.Services.Framework
 
             var sysUser = this.Repository.FindById(id);
             if (sysUser == null) return default;
-            var sysUserRoles = this._sysUserRoleRepository.Select
-                    .Where(w => w.UserId == sysUser.Id)
-                    .ToList()
-                ;
+            var sysRoles = (
+                from sysUserRole in this.Repository.Orm.SysUserRole
+                from sysRole in this.Repository.Orm.SysRole.Where(w => w.Id == sysUserRole.RoleId).DefaultIfEmpty()
+                where sysUserRole.UserId == id
+                select sysRole
+                ).ToList();
 
-            return new AccountInfo(sysUser,
-                id,
-                sysUser.Name,
-                sysUserRoles.Any(w => w.RoleId == this._appConfiguration.AdminRoleId),
-                "",
-                sysUserRoles.Select(w => w.RoleId).ToList());
+            var sysPosts = (
+                from sysUserPost in this.Repository.Orm.SysUserPost
+                from sysPost in this.Repository.Orm.SysPost.Where(w => w.Id == sysUserPost.PostId).DefaultIfEmpty()
+                where sysUserPost.UserId == id
+                select sysPost
+                ).ToList();
+
+            var sysOrganization = this.Repository.Orm.SysOrganization.FirstOrDefault(w => w.Id == sysUser.OrganizationId);
+
+            var accountInfo = new AccountInfo();
+            accountInfo = sysUser.MapTo<SysUser, AccountInfo>();
+            accountInfo.IsAdministrator = sysRoles.Any(w => w.Id == this._appConfiguration.AdminRoleId);
+            accountInfo.SysRoles = sysRoles;
+            accountInfo.SysPosts = sysPosts;
+            accountInfo.SysOrganization = sysOrganization;
+
+            return accountInfo;
         }
 
         /// <summary>

@@ -1,12 +1,7 @@
 <template>
-  <div className="p-15">
+  <div class="p-15">
     <a-spin v-if="loading" />
-    <iframe
-      src="https://2x.antdv.com/components/icon-cn/"
-      frameBorder="0"
-      id="iframe_antd_vue"
-      v-show="!loading"
-    ></iframe>
+    <iframe src="https://2x.antdv.com/components/icon-cn/" frameBorder="0" id="iframe_antd_vue" v-show="!loading"></iframe>
   </div>
 </template>
 

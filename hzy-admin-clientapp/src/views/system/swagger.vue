@@ -1,12 +1,7 @@
 <template>
-  <div className="p-15">
+  <div class="p-15">
     <a-spin v-if="loading" />
-    <iframe
-      :src="domainName + '/swagger'"
-      frameBorder="0"
-      id="iframe_swagger"
-      v-show="!loading"
-    ></iframe>
+    <iframe :src="domainName + '/swagger'" frameBorder="0" id="iframe_swagger" v-show="!loading"></iframe>
   </div>
 </template>
 

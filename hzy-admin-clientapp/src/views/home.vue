@@ -26,21 +26,21 @@
           <a-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16" class="mt-20">
             <a-row :gutter="20" class="mt-20">
               <a-col :span="8" class="text-center">
-                <a-statistic title="Stars" :value="532">
+                <a-statistic title="Stars" :value="553">
                   <template v-slot:suffix>
                     <AppIcons iconName="StarOutlined" />
                   </template>
                 </a-statistic>
               </a-col>
               <a-col :span="8" class="text-center">
-                <a-statistic title="Watch" :value="149">
+                <a-statistic title="Watch" :value="153">
                   <template v-slot:suffix>
                     <AppIcons iconName="EyeOutlined" />
                   </template>
                 </a-statistic>
               </a-col>
               <a-col :span="8" class="text-center">
-                <a-statistic title="Fork" :value="167">
+                <a-statistic title="Fork" :value="177">
                   <template v-slot:suffix>
                     <AppIcons iconName="BranchesOutlined" />
                   </template>
@@ -124,8 +124,8 @@
               <template #dot>
                 <AppIcons iconName="ClockCircleOutlined" style="font-size: 16px" />
               </template>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-              illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
+              beatae vitae dicta sunt explicabo.
             </a-timeline-item>
             <a-timeline-item color="red">Network problems being solved 2015-09-01</a-timeline-item>
             <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>

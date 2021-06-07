@@ -47,7 +47,7 @@ https://gitee.com/hzy6/hzy-quartz
 | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185540_4413085e_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185607_28ae4ec3_1242080.png "屏幕截图.png") |
 | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185635_47a24fd9_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185701_b96e2f6c_1242080.png "屏幕截图.png") |
 
-
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0607/200025_8a62b4ca_1242080.png "屏幕截图.png")
 
 
 #### 安装前提

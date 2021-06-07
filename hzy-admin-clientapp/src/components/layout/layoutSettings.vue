@@ -11,7 +11,7 @@
         <a-radio value="light">亮色</a-radio>
       </a-radio-group>
     </div>
-    <a-divider>开启</a-divider>
+    <a-divider>开启TopNav</a-divider>
     <div class="mt-5">
       <a-switch v-model:checked="topNav" />
     </div>

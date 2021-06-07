@@ -70,7 +70,7 @@ namespace @(Model.Namespace).Admin.Controllers
         /// <returns></returns>
         [ActionDescriptor("Have")]
         [HttpGet("FindForm/{id?}")]
-        public async Task<@("Dictionary<string, object>")> FindFormAsync([FromRoute] Guid id)
+        public async Task<@Html.Raw("Dictionary<string, object>")> FindFormAsync([FromRoute] Guid id)
         {
             return await this.DefaultService.FindFormAsync(id);
         }
@@ -81,7 +81,6 @@ namespace @(Model.Namespace).Admin.Controllers
         /// <param name="form">form</param>
         /// <returns></returns>
         [ActionDescriptor("Save")]
-        [AdminCheckModel]
         [Transactional]
         [HttpPost("SaveForm")]
         public async Task<@(className)> SaveFormAsync([FromBody] @(className) form)

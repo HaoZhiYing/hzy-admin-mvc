@@ -78,7 +78,7 @@ export default defineComponent({
     watch(
       () => state.topNav,
       (value) => {
-        methods.setTopNav(value);
+        methods.saveTopNavState(value);
       }
     );
 
@@ -92,8 +92,8 @@ export default defineComponent({
         this.$emit("update:propHeaderTheme", value);
         tools.setHeaderTheme(value);
       },
-      setTopNav() {
-        store.commit("app/setTopNav", state.topNav);
+      saveTopNavState() {
+        store.commit("app/saveTopNavState", state.topNav);
       },
     };
 

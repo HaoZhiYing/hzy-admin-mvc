@@ -129,12 +129,15 @@ export default {
         },
         //设置 TopNav
         setTopNav(state, value) {
+            if (tools.getTopNav()) {
+                state.topNav = value;
+            }
+        },
+        //保存 topnav 状态
+        saveTopNavState(state, value) {
             state.topNav = value;
             tools.setTopNav(value);
-        },
-        // getTopNav(){
-
-        // }
+        }
     },
     getters: {
         /**

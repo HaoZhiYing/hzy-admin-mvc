@@ -145,6 +145,10 @@ export default defineComponent({
       },
       //初始化 一级菜单
       initTopMenu() {
+        // 监听窗口大小 小屏幕下不使用 topnav
+        window.onresize = () => {
+          store.commit("app/setTopNav", document.body.clientWidth > 1350);
+        };
         methods.getOneLevelsMenu();
         //如果当前路由 父级菜单 有 则切换到这个菜单上去
         if (topMenuId.value) {

@@ -22,7 +22,9 @@ export default {
         title: "HzyAdminSpa",
         topNav: tools.getTopNav(),
         userInfo: {},
-        submenus: []
+        submenus: [],
+        //全局加载
+        globalLoading: false
     }),
     mutations: {
         //添加缓存视图
@@ -137,6 +139,10 @@ export default {
         saveTopNavState(state, value) {
             state.topNav = value;
             tools.setTopNav(value);
+        },
+        //设置全局加载值
+        setGlobalLoading(state, value) {
+            state.globalLoading = value;
         }
     },
     getters: {
@@ -197,11 +203,15 @@ export default {
         },
         //刷新用户信息
         refreshUserInfo({ commit }) {
+            commit('setGlobalLoading', true);
             return new Promise(resolve => {
                 userService.getUserInfo().then(res => {
                     let data = res.data;
                     commit('setUserInfo', data);
+                    commit('setGlobalLoading', false);
                     resolve(data)
+                }).catch(() => {
+                    commit('setGlobalLoading', false);
                 });
             })
         }

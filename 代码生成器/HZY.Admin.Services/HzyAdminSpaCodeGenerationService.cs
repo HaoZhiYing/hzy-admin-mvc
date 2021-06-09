@@ -259,18 +259,19 @@ namespace HZY.Admin.Services
         {
             var path = $"{this._webRootPath}{CodesRootPath}";
 
-            if (type == "HZY.Admin.Index.cshtml" || type == "HZY.Admin.Info.cshtml")
+            if (type == "HZY.Admin.Client.Index.Vue" || type == "HZY.Admin.Client.Info.Vue")
             {
+                tableName = tableName.FirstCharToLower();
                 path += $"/Views";
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 path += $"/{tableName}";
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 //Index
                 var codeString = await this.CreateClientIndexByTableNameAsync(tableName);
-                await File.WriteAllTextAsync($"{path}/Index.cshtml", codeString, Encoding.UTF8);
+                await File.WriteAllTextAsync($"{path}/Index.vue", codeString, Encoding.UTF8);
                 //Info
                 codeString = await this.CreateClientInfoByTableNameAsync(tableName);
-                await File.WriteAllTextAsync($"{path}/Info.cshtml", codeString, Encoding.UTF8);
+                await File.WriteAllTextAsync($"{path}/Info.vue", codeString, Encoding.UTF8);
                 return path;
             }
 

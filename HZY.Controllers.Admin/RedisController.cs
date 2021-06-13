@@ -1,4 +1,4 @@
-﻿using HZY.Framework.Controllers;
+﻿using HZY.Controllers.Admin.Framework;
 using HZY.Framework.Filters;
 using HZY.Repository.Redis;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ namespace HZY.Controllers.Admin
 {
     [ApiResultFilter]
     [Route("api/[controller]")]
-    public class RedisController : FrameworkBaseController
+    public class RedisController : AdminBaseController
     {
         private readonly RedisRepository _redisRepository;
 

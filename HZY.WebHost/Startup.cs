@@ -20,8 +20,6 @@ using HZY.Common.ScanDIService;
 using HZY.Repository.Redis.AppCore;
 using HZY.EntityFrameworkCorePlus;
 using HZY.WebHost.Filters;
-using System.Reflection;
-using System;
 
 namespace HZY.WebHost
 {

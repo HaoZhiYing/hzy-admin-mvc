@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HZY.Services.Admin", "HZY.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HZY.EntityFrameworkCorePlus", "HZY.EntityFrameworkCorePlus\HZY.EntityFrameworkCorePlus.csproj", "{18FE3399-62A3-42DE-987A-31C11BB3C809}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HZY.Controllers.App", "HZY.Controllers.App\HZY.Controllers.App.csproj", "{ABD8C21D-5EA8-4F0D-A9B5-E813F32EE566}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{18FE3399-62A3-42DE-987A-31C11BB3C809}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18FE3399-62A3-42DE-987A-31C11BB3C809}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18FE3399-62A3-42DE-987A-31C11BB3C809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABD8C21D-5EA8-4F0D-A9B5-E813F32EE566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABD8C21D-5EA8-4F0D-A9B5-E813F32EE566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABD8C21D-5EA8-4F0D-A9B5-E813F32EE566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABD8C21D-5EA8-4F0D-A9B5-E813F32EE566}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +106,7 @@ Global
 		{65DAE144-6923-4CD3-81B1-83A202FB113B} = {6D5D80D6-0AB6-40AE-B0E7-B3952AB5377E}
 		{171CF68C-939C-43E8-BEBD-241E1BAB7B40} = {6D5D80D6-0AB6-40AE-B0E7-B3952AB5377E}
 		{18FE3399-62A3-42DE-987A-31C11BB3C809} = {F31C3DFD-1D19-4BEA-80F4-D51A0D399AB0}
+		{ABD8C21D-5EA8-4F0D-A9B5-E813F32EE566} = {94293AD8-261C-41A7-B3C6-8F57B80B0FD1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {669156B2-7BC4-4980-AC66-21A6D5FCBD35}

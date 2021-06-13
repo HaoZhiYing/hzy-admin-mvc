@@ -10,57 +10,42 @@
             自动档 事务
             </summary>
         </member>
-        <member name="T:HZY.Repository.AppCore.DbContexts.AdminBaseDbContext">
-            <summary>
-            后台权限管理系统 DbContext
-            </summary>
-        </member>
-        <member name="P:HZY.Repository.AppCore.DbContexts.AdminBaseDbContext.CacheEntity">
-            <summary>
-            获取实体信息缓存服务
-            </summary>
-        </member>
-        <member name="M:HZY.Repository.AppCore.DbContexts.AdminBaseDbContext.SavingChangesEvent(System.Object,Microsoft.EntityFrameworkCore.SavingChangesEventArgs)">
-            <summary>
-            在调用SaveChanges结束时激发的事件 
-            </summary>
-        </member>
-        <member name="T:HZY.Repository.AppCore.DbContexts.BaseDbContext`1">
+        <member name="T:HZY.Repository.AppCore.BaseDbContext`1">
             <summary>
             基础上下文
             </summary>
             <typeparam name="TDbContext"></typeparam>
         </member>
-        <member name="M:HZY.Repository.AppCore.DbContexts.BaseDbContext`1.BeginTransaction">
+        <member name="M:HZY.Repository.AppCore.BaseDbContext`1.BeginTransaction">
             <summary>
             事务
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Repository.AppCore.DbContexts.BaseDbContext`1.BeginTransactionAsync">
+        <member name="M:HZY.Repository.AppCore.BaseDbContext`1.BeginTransactionAsync">
             <summary>
             事务
             </summary>
             <returns></returns>
         </member>
-        <member name="P:HZY.Repository.AppCore.DbContexts.BaseDbContext`1.UnitOfWork">
+        <member name="P:HZY.Repository.AppCore.BaseDbContext`1.UnitOfWork">
             <summary>
             工作单元
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Repository.AppCore.DbContexts.BaseDbContext`1.CommitOpen">
+        <member name="M:HZY.Repository.AppCore.BaseDbContext`1.CommitOpen">
             <summary>
             开启 提交
             </summary>
         </member>
-        <member name="M:HZY.Repository.AppCore.DbContexts.BaseDbContext`1.Commit">
+        <member name="M:HZY.Repository.AppCore.BaseDbContext`1.Commit">
             <summary>
             提交
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Repository.AppCore.DbContexts.BaseDbContext`1.CommitAsync">
+        <member name="M:HZY.Repository.AppCore.BaseDbContext`1.CommitAsync">
             <summary>
             提交
             </summary>
@@ -354,6 +339,21 @@
         <member name="T:HZY.Repository.AppCore.DefaultDatabaseType">
             <summary>
             默认数据库类型
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.DbContexts.AdminBaseDbContext">
+            <summary>
+            后台权限管理系统 DbContext
+            </summary>
+        </member>
+        <member name="P:HZY.Repository.DbContexts.AdminBaseDbContext.CacheEntity">
+            <summary>
+            获取实体信息缓存服务
+            </summary>
+        </member>
+        <member name="M:HZY.Repository.DbContexts.AdminBaseDbContext.SavingChangesEvent(System.Object,Microsoft.EntityFrameworkCore.SavingChangesEventArgs)">
+            <summary>
+            在调用SaveChanges结束时激发的事件 
             </summary>
         </member>
         <member name="T:HZY.Repository.Framework.SysUserRepository">

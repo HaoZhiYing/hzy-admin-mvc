@@ -1,4 +1,4 @@
-﻿using HZY.Repository.AppCore.DbContexts;
+﻿using HZY.Repository.DbContexts;
 using HZY.Repository.AppCore.Impl;
 using HZY.Repository.AppCore.Interface;
 using HZY.Repository.AppCore.Provider;

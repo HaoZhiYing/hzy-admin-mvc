@@ -1,7 +1,7 @@
-import {get, post, upload, download } from '@/scripts/request';
+import { get, post, upload, download } from '@/scripts/request';
 import tools from "@/scripts/tools";
 
-const controllerName = "Member";
+const controllerName = "admin/Member";
 
 export default {
     /**

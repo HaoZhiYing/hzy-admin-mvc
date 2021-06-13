@@ -1,10 +1,12 @@
-﻿namespace HZY.Framework.Services
+﻿using HZY.Common.ScanDIService.Interface;
+
+namespace HZY.Framework.Services
 {
     /// <summary>
     /// 服务层 基类
     /// </summary>
     /// <typeparam name="TRepository">默认仓储 类型</typeparam>
-    public class FrameworkBaseService<TRepository> where TRepository : class
+    public class FrameworkBaseService<TRepository> : IDITransientSelf where TRepository : class
     {
         /// <summary>
         /// 默认 仓储
@@ -16,6 +18,6 @@
             Repository = repository;
         }
 
-        
+
     }
 }

@@ -1,6 +1,6 @@
-﻿using HZY.Repository.Domain;
-using HZY.Repository.AppCore.Provider;
-using HZY.Repository.AppCore.DbContexts;
+﻿using HZY.Repository.AppCore.Provider;
+using HZY.Repository.DbContexts;
+using HZY.Model.Entities;
 
 namespace HZY.Repository
 {

@@ -1,6 +1,6 @@
 import { post } from '@/scripts/request';
 
-const controllerName = "PersonalCenter";
+const controllerName = "admin/PersonalCenter";
 
 export default {
     /**

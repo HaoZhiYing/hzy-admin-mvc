@@ -14,7 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HZY.Common;
 using HZY.Common.ScanDIService.Interface;
-using HZY.Repository.AppCore.DbContexts;
+using HZY.Repository.DbContexts;
 using HZY.Repository.AppCore.Extensions;
 using HZY.Repository.AppCore.Impl;
 using HZY.Repository.AppCore.Models;

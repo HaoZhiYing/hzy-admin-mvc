@@ -17,7 +17,7 @@ export default {
             return tools.message("密码不能为空!", "警告");
         }
 
-        return post('login/check', {
+        return post('account/check', {
             userName,
             userPassword
         });

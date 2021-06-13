@@ -27,7 +27,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\HZY.Common\HZY.Common.csproj" />
-    <ProjectReference Include="..\HZY.Repository.Domain\HZY.Repository.Domain.csproj" />
+    <ProjectReference Include="..\HZY.Model\HZY.Model.csproj" />
   </ItemGroup>
   
   <ItemGroup>

@@ -230,6 +230,16 @@
             </summary>
             <param name="apiResult"></param>
         </member>
+        <member name="F:HZY.Framework.Controllers.ApiBaseController`1.DefaultService">
+            <summary>
+            默认服务
+            </summary>
+        </member>
+        <member name="T:HZY.Framework.Controllers.ApiBaseController">
+            <summary>
+            控制器服务
+            </summary>
+        </member>
         <member name="T:HZY.Framework.Filters.ApiCheckModelAttribute">
             <summary>
             对接口模型验证

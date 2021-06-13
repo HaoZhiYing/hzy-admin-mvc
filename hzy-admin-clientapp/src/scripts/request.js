@@ -5,7 +5,7 @@ import router from '@/router'
 
 //axios 基本配置
 axios.defaults.timeout = 100 * 1000;
-axios.defaults.baseURL = appConsts.domainName + "/admin"; //http://localhost:6789
+axios.defaults.baseURL = appConsts.domainName + "/api"; //http://localhost:6789
 let isLoading = true;
 
 //http request 拦截器

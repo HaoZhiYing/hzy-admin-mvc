@@ -1,6 +1,6 @@
-import {  post } from '@/scripts/request';
+import { post } from '@/scripts/request';
 
-const controllerName = "ChangePassword";
+const controllerName = "admin/ChangePassword";
 
 export default {
     /**

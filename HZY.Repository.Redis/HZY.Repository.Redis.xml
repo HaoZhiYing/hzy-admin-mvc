@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HZY.Repository.Redis</name>
+    </assembly>
+    <members>
+        <member name="T:HZY.Redis.Service.RedisService">
+            <summary>
+            Redis 服务类
+            </summary>
+        </member>
+        <member name="P:HZY.Redis.Service.RedisService.Database">
+            <summary>
+            get database
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Redis.AppCore.RepositoryRedisModule">
+            <summary>
+            Redis 模块
+            </summary>
+        </member>
+        <member name="M:HZY.Repository.Redis.AppCore.RepositoryRedisModule.RegisterRedisRepository(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            注册 Redis 模块
+            </summary>
+            <param name="services"></param>
+            <param name="connectionString"></param>
+        </member>
+        <member name="T:HZY.Repository.Redis.RedisRepository">
+            <summary>
+            Redis 仓储
+            </summary>
+        </member>
+        <member name="M:HZY.Repository.Redis.RedisRepository.SetPlcOriginalData(System.String,System.String)">
+            <summary>
+            设置 plc 原数据
+            </summary>
+            <param name="key"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:HZY.Repository.Redis.RedisRepository.Listener(System.String)">
+            <summary>
+            监听器
+            </summary>
+            <param name="key"></param>
+        </member>
+    </members>
+</doc>

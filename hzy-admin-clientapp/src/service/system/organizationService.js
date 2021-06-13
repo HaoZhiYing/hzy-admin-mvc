@@ -1,7 +1,7 @@
 import { get, post, download } from '@/scripts/request';
 import tools from "@/scripts/tools";
 
-const controllerName = "SysOrganization";
+const controllerName = "admin/SysOrganization";
 
 export default {
     /**

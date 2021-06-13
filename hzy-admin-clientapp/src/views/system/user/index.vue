@@ -201,8 +201,8 @@ export default defineComponent({
         search: {
           state: false,
           vm: {
-            name: "",
-            loginName: "",
+            name: null,
+            loginName: null,
             organizationId: null,
           },
         },
@@ -249,7 +249,7 @@ export default defineComponent({
       onResetSearch() {
         let searchVm = state.table.search.vm;
         for (let key in searchVm) {
-          searchVm[key] = "";
+          searchVm[key] = null;
         }
         methods.findList();
       },

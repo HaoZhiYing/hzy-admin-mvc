@@ -220,8 +220,8 @@ export default defineComponent({
           state: false,
           fieldCount: 2,
           vm: {
-            name: "",
-            parentId: "",
+            name: null,
+            parentId: null,
           },
         },
         loading: false,
@@ -270,7 +270,7 @@ export default defineComponent({
         let searchVm = state.table.search.vm;
         for (let key in searchVm) {
           if (key == "parentId") continue;
-          searchVm[key] = "";
+          searchVm[key] = null;
         }
         methods.findList();
       },

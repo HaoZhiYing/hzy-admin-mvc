@@ -175,7 +175,7 @@ export default defineComponent({
           state: false,
           fieldCount: 2,
           vm: {
-            name: "",
+            name: null,
           },
         },
         loading: false,
@@ -215,7 +215,7 @@ export default defineComponent({
       onResetSearch() {
         let searchVm = state.table.search.vm;
         for (let key in searchVm) {
-          searchVm[key] = "";
+          searchVm[key] = null;
         }
         methods.findList();
       },

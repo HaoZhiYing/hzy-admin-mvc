@@ -14,6 +14,10 @@ https://gitee.com/hzy6/hzy-quartz
 
 2. https://gitee.com/hzy6/hzy-admin-spa
 
+### 目录结构
+
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0613/113658_b2e5b377_1242080.png "屏幕截图.png")
+
 #### :yellow_heart: 介绍 
 前后分离,后台通配权限管理系统！基于.Net5
 

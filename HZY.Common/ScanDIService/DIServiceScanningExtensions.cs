@@ -48,13 +48,21 @@ namespace HZY.Common.ScanDIService
 
             #region 将所有 dll 文件 重新载入 防止有未扫描到的 程序集
             var paths = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)
-                .Where(w => w.EndsWith(".dll"))
+                .Where(w => w.EndsWith(".dll") && !w.Contains("Microsoft"))
                 .Select(w => w)
              ;
             foreach (var item in paths)
             {
-                var assemblyName = AssemblyLoadContext.GetAssemblyName(item);
-                Assembly.Load(assemblyName);
+                //try
+                {
+                    var assemblyName = AssemblyLoadContext.GetAssemblyName(item);
+                    Assembly.Load(assemblyName);
+                }
+                //catch (Exception)
+                //{
+                //    continue;
+                //}
+                
             }
             assemblies = AssemblyLoadContext.Default.Assemblies.Union(assemblies);
             #endregion

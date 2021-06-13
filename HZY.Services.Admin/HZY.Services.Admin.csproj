@@ -13,6 +13,7 @@
     <ProjectReference Include="..\HZY.Common\HZY.Common.csproj" />
     <ProjectReference Include="..\HZY.Framework\HZY.Framework.csproj" />
     <ProjectReference Include="..\HZY.Model\HZY.Model.csproj" />
+    <ProjectReference Include="..\HZY.Repository.Redis\HZY.Repository.Redis.csproj" />
     <ProjectReference Include="..\HZY.Repository\HZY.Repository.csproj" />
     <ProjectReference Include="..\HZY.Services\HZY.Services.csproj" />
   </ItemGroup>

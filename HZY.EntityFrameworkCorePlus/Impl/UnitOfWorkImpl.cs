@@ -7,9 +7,10 @@
  *
  * *******************************************************
  */
-using HZY.Repository.AppCore.Interface;
 
-namespace HZY.Repository.AppCore.Impl
+using HZY.EntityFrameworkCorePlus.Interface;
+
+namespace HZY.EntityFrameworkCorePlus.Impl
 {
     public sealed class UnitOfWorkImpl : IUnitOfWork
     {

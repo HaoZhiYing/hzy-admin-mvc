@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace HZY.Admin.Controllers
+namespace HZY.WebHost.Controllers
 {
     /// <summary>
     /// 跳转客户端

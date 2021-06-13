@@ -1,4 +1,4 @@
-﻿namespace HZY.Repository.AppCore.Models
+﻿namespace HZY.EntityFrameworkCorePlus.Models
 {
     /// <summary>
     /// 列头信息

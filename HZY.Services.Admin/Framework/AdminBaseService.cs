@@ -2,8 +2,9 @@
 using System.IO;
 using System.Linq;
 using HZY.Common;
+using HZY.Common.ScanDIService.Interface;
+using HZY.EntityFrameworkCorePlus.Models;
 using HZY.Framework.Services;
-using HZY.Repository.AppCore.Models;
 using NPOI.HSSF.UserModel;
 
 namespace HZY.Services.Admin.Framework
@@ -15,12 +16,12 @@ namespace HZY.Services.Admin.Framework
         }
 
         #region 导出 Excel
-
         /// <summary>
         /// 导出 Excel
         /// </summary>
         /// <param name="pagingViewModel"></param>
         /// <param name="byName">别名</param>
+        /// <param name="ignore"></param>
         /// <returns></returns>
         protected virtual byte[] ExportExcelByPagingViewModel(PagingViewModel pagingViewModel, Dictionary<string, string> byName = null, params string[] ignore)
         {

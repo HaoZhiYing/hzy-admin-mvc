@@ -92,12 +92,13 @@
             <param name="search"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Services.Admin.Framework.AdminBaseService`1.ExportExcelByPagingViewModel(HZY.Repository.AppCore.Models.PagingViewModel,System.Collections.Generic.Dictionary{System.String,System.String},System.String[])">
+        <member name="M:HZY.Services.Admin.Framework.AdminBaseService`1.ExportExcelByPagingViewModel(HZY.EntityFrameworkCorePlus.Models.PagingViewModel,System.Collections.Generic.Dictionary{System.String,System.String},System.String[])">
             <summary>
             导出 Excel
             </summary>
             <param name="pagingViewModel"></param>
             <param name="byName">别名</param>
+            <param name="ignore"></param>
             <returns></returns>
         </member>
         <member name="T:HZY.Services.Admin.Framework.SysFunctionService">

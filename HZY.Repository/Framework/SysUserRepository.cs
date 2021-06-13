@@ -1,12 +1,9 @@
-﻿using HZY.Model.Entities.Framework;
-using HZY.Repository.AppCore.Provider;
-using HZY.Repository.DbContexts;
+﻿using HZY.EntityFrameworkCorePlus.DbContexts;
+using HZY.EntityFrameworkCorePlus.Repositories;
+using HZY.Model.Entities.Framework;
 
 namespace HZY.Repository.Framework
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class SysUserRepository : AdminBaseRepository<SysUser>
     {
         public SysUserRepository(AdminBaseDbContext context) : base(context)

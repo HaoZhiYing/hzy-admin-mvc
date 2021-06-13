@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Repository.AppCore.Models
+namespace HZY.EntityFrameworkCorePlus.Models
 {
     public class PagingViewModel
     {

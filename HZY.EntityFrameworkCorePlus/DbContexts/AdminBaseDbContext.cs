@@ -10,14 +10,13 @@
 
 using System;
 using System.Linq;
+using HZY.EntityFrameworkCorePlus.Interface;
 using HZY.Model.Entities;
 using HZY.Model.Entities.Framework;
-using HZY.Repository.AppCore;
-using HZY.Repository.AppCore.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace HZY.Repository.DbContexts
+namespace HZY.EntityFrameworkCorePlus.DbContexts
 {
     /// <summary>
     /// 后台权限管理系统 DbContext

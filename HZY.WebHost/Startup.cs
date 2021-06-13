@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using HZY.Admin.Filters;
 using HZY.Framework;
 using HZY.Framework.Filters;
 using HZY.Framework.Middleware;
@@ -19,9 +18,12 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using HZY.Common.ScanDIService;
 using HZY.Repository.Redis.AppCore;
-using HZY.Repository.AppCore;
+using HZY.EntityFrameworkCorePlus;
+using HZY.WebHost.Filters;
+using System.Reflection;
+using System;
 
-namespace HZY.Admin
+namespace HZY.WebHost
 {
     public class Startup
     {
@@ -74,7 +76,7 @@ namespace HZY.Admin
 
             #region 仓储注册 、 自动扫描服务注册 、 中间件注册
 
-            RepositoryModule.RegisterAdminRepository(services, connectionString, DefaultDatabaseType.SqlServer);
+            EntityFrameworkCorePlusModule.RegisterAdminRepository(services, connectionString, DefaultDatabaseType.SqlServer);
             //RepositoryRedisModule.RegisterRedisRepository(services, connectionStringRedis);
             services.ScanningAppServices("HZY.");
             services.AddScoped<TakeUpTimeMiddleware>();
@@ -140,6 +142,7 @@ namespace HZY.Admin
                 var xmlPath_Controllers = Path.Combine(System.AppContext.BaseDirectory, "HZY.Controllers.xml");
                 var xmlPath_Controllers_Admin = Path.Combine(System.AppContext.BaseDirectory, "HZY.Controllers.Admin.xml");
                 var xmlPath_Framework = Path.Combine(System.AppContext.BaseDirectory, "HZY.Framework.xml");
+                var xmlPath_EntityFrameworkCorePlus = Path.Combine(System.AppContext.BaseDirectory, "HZY.EntityFrameworkCorePlus.xml");
                 var xmlPath_WebHost = Path.Combine(System.AppContext.BaseDirectory, "HZY.WebHost.xml");
 
                 options.IncludeXmlComments(xmlPath_Model, true);
@@ -150,6 +153,7 @@ namespace HZY.Admin
                 options.IncludeXmlComments(xmlPath_Controllers, true);
                 options.IncludeXmlComments(xmlPath_Controllers_Admin, true);
                 options.IncludeXmlComments(xmlPath_Framework, true);
+                options.IncludeXmlComments(xmlPath_EntityFrameworkCorePlus, true);                
                 options.IncludeXmlComments(xmlPath_WebHost, true);
 
                 #region Jwt token 配置
@@ -174,11 +178,6 @@ namespace HZY.Admin
             });
 
             #endregion
-
-            #region 设置 Vue 单页面 地址
-            //services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/dist");
-            #endregion
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

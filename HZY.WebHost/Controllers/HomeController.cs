@@ -4,7 +4,7 @@ using HZY.Framework.Controllers;
 using HZY.Framework.Permission.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HZY.Admin.Controllers
+namespace HZY.WebHost.Controllers
 {
     [ApiExplorerSettings(IgnoreApi = true)]
     [ControllerDescriptor]

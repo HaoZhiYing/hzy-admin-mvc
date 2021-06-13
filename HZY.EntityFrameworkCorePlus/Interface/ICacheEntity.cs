@@ -1,11 +1,11 @@
-﻿using HZY.Repository.AppCore.Models;
+﻿using HZY.EntityFrameworkCorePlus.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HZY.Repository.AppCore.Interface
+namespace HZY.EntityFrameworkCorePlus.Interface
 {
     /// <summary>
     /// 缓存实体信息服务

@@ -1,17 +1,17 @@
-﻿using HZY.Repository.DbContexts;
-using HZY.Repository.AppCore.Impl;
-using HZY.Repository.AppCore.Interface;
-using HZY.Repository.AppCore.Provider;
+﻿using HZY.EntityFrameworkCorePlus.DbContexts;
+using HZY.EntityFrameworkCorePlus.Impl;
+using HZY.EntityFrameworkCorePlus.Interface;
+using HZY.EntityFrameworkCorePlus.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace HZY.Repository.AppCore
+namespace HZY.EntityFrameworkCorePlus
 {
     /// <summary>
     /// 仓储模块
     /// </summary>
-    public class RepositoryModule
+    public class EntityFrameworkCorePlusModule
     {
         /// <summary>
         /// 注册 Admin 后台管理数据库
@@ -58,7 +58,7 @@ namespace HZY.Repository.AppCore
             #endregion
 
             services.AddSingleton<ICacheEntity, CacheEntityImpl>();
-            services.AddScoped(typeof(AdminBaseRepository<>));
+            services.AddTransient(typeof(AdminBaseRepository<>));
         }
 
 

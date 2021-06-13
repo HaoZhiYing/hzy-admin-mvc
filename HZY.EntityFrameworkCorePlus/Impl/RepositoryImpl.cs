@@ -13,11 +13,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using HZY.Repository.AppCore.Extensions;
-using HZY.Repository.AppCore.Interface;
+using HZY.EntityFrameworkCorePlus.Extensions;
+using HZY.EntityFrameworkCorePlus.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace HZY.Repository.AppCore.Impl
+namespace HZY.EntityFrameworkCorePlus.Impl
 {
     /// <summary>
     /// 基础仓储 实现

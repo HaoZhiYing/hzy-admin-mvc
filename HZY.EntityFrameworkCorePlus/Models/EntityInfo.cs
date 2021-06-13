@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HZY.Repository.AppCore.Models
+namespace HZY.EntityFrameworkCorePlus.Models
 {
     public class EntityInfo
     {

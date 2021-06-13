@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace HZY.Repository.AppCore.Extensions
+namespace HZY.EntityFrameworkCorePlus.Extensions
 {
     /// <summary>
     /// 仓储扩展

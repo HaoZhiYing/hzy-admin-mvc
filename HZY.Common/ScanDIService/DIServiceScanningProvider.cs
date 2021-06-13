@@ -104,7 +104,6 @@ namespace HZY.Common.ScanDIService
         /// <param name="classType"></param>
         private void ScanningAppServiceAttribute(IServiceCollection serviceCollection, Type classType)
         {
-
             var appService = classType.GetCustomAttribute<DIServiceAttribute>();
             //判断 父级 类 是否 设置 忽略当前 服务
             if (appService != null && appService.IgnoreCurrent) return;

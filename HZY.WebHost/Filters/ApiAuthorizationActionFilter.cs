@@ -9,7 +9,7 @@ using HZY.Framework.ApiResultManage;
 using HZY.Services.Admin.Framework;
 using HZY.Services.Account;
 
-namespace HZY.Admin.Filters
+namespace HZY.WebHost.Filters
 {
     /// <summary>
     /// 后台 权限 管理 控制

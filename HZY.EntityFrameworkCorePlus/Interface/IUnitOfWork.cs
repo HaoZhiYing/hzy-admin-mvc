@@ -7,7 +7,7 @@
  *
  * *******************************************************
  */
-namespace HZY.Repository.AppCore.Interface
+namespace HZY.EntityFrameworkCorePlus.Interface
 {
     public interface IUnitOfWork
     {

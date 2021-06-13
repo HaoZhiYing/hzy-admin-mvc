@@ -14,7 +14,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace HZY.Repository.AppCore.Interface
+namespace HZY.EntityFrameworkCorePlus.Interface
 {
     public interface IRepository<T, out TDbContext> where T : class where TDbContext : DbContext
     {

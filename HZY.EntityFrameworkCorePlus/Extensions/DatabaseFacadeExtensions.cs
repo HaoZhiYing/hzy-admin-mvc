@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using MySqlConnector;
 using Npgsql;
 
-namespace HZY.Repository.AppCore.Extensions
+namespace HZY.EntityFrameworkCorePlus.Extensions
 {
     /// <summary>
     /// DatabaseFacade 扩展

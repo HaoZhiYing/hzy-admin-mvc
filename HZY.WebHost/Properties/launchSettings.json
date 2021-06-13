@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "HZY.Admin": {
+    "HZY.WebHost": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

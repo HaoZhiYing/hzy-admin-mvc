@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HZY.Repository.AppCore.Models;
 using HZY.Repository.Framework;
 using HZY.Common;
-using Microsoft.EntityFrameworkCore;
-using HZY.Repository.AppCore.Extensions;
+using HZY.Repository;
+using Microsoft.AspNetCore.Http;
+using HZY.Model.Entities;
+using HZY.Services.Admin.Framework;
+using HZY.EntityFrameworkCorePlus.Models;
+using HZY.EntityFrameworkCorePlus.Extensions;
 using HZY.Model.Entities.Framework;
-using HZY.Model.FormDto;
-using System.Collections;
+using Microsoft.EntityFrameworkCore;
 using HZY.Model.Bo;
 using HZY.Admin.Model.Bo;
 using HZY.Services.Account;
+using System.Collections;
+using HZY.Model.FormDto;
 
 namespace HZY.Services.Admin.Framework
 {
@@ -252,8 +256,10 @@ namespace HZY.Services.Admin.Framework
             {
                 foreach (var item in sysMenuList)
                 {
-                    var power = new Dictionary<string, object>();
-                    power["MenuId"] = item.Id;
+                    var power = new Dictionary<string, object>
+                    {
+                        ["MenuId"] = item.Id
+                    };
                     foreach (var sysFunction in sysFunctionList)
                     {
                         if (string.IsNullOrWhiteSpace(sysFunction.ByName)) continue;
@@ -273,13 +279,15 @@ namespace HZY.Services.Admin.Framework
 
             foreach (var item in sysMenuList)
             {
-                var power = new Dictionary<string, object>();
-                power["MenuId"] = item.Id;
+                var power = new Dictionary<string, object>
+                {
+                    ["MenuId"] = item.Id
+                };
                 foreach (var sysFunction in sysFunctionList)
                 {
                     if (string.IsNullOrWhiteSpace(sysFunction.ByName)) continue;
 
-                    if (this._accountInfo.SysRoles.Select(w => w.Id).Count() > 0)
+                    if (_accountInfo.SysRoles.Select(w => w.Id).Any())
                     {
                         var isPower = sysRoleMenuFunctionList
                             .Any(w =>
@@ -334,7 +342,7 @@ namespace HZY.Services.Admin.Framework
             {
                 if (string.IsNullOrWhiteSpace(item.ByName)) continue;
 
-                if (this._accountInfo.SysRoles.Select(w => w.Id).Count() > 0)
+                if (_accountInfo.SysRoles.Select(w => w.Id).Any())
                 {
                     var isPower = sysRoleMenuFunctionList
                         .Any(w => this._accountInfo.SysRoles.Select(w => w.Id).Contains(w.RoleId) && w.MenuId == menuId &&
@@ -362,10 +370,9 @@ namespace HZY.Services.Admin.Framework
             var sysFunctions = await this._sysFunctionRepository.Select.OrderBy(w => w.Number).ToListAsync();
             var sysMenuFunctions =
                 await this._sysMenuFunctionRepository.Select.OrderBy(w => w.CreateTime).ToListAsync();
-            List<Guid> defaultExpandedKeys = new List<Guid>();
-            List<string> defaultCheckedKeys = new List<string>();
-            var tree = this.CreateMenuFunctionTree(Guid.Empty, sysMenus, sysFunctions, sysMenuFunctions,
-                defaultExpandedKeys, defaultCheckedKeys);
+            List<Guid> defaultExpandedKeys = new();
+            List<string> defaultCheckedKeys = new();
+            var tree = this.CreateMenuFunctionTree(Guid.Empty, sysMenus, sysFunctions, sysMenuFunctions, defaultExpandedKeys, defaultCheckedKeys);
             return (tree, defaultExpandedKeys, defaultCheckedKeys);
         }
 
@@ -412,7 +419,7 @@ namespace HZY.Services.Admin.Framework
 
                         children.Add(new
                         {
-                            key = key,
+                            key,
                             title = $"{function.Name}-{function.ByName}-{function.Number}",
                             disabled = true,
                             children = new ArrayList()
@@ -425,7 +432,7 @@ namespace HZY.Services.Admin.Framework
                     key = item.Id,
                     title = $"{item.Name}-{item.Number}",
                     disableCheckbox = true,
-                    children = children
+                    children
                 });
             }
 

@@ -1,11 +1,11 @@
-﻿using HZY.Repository.AppCore.Impl;
-using HZY.Repository.AppCore.Interface;
+﻿using HZY.EntityFrameworkCorePlus.Impl;
+using HZY.EntityFrameworkCorePlus.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HZY.Repository.AppCore
+namespace HZY.EntityFrameworkCorePlus.DbContexts
 {
     /// <summary>
     /// 基础上下文

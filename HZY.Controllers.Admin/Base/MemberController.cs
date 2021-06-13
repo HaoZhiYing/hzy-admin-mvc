@@ -5,11 +5,11 @@ using HZY.Common;
 using Microsoft.AspNetCore.Mvc;
 using HZY.Framework.Permission.Attributes;
 using HZY.Framework.Filters;
-using HZY.Repository.AppCore.Attributes;
-using HZY.Repository.AppCore.Models;
 using HZY.Model.Entities;
 using HZY.Controllers.Admin.Framework;
 using HZY.Services.Admin.Base;
+using HZY.EntityFrameworkCorePlus.Models;
+using HZY.EntityFrameworkCorePlus.Attributes;
 
 namespace HZY.Controllers.Admin.Base
 {

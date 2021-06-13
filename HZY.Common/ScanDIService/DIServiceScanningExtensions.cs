@@ -9,8 +9,10 @@
  */
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HZY.Common.ScanDIService
@@ -36,13 +38,26 @@ namespace HZY.Common.ScanDIService
         /// <returns></returns>
         public static IEnumerable<Assembly> GetAssemblyList(Func<Assembly, bool> where = null)
         {
-            //查找程序集
+            #region 查找手动引用的程序集
             IEnumerable<Assembly> assemblies = new List<Assembly>();
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly == null) return assemblies;
-
             var referencedAssemblies = entryAssembly.GetReferencedAssemblies().Select(Assembly.Load);
-            assemblies = new List<Assembly> { entryAssembly }.Concat(referencedAssemblies);
+            assemblies = new List<Assembly> { entryAssembly }.Union(referencedAssemblies);
+            #endregion
+
+            #region 将所有 dll 文件 重新载入 防止有未扫描到的 程序集
+            var paths = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory)
+                .Where(w => w.EndsWith(".dll"))
+                .Select(w => w)
+             ;
+            foreach (var item in paths)
+            {
+                var assemblyName = AssemblyLoadContext.GetAssemblyName(item);
+                Assembly.Load(assemblyName);
+            }
+            assemblies = AssemblyLoadContext.Default.Assemblies.Union(assemblies);
+            #endregion
 
             return @where == null ? assemblies : assemblies.Where(@where);
         }

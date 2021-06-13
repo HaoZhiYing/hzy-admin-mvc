@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.12.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
@@ -36,8 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HZY.Common\HZY.Common.csproj" />
     <ProjectReference Include="..\HZY.Controllers.Admin\HZY.Controllers.Admin.csproj" />
     <ProjectReference Include="..\HZY.Controllers\HZY.Controllers.csproj" />
+    <ProjectReference Include="..\HZY.EntityFrameworkCorePlus\HZY.EntityFrameworkCorePlus.csproj" />
     <ProjectReference Include="..\HZY.Framework\HZY.Framework.csproj" />
     <ProjectReference Include="..\HZY.Model\HZY.Model.csproj" />
     <ProjectReference Include="..\HZY.Repository.Redis\HZY.Repository.Redis.csproj" />

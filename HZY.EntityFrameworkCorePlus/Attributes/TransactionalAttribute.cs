@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using System;
 using System.Data;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace HZY.Repository.AppCore.Attributes
+namespace HZY.EntityFrameworkCorePlus.Attributes
 {
     /// <summary>
     /// 通过标记 自动 事务 适用于 控制器 Action 上标记

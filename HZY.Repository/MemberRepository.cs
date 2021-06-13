@@ -1,5 +1,5 @@
-﻿using HZY.Repository.AppCore.Provider;
-using HZY.Repository.DbContexts;
+﻿using HZY.EntityFrameworkCorePlus.DbContexts;
+using HZY.EntityFrameworkCorePlus.Repositories;
 using HZY.Model.Entities;
 
 namespace HZY.Repository

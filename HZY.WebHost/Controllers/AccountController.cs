@@ -11,7 +11,7 @@ namespace HZY.WebHost.Controllers
     public class AccountController : FrameworkBaseController
     {
         private const string tokenType = "Bearer ";
-        private readonly AccountService _accountService;        
+        private readonly AccountService _accountService;
 
         public AccountController(AccountService accountService)
         {

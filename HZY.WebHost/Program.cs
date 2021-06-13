@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 using HZY.Framework.ApiResultManage;
 using NLog.Web;
 
-namespace HZY.Admin
+namespace HZY.WebHost
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
                 var host = CreateHostBuilder(args).Build();
@@ -29,6 +29,7 @@ namespace HZY.Admin
                 {
                     //NLog: catch setup errors
                     logger.Error(exception, "由于异常而停止程序!");
+                    throw;
                 }
             }
             finally

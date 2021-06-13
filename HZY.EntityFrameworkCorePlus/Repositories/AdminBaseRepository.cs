@@ -14,26 +14,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using HZY.Common;
 using HZY.Common.ScanDIService.Interface;
-using HZY.Repository.DbContexts;
-using HZY.Repository.AppCore.Extensions;
-using HZY.Repository.AppCore.Impl;
-using HZY.Repository.AppCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Dapper;
 using System;
+using HZY.EntityFrameworkCorePlus.Impl;
+using HZY.EntityFrameworkCorePlus.DbContexts;
+using HZY.EntityFrameworkCorePlus.Models;
+using HZY.EntityFrameworkCorePlus.Extensions;
+using HZY.Common.ScanDIService.Attributes;
 
-namespace HZY.Repository.AppCore.Provider
+namespace HZY.EntityFrameworkCorePlus.Repositories
 {
     /// <summary>
     /// 默认基础仓储
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    //[AppService(IgnoreCurrent = true)]
-    public class AdminBaseRepository<T> : RepositoryImpl<T, AdminBaseDbContext>, IDITransientSelf
-        where T : class, new()
+    //[DIService(IgnoreCurrent = true)]
+    public class AdminBaseRepository<T> : RepositoryImpl<T, AdminBaseDbContext>, IDITransientSelf where T : class, new()
     {
         public AdminBaseRepository(AdminBaseDbContext context) : base(context)
         {
+
         }
 
         /// <summary>

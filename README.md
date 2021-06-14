@@ -8,6 +8,10 @@ https://gitee.com/hzy6/hzy-admin-spa-ui
 ### WebApi 任务调度平台
 https://gitee.com/hzy6/hzy-quartz
 
+### 代码生成器 
+
+https://gitee.com/hzy6/hzy-admin-code-generation
+
 ### Java 后台框架
 
 1. https://gitee.com/hzy6/hzy-admin-thymeleaf

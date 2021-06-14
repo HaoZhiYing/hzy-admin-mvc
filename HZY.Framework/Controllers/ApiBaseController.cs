@@ -1,5 +1,4 @@
 ﻿using HZY.Framework.Filters;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Framework.Controllers
@@ -21,7 +20,6 @@ namespace HZY.Framework.Controllers
     /// <summary>
     /// 控制器服务
     /// </summary>
-    [Authorize]
     [ApiResultFilter]
     [ApiController]
     [Route("api/[controller]")]

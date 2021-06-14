@@ -85,7 +85,7 @@ namespace HZY.WebHost
 
             services.AddCors(options =>
             {
-                options.AddPolicy("HZYCors", builder =>
+                options.AddPolicy("WebHostCors", builder =>
                 {
                     builder.WithOrigins("*")
                         .AllowAnyMethod()
@@ -220,7 +220,7 @@ namespace HZY.WebHost
 
             #region 使用跨域 警告: 通过终结点路由，CORS 中间件必须配置为在对UseRouting和UseEndpoints的调用之间执行。 配置不正确将导致中间件停止正常运行。
 
-            app.UseCors("HZYCors");
+            app.UseCors("WebHostCors");
 
             #endregion
 

@@ -1,4 +1,4 @@
-﻿using HZY.Framework.Controllers;
+using HZY.Framework.Controllers;
 using HZY.Framework.Filters;
 using HZY.Model.FormDto;
 using HZY.Services.Account;
@@ -10,7 +10,7 @@ namespace HZY.WebHost.Controllers
     [ApiResultFilter]
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController
+    public class AccountController:ApiBaseController
     {
         private const string tokenType = "Bearer ";
         private readonly AccountService _accountService;

@@ -52,7 +52,7 @@ namespace HZY.Model.Entities
         /// <summary>
         /// 账户Id
         /// </summary>
-        [Required(ErrorMessage = "请选择账户信息!")]
+        //[Required(ErrorMessage = "请选择账户信息!")]
         public Guid? UserId { get; set; }
     }
 }

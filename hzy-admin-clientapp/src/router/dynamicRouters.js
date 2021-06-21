@@ -20,7 +20,7 @@ function createDynamicRouters(data) {
             createDynamicRouters(item.children);
         } else {
             dynamicRouters.push({
-                path: !item.router && !item.url ? '/NotFound' : item.router,
+                path: item.router ? item.router : '/NotFound',
                 name: item.componentName ? item.componentName : item.id,
                 component: () =>
                     import('@/' + item.url),

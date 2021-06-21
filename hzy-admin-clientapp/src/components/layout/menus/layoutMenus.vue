@@ -22,7 +22,7 @@
     <!-- 动态生成 topnav-->
     <template v-if="topNavValue">
       <template v-for="item in subMenus">
-        <a-menu-item v-if="item.children.length === 0" :key="item.componentName" :title="item.name">
+        <a-menu-item v-if="item.children.length === 0" :key="item.componentName ? item.componentName : item.id" :title="item.name">
           <AppIcons :iconName="item.icon" />
           <span>{{ item.name }}</span>
         </a-menu-item>
@@ -32,7 +32,7 @@
 
     <template v-else>
       <template v-for="item in menus">
-        <a-menu-item v-if="item.children.length === 0" :key="item.componentName" :title="item.name">
+        <a-menu-item v-if="item.children.length === 0" :key="item.componentName ? item.componentName : item.id" :title="item.name">
           <AppIcons :iconName="item.icon" />
           <span>{{ item.name }}</span>
         </a-menu-item>

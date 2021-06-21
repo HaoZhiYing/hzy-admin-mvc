@@ -1,4 +1,4 @@
-import router from '@/router/index'
+import router from '@/router/index.js'
 
 let dynamicRouters = [];
 
@@ -16,14 +16,13 @@ let dynamicRouters = [];
 function createDynamicRouters(data) {
     for (let i = 0; i < data.length; i++) {
         let item = data[i];
+        let path = item.router ? item.router : (item.url ? item.url : '/NotFound');
         if (item.children.length > 0) {
             createDynamicRouters(item.children);
         } else {
-            dynamicRouters.push({
-                path: item.router ? item.router : '/NotFound',
+            var route = {
+                path: path,
                 name: item.componentName ? item.componentName : item.id,
-                component: () =>
-                    import('@/' + item.url),
                 meta: {
                     title: item.name,
                     close: item.close,
@@ -31,7 +30,15 @@ function createDynamicRouters(data) {
                     menuId: item.id,
                     parentId: item.parentId
                 },
-            })
+            };
+
+            if (path && path === '/NotFound') {
+                route.redirect = '/NotFound';
+            } else {
+                route.component = () => import('@/' + item.url);
+            }
+
+            dynamicRouters.push(route);
         }
     }
 }

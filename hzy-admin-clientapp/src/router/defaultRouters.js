@@ -6,7 +6,7 @@ import redirect from '@/views/redirect';
 //路由配置
 export default [
     { path: '/login', name: "/login", component: login },
-    { path: '/:pathMatch(.*)', name: 'NotFound', component: notFoundComponent },
+    { path: '/NotFound', name: 'NotFound', component: notFoundComponent },
     {
         path: '/redirect',
         component: layout,

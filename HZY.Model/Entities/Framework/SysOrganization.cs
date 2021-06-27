@@ -7,7 +7,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 组织机构
     /// </summary>
-    public class SysOrganization : BaseEntity<Guid>
+    public class SysOrganization : BaseModel<Guid>
     {
         /// <summary>
         /// 组织名称

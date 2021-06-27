@@ -9,7 +9,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 用户鱼岗位绑定表
     /// </summary>
-    public class SysUserPost : BaseEntity<Guid>
+    public class SysUserPost : BaseModel<Guid>
     {
         /// <summary>
         /// 账户Id

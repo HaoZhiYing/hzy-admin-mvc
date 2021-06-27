@@ -5,7 +5,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 菜单
     /// </summary>
-    public class SysMenu : BaseEntity<Guid>
+    public class SysMenu : BaseModel<Guid>
     {
         /// <summary>
         /// 编号

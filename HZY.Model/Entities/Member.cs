@@ -7,7 +7,7 @@ namespace HZY.Model.Entities
     /// <summary>
     /// member
     /// </summary>
-    public class Member : BaseEntity<Guid>
+    public class Member : BaseModel<Guid>
     {
         /// <summary>
         /// 编号

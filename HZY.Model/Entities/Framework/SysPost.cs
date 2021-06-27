@@ -6,7 +6,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 岗位
     /// </summary>
-    public class SysPost : BaseEntity<Guid>
+    public class SysPost : BaseModel<Guid>
     {
         /// <summary>
         /// 编号

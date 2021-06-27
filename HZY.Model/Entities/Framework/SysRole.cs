@@ -6,7 +6,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 角色
     /// </summary>
-    public class SysRole : BaseEntity<Guid>
+    public class SysRole : BaseModel<Guid>
     {
         /// <summary>
         /// 编号

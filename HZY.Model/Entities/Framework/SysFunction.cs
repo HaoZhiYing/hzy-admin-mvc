@@ -5,7 +5,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 功能
     /// </summary>
-    public class SysFunction : BaseEntity<Guid>
+    public class SysFunction : BaseModel<Guid>
     {
         /// <summary>
         /// 编号

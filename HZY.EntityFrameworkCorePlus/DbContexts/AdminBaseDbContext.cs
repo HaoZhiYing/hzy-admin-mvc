@@ -10,8 +10,10 @@
 
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using HZY.Common.Token;
 using HZY.EntityFrameworkCorePlus.Interface;
+using HZY.Model.BaseEntitys;
 using HZY.Model.Entities;
 using HZY.Model.Entities.Framework;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +68,22 @@ namespace HZY.EntityFrameworkCorePlus.DbContexts
         {
             //扫描表 并 缓存 属性 xml 信息
             _cacheEntity.Set(modelBuilder.Model.GetEntityTypes().Select(item => item.ClrType));
+
+            #region 过滤软删除
+
+            foreach (var entityType in modelBuilder.Model
+                .GetEntityTypes()
+                .Where(w => typeof(IDeleteBaseEntity).IsAssignableFrom(w.ClrType)))
+            {
+                var parameter = Expression.Parameter(entityType.ClrType);
+                var propertyMethodInfo = typeof(EF).GetMethod(nameof(EF.Property)).MakeGenericMethod(typeof(bool));
+                var isDeletedProperty = Expression.Call(propertyMethodInfo, parameter, Expression.Constant(nameof(IDeleteBaseEntity.IsDeleted)));
+                BinaryExpression compareExpression = Expression.MakeBinary(ExpressionType.Equal, isDeletedProperty, Expression.Constant(false));
+                var lambda = Expression.Lambda(compareExpression, parameter);
+                modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -75,30 +93,70 @@ namespace HZY.EntityFrameworkCorePlus.DbContexts
         {
             var userId = _tokenService.GetAppToken();
 
-            #region 处理 createTime updateTime
-
             var entries = ChangeTracker.Entries();
             var entityEntries = entries as EntityEntry[] ?? entries.ToArray();
 
+            #region 处理 BaseModel
+
             //Update
-            var updateEntries = entityEntries
-                .Where(w => w.Entity is BaseEntity && w.State == EntityState.Modified) // || w.State == EntityState.Unchanged
-                .Select(item => (BaseEntity)item.Entity)
+            var updateEntries_BaseModel = entityEntries
+                .Where(w => w.Entity is BaseModel && w.State == EntityState.Modified) // || w.State == EntityState.Unchanged
+                .Select(item => (BaseModel)item.Entity)
                 .ToList();
-            updateEntries.ForEach(w => w.UpdateTime = DateTime.Now);
+            updateEntries_BaseModel.ForEach(w => w.UpdateTime = DateTime.Now);
 
             //Insert
-            var insertEntries = entityEntries
-                .Where(w => w.Entity is BaseEntity && w.State == EntityState.Added)
-                .Select(item => (BaseEntity)item.Entity)
+            var insertEntries_BaseModel = entityEntries
+                .Where(w => w.Entity is BaseModel && w.State == EntityState.Added)
+                .Select(item => (BaseModel)item.Entity)
                 .ToList();
-            foreach (var entity in insertEntries)
+            foreach (var entity in insertEntries_BaseModel)
             {
                 entity.CreateTime = DateTime.Now;
                 entity.UpdateTime = DateTime.Now;
             }
 
             #endregion
+
+            #region 处理 BaseEntity
+
+            //Insert
+            var insertEntries = entityEntries
+                .Where(w => w.Entity is ICreateBaseEntity && w.State == EntityState.Added)
+                .Select(item => (ICreateBaseEntity)item.Entity)
+                .ToList();
+            foreach (var item in insertEntries)
+            {
+                item.CreateTime = DateTime.Now;
+                item.CreateUserId = userId;
+            }
+
+            //Update
+            var updateEntries = entityEntries
+                .Where(w => w.Entity is IUpdateBaseEntity && w.State == EntityState.Modified) // || w.State == EntityState.Unchanged
+                .Select(item => (IUpdateBaseEntity)item.Entity)
+                .ToList();
+            foreach (var item in updateEntries)
+            {
+                item.UpdateTime = DateTime.Now;
+                item.UpdateUserId = userId;
+            }
+
+            //Delete
+            var deleteEntries = entityEntries
+                .Where(w => w.Entity is IDeleteBaseEntity && w.State == EntityState.Deleted);
+            foreach (var item in deleteEntries)
+            {
+                item.State = EntityState.Modified;
+                var entity = (IDeleteBaseEntity)item.Entity;
+                entity.IsDeleted = true;
+                entity.DeleteTime = DateTime.Now;
+                entity.DeleteUserId = userId;
+            }
+
+            #endregion
+
+
         }
 
 

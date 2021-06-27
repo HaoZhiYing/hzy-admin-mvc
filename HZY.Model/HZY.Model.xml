@@ -4,58 +4,58 @@
         <name>HZY.Model</name>
     </assembly>
     <members>
-        <member name="T:HZY.Model.Bo.AccountInfo">
+        <member name="P:HZY.Model.BaseEntitys.ICreateBaseEntity.CreateUserId">
             <summary>
-            账户 业务对象
+            创建用户
             </summary>
         </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.SysRoles">
+        <member name="P:HZY.Model.BaseEntitys.ICreateBaseEntity.CreateTime">
             <summary>
-            角色 集合
+            创建时间
             </summary>
         </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.SysPosts">
+        <member name="P:HZY.Model.BaseEntitys.IDeleteBaseEntity.IsDeleted">
             <summary>
-            所属岗位
+            是否删除
             </summary>
         </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.SysOrganization">
+        <member name="P:HZY.Model.BaseEntitys.IDeleteBaseEntity.DeleteUserId">
             <summary>
-            所属组织
+            删除用户
             </summary>
         </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.IsAdministrator">
+        <member name="P:HZY.Model.BaseEntitys.IDeleteBaseEntity.DeleteTime">
             <summary>
-            是否超级管理员
+            删除时间
             </summary>
         </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.Menus">
+        <member name="P:HZY.Model.BaseEntitys.IUpdateBaseEntity.UpdateUserId">
             <summary>
-            菜单集合
+            更新用户
             </summary>
         </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.MenuPowers">
+        <member name="P:HZY.Model.BaseEntitys.IUpdateBaseEntity.UpdateTime">
             <summary>
-            菜单功能集合
+            更新时间
             </summary>
         </member>
-        <member name="T:HZY.Model.Entities.Framework.BaseEntity">
+        <member name="T:HZY.Model.Entities.Framework.BaseModel">
             <summary>
             基础模型
             包含属性 UpdateTime、CreateTime
             </summary>
         </member>
-        <member name="P:HZY.Model.Entities.Framework.BaseEntity.UpdateTime">
+        <member name="P:HZY.Model.Entities.Framework.BaseModel.UpdateTime">
             <summary>
             更新时间
             </summary>
         </member>
-        <member name="P:HZY.Model.Entities.Framework.BaseEntity.CreateTime">
+        <member name="P:HZY.Model.Entities.Framework.BaseModel.CreateTime">
             <summary>
             创建时间
             </summary>
         </member>
-        <member name="T:HZY.Model.Entities.Framework.BaseEntity`1">
+        <member name="T:HZY.Model.Entities.Framework.BaseModel`1">
             <summary>
             基础模型
             包含属性 Id、UpdateTime、CreateTime
@@ -355,6 +355,41 @@
         <member name="P:HZY.Model.Entities.Member.UserId">
             <summary>
             账户Id
+            </summary>
+        </member>
+        <member name="T:HZY.Model.Bo.AccountInfo">
+            <summary>
+            账户 业务对象
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.SysRoles">
+            <summary>
+            角色 集合
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.SysPosts">
+            <summary>
+            所属岗位
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.SysOrganization">
+            <summary>
+            所属组织
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.IsAdministrator">
+            <summary>
+            是否超级管理员
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.Menus">
+            <summary>
+            菜单集合
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.MenuPowers">
+            <summary>
+            菜单功能集合
             </summary>
         </member>
         <member name="P:HZY.Model.FormDto.AuthUserFormDto.UserName">

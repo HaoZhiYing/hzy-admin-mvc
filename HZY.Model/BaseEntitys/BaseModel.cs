@@ -7,7 +7,7 @@ namespace HZY.Model.Entities.Framework
     /// 基础模型
     /// 包含属性 UpdateTime、CreateTime
     /// </summary>
-    public class BaseEntity
+    public class BaseModel
     {
         /// <summary>
         /// 更新时间
@@ -25,7 +25,7 @@ namespace HZY.Model.Entities.Framework
     /// 包含属性 Id、UpdateTime、CreateTime
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public class BaseEntity<TKey> : BaseEntity
+    public class BaseModel<TKey> : BaseModel
     {
         [Key]
         public TKey Id { get; set; } = default;

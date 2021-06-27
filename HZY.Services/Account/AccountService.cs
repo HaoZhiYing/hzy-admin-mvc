@@ -37,7 +37,7 @@ namespace HZY.Services.Account
         /// <returns></returns>
         private AccountInfo FindAccountInfoByToken()
         {
-            var id = _tokenService.GetAppToken();
+            var id = _tokenService.GetAccountIdByToken();
 
             if (id == Guid.Empty)
             {
@@ -109,7 +109,7 @@ namespace HZY.Services.Account
             //if (string.IsNullOrEmpty(code)) throw new MessageBox("验证码失效");
             //if (!code.ToLower().Equals(loginCode.ToLower())) throw new MessageBox("验证码不正确");
 
-            return _tokenService.CreateAppTokenById(sysUser.Id);
+            return _tokenService.CreateTokenByAccountId(sysUser.Id);
         }
 
         /// <summary>

@@ -91,7 +91,7 @@ namespace HZY.EntityFrameworkCorePlus.DbContexts
         /// </summary>
         protected void SavingChangesEvent(object sender, SavingChangesEventArgs e)
         {
-            var userId = _tokenService.GetAppToken();
+            var userId = _tokenService.GetAccountIdByToken();
 
             var entries = ChangeTracker.Entries();
             var entityEntries = entries as EntityEntry[] ?? entries.ToArray();

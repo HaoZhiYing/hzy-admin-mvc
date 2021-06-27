@@ -28,7 +28,7 @@ namespace HZY.Common.Token
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string CreateAppTokenById(Guid id)
+        public string CreateTokenByAccountId(Guid id)
         {
             return JwtTokenUtil.CreateToken(id.ToString(), this._appConfiguration.JwtSecurityKey, this._appConfiguration.JwtKeyName);
         }
@@ -37,7 +37,7 @@ namespace HZY.Common.Token
         /// 获取 token 并得到 id
         /// </summary>
         /// <returns></returns>
-        public Guid GetAppToken()
+        public Guid GetAccountIdByToken()
         {
             var token = this._httpContext.Request.Headers[this._appConfiguration.AuthorizationKeyName].ToString();
 

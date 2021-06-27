@@ -14,6 +14,29 @@
             创建时间
             </summary>
         </member>
+        <member name="T:HZY.Model.BaseEntitys.DefaultBaseEntity">
+            <summary>
+            基础模型
+            包含属性 UpdateTime、CreateTime
+            </summary>
+        </member>
+        <member name="P:HZY.Model.BaseEntitys.DefaultBaseEntity.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:HZY.Model.BaseEntitys.DefaultBaseEntity.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:HZY.Model.BaseEntitys.DefaultBaseEntity`1">
+            <summary>
+            基础模型
+            包含属性 Id、UpdateTime、CreateTime
+            </summary>
+            <typeparam name="TKey"></typeparam>
+        </member>
         <member name="P:HZY.Model.BaseEntitys.IDeleteBaseEntity.IsDeleted">
             <summary>
             是否删除
@@ -39,28 +62,40 @@
             更新时间
             </summary>
         </member>
-        <member name="T:HZY.Model.Entities.Framework.BaseModel">
+        <member name="T:HZY.Model.Bo.AccountInfo">
             <summary>
-            基础模型
-            包含属性 UpdateTime、CreateTime
+            账户 业务对象
             </summary>
         </member>
-        <member name="P:HZY.Model.Entities.Framework.BaseModel.UpdateTime">
+        <member name="P:HZY.Model.Bo.AccountInfo.SysRoles">
             <summary>
-            更新时间
+            角色 集合
             </summary>
         </member>
-        <member name="P:HZY.Model.Entities.Framework.BaseModel.CreateTime">
+        <member name="P:HZY.Model.Bo.AccountInfo.SysPosts">
             <summary>
-            创建时间
+            所属岗位
             </summary>
         </member>
-        <member name="T:HZY.Model.Entities.Framework.BaseModel`1">
+        <member name="P:HZY.Model.Bo.AccountInfo.SysOrganization">
             <summary>
-            基础模型
-            包含属性 Id、UpdateTime、CreateTime
+            所属组织
             </summary>
-            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.IsAdministrator">
+            <summary>
+            是否超级管理员
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.Menus">
+            <summary>
+            菜单集合
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Bo.AccountInfo.MenuPowers">
+            <summary>
+            菜单功能集合
+            </summary>
         </member>
         <member name="T:HZY.Model.Entities.Framework.SysFunction">
             <summary>
@@ -355,41 +390,6 @@
         <member name="P:HZY.Model.Entities.Member.UserId">
             <summary>
             账户Id
-            </summary>
-        </member>
-        <member name="T:HZY.Model.Bo.AccountInfo">
-            <summary>
-            账户 业务对象
-            </summary>
-        </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.SysRoles">
-            <summary>
-            角色 集合
-            </summary>
-        </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.SysPosts">
-            <summary>
-            所属岗位
-            </summary>
-        </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.SysOrganization">
-            <summary>
-            所属组织
-            </summary>
-        </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.IsAdministrator">
-            <summary>
-            是否超级管理员
-            </summary>
-        </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.Menus">
-            <summary>
-            菜单集合
-            </summary>
-        </member>
-        <member name="P:HZY.Model.Bo.AccountInfo.MenuPowers">
-            <summary>
-            菜单功能集合
             </summary>
         </member>
         <member name="P:HZY.Model.FormDto.AuthUserFormDto.UserName">

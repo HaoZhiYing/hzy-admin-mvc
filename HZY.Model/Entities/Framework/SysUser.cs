@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HZY.Model.BaseEntitys;
+using System;
 
 namespace HZY.Model.Entities.Framework
 {
     /// <summary>
     /// 系统账号
     /// </summary>
-    public class SysUser : BaseModel<Guid>
+    public class SysUser : DefaultBaseEntity<Guid>
     {
         /// <summary>
         /// 账户名称

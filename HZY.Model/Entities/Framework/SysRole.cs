@@ -1,4 +1,5 @@
 ﻿
+using HZY.Model.BaseEntitys;
 using System;
 
 namespace HZY.Model.Entities.Framework
@@ -6,7 +7,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 角色
     /// </summary>
-    public class SysRole : BaseModel<Guid>
+    public class SysRole : DefaultBaseEntity<Guid>
     {
         /// <summary>
         /// 编号

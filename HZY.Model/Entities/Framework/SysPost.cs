@@ -1,4 +1,5 @@
 ﻿
+using HZY.Model.BaseEntitys;
 using System;
 
 namespace HZY.Model.Entities.Framework
@@ -6,7 +7,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 岗位
     /// </summary>
-    public class SysPost : BaseModel<Guid>
+    public class SysPost : DefaultBaseEntity<Guid>
     {
         /// <summary>
         /// 编号

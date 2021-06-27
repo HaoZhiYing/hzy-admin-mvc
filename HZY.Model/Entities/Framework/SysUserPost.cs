@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HZY.Model.BaseEntitys;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 用户鱼岗位绑定表
     /// </summary>
-    public class SysUserPost : BaseModel<Guid>
+    public class SysUserPost : DefaultBaseEntity<Guid>
     {
         /// <summary>
         /// 账户Id

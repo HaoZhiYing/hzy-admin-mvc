@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HZY.Model.BaseEntitys;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,7 +8,7 @@ namespace HZY.Model.Entities.Framework
     /// <summary>
     /// 组织机构
     /// </summary>
-    public class SysOrganization : BaseModel<Guid>
+    public class SysOrganization : DefaultBaseEntity<Guid>
     {
         /// <summary>
         /// 组织名称

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HZY.Model.BaseEntitys;
+using System;
 
 namespace HZY.Model.Entities.Framework
 {
     /// <summary>
     /// 功能
     /// </summary>
-    public class SysFunction : BaseModel<Guid>
+    public class SysFunction : DefaultBaseEntity<Guid>
     {
         /// <summary>
         /// 编号

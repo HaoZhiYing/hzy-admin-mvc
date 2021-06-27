@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HZY.Model.BaseEntitys;
+using System;
 
 namespace HZY.Model.Entities.Framework
 {
     /// <summary>
     /// 菜单
     /// </summary>
-    public class SysMenu : BaseModel<Guid>
+    public class SysMenu : DefaultBaseEntity<Guid>
     {
         /// <summary>
         /// 编号

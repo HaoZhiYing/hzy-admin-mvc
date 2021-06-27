@@ -96,19 +96,19 @@ namespace HZY.EntityFrameworkCorePlus.DbContexts
             var entries = ChangeTracker.Entries();
             var entityEntries = entries as EntityEntry[] ?? entries.ToArray();
 
-            #region 处理 BaseModel
+            #region 处理 DefaultBaseEntity
 
             //Update
             var updateEntries_BaseModel = entityEntries
-                .Where(w => w.Entity is BaseModel && w.State == EntityState.Modified) // || w.State == EntityState.Unchanged
-                .Select(item => (BaseModel)item.Entity)
+                .Where(w => w.Entity is DefaultBaseEntity && w.State == EntityState.Modified) // || w.State == EntityState.Unchanged
+                .Select(item => (DefaultBaseEntity)item.Entity)
                 .ToList();
             updateEntries_BaseModel.ForEach(w => w.UpdateTime = DateTime.Now);
 
             //Insert
             var insertEntries_BaseModel = entityEntries
-                .Where(w => w.Entity is BaseModel && w.State == EntityState.Added)
-                .Select(item => (BaseModel)item.Entity)
+                .Where(w => w.Entity is DefaultBaseEntity && w.State == EntityState.Added)
+                .Select(item => (DefaultBaseEntity)item.Entity)
                 .ToList();
             foreach (var entity in insertEntries_BaseModel)
             {

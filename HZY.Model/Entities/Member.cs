@@ -1,13 +1,12 @@
-﻿using HZY.Model.Entities.Framework;
+﻿using HZY.Model.BaseEntitys;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace HZY.Model.Entities
 {
     /// <summary>
     /// member
     /// </summary>
-    public class Member : BaseModel<Guid>
+    public class Member : DefaultBaseEntity<Guid>
     {
         /// <summary>
         /// 编号

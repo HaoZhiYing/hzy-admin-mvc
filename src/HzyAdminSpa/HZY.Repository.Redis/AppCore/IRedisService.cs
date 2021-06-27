@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Redis.Service
+namespace HZY.Repository.Redis.AppCore
 {
     public interface IRedisService : IDisposable
     {

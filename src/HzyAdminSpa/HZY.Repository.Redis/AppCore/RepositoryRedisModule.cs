@@ -1,5 +1,4 @@
-﻿using HZY.Redis.Service;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace HZY.Repository.Redis.AppCore
 {

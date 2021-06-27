@@ -1,4 +1,4 @@
-namespace HZY.Redis.Service
+namespace HZY.Repository.Redis.AppCore
 {
     using StackExchange.Redis;
 

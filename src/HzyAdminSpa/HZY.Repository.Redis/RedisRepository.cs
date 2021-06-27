@@ -1,5 +1,5 @@
 ﻿using HZY.Common.ScanDIService.Interface;
-using HZY.Redis.Service;
+using HZY.Repository.Redis.AppCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 

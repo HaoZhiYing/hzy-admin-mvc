@@ -1,17 +1,12 @@
-﻿using System;
-using System.Linq;
-using HZY.Repository.Framework;
-using HZY.Common;
-using Microsoft.AspNetCore.Http;
-using HZY.Model.Bo;
-using HZY.Model.Entities.Framework;
+﻿using HZY.Admin.Model.Bo;
 using HZY.Framework.Services;
+using HZY.Repository.Framework;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
-using HZY.Framework.ApiResultManage;
-using Microsoft.EntityFrameworkCore;
-using HZY.Common.Token;
 
-namespace HZY.Services.Account
+namespace HZY.AccountServices
 {
     /// <summary>
     /// 当前登录账户服务
@@ -20,16 +15,24 @@ namespace HZY.Services.Account
     {
         private readonly AccountInfo _accountInfo;
         private readonly AppConfiguration _appConfiguration;
-        private readonly TokenService _tokenService;
+        private readonly HttpContext _httpContext;
 
         public AccountService(SysUserRepository repository,
             AppConfiguration appConfiguration,
-            TokenService tokenService) : base(repository)
+            IHttpContextAccessor httpContextAccessor) : base(repository)
         {
             _appConfiguration = appConfiguration;
-            _tokenService = tokenService;
+            _httpContext = httpContextAccessor.HttpContext;
             this._accountInfo = this.FindAccountInfoByToken();
         }
+
+        /// <summary>
+        /// 创建 token 根据账户 id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string CreateToken(string id)
+            => JwtTokenUtil.CreateToken(id, this._appConfiguration.JwtSecurityKey, this._appConfiguration.JwtKeyName);
 
         /// <summary>
         /// 根据用户信息获取 Account 对象
@@ -37,7 +40,20 @@ namespace HZY.Services.Account
         /// <returns></returns>
         private AccountInfo FindAccountInfoByToken()
         {
-            var id = _tokenService.GetAppToken();
+            var token = this._httpContext.Request.Headers[this._appConfiguration.AuthorizationKeyName].ToString();
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return default;
+            }
+
+            if (this._httpContext.User.Identity == null)
+            {
+                return default;
+            }
+
+            //var id = JwtTokenUtil.ReadJwtToken(token).ToGuid();
+            var id = this._httpContext.User.Identity.Name.ToGuid();
 
             if (id == Guid.Empty)
             {
@@ -109,7 +125,7 @@ namespace HZY.Services.Account
             //if (string.IsNullOrEmpty(code)) throw new MessageBox("验证码失效");
             //if (!code.ToLower().Equals(loginCode.ToLower())) throw new MessageBox("验证码不正确");
 
-            return _tokenService.CreateAppTokenById(sysUser.Id);
+            return this.CreateToken(sysUser?.Id.ToStr());
         }
 
         /// <summary>

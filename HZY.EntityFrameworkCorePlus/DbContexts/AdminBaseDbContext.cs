@@ -10,6 +10,7 @@
 
 using System;
 using System.Linq;
+using HZY.Common.Token;
 using HZY.EntityFrameworkCorePlus.Interface;
 using HZY.Model.Entities;
 using HZY.Model.Entities.Framework;
@@ -24,11 +25,13 @@ namespace HZY.EntityFrameworkCorePlus.DbContexts
     public class AdminBaseDbContext : BaseDbContext<AdminBaseDbContext>
     {
         private readonly ICacheEntity _cacheEntity;
+        private readonly TokenService _tokenService;
 
-        public AdminBaseDbContext(DbContextOptions<AdminBaseDbContext> options, ICacheEntity cacheEntity) : base(options)
+        public AdminBaseDbContext(DbContextOptions<AdminBaseDbContext> options, ICacheEntity cacheEntity, TokenService tokenService) : base(options)
         {
             this.SavingChanges += (sender, args) => this.SavingChangesEvent(sender, args);
             _cacheEntity = cacheEntity;
+            _tokenService = tokenService;
         }
 
         #region DbSet
@@ -70,6 +73,8 @@ namespace HZY.EntityFrameworkCorePlus.DbContexts
         /// </summary>
         protected void SavingChangesEvent(object sender, SavingChangesEventArgs e)
         {
+            var userId = _tokenService.GetAppToken();
+
             #region 处理 createTime updateTime
 
             var entries = ChangeTracker.Entries();

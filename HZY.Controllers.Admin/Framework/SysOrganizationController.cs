@@ -18,7 +18,7 @@ namespace HZY.Controllers.Admin.Framework
     /// <summary>
     /// 组织机构控制器
     /// </summary>
-    [ControllerDescriptor("d29fde94-0d6a-4a64-8446-55ee63df5885")]
+    [ControllerDescriptor("0ABFD53B-6BDE-42C6-9F99-E32775BC31DD")]
     public class SysOrganizationController : AdminBaseController<SysOrganizationService>
     {
         public SysOrganizationController(SysOrganizationService defaultService) : base(defaultService)

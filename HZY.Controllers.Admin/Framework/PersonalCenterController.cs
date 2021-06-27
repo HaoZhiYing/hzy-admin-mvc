@@ -1,4 +1,5 @@
 ﻿using HZY.Framework.Controllers;
+using HZY.Framework.Permission.Attributes;
 using HZY.Model.Entities.Framework;
 using HZY.Model.FormDto;
 using HZY.Repository.Framework;
@@ -12,6 +13,7 @@ namespace HZY.Controllers.Admin.Framework
     /// <summary>
     /// 个人中心
     /// </summary>
+    [ControllerDescriptor()]
     public class PersonalCenterController : AdminBaseController<SysUserService>
     {
         private readonly AccountService _accountService;

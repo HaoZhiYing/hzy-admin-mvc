@@ -18,7 +18,7 @@ using HZY.Model.FormDto;
 
 namespace HZY.Controllers.Admin.Framework
 {
-    [ControllerDescriptor("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d")]
+    [ControllerDescriptor("E5D4DA6B-AAB0-4AAA-982F-43673E8152C0")]
     public class SysMenuController : AdminBaseController<SysMenuService>
     {
         private readonly AccountInfo _accountInfo;

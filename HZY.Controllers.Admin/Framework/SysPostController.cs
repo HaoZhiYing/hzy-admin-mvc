@@ -18,7 +18,7 @@ namespace HZY.Controllers.Admin.Framework
     /// <summary>
     /// 岗位控制器
     /// </summary>
-    [ControllerDescriptor("d29fde94-0d6a-4a64-8446-55ee63df5885")]
+    [ControllerDescriptor("D29FDE94-0D6A-4A64-8446-55EE63DF5885")]
     public class SysPostController : AdminBaseController<SysPostService>
     {
         public SysPostController(SysPostService defaultService) : base(defaultService)

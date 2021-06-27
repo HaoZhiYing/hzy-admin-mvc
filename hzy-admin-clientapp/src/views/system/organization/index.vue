@@ -23,7 +23,9 @@
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
           <template v-if="power.search">
             <a-button class="mr-10" @click="table.search.state = !table.search.state">
-              <div v-if="table.search.state"><AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起</div>
+              <div v-if="table.search.state">
+                <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
+              </div>
               <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
             </a-button>
           </template>
@@ -67,7 +69,12 @@
             </template>
             <a-divider type="vertical" />
             <template v-if="power.delete">
-              <a-popconfirm title="您确定要删除吗?" @confirm="deleteList(record.id)" okText="确定" cancelText="取消">
+              <a-popconfirm
+                title="您确定要删除吗?"
+                @confirm="deleteList(record.id)"
+                okText="确定"
+                cancelText="取消"
+              >
                 <a class="text-danger">删除</a>
               </a-popconfirm>
             </template>
@@ -77,21 +84,7 @@
     </a-card>
 
     <!--表单弹层-->
-    <a-modal v-model:visible="form.visible" title="编辑" centered @ok="form.visible = false" :width="800" destroyOnClose>
-      <template #footer>
-        <a-button type="primary" @click="infoForm.saveForm()">提交</a-button>
-        <a-button type="danger" ghost @click="form.visible = false">关闭</a-button>
-      </template>
-      <info
-        v-model:formKey="form.key"
-        ref="infoForm"
-        @onSaveSuccess="
-          findList();
-          form.visible = false;
-        "
-        v-model:parentId="table.search.vm.parentId"
-      />
-    </a-modal>
+    <info ref="formRef" @onSuccess="() => findList()" />
   </div>
 </template>
 <script>
@@ -168,13 +161,9 @@ export default defineComponent({
         data: [],
         expandedRowKeys: null,
       },
-      form: {
-        visible: false,
-        key: "",
-      },
     });
     //表单 ref 对象
-    const infoForm = ref(null);
+    const formRef = ref(null);
 
     //权限
     const power = computed(() => store.getters["app/getMenuPowerById"]);
@@ -213,9 +202,13 @@ export default defineComponent({
       },
       //打开表单页面
       openForm(id, parentId) {
-        state.form.visible = true;
-        state.form.key = id;
         state.table.search.vm.parentId = parentId;
+
+        formRef.value.openForm({
+          visible: true,
+          key: id,
+          parentId: state.table.search.vm.parentId,
+        });
       },
       formatDate(time) {
         return moment(time).format("YYYY-MM-DD");
@@ -230,7 +223,7 @@ export default defineComponent({
       ...toRefs(state),
       ...methods,
       power,
-      infoForm,
+      formRef,
     };
   },
 });

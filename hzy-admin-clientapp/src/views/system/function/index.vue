@@ -18,7 +18,9 @@
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
           <template v-if="power.search">
             <a-button class="mr-10" @click="table.search.state = !table.search.state">
-              <div v-if="table.search.state"><AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起</div>
+              <div v-if="table.search.state">
+                <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
+              </div>
               <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
             </a-button>
           </template>
@@ -31,7 +33,12 @@
             </a-button>
           </template>
           <template v-if="power.delete">
-            <a-popconfirm title="您确定要删除吗?" @confirm="deleteList()" okText="确定" cancelText="取消">
+            <a-popconfirm
+              title="您确定要删除吗?"
+              @confirm="deleteList()"
+              okText="确定"
+              cancelText="取消"
+            >
               <a-button type="danger" class="mr-10">
                 <template #icon>
                   <AppIcons iconName="DeleteOutlined" />
@@ -66,7 +73,12 @@
             </template>
             <a-divider type="vertical" />
             <template v-if="power.delete">
-              <a-popconfirm title="您确定要删除吗?" @confirm="deleteList(record.id)" okText="确定" cancelText="取消">
+              <a-popconfirm
+                title="您确定要删除吗?"
+                @confirm="deleteList(record.id)"
+                okText="确定"
+                cancelText="取消"
+              >
                 <a class="text-danger">删除</a>
               </a-popconfirm>
             </template>
@@ -89,20 +101,7 @@
       </a-pagination>
     </a-card>
     <!--表单弹层-->
-    <a-modal v-model:visible="form.visible" title="编辑" centered @ok="form.visible = false" :width="400" destroyOnClose>
-      <template #footer>
-        <a-button type="primary" @click="infoForm.saveForm()">提交</a-button>
-        <a-button type="danger" ghost @click="form.visible = false">关闭</a-button>
-      </template>
-      <info
-        v-model:formKey="form.key"
-        ref="infoForm"
-        @onSaveSuccess="
-          findList();
-          form.visible = false;
-        "
-      />
-    </a-modal>
+    <info ref="formRef" @onSuccess="() => findList()" />
   </div>
 </template>
 <script>
@@ -177,13 +176,10 @@ export default defineComponent({
         columns,
         data: [],
       },
-      form: {
-        visible: false,
-        key: "",
-      },
     });
+
     //表单 ref 对象
-    const infoForm = ref(null);
+    const formRef = ref(null);
 
     //权限
     const power = computed(() => store.getters["app/getMenuPowerById"]);
@@ -212,14 +208,16 @@ export default defineComponent({
       //获取列表数据
       findList() {
         state.table.loading = true;
-        service.findList(state.table.rows, state.table.page, state.table.search.vm).then((res) => {
-          let data = res.data;
-          state.table.loading = false;
-          state.table.page = data.page;
-          state.table.rows = data.size;
-          state.table.total = data.total;
-          state.table.data = data.dataSource;
-        });
+        service
+          .findList(state.table.rows, state.table.page, state.table.search.vm)
+          .then((res) => {
+            let data = res.data;
+            state.table.loading = false;
+            state.table.page = data.page;
+            state.table.rows = data.size;
+            state.table.total = data.total;
+            state.table.data = data.dataSource;
+          });
       },
       //删除数据
       deleteList(id) {
@@ -237,8 +235,7 @@ export default defineComponent({
       },
       //打开表单页面
       openForm(id) {
-        state.form.visible = true;
-        state.form.key = id;
+        formRef.value.openForm({ visible: true, key: id });
       },
       // exportExcel() {
       //   service.exportExcel(state.table.search.vm);
@@ -253,7 +250,7 @@ export default defineComponent({
       ...toRefs(state),
       ...methods,
       power,
-      infoForm,
+      formRef,
     };
   },
 });

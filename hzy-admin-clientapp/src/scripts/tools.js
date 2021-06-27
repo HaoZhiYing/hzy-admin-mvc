@@ -10,7 +10,7 @@ let tools = {
     loadingStart() {
         let value = 0.1;
         const time = setInterval(() => {
-            if (this.nprogressState) {
+            if (tools.nprogressState) {
                 NProgress.set(1);
                 return clearInterval(time);
             }
@@ -26,7 +26,7 @@ let tools = {
      * 加载效果结束
      */
     loadingStop() {
-        this.nprogressState = true;
+        tools.nprogressState = true;
     },
     //消息提醒
     message(text, type = '') {

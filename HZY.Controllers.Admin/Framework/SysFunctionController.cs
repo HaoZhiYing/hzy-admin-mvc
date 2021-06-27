@@ -15,7 +15,7 @@ using HZY.Model.Entities.Framework;
 
 namespace HZY.Controllers.Admin.Framework
 {
-    [ControllerDescriptor("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d")]
+    [ControllerDescriptor("D721FC55-2174-40EB-BB37-5C54A158525A")]
     public class SysFunctionController : AdminBaseController<SysFunctionService>
     {
         public SysFunctionController(SysFunctionService defaultService) : base(defaultService)

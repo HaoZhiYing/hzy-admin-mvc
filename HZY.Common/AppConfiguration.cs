@@ -4,7 +4,7 @@ using HZY.Common.ScanDIService.Attributes;
 using HZY.Common.ScanDIService.Enums;
 using Microsoft.Extensions.Configuration;
 
-namespace HZY.Admin.Model.Bo
+namespace HZY.Common
 {
     /// <summary>
     /// 程序配置信息映射类 appsettings.json

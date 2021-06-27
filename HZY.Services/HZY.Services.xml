@@ -9,13 +9,6 @@
             当前登录账户服务
             </summary>
         </member>
-        <member name="M:HZY.Services.Account.AccountService.CreateToken(System.String)">
-            <summary>
-            创建 token 根据账户 id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
         <member name="M:HZY.Services.Account.AccountService.FindAccountInfoByToken">
             <summary>
             根据用户信息获取 Account 对象

@@ -13,7 +13,7 @@ using HZY.EntityFrameworkCorePlus.Attributes;
 
 namespace HZY.Controllers.Admin.Base
 {
-    [ControllerDescriptor("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d")]
+    [ControllerDescriptor("7C34C2FD-98ED-4655-AA04-BB00B915A751")]
     public class MemberController : AdminBaseController<MemberService>
     {
         public MemberController(MemberService defaultService) : base(defaultService)

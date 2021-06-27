@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace HZY.Common
+namespace HZY.Common.Token
 {
     /// <summary>
     /// JWT是由 . 分割的三部分组成：

@@ -57,12 +57,10 @@ axios.interceptors.response.use(
             if (data.code === -2) {
                 //服务端异常
                 tools.message(data.message, "错误");
-                return;
             }
             if (data.code === 0) {
                 //失败
                 tools.message(data.message, "警告");
-                return;
             }
         }
 

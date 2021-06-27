@@ -18,7 +18,7 @@ using HZY.Services.Account;
 
 namespace HZY.Controllers.Admin.Framework
 {
-    [ControllerDescriptor("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d")]
+    [ControllerDescriptor("BD024F3A-99A7-4407-861C-A016F243F222")]
     public class SysRoleMenuFunctionController : AdminBaseController<SysRoleMenuFunctionService>
     {
         private readonly SysRoleService _sysRoleService;

@@ -15,7 +15,7 @@ using HZY.Model.Entities.Framework;
 
 namespace HZY.Controllers.Admin.Framework
 {
-    [ControllerDescriptor("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d")]
+    [ControllerDescriptor("60AE9382-31AB-4276-A379-D3876E9BB783")]
     public class SysRoleController : AdminBaseController<SysRoleService>
     {
         public SysRoleController(SysRoleService defaultService) : base(defaultService)

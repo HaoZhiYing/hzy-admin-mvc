@@ -393,16 +393,5 @@
             系统账户表单
             </summary>
         </member>
-        <member name="T:HZY.Admin.Model.Bo.AppConfiguration">
-            <summary>
-            程序配置信息映射类 appsettings.json
-            </summary>
-        </member>
-        <member name="M:HZY.Admin.Model.Bo.AppConfiguration.Mapping(System.String)">
-            <summary>
-            映射数据 到 属性
-            </summary>
-            <param name="key"></param>
-        </member>
     </members>
 </doc>

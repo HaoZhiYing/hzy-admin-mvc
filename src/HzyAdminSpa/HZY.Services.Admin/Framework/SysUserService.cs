@@ -143,6 +143,11 @@ namespace HZY.Services.Admin.Framework
                 model.Password = string.IsNullOrWhiteSpace(model.Password) ? "123qwe" : model.Password; //Tools.MD5Encrypt("123");
             }
 
+            if (await this.Repository.AnyAsync(w => w.LoginName == model.LoginName && w.Id != model.Id))
+            {
+                MessageBox.Show("登录账号名称已存在!");
+            }
+
             await this.Repository.InsertOrUpdateAsync(form.Form);
 
             //变更用户角色

@@ -68,7 +68,7 @@
   </a-modal>
 </template>
 <script>
-import { defineComponent, reactive, toRefs, ref } from "vue";
+import { defineComponent, reactive, toRefs, ref, nextTick } from "vue";
 import tools from "@/scripts/tools";
 import service from "@/service/system/userService";
 
@@ -113,13 +113,17 @@ export default defineComponent({
         formRef.value.validate().then(() => {
           state.saveLoading = true;
           state.vm.form.organizationId = state.organizationId;
-          service.saveForm(state.vm).then((res) => {
-            state.saveLoading = false;
-            if (res.code != 1) return;
-            tools.message("操作成功!", "成功");
-            context.emit("onSuccess", res.data);
-            state.visible = false;
-          });
+          service
+            .saveForm(state.vm)
+            .then((res) => {
+              if (res.code != 1) return;
+              tools.message("操作成功!", "成功");
+              context.emit("onSuccess", res.data);
+              state.visible = false;
+            })
+            .finally(() => {
+              state.saveLoading = false;
+            });
         });
         // .catch((error) => {
         //   console.log("error", error);
@@ -131,7 +135,9 @@ export default defineComponent({
         if (visible) {
           state.vm.id = key;
           state.organizationId = organizationId;
-          if (formRef.value) formRef.value.resetFields();
+          nextTick(() => {
+            formRef.value.resetFields();
+          });
           methods.findForm();
         }
       },

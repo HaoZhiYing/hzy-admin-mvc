@@ -240,6 +240,7 @@ export default defineComponent({
           if (res.code != 1) return;
           tools.message("删除成功!", "成功");
           methods.findList();
+          state.table.selectedRowKeys = [];
         });
       },
       //打开表单页面

@@ -19,13 +19,22 @@
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" class="pb-15">
               <template v-if="power.search">
                 <a-button class="mr-10" @click="table.search.state = !table.search.state">
-                  <div v-if="table.search.state"><AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起</div>
+                  <div v-if="table.search.state">
+                    <AppIcons iconName="UpOutlined" />&nbsp;&nbsp;收起
+                  </div>
                   <div v-else><AppIcons iconName="DownOutlined" />&nbsp;&nbsp;展开</div>
                 </a-button>
               </template>
             </a-col>
           </a-row>
-          <a-table :columns="table.columns" :data-source="table.data" :loading="table.loading" :pagination="false" tableLayout="fixed" rowKey="id">
+          <a-table
+            :columns="table.columns"
+            :data-source="table.data"
+            :loading="table.loading"
+            :pagination="false"
+            tableLayout="fixed"
+            rowKey="id"
+          >
             <template #id="{ record }">
               <span>
                 <a href="javascript:void(0)" @click="goSetUp(record.id)">去设置</a>
@@ -49,10 +58,21 @@
         </a-card>
       </a-col>
       <a-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
-        <a-table rowKey="id" :columns="tree.columns" :data-source="tree.data" :pagination="false" :expandedRowKeys="tree.expandedRowKeys" size="small">
+        <a-table
+          rowKey="id"
+          :columns="tree.columns"
+          :data-source="tree.data"
+          :pagination="false"
+          :expandedRowKeys="tree.expandedRowKeys"
+          size="small"
+        >
           <template #action="{ record }">
             <div>
-              <a-checkbox-group style="display: block" v-model:value="record.checkFunction" @change="(values) => onChangeCheckbox({ values, id: record.id })">
+              <a-checkbox-group
+                style="display: block"
+                v-model:value="record.checkFunction"
+                @change="(values) => onChangeCheckbox({ values, id: record.id })"
+              >
                 <a-row>
                   <a-col :span="3" v-for="item in record.functions" :key="item.id">
                     <a-checkbox :value="item.id">{{ item.label }}</a-checkbox>
@@ -186,15 +206,17 @@ export default defineComponent({
       //获取列表数据
       findList() {
         state.table.loading = true;
-        service.findList(state.table.rows, state.table.page, state.table.search.vm).then((res) => {
-          let data = res.data;
-          state.table.loading = false;
-          state.table.page = data.page;
-          state.table.rows = data.size;
-          state.table.total = data.total;
-          state.table.data = data.dataSource;
-          state.tree.roleId = data.dataSource[0].id;
-        });
+        service
+          .findList(state.table.rows, state.table.page, state.table.search.vm)
+          .then((res) => {
+            let data = res.data;
+            state.table.loading = false;
+            state.table.page = data.page;
+            state.table.rows = data.size;
+            state.table.total = data.total;
+            state.table.data = data.dataSource;
+            state.tree.roleId = data.dataSource[0].id;
+          });
       },
       //删除数据
       deleteList(id) {
@@ -208,6 +230,7 @@ export default defineComponent({
           if (res.code != 1) return;
           tools.message("删除成功!", "成功");
           methods.findList();
+          state.table.selectedRowKeys = [];
         });
       },
       //打开表单页面

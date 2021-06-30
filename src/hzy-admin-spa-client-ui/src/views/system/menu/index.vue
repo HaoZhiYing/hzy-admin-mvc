@@ -305,6 +305,7 @@ export default defineComponent({
           tools.message("删除成功!", "成功");
           methods.getMenusFunctionTree();
           methods.findList();
+          state.table.selectedRowKeys = [];
         });
       },
       //打开表单页面

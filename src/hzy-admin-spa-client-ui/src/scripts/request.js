@@ -69,18 +69,21 @@ axios.interceptors.response.use(
     (error) => {
         tools.loadingStop();
         console.log(error);
-        if (error.message === 'Network Error') {
-            tools.message('网络连接错误!', "错误");
-            return router.push("/login");
-        }
-        if (!error.response) {
-            return router.push("/login");
-        }
+        
+        Promise.reject(error);
+
         if (error.response.status === 401) {
             tools.notice("未授权!", "错误");
-            return router.push("/login");
-        } else {
-            return Promise.reject(error);
+            router.push("/login");
+        }
+
+        if (error.message === 'Network Error') {
+            tools.message('网络连接错误!', "错误");
+            router.push("/login");
+        }
+        
+        if (!error.response) {
+            router.push("/login");
         }
     }
 );

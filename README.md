@@ -1,6 +1,7 @@
 # HzyAdminSpa
 
-#### 文档: https://gitee.com/hzy6/HzyAdminSpa/wikis/pages
+####  文档: https://gitee.com/hzy6/HzyAdminSpa/wikis/pages
+
 
 ### 后台模板
 https://gitee.com/hzy6/hzy-admin-spa-ui
@@ -8,7 +9,7 @@ https://gitee.com/hzy6/hzy-admin-spa-ui
 ### WebApi 任务调度平台
 https://gitee.com/hzy6/hzy-quartz
 
-### 代码生成器 
+### 🚩  代码生成器 
 
 https://gitee.com/hzy6/hzy-admin-code-generation
 
@@ -22,7 +23,7 @@ https://gitee.com/hzy6/hzy-admin-code-generation
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0614/225823_4159745c_1242080.png "屏幕截图.png")
 
-#### :yellow_heart: 介绍 
+#### 📝  介绍 
 前后分离,后台通配权限管理系统！基于.Net5
 
     数据库脚本位置(默认 PostgreSql 数据库)：
@@ -47,7 +48,7 @@ https://gitee.com/hzy6/hzy-admin-code-generation
 
 
 
-#### :cherries:  特技
+#### ✨  特技
 
 | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/155729_75be773c_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185359_45c10fc9_1242080.png "屏幕截图.png") |
 |-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|

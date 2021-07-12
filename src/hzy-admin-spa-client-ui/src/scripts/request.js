@@ -80,6 +80,7 @@ axios.interceptors.response.use(
 
         if (error.message === 'Network Error') {
             tools.message('网络连接错误!', "错误");
+            router.replace("/login");
         }
 
         console.log(error);

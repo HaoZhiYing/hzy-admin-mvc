@@ -15,7 +15,7 @@ using System.Reflection;
 using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HZY.Common.ScanDIService
+namespace ZEUS.Common.ScanDIService
 {
     /// <summary>
     /// 服务扫描扩展
@@ -53,16 +53,17 @@ namespace HZY.Common.ScanDIService
              ;
             foreach (var item in paths)
             {
-                //try
+                if (File.Exists(item))
                 {
-                    var assemblyName = AssemblyLoadContext.GetAssemblyName(item);
-                    Assembly.Load(assemblyName);
+                    try
+                    {
+                        Assembly.Load(AssemblyLoadContext.GetAssemblyName(item));
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                 }
-                //catch (Exception)
-                //{
-                //    continue;
-                //}
-                
             }
             assemblies = AssemblyLoadContext.Default.Assemblies.Union(assemblies);
             #endregion

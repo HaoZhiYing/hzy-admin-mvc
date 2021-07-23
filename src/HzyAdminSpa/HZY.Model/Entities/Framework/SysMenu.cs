@@ -24,7 +24,7 @@ namespace HZY.Model.Entities.Framework
         public string ComponentName { get; set; }
 
         /// <summary>
-        /// 菜单地址
+        /// 菜单物理路径
         /// </summary>
         public string Url { get; set; }
 
@@ -32,6 +32,11 @@ namespace HZY.Model.Entities.Framework
         /// 路由地址
         /// </summary>
         public string Router { get; set; }
+
+        /// <summary>
+        /// 默认跳转地址
+        /// </summary>
+        public string JumpUrl { get; set; }
 
         /// <summary>
         /// 菜单图标
@@ -52,5 +57,7 @@ namespace HZY.Model.Entities.Framework
         /// 是否可关闭
         /// </summary>
         public int Close { get; set; } = 1;
+
+
     }
 }

@@ -15,7 +15,7 @@ using System.Reflection;
 using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ZEUS.Common.ScanDIService
+namespace HZY.Common.ScanDIService
 {
     /// <summary>
     /// 服务扫描扩展

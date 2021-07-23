@@ -10,61 +10,63 @@
       <a-button type="primary" @click="saveForm()" :loading="saveLoading">提交</a-button>
       <a-button type="danger" ghost @click="visible = false">关闭</a-button>
     </template>
-    <a-form ref="formRef" layout="vertical" :model="vm.form" :rules="rules">
-      <a-row :gutter="[15, 15]">
-        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-          <a-form-item label="真实姓名" ref="name" name="name">
-            <a-input v-model:value="vm.form.name" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-          <a-form-item label="账户名称" ref="loginName" name="loginName">
-            <a-input v-model:value="vm.form.loginName" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-          <a-form-item label="账户密码">
-            <a-input v-model:value="vm.form.password" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-          <a-form-item label="联系电话">
-            <a-input v-model:value="vm.form.phone" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-          <a-form-item label="邮箱地址">
-            <a-input v-model:value="vm.form.email" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-          <a-form-item label="所属岗位">
-            <a-checkbox-group v-model:value="vm.postIds" class="w100">
-              <a-row>
-                <a-col :span="6" v-for="(item, index) in vm.allPostList" :key="index">
-                  <a-checkbox :value="item.id">
-                    {{ item.name }}
-                  </a-checkbox>
-                </a-col>
-              </a-row>
-            </a-checkbox-group>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24">
-          <a-form-item label="所属角色">
-            <a-checkbox-group v-model:value="vm.roleIds" class="w100">
-              <a-row>
-                <a-col :span="6" v-for="(item, index) in vm.allRoleList" :key="index">
-                  <a-checkbox :value="item.id">
-                    {{ item.name }}
-                  </a-checkbox>
-                </a-col>
-              </a-row>
-            </a-checkbox-group>
-          </a-form-item>
-        </a-col>
-      </a-row>
-    </a-form>
+    <a-spin :spinning="saveLoading">
+      <a-form ref="formRef" layout="vertical" :model="vm.form" :rules="rules">
+        <a-row :gutter="[15, 15]">
+          <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <a-form-item label="真实姓名" ref="name" name="name">
+              <a-input v-model:value="vm.form.name" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <a-form-item label="账户名称" ref="loginName" name="loginName">
+              <a-input v-model:value="vm.form.loginName" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <a-form-item label="账户密码">
+              <a-input v-model:value="vm.form.password" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <a-form-item label="联系电话">
+              <a-input v-model:value="vm.form.phone" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <a-form-item label="邮箱地址">
+              <a-input v-model:value="vm.form.email" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <a-form-item label="所属岗位">
+              <a-checkbox-group v-model:value="vm.postIds" class="w100">
+                <a-row>
+                  <a-col :span="6" v-for="(item, index) in vm.allPostList" :key="index">
+                    <a-checkbox :value="item.id">
+                      {{ item.name }}
+                    </a-checkbox>
+                  </a-col>
+                </a-row>
+              </a-checkbox-group>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24">
+            <a-form-item label="所属角色">
+              <a-checkbox-group v-model:value="vm.roleIds" class="w100">
+                <a-row>
+                  <a-col :span="6" v-for="(item, index) in vm.allRoleList" :key="index">
+                    <a-checkbox :value="item.id">
+                      {{ item.name }}
+                    </a-checkbox>
+                  </a-col>
+                </a-row>
+              </a-checkbox-group>
+            </a-form-item>
+          </a-col>
+        </a-row>
+      </a-form>
+    </a-spin>
   </a-modal>
 </template>
 <script>

@@ -1,16 +1,28 @@
 <template>
   <div class="app-tabs">
-    <a-tabs hide-add tabPosition="top" type="editable-card" :tabBarGutter="0" @edit="onEdit" @tabClick="tabClick" v-model:activeKey="activeKey">
-      <a-tab-pane v-for="item in tabList" :key="item.name" :closable="item.meta.close == 1">
+    <a-tabs
+      hide-add
+      tabPosition="top"
+      type="editable-card"
+      :tabBarGutter="0"
+      @edit="onEdit"
+      @tabClick="tabClick"
+      v-model:activeKey="activeKey"
+    >
+      <a-tab-pane
+        v-for="item in tabList"
+        :key="item.path"
+        :closable="item.meta.close == 1"
+      >
         <template #tab>
           <a-dropdown>
             <AppIcons iconName="EllipsisOutlined" class="tab-more" />
             <template #overlay>
               <a-menu>
-                <a-menu-item key="1" @click="closeTabSelf(item.name)">
+                <a-menu-item key="1" @click="closeTabSelf(item.path)">
                   关闭当前
                 </a-menu-item>
-                <a-menu-item key="2" @click="closeTabOther(item.name)">
+                <a-menu-item key="2" @click="closeTabOther(item.path)">
                   关闭其他
                 </a-menu-item>
                 <a-menu-item key="3" @click="closeTabAll()">关闭全部</a-menu-item>
@@ -36,11 +48,11 @@ export default defineComponent({
     //计算属性
     const store = useStore();
     const tabList = computed(() => store.state.app.tabList);
-    const activeKey = ref(router.currentRoute.value.name);
+    const activeKey = ref(router.currentRoute.value.fullPath);
 
     //
     watch(
-      () => router.currentRoute.value.name,
+      () => router.currentRoute.value.fullPath,
       (value) => {
         activeKey.value = value;
         methods.addTags();
@@ -56,7 +68,7 @@ export default defineComponent({
 
     const methods = {
       addTags() {
-        store.commit("app/addTab", router.currentRoute.value);
+        store.commit("app/addTab", { currentRoute: router.currentRoute.value });
       },
       onEdit(key, action) {
         if (action === "remove") {

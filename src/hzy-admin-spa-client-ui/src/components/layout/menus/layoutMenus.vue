@@ -1,5 +1,11 @@
 <template>
-  <a-menu :theme="menuTheme" v-model:selectedKeys="selectedKeys" v-model:openKeys="openKeys" mode="inline" @select="onMenuSelected">
+  <a-menu
+    :theme="menuTheme"
+    v-model:selectedKeys="selectedKeys"
+    v-model:openKeys="openKeys"
+    mode="inline"
+    @select="onMenuSelected"
+  >
     <!-- <a-menu-item key="/home" title="首页">
       <desktop-outlined />
       <span>首页</span>
@@ -22,7 +28,11 @@
     <!-- 动态生成 topnav-->
     <template v-if="topNavValue">
       <template v-for="item in subMenus">
-        <a-menu-item v-if="item.children.length === 0" :key="item.componentName ? item.componentName : item.id" :title="item.name">
+        <a-menu-item
+          v-if="item.children.length === 0"
+          :key="item.jumpUrl ? item.jumpUrl : item.id"
+          :title="item.name"
+        >
           <AppIcons :iconName="item.icon" />
           <span>{{ item.name }}</span>
         </a-menu-item>
@@ -32,7 +42,11 @@
 
     <template v-else>
       <template v-for="item in menus">
-        <a-menu-item v-if="item.children.length === 0" :key="item.componentName ? item.componentName : item.id" :title="item.name">
+        <a-menu-item
+          v-if="item.children.length === 0"
+          :key="item.jumpUrl ? item.jumpUrl : item.id"
+          :title="item.name"
+        >
           <AppIcons :iconName="item.icon" />
           <span>{{ item.name }}</span>
         </a-menu-item>
@@ -59,7 +73,7 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
-    const routeName = router.currentRoute.value.name;
+    const fullPath = router.currentRoute.value.fullPath;
     const openKeysString = localStorage.getItem("openKeys") ?? "";
     const openKeys = openKeysString ? JSON.parse(openKeysString) ?? [] : [];
     const topNavValue = computed(() => store.state.app.topNav);
@@ -67,8 +81,8 @@ export default defineComponent({
     const menus = computed(() => store.state.app.userInfo.menus);
 
     const state = reactive({
-      defaultSelectedKeys: [routeName],
-      selectedKeys: [routeName],
+      defaultSelectedKeys: [fullPath],
+      selectedKeys: [fullPath],
       openKeys: openKeys,
       menuTheme: props.propMenuTheme,
     });
@@ -76,7 +90,7 @@ export default defineComponent({
     watch(
       () => router.currentRoute.value,
       (value) => {
-        state.selectedKeys = [value.name];
+        state.selectedKeys = [value.fullPath];
       }
     );
     watch(
@@ -95,7 +109,7 @@ export default defineComponent({
 
     //菜单选中
     const onMenuSelected = (obj) => {
-      router.push({ name: obj.key });
+      router.push({ path: obj.key });
     };
 
     return {

@@ -65,6 +65,7 @@
           :pagination="false"
           :expandedRowKeys="tree.expandedRowKeys"
           size="small"
+          :loading="tree.loading"
         >
           <template #action="{ record }">
             <div>
@@ -168,6 +169,7 @@ export default defineComponent({
         ],
         expandedRowKeys: [],
         checkAll: false,
+        loading: false,
       },
     });
 
@@ -246,7 +248,9 @@ export default defineComponent({
       },
       //获取角色菜单功能树
       getRoleMenuFunctionTree() {
+        state.tree.loading = true;
         service.getRoleMenuFunctionTree(state.tree.roleId).then((res) => {
+          state.tree.loading = false;
           let data = res.data;
           state.tree.data = data.list;
           state.tree.expandedRowKeys = data.expandedRowKeys;

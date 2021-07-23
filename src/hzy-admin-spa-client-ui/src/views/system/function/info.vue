@@ -10,25 +10,27 @@
       <a-button type="primary" @click="saveForm()" :loading="saveLoading">提交</a-button>
       <a-button type="danger" ghost @click="visible = false">关闭</a-button>
     </template>
-    <a-form layout="vertical" :model="vm.form">
-      <a-row :gutter="[15, 15]">
-        <a-col :xs="24">
-          <a-form-item label="编号">
-            <a-input v-model:value="vm.form.number" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24">
-          <a-form-item label="名称">
-            <a-input v-model:value="vm.form.name" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24">
-          <a-form-item label="英文名称">
-            <a-input v-model:value="vm.form.byName" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-      </a-row>
-    </a-form>
+    <a-spin :spinning="saveLoading">
+      <a-form layout="vertical" :model="vm.form">
+        <a-row :gutter="[15, 15]">
+          <a-col :xs="24">
+            <a-form-item label="编号">
+              <a-input v-model:value="vm.form.number" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24">
+            <a-form-item label="名称">
+              <a-input v-model:value="vm.form.name" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24">
+            <a-form-item label="英文名称">
+              <a-input v-model:value="vm.form.byName" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+        </a-row>
+      </a-form>
+    </a-spin>
   </a-modal>
 </template>
 <script>

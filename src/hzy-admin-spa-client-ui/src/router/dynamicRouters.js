@@ -1,7 +1,8 @@
 import router from '@/router/index.js'
+import store from '@/store/index'
 
 let dynamicRouters = [];
-
+let allRouters = [];
 // [{
 //     path: '/system/role',
 //     name: "system_role",
@@ -16,7 +17,7 @@ let dynamicRouters = [];
 function createDynamicRouters(data) {
     for (let i = 0; i < data.length; i++) {
         let item = data[i];
-        let path = item.router ? item.router : (item.url ? item.url : '/NotFound');
+        let path = item.jumpUrl ? item.jumpUrl : (item.url ? item.url : '/NotFound');
         if (item.children.length > 0) {
             createDynamicRouters(item.children);
         } else {
@@ -28,7 +29,8 @@ function createDynamicRouters(data) {
                     close: item.close,
                     keepAlive: true,
                     menuId: item.id,
-                    parentId: item.parentId
+                    parentId: item.parentId,
+                    jumpUrl: item.jumpUrl
                 },
             };
 
@@ -39,6 +41,8 @@ function createDynamicRouters(data) {
             }
 
             dynamicRouters.push(route);
+            allRouters.push(route);
+
         }
     }
 }
@@ -48,24 +52,22 @@ function createDynamicRouters(data) {
  * @param data
  */
 export function getDynamicRouters(data) {
+    allRouters = []
     createDynamicRouters(data);
-    let hasRouteLayout = router.hasRoute("appLayout");
+    let hasRouteLayout = router.hasRoute("dynamicLayout");
     if (!hasRouteLayout) {
         router.addRoute({
-            name: 'appLayout',
+            name: 'dynamicLayout',
             path: '',
+            redirect: '/home',
             component: () =>
                 import('@/components/layout/layout'),
             children: dynamicRouters
         });
     }
 
+    //store    
+    store.commit("app/setAllRouters", allRouters)
+
     return hasRouteLayout;
-    // for (let i = 0; i < dynamicRouters.length; i++) {
-    //     let item = dynamicRouters[i];
-    //     if (router.hasRoute(item.name)) {
-    //         continue
-    //     }
-    //     router.addRoute('appLayout', dynamicRouters[i]);
-    // }
 }

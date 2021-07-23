@@ -17,7 +17,7 @@ router.beforeEach((to, from, next) => {
     tools.loadingStart();
     // console.log('路由拦截器=>', from, to);
 
-    if (to.name === "/login") {
+    if (to.fullPath === "/login") {
         return next();
     }
 

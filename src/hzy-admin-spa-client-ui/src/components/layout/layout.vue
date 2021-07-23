@@ -28,11 +28,7 @@
           <div class="hzy-logo">{{ title }}</div>
           <layoutMenus class="hzy-layout-sider" :propMenuTheme="menuTheme" />
         </a-drawer>
-        <layoutMenus
-          class="hzy-layout-sider"
-          :propMenuTheme="menuTheme"
-          v-else
-        />
+        <layoutMenus class="hzy-layout-sider" :propMenuTheme="menuTheme" v-else />
       </a-layout-sider>
       <a-layout :style="{ marginLeft: siderWidth + 'px', zIndex: 5 }">
         <layoutHeader
@@ -42,12 +38,14 @@
           @reload="reload"
         />
         <a-layout-content>
+          <!-- {{ $route.fullPath }}
+          {{ cacheViews }} -->
+          <!-- <transition name="fade" mode="out-in"> -->
+          <!-- </transition> -->
           <router-view v-slot="{ Component }">
-            <!-- <transition name="fade" mode="out-in"> -->
             <keep-alive :include="cacheViews">
-              <component :is="Component"/>
+              <component :is="Component" :key="$route.fullPath" />
             </keep-alive>
-            <!-- </transition> -->
           </router-view>
         </a-layout-content>
         <a-layout-footer style="text-align: center">
@@ -65,15 +63,7 @@
   </div>
 </template>
 <script>
-import {
-  computed,
-  nextTick,
-  reactive,
-  watch,
-  defineComponent,
-  toRefs,
-  ref,
-} from "vue";
+import { computed, nextTick, reactive, watch, defineComponent, toRefs, ref } from "vue";
 import tools from "@/scripts/tools";
 import router from "@/router/index";
 import { useStore } from "vuex";
@@ -90,7 +80,6 @@ export default defineComponent({
   },
   setup() {
     const fullPath = ref(router.currentRoute.value.fullPath);
-    const routeName = ref(router.currentRoute.value.name);
     const headerTheme = tools.getHeaderTheme() ?? "hzy-layout-header-light";
 
     const state = reactive({
@@ -123,7 +112,6 @@ export default defineComponent({
       () => router.currentRoute.value,
       (value) => {
         fullPath.value = value.fullPath;
-        routeName.value = value.name;
       }
     );
 
@@ -139,7 +127,7 @@ export default defineComponent({
 
     //刷新当前页面
     const reload = () => {
-      store.dispatch("app/delCacheView", routeName.value).then(() => {
+      store.dispatch("app/delCacheView", fullPath.value).then(() => {
         nextTick(() => {
           router.push({
             path: "/redirect" + fullPath.value,

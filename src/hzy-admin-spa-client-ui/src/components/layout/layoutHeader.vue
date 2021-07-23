@@ -7,8 +7,23 @@
       </div>
       <!-- <div class="hzy-header-btn logo" v-if="!isMobile">{{ title }}</div> -->
       <div style="flex: 1 1 0%">
-        <a-menu v-model:selectedKeys="selectedKeys" mode="horizontal" @select="onMenuSelected" style="line-height:57px" v-if="topNavValue">
-          <a-menu-item v-for="item in oneLevels" :key="item.componentName ? item.componentName : item.id">
+        <a-menu
+          v-model:selectedKeys="selectedKeys"
+          mode="horizontal"
+          @select="onMenuSelected"
+          style="line-height: 57px"
+          v-if="topNavValue"
+        >
+          <a-menu-item
+            v-for="item in oneLevels"
+            :key="
+              item.jumpUrl
+                ? item.jumpUrl
+                : item.componentName
+                ? item.componentName
+                : item.id
+            "
+          >
             <AppIcons :iconName="item.icon" />
             <span class="title">{{ item.name }}</span>
           </a-menu-item>
@@ -33,10 +48,14 @@
           <template #overlay>
             <a-menu>
               <a-menu-item>
-                <router-link to="/system/personal/center"> <AppIcons iconName="FormOutlined" />&nbsp;&nbsp;个人中心</router-link>
+                <router-link to="/system/personal/center">
+                  <AppIcons iconName="FormOutlined" />&nbsp;&nbsp;个人中心</router-link
+                >
               </a-menu-item>
               <a-menu-item>
-                <router-link to="/login"> <AppIcons iconName="LogoutOutlined" />&nbsp;&nbsp;退出登录 </router-link>
+                <router-link to="/login">
+                  <AppIcons iconName="LogoutOutlined" />&nbsp;&nbsp;退出登录
+                </router-link>
               </a-menu-item>
             </a-menu>
           </template>
@@ -68,7 +87,7 @@ export default defineComponent({
     layoutTabs,
   },
   setup(props, context) {
-    const routeName = router.currentRoute.value.name;
+    const fullPath = router.currentRoute.value.fullPath;
     const store = useStore();
     const title = computed(() => store.state.app.title);
     const userName = computed(() => store.state.app.userInfo.name);
@@ -87,7 +106,7 @@ export default defineComponent({
       isMobile: false,
       tabs: [],
       oneLevels: [],
-      selectedKeys: [routeName],
+      selectedKeys: [fullPath],
     });
 
     watch(
@@ -138,7 +157,9 @@ export default defineComponent({
       //全屏事件
       onFullScreen() {
         if (!screenfull.isEnabled) {
-          return tools.message("您的浏览器无法使用全屏功能，请更换谷歌浏览器或者请手动点击F11按钮全屏展示！");
+          return tools.message(
+            "您的浏览器无法使用全屏功能，请更换谷歌浏览器或者请手动点击F11按钮全屏展示！"
+          );
         }
         screenfull.toggle();
         state.fullscreen = !screenfull.isFullscreen;
@@ -157,19 +178,30 @@ export default defineComponent({
         } else {
           if (state.oneLevels.length > 0) {
             var menu = state.oneLevels[0];
-            state.selectedKeys = [menu.componentName ? menu.componentName : menu.id];
-            methods.onMenuSelected({ key: menu.componentName ? menu.componentName : menu.id });
+            state.selectedKeys = [
+              menu.jumpUrl
+                ? menu.jumpUrl
+                : menu.componentName
+                ? menu.componentName
+                : menu.id,
+            ];
+            methods.onMenuSelected({
+              key: menu.componentName ? menu.componentName : menu.id,
+            });
           }
         }
       },
       //获取第一级菜单
       getOneLevelsMenu() {
-        state.oneLevels = menus.value.filter((w) => w.parentId == null || w.parentId == "");
+        state.oneLevels = menus.value.filter(
+          (w) => w.parentId == null || w.parentId == ""
+        );
       },
       //菜单选中
       onMenuSelected(obj) {
-        if (router.hasRoute(obj.key)) {
-          router.push({ name: obj.key });
+        const routeInfo = store.getters["app/getRouterByFullPath"](obj.key);
+        if (routeInfo && router.hasRoute(routeInfo.name)) {
+          router.push({ path: obj.key });
         } else {
           store.commit("app/setSubmenu", obj.key);
         }

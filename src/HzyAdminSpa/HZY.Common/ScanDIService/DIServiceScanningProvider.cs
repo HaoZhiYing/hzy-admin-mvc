@@ -8,16 +8,16 @@
  * *******************************************************
  */
 
-using ZEUS.Common.ScanDIService.Attributes;
-using ZEUS.Common.ScanDIService.Enums;
-using ZEUS.Common.ScanDIService.Interface;
+using HZY.Common.ScanDIService.Attributes;
+using HZY.Common.ScanDIService.Enums;
+using HZY.Common.ScanDIService.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ZEUS.Common.ScanDIService
+namespace HZY.Common.ScanDIService
 {
     /// <summary>
     /// 扫描服务
@@ -28,7 +28,7 @@ namespace ZEUS.Common.ScanDIService
         /// <summary>
         /// 开始扫描
         /// </summary>
-        public void Start(IServiceCollection serviceCollection, string assemblyFilter = "ZEUS.")
+        public void Start(IServiceCollection serviceCollection, string assemblyFilter = "HZY.")
         {
             IEnumerable<Assembly> assemblies = default;
 

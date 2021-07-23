@@ -124,13 +124,13 @@ const columns = [
     title: "名称",
     dataIndex: "name",
     ellipsis: true,
-    width: 200,
+    // width: 200,
   },
   {
     title: "英文名称",
     dataIndex: "byName",
     ellipsis: true,
-    width: 200,
+    // width: 200,
   },
   {
     title: "更新时间",
@@ -142,7 +142,7 @@ const columns = [
     title: "创建时间",
     dataIndex: "createTime",
     ellipsis: true,
-    width: 200,
+    // width: 200,
   },
   {
     title: "操作",

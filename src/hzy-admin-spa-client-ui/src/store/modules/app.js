@@ -1,16 +1,18 @@
 // import { createStore } from 'vuex';
 //属性状态管理
-import tools from '@/scripts/tools'
-import store from '@/store/index'
-import router from '@/router/index'
+import tools from "@/scripts/tools";
+import store from "@/store/index";
+import router from "@/router/index";
 import userService from "@/service/system/userService";
 
 function getTabs() {
-    return [{
-        path: "",
-        name: "home",
-        meta: { title: '首页', close: false, keepAlive: true }
-    }];
+    return [
+        {
+            path: "/home",
+            name: "home",
+            meta: { title: "首页", close: false, keepAlive: true },
+        },
+    ];
 }
 
 export default {
@@ -24,29 +26,34 @@ export default {
         userInfo: {},
         submenus: [],
         //全局加载
-        globalLoading: false
+        globalLoading: false,
+        //所有路由
+        allRouters: []
     }),
     mutations: {
         //添加缓存视图
         addCacheView(state, value) {
-            const { name, meta } = value;
+            const { path, meta } = value;
             if (!meta.keepAlive) return;
+            const { name } = store.getters["app/getRouterByFullPath"](path);
             let any = state.cacheViews.includes(name);
             if (any) return;
             state.cacheViews.push(name);
         },
         //删除缓存视图
         delCacheView(state, value) {
-            const index = state.cacheViews.indexOf(value);
+            const { name } = store.getters["app/getRouterByFullPath"](value);
+            const index = state.cacheViews.indexOf(name);
             state.cacheViews.splice(index, 1);
         },
         //删除其他缓存视图
         delCacheViewOther(state, value) {
-            const index = state.cacheViews.indexOf(value)
+            const { name } = store.getters["app/getRouterByFullPath"](value);
+            const index = state.cacheViews.indexOf(name);
             if (index > -1) {
-                state.cacheViews = state.cacheViews.slice(index, index + 1)
+                state.cacheViews = state.cacheViews.slice(index, index + 1);
             } else {
-                state.cacheViews = []
+                state.cacheViews = [];
             }
         },
         //删除所有缓存视图
@@ -54,59 +61,63 @@ export default {
             state.cacheViews = [];
         },
         //添加标签页
-        addTab(state, value) {
-            const { hidden, meta } = value;
+        addTab(state, { currentRoute, title }) {
+            const { path, hidden, meta } = currentRoute;
 
-            if (Object.prototype.hasOwnProperty.call(value, 'hidden') && hidden) return;
+            if (Object.prototype.hasOwnProperty.call(currentRoute, "hidden") && hidden) return;
 
-            if (!Object.prototype.hasOwnProperty.call(meta, 'close')) return;
+            if (!Object.prototype.hasOwnProperty.call(meta, "close")) return;
 
-            //检查是否存在
-            let tab = state.tabList.find(w => w.name == value.name);
-            if (!tab) {
-                state.tabList.push(value);
+            if (title) {
+                meta.title = title;
             }
 
-            store.commit("app/addCacheView", value);
+            //检查是否存在
+            let tab = state.tabList.find((w) => w.path == path);
+            if (!tab) {
+                state.tabList.push(currentRoute);
+            }
+
+            store.commit("app/addCacheView", currentRoute);
         },
         //关闭当前
         closeTabSelf(state, value) {
-            let index = state.tabList.findIndex(w => w.name == value);
+            let index = state.tabList.findIndex((w) => w.path == value);
             let oldTab = state.tabList[index];
             if (oldTab.meta.close) {
                 state.tabList.splice(index, 1);
-                store.commit("app/delCacheView", oldTab.name);
+                store.commit("app/delCacheView", oldTab.path);
             }
             let tab = state.tabList[index - 1];
             if (!tab) return;
-            router.push({ name: tab.name });
+            router.push({ path: tab.path });
         },
         //关闭其他
         closeTabOther(state, value) {
-            let name = value;
+            let path = value;
             let list = [];
             for (let i = 0; i < state.tabList.length; i++) {
                 let item = state.tabList[i];
-                if (!item.meta.close || item.name == name) {
+                if (!item.meta.close || item.path == path) {
                     list.push(item);
                 }
             }
 
             let route = router.currentRoute.value;
-            if (value != route.name) {
-                router.push({ name: value });
+            if (path != route.path) {
+                router.push({ path });
             }
 
-            store.commit("app/delCacheViewOther", name);
+            store.commit("app/delCacheViewOther", path);
             state.tabList = list;
         },
         //关闭所有
         closeTabAll(state) {
-            let tab = state.tabList.find(w => !w.meta.close);
+            let tab = state.tabList.find((w) => !w.meta.close);
             let route = router.currentRoute.value;
 
-            if (tab.name != route.name) {
-                router.push({ name: tab.name });
+            if (tab.path != route.path) {
+                router.push({ path: tab.path });
             }
 
             state.tabList = [];
@@ -116,7 +127,7 @@ export default {
         },
         //点击切换选项卡
         tabClick(state, value) {
-            router.push({ name: value });
+            router.push({ path: value });
         },
         //设置用户信息
         setUserInfo(state, value) {
@@ -143,17 +154,21 @@ export default {
         //设置全局加载值
         setGlobalLoading(state, value) {
             state.globalLoading = value;
+        },
+        //设置所有路由
+        setAllRouters(state, value) {
+            state.allRouters = value;
         }
     },
     getters: {
         /**
-        * 根据菜单 Id 获取 菜单所 对应的 权限
-        * @param menuId
-        * @returns {*}
-        */
-        getMenuPowerById(state) {
+         * 根据菜单 Id 获取 菜单所 对应的 权限
+         * @param menuId
+         * @returns {*}
+         */
+        getMenuPowerById: (state) => {
             let route = router.currentRoute.value;
-            const data = state.userInfo.menuPowers.find(w => w.menuId == route.meta.menuId);
+            const data = state.userInfo.menuPowers.find((w) => w.menuId == route.meta.menuId);
             return data ? data : {};
         },
         /**
@@ -176,44 +191,57 @@ export default {
                         findId(element.children, element.parentId ? null : element.id);
                     }
                 }
-            }
+            };
 
             findId(allMenus, null);
 
             return topMenuId;
+        },
+        /**
+         * 根据全路径信息获取 router 信息
+         */
+        getRouterByFullPath: (state) => (fullPath) => {
+            let result = state.allRouters.find(w => w.path == fullPath);
+            if (!result) {
+                result = state.tabList.find(w => w.path == fullPath);
+            }
+            return result;
         }
     },
     actions: {
         delCacheView({ commit, state }, view) {
-            return new Promise(resolve => {
-                commit('delCacheView', view)
-                resolve([...state.cacheViews])
-            })
+            return new Promise((resolve) => {
+                commit("delCacheView", view);
+                resolve([...state.cacheViews]);
+            });
         },
         //获取用户信息 与 菜单
         getUserInfo({ state }) {
-            return new Promise(resolve => {
-                if (Object.prototype.hasOwnProperty.call(state.userInfo, 'sysRoles')) {
-                    return resolve(state.userInfo)
+            return new Promise((resolve) => {
+                if (Object.prototype.hasOwnProperty.call(state.userInfo, "sysRoles")) {
+                    return resolve(state.userInfo);
                 }
-                store.dispatch("app/refreshUserInfo").then(data => {
-                    resolve(data)
+                store.dispatch("app/refreshUserInfo").then((data) => {
+                    resolve(data);
                 });
-            })
+            });
         },
         //刷新用户信息
         refreshUserInfo({ commit }) {
-            commit('setGlobalLoading', true);
-            return new Promise(resolve => {
-                userService.getUserInfo().then(res => {
-                    let data = res.data;
-                    commit('setUserInfo', data);
-                    commit('setGlobalLoading', false);
-                    resolve(data)
-                }).catch(() => {
-                    commit('setGlobalLoading', false);
-                });
-            })
-        }
-    }
-}
+            commit("setGlobalLoading", true);
+            return new Promise((resolve) => {
+                userService
+                    .getUserInfo()
+                    .then((res) => {
+                        let data = res.data;
+                        commit("setUserInfo", data);
+                        commit("setGlobalLoading", false);
+                        resolve(data);
+                    })
+                    .catch(() => {
+                        commit("setGlobalLoading", false);
+                    });
+            });
+        },
+    },
+};

@@ -17,14 +17,17 @@ export default [
         }]
     },
     {
+        name: 'defaultLayout',
         path: '',
         component: layout,
-        children: [{
-            path: '',
-            name: "home",
-            component: () => import('@/views/home'),
-            meta: { title: '首页', close: false, keepAlive: true },
-        }]
+        redirect: '/home',
+        children: [
+            {
+                path: '/home',
+                name: "home",
+                component: () => import('@/views/home'),
+                meta: { title: '首页', close: false, keepAlive: true },
+            }]
     }
     // {
     //     component: layout,

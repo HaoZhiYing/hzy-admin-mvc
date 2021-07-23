@@ -10,82 +10,84 @@
       <a-button type="primary" @click="saveForm()" :loading="saveLoading">提交</a-button>
       <a-button type="danger" ghost @click="visible = false">关闭</a-button>
     </template>
-    <a-form layout="vertical" :model="vm.form">
-      <a-row :gutter="[15, 15]">
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-          <a-form-item label="编号">
-            <a-input v-model:value="vm.form.number" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-          <a-form-item label="名称">
-            <a-input v-model:value="vm.form.name" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-          <a-form-item label="联系电话">
-            <a-input v-model:value="vm.form.phone" placeholder="请输入" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-          <a-form-item label="生日">
-            <a-date-picker
-              v-model:value="vm.form.birthday"
-              valueFormat="YYYY-MM-DD"
-              style="width: 100%"
-            />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-          <a-form-item label="性别">
-            <a-radio-group
-              name="radioGroup"
-              default-value="男"
-              v-model:value="vm.form.sex"
-            >
-              <a-radio value="男">男</a-radio>
-              <a-radio value="女">女</a-radio>
-            </a-radio-group>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
-          <a-form-item label="头像">
-            <div>
-              <input type="file" @change="handlePhoto" />
-            </div>
-            <a-avatar
-              shape="square"
-              v-if="vm.form.photo"
-              :size="100"
-              :src="domainName + vm.form.photo"
-            />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
-          <a-form-item label="文件">
-            <input type="file" @change="handleFiles" multiple="multiple" />
-            <ul v-if="vm.form.filePath">
-              <li v-for="(item, index) in vm.form.filePath.split(',')" :key="index">
-                <a v-if="vm.id" :href="domainName + item" target="_blank">{{ item }}</a>
-                <a v-else href="javascript:void(0);">{{ item }}</a>
-              </li>
-            </ul>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-          <a-form-item label="简介">
-            <WangEditor
-              el="editor"
-              v-model:html="vm.form.introduce"
-              :domainName="domainName"
-              :previewDomainName="domainName"
-              :height="400"
-              ref="editor"
-            />
-          </a-form-item>
-        </a-col>
-      </a-row>
-    </a-form>
+    <a-spin :spinning="saveLoading">
+      <a-form layout="vertical" :model="vm.form">
+        <a-row :gutter="[15, 15]">
+          <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <a-form-item label="编号">
+              <a-input v-model:value="vm.form.number" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <a-form-item label="名称">
+              <a-input v-model:value="vm.form.name" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <a-form-item label="联系电话">
+              <a-input v-model:value="vm.form.phone" placeholder="请输入" />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <a-form-item label="生日">
+              <a-date-picker
+                v-model:value="vm.form.birthday"
+                valueFormat="YYYY-MM-DD"
+                style="width: 100%"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <a-form-item label="性别">
+              <a-radio-group
+                name="radioGroup"
+                default-value="男"
+                v-model:value="vm.form.sex"
+              >
+                <a-radio value="男">男</a-radio>
+                <a-radio value="女">女</a-radio>
+              </a-radio-group>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
+            <a-form-item label="头像">
+              <div>
+                <input type="file" @change="handlePhoto" />
+              </div>
+              <a-avatar
+                shape="square"
+                v-if="vm.form.photo"
+                :size="100"
+                :src="domainName + vm.form.photo"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
+            <a-form-item label="文件">
+              <input type="file" @change="handleFiles" multiple="multiple" />
+              <ul v-if="vm.form.filePath">
+                <li v-for="(item, index) in vm.form.filePath.split(',')" :key="index">
+                  <a v-if="vm.id" :href="domainName + item" target="_blank">{{ item }}</a>
+                  <a v-else href="javascript:void(0);">{{ item }}</a>
+                </li>
+              </ul>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <a-form-item label="简介">
+              <WangEditor
+                el="editor"
+                v-model:html="vm.form.introduce"
+                :domainName="domainName"
+                :previewDomainName="domainName"
+                :height="400"
+                ref="editor"
+              />
+            </a-form-item>
+          </a-col>
+        </a-row>
+      </a-form>
+    </a-spin>
   </a-modal>
 </template>
 <script>

@@ -228,12 +228,12 @@ namespace HZY.Services.Admin.Framework
                 ["componentName"] = item.ComponentName,
                 ["url"] = item.Url,
                 ["router"] = item.Router,
+                ["jumpUrl"] = string.IsNullOrWhiteSpace(item.JumpUrl) ? item.Router : item.JumpUrl,
                 ["icon"] = item.Icon,
                 ["close"] = item.Close,
                 ["parentId"] = item.ParentId,
                 ["children"] = this.CreateMenus(item.Id.ToGuid(), sysMenuList)
-            })
-                .ToList();
+            }).ToList();
         }
 
         /// <summary>

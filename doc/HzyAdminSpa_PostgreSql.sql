@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本机_postgresql
+ Source Server         : 本地_PostgreSql
  Source Server Type    : PostgreSQL
  Source Server Version : 130003
  Source Host           : localhost:5432
@@ -12,7 +12,7 @@
  Target Server Version : 130003
  File Encoding         : 65001
 
- Date: 28/05/2021 14:48:05
+ Date: 23/07/2021 23:21:16
 */
 
 
@@ -85,35 +85,36 @@ CREATE TABLE "public"."SysMenu" (
   "Show" int4,
   "Close" int4,
   "UpdateTime" timestamp(6),
-  "CreateTime" timestamp(6)
+  "CreateTime" timestamp(6),
+  "JumpUrl" varchar(255) COLLATE "pg_catalog"."default"
 )
 ;
 
 -- ----------------------------
 -- Records of SysMenu
 -- ----------------------------
-INSERT INTO "public"."SysMenu" VALUES ('63a6d076-3e22-4d26-85b4-08d8b9f578ef', 10, '基础图表', 'views/chart/base', '/chart/base', 'chart_base', NULL, '15455a8d-262d-4266-85b3-08d8b9f578ef', 1, 1, '2021-01-16 16:07:24', '2021-01-16 16:07:24');
-INSERT INTO "public"."SysMenu" VALUES ('9b01f9f3-5621-4bc2-85b5-08d8b9f578ef', 20, '更多示例', 'views/chart/more', '/chart/more', 'chart_more', NULL, '15455a8d-262d-4266-85b3-08d8b9f578ef', 1, 1, '2021-01-16 16:10:06', '2021-01-16 16:10:06');
-INSERT INTO "public"."SysMenu" VALUES ('d788896b-4033-11eb-a2cb-4cedfb69a3e8', 100, '基础表格', 'views/baseList', '/baseList', 'base_list', NULL, '9674d439-864e-4bf8-9dd8-08d7d70ad6bb', 1, 1, '2020-12-17 14:49:10', '2020-12-17 14:49:12');
-INSERT INTO "public"."SysMenu" VALUES ('35dc130e-4034-11eb-a2cb-4cedfb69a3e8', 110, '标准表格', 'views/list/index', '/list', 'list', NULL, '9674d439-864e-4bf8-9dd8-08d7d70ad6bb', 1, 1, '2020-12-17 14:51:05', '2020-12-17 14:51:07');
-INSERT INTO "public"."SysMenu" VALUES ('9591f249-1471-44f7-86b5-6fdae8b93888', 100, '系统管理', NULL, NULL, NULL, 'DesktopOutlined', NULL, 1, 1, '2018-03-10 12:16:38', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('1ec76c4c-b9b3-4517-9854-f08cd11d653d', 90, '基础信息', NULL, NULL, NULL, 'GoldOutlined', NULL, 1, 1, '2021-01-18 19:33:46', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 10, '更多示例', NULL, NULL, NULL, NULL, NULL, 1, 1, '2021-05-28 11:49:02.215519', '2021-05-28 11:49:02.215516');
-INSERT INTO "public"."SysMenu" VALUES ('f55a8858-ede4-4380-85b2-08d8b9f578ef', 10, 'Antd Vue3.0组件库', 'views/antd_vue_components', '/antd/vue/components', 'antd_vue_components', 'LayoutOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-16 16:05:46', '2021-01-16 16:05:22');
-INSERT INTO "public"."SysMenu" VALUES ('38fd48a9-4035-11eb-a2cb-4cedfb69a3e8', 30, '按钮', 'views/button', '/button', 'button', 'AppstoreOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-16 16:04:05', '2020-12-17 14:58:05');
-INSERT INTO "public"."SysMenu" VALUES ('15455a8d-262d-4266-85b3-08d8b9f578ef', 40, '图表 AntV G2', NULL, NULL, NULL, 'PieChartOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-16 16:06:33', '2021-01-16 16:06:33');
-INSERT INTO "public"."SysMenu" VALUES ('9674d439-864e-4bf8-9dd8-08d7d70ad6bb', 50, '表格管理', NULL, NULL, NULL, 'TableOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-16 17:32:07', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('cc99f568-a831-4ea8-4c7a-08d8bba503bf', 60, '富文本编辑器', 'views/editor', '/editor', 'editor', 'PicRightOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-18 19:34:54', '2021-01-18 19:34:28');
-INSERT INTO "public"."SysMenu" VALUES ('38d864ff-f6e7-43af-8c5c-8bbcf9fa586d', 100, '账户管理', 'views/system/user/index', '/system/user', 'system_user', 'UserOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:44:35.970955', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('60ae9382-31ab-4276-a379-d3876e9bb783', 110, '角色管理', 'views/system/role/index', '/system/role', 'system_role', 'TeamOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:45:15.574081', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('d721fc55-2174-40eb-bb37-5c54a158525a', 120, '功能管理', 'views/system/function/index', '/system/function', 'system_function', 'ControlOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:49:53.147933', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('e5d4da6b-aab0-4aaa-982f-43673e8152c0', 130, '菜单功能', 'views/system/menu/index', '/system/menu', 'system_menu', 'MenuOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:51:15.014863', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('bd024f3a-99a7-4407-861c-a016f243f222', 140, '角色功能', 'views/system/rolefunction/index', '/system/role/function', 'system_role_function', 'UserSwitchOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:53:04.316249', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('f35d64ae-ecb7-4d06-acfb-d91595966d9e', 150, '修改密码', 'views/system/changePassword/index', '/system/change/password', 'system_change_password', 'FormOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:55:04.237568', '2018-03-10 12:16:38');
-INSERT INTO "public"."SysMenu" VALUES ('9a27dfc2-4a66-11eb-87b1-4cedfb69a3e8', 160, '接口文档', 'views/system/swagger', '/system/swagger', 'system_swagger', 'FileSearchOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:56:14.225026', '2018-03-10 12:17:03');
-INSERT INTO "public"."SysMenu" VALUES ('d29fde94-0d6a-4a64-8446-55ee63df5885', 170, '岗位管理', 'views/system/post/index', '/system/post', 'system_post', 'IdcardOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:56:55.842459', '2021-05-27 17:29:48.78474');
-INSERT INTO "public"."SysMenu" VALUES ('0abfd53b-6bde-42c6-9f99-e32775bc31dd', 180, '组织机构', 'views/system/organization/index', '/system/organization', 'system_organization', 'ClusterOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:57:27.058675', '2021-05-27 20:27:55.571105');
-INSERT INTO "public"."SysMenu" VALUES ('7c34c2fd-98ed-4655-aa04-bb00b915a751', 10, '会员管理', 'views/base/member', '/base/member', 'base_member', 'UsergroupAddOutlined', '1ec76c4c-b9b3-4517-9854-f08cd11d653d', 1, 1, '2021-05-28 12:58:22.175003', '2018-03-10 12:16:38');
+INSERT INTO "public"."SysMenu" VALUES ('63a6d076-3e22-4d26-85b4-08d8b9f578ef', 10, '基础图表', 'views/chart/base', '/chart/base', 'chart_base', NULL, '15455a8d-262d-4266-85b3-08d8b9f578ef', 1, 1, '2021-01-16 16:07:24', '2021-01-16 16:07:24', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('9b01f9f3-5621-4bc2-85b5-08d8b9f578ef', 20, '更多示例', 'views/chart/more', '/chart/more', 'chart_more', NULL, '15455a8d-262d-4266-85b3-08d8b9f578ef', 1, 1, '2021-01-16 16:10:06', '2021-01-16 16:10:06', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('d788896b-4033-11eb-a2cb-4cedfb69a3e8', 100, '基础表格', 'views/baseList', '/baseList', 'base_list', NULL, '9674d439-864e-4bf8-9dd8-08d7d70ad6bb', 1, 1, '2020-12-17 14:49:10', '2020-12-17 14:49:12', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('35dc130e-4034-11eb-a2cb-4cedfb69a3e8', 110, '标准表格', 'views/list/index', '/list', 'list', NULL, '9674d439-864e-4bf8-9dd8-08d7d70ad6bb', 1, 1, '2020-12-17 14:51:05', '2020-12-17 14:51:07', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('9591f249-1471-44f7-86b5-6fdae8b93888', 100, '系统管理', NULL, NULL, NULL, 'DesktopOutlined', NULL, 1, 1, '2018-03-10 12:16:38', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('1ec76c4c-b9b3-4517-9854-f08cd11d653d', 90, '基础信息', NULL, NULL, NULL, 'GoldOutlined', NULL, 1, 1, '2021-01-18 19:33:46', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 10, '更多示例', NULL, NULL, NULL, NULL, NULL, 1, 1, '2021-05-28 11:49:02.215519', '2021-05-28 11:49:02.215516', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('f55a8858-ede4-4380-85b2-08d8b9f578ef', 10, 'Antd Vue3.0组件库', 'views/antd_vue_components', '/antd/vue/components', 'antd_vue_components', 'LayoutOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-16 16:05:46', '2021-01-16 16:05:22', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('38fd48a9-4035-11eb-a2cb-4cedfb69a3e8', 30, '按钮', 'views/button', '/button', 'button', 'AppstoreOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-16 16:04:05', '2020-12-17 14:58:05', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('15455a8d-262d-4266-85b3-08d8b9f578ef', 40, '图表 AntV G2', NULL, NULL, NULL, 'PieChartOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-16 16:06:33', '2021-01-16 16:06:33', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('9674d439-864e-4bf8-9dd8-08d7d70ad6bb', 50, '表格管理', NULL, NULL, NULL, 'TableOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-16 17:32:07', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('cc99f568-a831-4ea8-4c7a-08d8bba503bf', 60, '富文本编辑器', 'views/editor', '/editor', 'editor', 'PicRightOutlined', '6f48b583-9c8f-490f-a3e0-81fc5f2e71b4', 1, 1, '2021-01-18 19:34:54', '2021-01-18 19:34:28', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('38d864ff-f6e7-43af-8c5c-8bbcf9fa586d', 100, '账户管理', 'views/system/user/index', '/system/user', 'system_user', 'UserOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:44:35.970955', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('60ae9382-31ab-4276-a379-d3876e9bb783', 110, '角色管理', 'views/system/role/index', '/system/role', 'system_role', 'TeamOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:45:15.574081', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('d721fc55-2174-40eb-bb37-5c54a158525a', 120, '功能管理', 'views/system/function/index', '/system/function', 'system_function', 'ControlOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:49:53.147933', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('e5d4da6b-aab0-4aaa-982f-43673e8152c0', 130, '菜单功能', 'views/system/menu/index', '/system/menu', 'system_menu', 'MenuOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:51:15.014863', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('bd024f3a-99a7-4407-861c-a016f243f222', 140, '角色功能', 'views/system/rolefunction/index', '/system/role/function', 'system_role_function', 'UserSwitchOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:53:04.316249', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('f35d64ae-ecb7-4d06-acfb-d91595966d9e', 150, '修改密码', 'views/system/changePassword/index', '/system/change/password', 'system_change_password', 'FormOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:55:04.237568', '2018-03-10 12:16:38', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('9a27dfc2-4a66-11eb-87b1-4cedfb69a3e8', 160, '接口文档', 'views/system/swagger', '/system/swagger', 'system_swagger', 'FileSearchOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:56:14.225026', '2018-03-10 12:17:03', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('d29fde94-0d6a-4a64-8446-55ee63df5885', 170, '岗位管理', 'views/system/post/index', '/system/post', 'system_post', 'IdcardOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:56:55.842459', '2021-05-27 17:29:48.78474', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('0abfd53b-6bde-42c6-9f99-e32775bc31dd', 180, '组织机构', 'views/system/organization/index', '/system/organization', 'system_organization', 'ClusterOutlined', '9591f249-1471-44f7-86b5-6fdae8b93888', 1, 1, '2021-05-28 12:57:27.058675', '2021-05-27 20:27:55.571105', NULL);
+INSERT INTO "public"."SysMenu" VALUES ('7c34c2fd-98ed-4655-aa04-bb00b915a751', 10, '会员管理', 'views/base/member', '/base/member', 'base_member', 'UsergroupAddOutlined', '1ec76c4c-b9b3-4517-9854-f08cd11d653d', 1, 1, '2021-05-28 12:58:22.175003', '2018-03-10 12:16:38', NULL);
 
 -- ----------------------------
 -- Table structure for SysMenuFunction
@@ -406,7 +407,7 @@ CREATE TABLE "public"."SysUserPost" (
 -- Records of SysUserPost
 -- ----------------------------
 INSERT INTO "public"."SysUserPost" VALUES ('5a6ac9ba-2ce7-4505-b5ea-65c6817b13f4', '0198459e-2034-4533-b843-5d227ad20740', '96927c30-41d0-4ced-8e29-cbed35c90fb0', '2021-05-28 10:00:39.150022', '2021-05-28 10:00:39.150021');
-INSERT INTO "public"."SysUserPost" VALUES ('8be16163-ce6b-4abb-908c-f343c6df5ecc', 'ac18f496-e93d-42f0-b59e-e321acc85335', '0716b4b0-9a06-43e9-8ae8-82c74875f83e', '2021-05-28 10:33:35.213383', '2021-05-28 10:33:35.21338');
+INSERT INTO "public"."SysUserPost" VALUES ('7f000488-6134-4c97-aaf5-ad429fb16f19', 'ac18f496-e93d-42f0-b59e-e321acc85335', '0716b4b0-9a06-43e9-8ae8-82c74875f83e', '2021-07-23 23:11:30.223527', '2021-07-23 23:11:30.223525');
 
 -- ----------------------------
 -- Table structure for SysUserRole
@@ -425,7 +426,7 @@ CREATE TABLE "public"."SysUserRole" (
 -- Records of SysUserRole
 -- ----------------------------
 INSERT INTO "public"."SysUserRole" VALUES ('4458a14e-a787-4a7a-9d9b-fd3de1ed07e3', '0198459e-2034-4533-b843-5d227ad20740', '18fa4771-6f58-46a3-80d2-6f0f5e9972e3', '2021-05-28 10:00:39.147022', '2021-05-28 10:00:39.14702');
-INSERT INTO "public"."SysUserRole" VALUES ('9c6e49e7-fcf0-4372-b726-9d9d8b9a55e8', 'ac18f496-e93d-42f0-b59e-e321acc85335', '40ff1844-c099-4061-98e0-cd6e544fcfd3', '2021-05-28 10:33:35.184957', '2021-05-28 10:33:35.184951');
+INSERT INTO "public"."SysUserRole" VALUES ('f8ace9c4-a801-4655-9740-a3160184a8a3', 'ac18f496-e93d-42f0-b59e-e321acc85335', '40ff1844-c099-4061-98e0-cd6e544fcfd3', '2021-07-23 23:11:30.192637', '2021-07-23 23:11:30.192634');
 
 -- ----------------------------
 -- Primary Key structure for table Member

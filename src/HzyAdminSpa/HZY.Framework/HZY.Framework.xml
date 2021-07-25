@@ -337,13 +337,19 @@
         </member>
         <member name="F:HZY.Framework.Permission.Attributes.ControllerDescriptorAttribute._menuId">
             <summary>
-            菜单 Id
+            用于接口权限鉴定 菜单id
             </summary>
         </member>
         <member name="F:HZY.Framework.Permission.Attributes.ControllerDescriptorAttribute.AuthCheck">
             <summary>
             授权检查 默认检查
             </summary>
+        </member>
+        <member name="M:HZY.Framework.Permission.Attributes.ControllerDescriptorAttribute.#ctor(System.String)">
+            <summary>
+            控制器描述
+            </summary>
+            <param name="menuId">用于接口权限鉴定 菜单id</param>
         </member>
         <member name="M:HZY.Framework.Permission.Attributes.ControllerDescriptorAttribute.GetMenuId">
             <summary>

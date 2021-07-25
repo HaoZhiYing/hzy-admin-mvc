@@ -97,6 +97,36 @@
             菜单功能集合
             </summary>
         </member>
+        <member name="T:HZY.Model.Entities.Framework.SysDictionary">
+            <summary>
+            数据字典
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.SysDictionary.Sort">
+            <summary>
+            排序号
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.SysDictionary.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.SysDictionary.Name">
+            <summary>
+            分组名称/键
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.SysDictionary.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.SysDictionary.ParentId">
+            <summary>
+            父级Id
+            </summary>
+        </member>
         <member name="T:HZY.Model.Entities.Framework.SysFunction">
             <summary>
             功能

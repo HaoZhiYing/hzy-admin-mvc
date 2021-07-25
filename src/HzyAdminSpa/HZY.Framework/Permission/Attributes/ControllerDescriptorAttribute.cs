@@ -9,7 +9,7 @@ namespace HZY.Framework.Permission.Attributes
     public class ControllerDescriptorAttribute : Attribute
     {
         /// <summary>
-        /// 菜单 Id
+        /// 用于接口权限鉴定 菜单id
         /// </summary>
         private readonly string _menuId;
 
@@ -23,6 +23,10 @@ namespace HZY.Framework.Permission.Attributes
 
         }
 
+        /// <summary>
+        /// 控制器描述
+        /// </summary>
+        /// <param name="menuId">用于接口权限鉴定 菜单id</param>
         public ControllerDescriptorAttribute(string menuId)
         {
             _menuId = menuId;

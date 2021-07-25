@@ -4,5 +4,10 @@
         <name>HZY.Repository</name>
     </assembly>
     <members>
+        <member name="T:HZY.Repository.Framework.SysDictionaryRepository">
+            <summary>
+            数据字典仓储
+            </summary>
+        </member>
     </members>
 </doc>

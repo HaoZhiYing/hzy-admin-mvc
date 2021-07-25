@@ -16,6 +16,18 @@
             跳转客户端
             </summary>
         </member>
+        <member name="T:HZY.WebHost.Controllers.PublicController">
+            <summary>
+            公共接口控制器
+            </summary>
+        </member>
+        <member name="M:HZY.WebHost.Controllers.PublicController.GetDictionaryByCodeAsync(System.String)">
+            <summary>
+            根据编码获取 字典集合
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
         <member name="T:HZY.WebHost.UploadController">
             <summary>
             上传文件控制器

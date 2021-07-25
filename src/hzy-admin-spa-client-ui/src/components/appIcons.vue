@@ -47,6 +47,7 @@ import {
   ClusterOutlined,
   UsergroupAddOutlined,
   MoreOutlined,
+  FileDoneOutlined,
   //tab 选项卡
 } from "@ant-design/icons-vue";
 
@@ -98,6 +99,7 @@ export default defineComponent({
     ClusterOutlined,
     UsergroupAddOutlined,
     MoreOutlined,
+    FileDoneOutlined,
   },
 });
 </script>

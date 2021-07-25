@@ -101,6 +101,67 @@
             <param name="ignore"></param>
             <returns></returns>
         </member>
+        <member name="T:HZY.Services.Admin.Framework.SysDictionaryService">
+            <summary>
+            数据字典服务
+            </summary>
+        </member>
+        <member name="M:HZY.Services.Admin.Framework.SysDictionaryService.FindListAsync(System.Int32,System.Int32,HZY.Model.Entities.Framework.SysDictionary)">
+            <summary>
+            获取列表数据
+            </summary>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Services.Admin.Framework.SysDictionaryService.DeleteListAsync(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            根据id数组删除
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Services.Admin.Framework.SysDictionaryService.FindFormAsync(System.Guid)">
+            <summary>
+            查询表单数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Services.Admin.Framework.SysDictionaryService.SaveFormAsync(HZY.Model.Entities.Framework.SysDictionary)">
+            <summary>
+            保存数据
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Services.Admin.Framework.SysDictionaryService.ExportExcelAsync(HZY.Model.Entities.Framework.SysDictionary)">
+            <summary>
+            导出Excel
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Services.Admin.Framework.SysDictionaryService.GetDictionaryTreeAsync">
+            <summary>
+            获取字典树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Services.Admin.Framework.SysDictionaryService.CreateDictionaryTree(System.Guid,System.Collections.Generic.List{HZY.Model.Entities.Framework.SysDictionary})">
+            <summary>
+            创建字典树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Services.Admin.Framework.SysDictionaryService.GetDictionaryByCodeAsync(System.String)">
+            <summary>
+            根据 Code 获取 字典集
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
         <member name="T:HZY.Services.Admin.Framework.SysFunctionService">
             <summary>
             功能服务

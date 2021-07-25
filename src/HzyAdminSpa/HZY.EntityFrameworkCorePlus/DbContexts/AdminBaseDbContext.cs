@@ -49,6 +49,7 @@ namespace HZY.EntityFrameworkCorePlus.DbContexts
         public DbSet<SysOrganization> SysOrganization { get; set; }
         public DbSet<SysPost> SysPost { get; set; }
         public DbSet<SysUserPost> SysUserPost { get; set; }
+        public DbSet<SysDictionary> SysDictionary { get; set; }
         #endregion
 
         #region 业务

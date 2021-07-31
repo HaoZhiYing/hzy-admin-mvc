@@ -12,6 +12,7 @@
           height: '100vh',
           position: 'fixed',
           left: 0,
+          zIndex: 9,
         }"
         :theme="menuTheme"
       >
@@ -44,7 +45,9 @@
           <!-- </transition> -->
           <router-view v-slot="{ Component }">
             <keep-alive :include="cacheViews">
-              <component :is="Component" :key="$route.fullPath" />
+              <transition name="fade-transform" mode="out-in">
+                <component :is="Component" :key="$route.fullPath" />
+              </transition>
             </keep-alive>
           </router-view>
         </a-layout-content>

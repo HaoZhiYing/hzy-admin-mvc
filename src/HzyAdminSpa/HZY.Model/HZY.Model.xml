@@ -97,6 +97,116 @@
             菜单功能集合
             </summary>
         </member>
+        <member name="T:HZY.Model.Entities.Framework.Flow.SysFlow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlow.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlow.Name">
+            <summary>
+            流程名称 => 备注: Name
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlow.Remark">
+            <summary>
+            备注 => 备注: Remark
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlow.Sort">
+            <summary>
+            排序号 => 备注: Sort
+            </summary>
+        </member>
+        <member name="T:HZY.Model.Entities.Framework.Flow.SysFlowLog">
+            <summary>
+            用于存储当前表单执行的流程步骤
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowLog.FlowId">
+            <summary>
+            流程id => 备注: FlowId
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowLog.FlowNodeId">
+            <summary>
+            流程节点id => 备注: FlowNodeId
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowLog.FormId">
+            <summary>
+            表单id => 备注: FormId
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowLog.Sort">
+            <summary>
+            排序号 => 备注: Sort
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowLog.UserId">
+            <summary>
+            节点执行人id => 备注: UserId
+            </summary>
+        </member>
+        <member name="T:HZY.Model.Entities.Framework.Flow.SysFlowLogUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowLogUser.FlowLogId">
+            <summary>
+            流程执行记录id => 备注: FlowLogId
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowLogUser.UserId">
+            <summary>
+            流程执行用户 => 备注: UserId
+            </summary>
+        </member>
+        <member name="T:HZY.Model.Entities.Framework.Flow.SysFlowNode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowNode.FlowId">
+            <summary>
+            流程id => 备注: FlowId
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowNode.Name">
+            <summary>
+            节点名称 => 备注: Name
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowNode.Remark">
+            <summary>
+            备注 => 备注: Remark
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowNode.Sort">
+            <summary>
+            排序号 => 备注: Sort
+            </summary>
+        </member>
+        <member name="T:HZY.Model.Entities.Framework.Flow.SysFlowNodeUserOrRole">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowNodeUserOrRole.FlowNodeId">
+            <summary>
+            节点id => 备注: FlowNodeId
+            </summary>
+        </member>
+        <member name="P:HZY.Model.Entities.Framework.Flow.SysFlowNodeUserOrRole.UserOrRoleId">
+            <summary>
+            用户或者角色id => 备注: UserOrRoleId
+            </summary>
+        </member>
         <member name="T:HZY.Model.Entities.Framework.SysDictionary">
             <summary>
             数据字典

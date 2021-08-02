@@ -44,11 +44,11 @@
           <!-- <transition name="fade" mode="out-in"> -->
           <!-- </transition> -->
           <router-view v-slot="{ Component }">
-            <keep-alive :include="cacheViews">
-              <transition name="fade-transform" mode="out-in">
+            <transition name="fade-transform" mode="out-in">
+              <keep-alive :include="cacheViews">
                 <component :is="Component" :key="$route.fullPath" />
-              </transition>
-            </keep-alive>
+              </keep-alive>
+            </transition>
           </router-view>
         </a-layout-content>
         <a-layout-footer style="text-align: center">

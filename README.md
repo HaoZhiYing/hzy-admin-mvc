@@ -15,7 +15,7 @@ https://gitee.com/hzy6/hzy-admin-code-generation
 
 ### Java 后台框架
 
-1. https://gitee.com/hzy6/hzy-admin-thymeleaf
+1. https://gitee.com/hzy6/hzy-admin
 
 2. https://gitee.com/hzy6/hzy-admin-spa
 

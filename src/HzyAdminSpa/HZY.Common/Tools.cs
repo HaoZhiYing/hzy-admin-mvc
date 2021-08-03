@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.AspNetCore.Http;
+using UAParser;
 
 namespace HZY.Common
 {
@@ -929,6 +930,36 @@ namespace HZY.Common
             var str = input.First().ToString().ToUpper() + input.Substring(1);
             return str;
         }
-        
+
+        #region 获取浏览器客户端信息
+
+        /// <summary>
+        /// 获取浏览器客户端信息
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
+        public static ClientInfo GetBrowserClientInfo(this HttpContext httpContext)
+        {
+            var headers = httpContext.Request.Headers;
+
+            if (!headers.ContainsKey("User-Agent"))
+            {
+                return null;
+            }
+
+            var uaString = headers["User-Agent"].ToString();
+
+            if (string.IsNullOrWhiteSpace(uaString))
+            {
+                return null;
+            }
+
+            return Parser.GetDefault().Parse(uaString);
+        }
+
+        #endregion
+
+
+
     }
 }

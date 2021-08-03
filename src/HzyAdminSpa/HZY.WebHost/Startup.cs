@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.Json;
 using HZY.Framework;
 using HZY.Framework.Filters;
-using HZY.Framework.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,6 +19,7 @@ using HZY.Common.ScanDIService;
 using HZY.Repository.Redis.AppCore;
 using HZY.EntityFrameworkCorePlus;
 using HZY.WebHost.Filters;
+using HZY.WebHost.Middlewares;
 
 namespace HZY.WebHost
 {

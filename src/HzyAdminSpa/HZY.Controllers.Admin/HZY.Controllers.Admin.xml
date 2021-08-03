@@ -194,6 +194,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:HZY.Controllers.Admin.Framework.SysOperationLogController">
+            <summary>
+            操作日志控制器
+            </summary>
+        </member>
         <member name="T:HZY.Controllers.Admin.Framework.SysOrganizationController">
             <summary>
             组织机构控制器

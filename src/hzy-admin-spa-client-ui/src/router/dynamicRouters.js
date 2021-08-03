@@ -17,7 +17,7 @@ let allRouters = [];
 function createDynamicRouters(data) {
     for (let i = 0; i < data.length; i++) {
         let item = data[i];
-        let path = item.jumpUrl ? item.jumpUrl : (item.url ? item.url : '/NotFound');
+        let path = item.router ? item.router : (item.url ? item.url : '/NotFound');
         if (item.children.length > 0) {
             createDynamicRouters(item.children);
         } else {

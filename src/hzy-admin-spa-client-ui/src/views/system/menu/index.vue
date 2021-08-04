@@ -7,14 +7,16 @@
             ><a href="javascript:void(0)" @click="getFirst">查看一级</a></template
           >
           <a-spin :spinning="tree.loadingTree">
-            <a-tree
-              checkable
-              v-model:expanded-keys="tree.expandedKeys"
-              v-model:auto-expand-parent="tree.autoExpandParent"
-              v-model:checkedKeys="tree.checkedKeys"
-              v-model:selectedKeys="tree.selectedKeys"
-              :tree-data="tree.data"
-            />
+            <div style="height: calc(100vh - 250px); overflow: hidden; overflow-y: auto">
+              <a-tree
+                checkable
+                v-model:expanded-keys="tree.expandedKeys"
+                v-model:auto-expand-parent="tree.autoExpandParent"
+                v-model:checkedKeys="tree.checkedKeys"
+                v-model:selectedKeys="tree.selectedKeys"
+                :tree-data="tree.data"
+              />
+            </div>
           </a-spin>
         </a-card>
       </a-col>

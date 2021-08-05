@@ -46,7 +46,7 @@ namespace HZY.WebHost.Middlewares
                 var log = $"{remoteIpAddress} 请求：{path} 耗时：{_stopwatch.ElapsedMilliseconds} 毫秒!";
                 _logger.LogInformation(log);
 
-                //await _sysOperationLogService.WriteInLogAsync(_stopwatch.ElapsedMilliseconds, bodyString);
+                await _sysOperationLogService.WriteInLogAsync(_stopwatch.ElapsedMilliseconds, bodyString);
             }
         }
 

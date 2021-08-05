@@ -4,7 +4,7 @@
     title="编辑"
     centered
     @ok="visible = false"
-    :width="800"
+    :width="1000"
   >
     <template #footer>
       <a-button type="primary" @click="saveForm()" :loading="saveLoading">提交</a-button>
@@ -44,12 +44,17 @@
             </a-form-item>
           </a-col>
           <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-            <a-form-item label="菜单跳转地址（不填默认使用 菜单路由地址）">
+            <a-form-item label="跳转地址（不填默认使用 菜单路由地址）支持 http、https">
               <a-input v-model:value="vm.form.jumpUrl" placeholder="请输入" />
             </a-form-item>
           </a-col>
           <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-            <a-form-item label="图标（请使用AntdV 2.0 官方icon）">
+            <a-form-item>
+              <template #label>
+                <a href="https://2x.antdv.com/components/icon-cn" target="black">
+                  图标（请使用AntdV 2.0 官方icon）
+                </a>
+              </template>
               <a-input v-model:value="vm.form.icon" placeholder="请输入" />
             </a-form-item>
           </a-col>

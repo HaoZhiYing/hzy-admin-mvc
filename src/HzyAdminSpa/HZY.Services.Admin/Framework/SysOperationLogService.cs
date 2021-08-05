@@ -1,4 +1,6 @@
 ﻿using HZY.Common;
+using HZY.EntityFrameworkCorePlus.Extensions;
+using HZY.EntityFrameworkCorePlus.Models;
 using HZY.Framework.MessageQueue;
 using HZY.Model.Entities.Framework;
 using HZY.Repository.Framework;
@@ -27,15 +29,19 @@ namespace HZY.Services.Admin.Framework
         private readonly HttpContext _httpContext;
         private readonly AccountService _accountService;
         private readonly IMessageQueueProvider _messageQueueProvider;
+        private readonly SysUserRepository _sysUserRepository;
 
         public SysOperationLogService(SysOperationLogRepository repository,
             IHttpContextAccessor iHttpContextAccessor,
             AccountService accountService,
-            IMessageQueueProvider messageQueueProvider) : base(repository)
+            IMessageQueueProvider messageQueueProvider,
+            SysUserRepository sysUserRepository
+            ) : base(repository)
         {
             this._httpContext = iHttpContextAccessor.HttpContext;
             _accountService = accountService;
             this._messageQueueProvider = messageQueueProvider;
+            _sysUserRepository = sysUserRepository;
         }
 
 
@@ -104,6 +110,70 @@ namespace HZY.Services.Admin.Framework
             });
         }
 
+
+        /// <summary>
+        /// 获取列表数据
+        /// </summary>
+        /// <param name="page">page</param>
+        /// <param name="size">size</param>
+        /// <param name="search">search</param>
+        /// <returns></returns>
+        public async Task<PagingViewModel> FindListAsync(int page, int size, SysOperationLog search)
+        {
+
+            var query = (from log in Repository.Orm.SysOperationLog.OrderByDescending(w => w.CreateTime)
+                         from use in Repository.Orm.SysUser.Where(w => w.Id == log.UserId).DefaultIfEmpty()
+                         select new
+                         {
+                             log.Id,
+                             log.Api,
+                             log.Browser,
+                             log.Ip,
+                             log.OS,
+                             log.TakeUpTime,
+                             UserName = use.Name,
+                             use.LoginName,
+                             CreateTime = log.CreateTime.ToString("yyyy-MM-dd hh:mm:ss")
+                         })
+                         .WhereIf(!string.IsNullOrWhiteSpace(search.Api), w => w.Api.Contains(search.Api))
+                         .WhereIf(!string.IsNullOrWhiteSpace(search.Browser), w => w.Browser.Contains(search.Browser))
+                         .WhereIf(!string.IsNullOrWhiteSpace(search.Ip), w => w.Ip.Contains(search.Ip))
+                         .WhereIf(!string.IsNullOrWhiteSpace(search.OS), w => w.OS.Contains(search.OS))
+                         ;
+
+            return await this.Repository.AsPagingViewModelAsync(query, page, size);
+        }
+        /// <summary>
+        /// 删除所有数据
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> DeletedAllData()
+        {
+            int i = await Repository.DeleteAsync(w => 1 == 1);
+            if (i >= 0)
+            {
+                return await Task.FromResult(true);
+            }
+            return await Task.FromResult(false);
+        }
+        /// <summary>
+        /// 查询表单数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, object>> FindFormAsync(Guid id)
+        {
+            var res = new Dictionary<string, object>();
+            var form = await this.Repository.FindByIdAsync(id);
+            form = form.NullSafe();
+            var use = await _sysUserRepository.FindByIdAsync(form.UserId);
+            use = use.NullSafe();
+            res[nameof(id)] = id == Guid.Empty ? "" : id;
+            res[nameof(form)] = form;
+            res[nameof(use)] = use;
+            return res;
+        }
 
 
 

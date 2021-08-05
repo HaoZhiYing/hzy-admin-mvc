@@ -48,6 +48,8 @@ import {
   UsergroupAddOutlined,
   MoreOutlined,
   FileDoneOutlined,
+  ContainerOutlined,
+  RadarChartOutlined,
   //tab 选项卡
 } from "@ant-design/icons-vue";
 
@@ -100,6 +102,8 @@ export default defineComponent({
     UsergroupAddOutlined,
     MoreOutlined,
     FileDoneOutlined,
+    ContainerOutlined,
+    RadarChartOutlined,
   },
 });
 </script>

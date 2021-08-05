@@ -91,22 +91,20 @@
               <AppIcons :iconName="text" />
             </template>
             <template #id="{ record }">
-              <div>
-                <template v-if="power.update">
-                  <a href="javascript:void(0)" @click="openForm(record.id)">修改</a>
-                </template>
-                <a-divider type="vertical" />
-                <template v-if="power.delete">
-                  <a-popconfirm
-                    title="您确定要删除吗?"
-                    @confirm="deleteList(record.id)"
-                    okText="确定"
-                    cancelText="取消"
-                  >
-                    <a class="text-danger">删除</a>
-                  </a-popconfirm>
-                </template>
-              </div>
+              <template v-if="power.update">
+                <a href="javascript:void(0)" @click="openForm(record.id)">修改</a>
+              </template>
+              <a-divider type="vertical" />
+              <template v-if="power.delete">
+                <a-popconfirm
+                  title="您确定要删除吗?"
+                  @confirm="deleteList(record.id)"
+                  okText="确定"
+                  cancelText="取消"
+                >
+                  <a class="text-danger">删除</a>
+                </a-popconfirm>
+              </template>
             </template>
             <!--展开信息-->
             <!--            <template #expandedRowRender="{ record }">-->
@@ -212,7 +210,7 @@ const columns = [
   {
     title: "操作",
     dataIndex: "id",
-    width: 120,
+    width: 150,
     fixed: "right",
     slots: { customRender: "id" },
   },

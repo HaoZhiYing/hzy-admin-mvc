@@ -109,6 +109,12 @@ export default defineComponent({
 
     //菜单选中
     const onMenuSelected = (obj) => {
+      if (!obj.key) return;
+      var externalAddress =
+        obj.key.indexOf("http://") > -1 || obj.key.indexOf("https://") > -1;
+      if (externalAddress) {
+        return window.open(obj.key, "black");
+      }
       router.push({ path: obj.key });
     };
 

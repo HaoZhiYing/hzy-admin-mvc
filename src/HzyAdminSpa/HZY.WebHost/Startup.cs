@@ -20,6 +20,7 @@ using HZY.Repository.Redis.AppCore;
 using HZY.EntityFrameworkCorePlus;
 using HZY.WebHost.Filters;
 using HZY.WebHost.Middlewares;
+using HZY.Framework.MessageQueue;
 
 namespace HZY.WebHost
 {
@@ -179,7 +180,7 @@ namespace HZY.WebHost
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMessageQueueProvider messageQueueProvider)
         {
             if (env.IsDevelopment())
             {
@@ -230,6 +231,9 @@ namespace HZY.WebHost
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
+            #region 消息队列启动
+            messageQueueProvider.RunAsync();
+            #endregion
 
         }
     }

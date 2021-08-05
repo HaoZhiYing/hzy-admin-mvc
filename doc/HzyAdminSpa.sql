@@ -12,7 +12,7 @@
  Target Server Version : 14001000
  File Encoding         : 65001
 
- Date: 23/07/2021 23:21:26
+ Date: 05/08/2021 22:16:57
 */
 
 
@@ -50,6 +50,104 @@ INSERT INTO [dbo].[Member] ([Id], [Number], [Name], [Phone], [Sex], [Birthday], 
 GO
 
 INSERT INTO [dbo].[Member] ([Id], [Number], [Name], [Phone], [Sex], [Birthday], [Photo], [Introduce], [FilePath], [UserId], [CreateTime], [UpdateTime]) VALUES (N'9A604AA2-9AE6-4A2F-8DDB-D9E0289EAD9E', N'1', N'测试会员', N'18510912123', N'男', N'2019-07-08 11:47:24', N'/upload/files/20210118/time_232747_old_name_hzy.png', N'<p>888</p>', N'/upload/files/20210118/time_233310_old_name_hzy.png', N'AC18F496-E93D-42F0-B59E-E321ACC85335', N'2018-04-25 23:00:00', N'2021-01-19 14:19:47')
+GO
+
+
+-- ----------------------------
+-- Table structure for SysDictionary
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[SysDictionary]') AND type IN ('U'))
+	DROP TABLE [dbo].[SysDictionary]
+GO
+
+CREATE TABLE [dbo].[SysDictionary] (
+  [Id] uniqueidentifier  NOT NULL,
+  [UpdateTime] datetime  NULL,
+  [CreateTime] datetime  NULL,
+  [Sort] int  NULL,
+  [Code] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Value] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Name] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [ParentId] uniqueidentifier  NULL
+)
+GO
+
+ALTER TABLE [dbo].[SysDictionary] SET (LOCK_ESCALATION = TABLE)
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'id',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary',
+'COLUMN', N'Id'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'更新时间',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary',
+'COLUMN', N'UpdateTime'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'创建时间',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary',
+'COLUMN', N'CreateTime'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'排序号',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary',
+'COLUMN', N'Sort'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'编码',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary',
+'COLUMN', N'Code'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'值',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary',
+'COLUMN', N'Value'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'分组名/键',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary',
+'COLUMN', N'Name'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'父级分组id',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary',
+'COLUMN', N'ParentId'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'数据字典',
+'SCHEMA', N'dbo',
+'TABLE', N'SysDictionary'
+GO
+
+
+-- ----------------------------
+-- Records of SysDictionary
+-- ----------------------------
+INSERT INTO [dbo].[SysDictionary] ([Id], [UpdateTime], [CreateTime], [Sort], [Code], [Value], [Name], [ParentId]) VALUES (N'B2770A68-A541-4E22-BCBC-08D94F78E4E4', N'2021-07-25 22:39:34.870', N'2021-07-25 22:31:30.490', N'1', N'news_type', NULL, N'资讯类别', NULL)
+GO
+
+INSERT INTO [dbo].[SysDictionary] ([Id], [UpdateTime], [CreateTime], [Sort], [Code], [Value], [Name], [ParentId]) VALUES (N'4A88DCC3-8299-4699-8B99-08D94F79EA5D', N'2021-07-25 22:40:30.037', N'2021-07-25 22:38:49.153', N'1', N'news_type_nan', N'1', N'男', N'B2770A68-A541-4E22-BCBC-08D94F78E4E4')
+GO
+
+INSERT INTO [dbo].[SysDictionary] ([Id], [UpdateTime], [CreateTime], [Sort], [Code], [Value], [Name], [ParentId]) VALUES (N'015B0F58-B9A5-4A11-8B9A-08D94F79EA5D', N'2021-07-25 22:40:52.990', N'2021-07-25 22:40:47.933', N'2', N'news_type_nv', N'2', N'女', N'B2770A68-A541-4E22-BCBC-08D94F78E4E4')
 GO
 
 
@@ -150,6 +248,15 @@ INSERT INTO [dbo].[SysMenu] ([Id], [Number], [Name], [Url], [Router], [Component
 GO
 
 INSERT INTO [dbo].[SysMenu] ([Id], [Number], [Name], [Url], [Router], [ComponentName], [Icon], [ParentId], [Show], [Close], [UpdateTime], [CreateTime], [JumpUrl]) VALUES (N'CC99F568-A831-4EA8-4C7A-08D8BBA503BF', N'60', N'富文本编辑器', N'views/editor', N'/editor', N'editor', N'PicRightOutlined', N'6F48B583-9C8F-490F-A3E0-81FC5F2E71B4', N'1', N'1', N'2021-01-18 19:34:54', N'2021-01-18 19:34:28', NULL)
+GO
+
+INSERT INTO [dbo].[SysMenu] ([Id], [Number], [Name], [Url], [Router], [ComponentName], [Icon], [ParentId], [Show], [Close], [UpdateTime], [CreateTime], [JumpUrl]) VALUES (N'383053F9-DA70-4A0D-B9F0-08D94F7318CD', N'190', N'数据字典', N'views/system/dictionary/index', N'/system/dictionary', N'system_dictionary', N'FileDoneOutlined', N'9591F249-1471-44F7-86B5-6FDAE8B93888', N'1', N'1', N'2021-07-25 21:51:53', N'2021-07-25 21:50:01', NULL)
+GO
+
+INSERT INTO [dbo].[SysMenu] ([Id], [Number], [Name], [Url], [Router], [ComponentName], [Icon], [ParentId], [Show], [Close], [UpdateTime], [CreateTime], [JumpUrl]) VALUES (N'10E7B3CF-D846-4B1B-7662-08D95814698B', N'200', N'操作日志', N'views/system/sys_operation_log/index', N'/system/sys_operation_log', N'sys_operation_log', N'ContainerOutlined', N'9591F249-1471-44F7-86B5-6FDAE8B93888', N'1', N'1', N'2021-08-05 21:48:54', N'2021-08-05 21:24:54', N'')
+GO
+
+INSERT INTO [dbo].[SysMenu] ([Id], [Number], [Name], [Url], [Router], [ComponentName], [Icon], [ParentId], [Show], [Close], [UpdateTime], [CreateTime], [JumpUrl]) VALUES (N'90E7F189-9160-4E46-E2D5-08D958181601', N'70', N'跳转外部地址', NULL, NULL, NULL, N'RadarChartOutlined', N'6F48B583-9C8F-490F-A3E0-81FC5F2E71B4', N'1', N'1', N'2021-08-05 21:51:12', N'2021-08-05 21:51:12', N'https://antv.vision/zh')
 GO
 
 INSERT INTO [dbo].[SysMenu] ([Id], [Number], [Name], [Url], [Router], [ComponentName], [Icon], [ParentId], [Show], [Close], [UpdateTime], [CreateTime], [JumpUrl]) VALUES (N'E5D4DA6B-AAB0-4AAA-982F-43673E8152C0', N'130', N'菜单功能', N'views/system/menu/index', N'/system/menu', N'system_menu', N'MenuOutlined', N'9591F249-1471-44F7-86B5-6FDAE8B93888', N'1', N'1', N'2021-05-28 12:51:15', N'2018-03-10 12:16:38', NULL)
@@ -299,6 +406,33 @@ GO
 INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'15CC0317-A15C-43E3-CD95-08D9283EFC24', N'9A27DFC2-4A66-11EB-87B1-4CEDFB69A3E8', N'C9518758-B2E1-4F51-B517-5282E273889C', N'2021-06-06 00:29:25', N'2021-06-06 00:29:25')
 GO
 
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'11FA6A85-A906-43A6-B97A-08D94F7318DF', N'383053F9-DA70-4A0D-B9F0-08D94F7318CD', N'C9518758-B2E1-4F51-B517-5282E273889C', N'2021-07-25 21:51:53', N'2021-07-25 21:51:53')
+GO
+
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'C133E85D-5C65-4BCB-B97B-08D94F7318DF', N'383053F9-DA70-4A0D-B9F0-08D94F7318CD', N'BFFEFB1C-8988-4DDF-B4AC-81C2B30E80CD', N'2021-07-25 21:51:53', N'2021-07-25 21:51:53')
+GO
+
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'1219BFDC-AEAA-41F4-B97C-08D94F7318DF', N'383053F9-DA70-4A0D-B9F0-08D94F7318CD', N'E7EF2A05-8317-41C3-B588-99519FE88BF9', N'2021-07-25 21:51:53', N'2021-07-25 21:51:53')
+GO
+
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'E036CC12-A2C6-429A-B97D-08D94F7318DF', N'383053F9-DA70-4A0D-B9F0-08D94F7318CD', N'9C388461-2704-4C5E-A729-72C17E9018E1', N'2021-07-25 21:51:53', N'2021-07-25 21:51:53')
+GO
+
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'D07E8419-9EC6-45C1-B97E-08D94F7318DF', N'383053F9-DA70-4A0D-B9F0-08D94F7318CD', N'383E7EE2-7690-46AC-9230-65155C84AA30', N'2021-07-25 21:51:53', N'2021-07-25 21:51:53')
+GO
+
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'BBF9C49E-64FB-4BBF-B97F-08D94F7318DF', N'383053F9-DA70-4A0D-B9F0-08D94F7318CD', N'F27ECB0A-197D-47B1-B243-59A8C71302BF', N'2021-07-25 21:51:53', N'2021-07-25 21:51:53')
+GO
+
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'7C1FE795-8251-4B16-F812-08D9581605F8', N'10E7B3CF-D846-4B1B-7662-08D95814698B', N'C9518758-B2E1-4F51-B517-5282E273889C', N'2021-08-05 21:48:54', N'2021-08-05 21:48:54')
+GO
+
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'5D9CB5D6-9112-42A6-F813-08D9581605F8', N'10E7B3CF-D846-4B1B-7662-08D95814698B', N'F27ECB0A-197D-47B1-B243-59A8C71302BF', N'2021-08-05 21:48:54', N'2021-08-05 21:48:54')
+GO
+
+INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'DBFD79A0-A212-43EB-F814-08D9581605F8', N'90E7F189-9160-4E46-E2D5-08D958181601', N'C9518758-B2E1-4F51-B517-5282E273889C', N'2021-08-05 21:51:12', N'2021-08-05 21:51:12')
+GO
+
 INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'C2207F27-9CAA-44F7-A31F-0B757B973E23', N'38D864FF-F6E7-43AF-8C5C-8BBCF9FA586D', N'2401F4D0-60B0-4E2E-903F-84C603373572', N'2021-05-28 12:44:36', N'2021-05-28 12:44:36')
 GO
 
@@ -441,6 +575,383 @@ INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime],
 GO
 
 INSERT INTO [dbo].[SysMenuFunction] ([Id], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'1A727D75-867E-4292-9024-F66A292B465F', N'60AE9382-31AB-4276-A379-D3876E9BB783', N'383E7EE2-7690-46AC-9230-65155C84AA30', N'2021-05-28 12:45:16', N'2021-05-28 12:45:16')
+GO
+
+
+-- ----------------------------
+-- Table structure for SysOperationLog
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[SysOperationLog]') AND type IN ('U'))
+	DROP TABLE [dbo].[SysOperationLog]
+GO
+
+CREATE TABLE [dbo].[SysOperationLog] (
+  [Id] uniqueidentifier  NOT NULL ROWGUIDCOL,
+  [Api] varchar(500) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Ip] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Form] varchar(max) COLLATE Chinese_PRC_CI_AS  NULL,
+  [FormBody] varchar(max) COLLATE Chinese_PRC_CI_AS  NULL,
+  [QueryString] varchar(max) COLLATE Chinese_PRC_CI_AS  NULL,
+  [Browser] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [OS] varchar(255) COLLATE Chinese_PRC_CI_AS  NULL,
+  [UserId] uniqueidentifier  NULL,
+  [TakeUpTime] bigint  NOT NULL,
+  [UpdateTime] datetime2(0)  NULL,
+  [CreateTime] datetime2(0)  NULL
+)
+GO
+
+ALTER TABLE [dbo].[SysOperationLog] SET (LOCK_ESCALATION = TABLE)
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'接口地址',
+'SCHEMA', N'dbo',
+'TABLE', N'SysOperationLog',
+'COLUMN', N'Api'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'ip地址',
+'SCHEMA', N'dbo',
+'TABLE', N'SysOperationLog',
+'COLUMN', N'Ip'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'表单信息',
+'SCHEMA', N'dbo',
+'TABLE', N'SysOperationLog',
+'COLUMN', N'Form'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'json表单信息',
+'SCHEMA', N'dbo',
+'TABLE', N'SysOperationLog',
+'COLUMN', N'FormBody'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'地址栏信息',
+'SCHEMA', N'dbo',
+'TABLE', N'SysOperationLog',
+'COLUMN', N'QueryString'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'当前操作人id',
+'SCHEMA', N'dbo',
+'TABLE', N'SysOperationLog',
+'COLUMN', N'UserId'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'接口耗时（毫秒）',
+'SCHEMA', N'dbo',
+'TABLE', N'SysOperationLog',
+'COLUMN', N'TakeUpTime'
+GO
+
+
+-- ----------------------------
+-- Records of SysOperationLog
+-- ----------------------------
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'5A45ABB9-139D-4FC5-E8A3-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'353', N'2021-08-05 21:33:47', N'2021-08-05 21:33:47')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'D51848D9-1A5D-4FF2-E8A4-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'83', N'2021-08-05 21:33:50', N'2021-08-05 21:33:50')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'50B78181-BA86-43ED-E8A5-08D95815A729', N'/api/admin/SysOperationLog/findList/10/1', N'0.0.0.1', N'', N'{"name":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'172', N'2021-08-05 21:33:51', N'2021-08-05 21:33:51')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'B651DFA8-E681-4AB5-E8A6-08D95815A729', N'/api/admin/SysOperationLog/findList/10/1', N'0.0.0.1', N'', N'{"name":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'50', N'2021-08-05 21:33:54', N'2021-08-05 21:33:54')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'46321858-134E-4361-E8A7-08D95815A729', N'/api/admin/SysUser/sysOrganizationTree', N'0.0.0.1', N'', N'{}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'137', N'2021-08-05 21:33:57', N'2021-08-05 21:33:57')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'A40B8D61-A7F1-4AEF-E8A8-08D95815A729', N'/api/admin/SysUser/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"loginName":null,"organizationId":"f23777dd-2c03-449f-953b-df91c19dee5b"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'121', N'2021-08-05 21:33:57', N'2021-08-05 21:33:57')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'945661CD-BEB0-4B7B-E8A9-08D95815A729', N'/api/admin/SysUser/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"loginName":null,"organizationId":"1b001a4d-bce5-4e09-bc96-4e7da7686c48"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'62', N'2021-08-05 21:33:59', N'2021-08-05 21:33:59')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'F3855CFA-5141-4F2E-E8AA-08D95815A729', N'/api/admin/SysUser/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"loginName":null,"organizationId":"f23777dd-2c03-449f-953b-df91c19dee5b"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'60', N'2021-08-05 21:34:00', N'2021-08-05 21:34:00')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'4C772382-A3B7-4319-E8AB-08D95815A729', N'/api/admin/SysUser/findForm/ac18f496-e93d-42f0-b59e-e321acc85335', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'101', N'2021-08-05 21:34:01', N'2021-08-05 21:34:01')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'2EB2D709-92C7-4729-E8AC-08D95815A729', N'/api/admin/SysRole/findList/10/1', N'0.0.0.1', N'', N'{"name":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'72', N'2021-08-05 21:34:07', N'2021-08-05 21:34:07')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'815352E0-7D83-47A2-E8AD-08D95815A729', N'/api/admin/SysFunction/findList/10/1', N'0.0.0.1', N'', N'{"name":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'68', N'2021-08-05 21:34:09', N'2021-08-05 21:34:09')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'23F7EE54-A0EA-40E7-E8AE-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'107', N'2021-08-05 21:36:15', N'2021-08-05 21:36:15')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'E6E7D604-C346-4700-E8AF-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'107', N'2021-08-05 21:36:15', N'2021-08-05 21:36:15')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'9B9592D8-B01C-47BE-E8B0-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'58', N'2021-08-05 21:36:16', N'2021-08-05 21:36:16')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'693AD86F-0167-4162-E8B1-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'57', N'2021-08-05 21:36:19', N'2021-08-05 21:36:19')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'2981E57A-C7DE-46B4-E8B2-08D95815A729', N'/api/admin/SysMenu/findForm/10e7b3cf-d846-4b1b-7662-08d95814698b', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'83', N'2021-08-05 21:36:20', N'2021-08-05 21:36:20')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'2D2BDD37-CDB6-4EED-E8B3-08D95815A729', N'/api/admin/SysMenu/saveForm', N'0.0.0.1', N'', N'{"id":"10e7b3cf-d846-4b1b-7662-08d95814698b","form":{"lazyLoader":{},"number":200,"name":"操作日志","componentName":"sys_operation_log","url":"views/system/sys_operation_log/index","router":"/system/sys_operation_log","jumpUrl":null,"icon":"ContainerOutlined","parentId":"9591f249-1471-44f7-86b5-6fdae8b93888","show":1,"close":1,"id":"10e7b3cf-d846-4b1b-7662-08d95814698b","updateTime":"2021-08-05T21:24:54","createTime":"2021-08-05T21:24:54","ParentId":"9591f249-1471-44f7-86b5-6fdae8b93888"},"allFunctions":[{"number":10,"name":"显示","byName":"Display","remark":"Display","id":"c9518758-b2e1-4f51-b517-5282e273889c","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":20,"name":"添加","byName":"Insert","remark":"Insert","id":"bffefb1c-8988-4ddf-b4ac-81c2b30e80cd","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":30,"name":"修改","byName":"Update","remark":"Update","id":"e7ef2a05-8317-41c3-b588-99519fe88bf9","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":40,"name":"删除","byName":"Delete","remark":"Delete","id":"9c388461-2704-4c5e-a729-72c17e9018e1","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":50,"name":"保存","byName":"Save","remark":"Save","id":"383e7ee2-7690-46ac-9230-65155c84aa30","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":60,"name":"检索","byName":"Search","remark":"Search","id":"f27ecb0a-197d-47b1-b243-59a8c71302bf","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":70,"name":"导出","byName":"Export","remark":"Export","id":"2401f4d0-60b0-4e2e-903f-84c603373572","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":80,"name":"打印","byName":"Print","remark":"Print","id":"b6fd5425-504a-46a9-993b-2f8dc9158eb8","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"}],"functionIds":["c9518758-b2e1-4f51-b517-5282e273889c","f27ecb0a-197d-47b1-b243-59a8c71302bf"]}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'129', N'2021-08-05 21:36:26', N'2021-08-05 21:36:26')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'ACDB76BF-5361-4264-E8B4-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'128', N'2021-08-05 21:36:27', N'2021-08-05 21:36:27')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'31EBBAB9-0802-468A-E8B5-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'132', N'2021-08-05 21:36:27', N'2021-08-05 21:36:27')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'95C3738B-9850-4C96-E8B6-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'91', N'2021-08-05 21:37:54', N'2021-08-05 21:37:54')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'662C08A9-07F7-4BF9-E8B7-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'95', N'2021-08-05 21:37:55', N'2021-08-05 21:37:55')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'93437653-6138-4B51-E8B8-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'93', N'2021-08-05 21:37:55', N'2021-08-05 21:37:55')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'85D2722C-AACB-4BA0-E8B9-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'61', N'2021-08-05 21:37:56', N'2021-08-05 21:37:56')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'BDE66D6D-0BF0-4AD4-E8BA-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'64', N'2021-08-05 21:37:58', N'2021-08-05 21:37:58')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'49EDBBC8-7BBF-4332-E8BB-08D95815A729', N'/api/admin/SysMenu/findForm/10e7b3cf-d846-4b1b-7662-08d95814698b', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'89', N'2021-08-05 21:38:00', N'2021-08-05 21:38:00')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'F2E5A9B8-AE64-47EE-E8BC-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'61', N'2021-08-05 21:38:07', N'2021-08-05 21:38:07')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'84563A6F-ECA2-4ACD-E8BD-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'134', N'2021-08-05 21:38:35', N'2021-08-05 21:38:35')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'B2EC3C3E-592B-401D-E8BE-08D95815A729', N'/api/admin/SysMenu/findForm/d721fc55-2174-40eb-bb37-5c54a158525a', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'64', N'2021-08-05 21:38:36', N'2021-08-05 21:38:36')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'21D68BB4-D4A5-40D1-E8BF-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'108', N'2021-08-05 21:40:25', N'2021-08-05 21:40:25')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'C3A3E4C3-3F37-4942-E8C0-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'132', N'2021-08-05 21:40:26', N'2021-08-05 21:40:26')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'F859412D-79A1-497E-E8C1-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'151', N'2021-08-05 21:40:26', N'2021-08-05 21:40:26')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'2A3850EF-FED1-4FEB-E8C2-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'62', N'2021-08-05 21:40:27', N'2021-08-05 21:40:27')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'F692BB9F-C02A-4D78-E8C3-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'74', N'2021-08-05 21:40:29', N'2021-08-05 21:40:29')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'4CA0C02E-4214-4BD7-E8C4-08D95815A729', N'/api/admin/SysMenu/findForm/10e7b3cf-d846-4b1b-7662-08d95814698b', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'60', N'2021-08-05 21:40:30', N'2021-08-05 21:40:30')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'5CA31BE6-2CFE-4B0A-E8C5-08D95815A729', N'/api/admin/SysMenu/saveForm', N'0.0.0.1', N'', N'{"id":"10e7b3cf-d846-4b1b-7662-08d95814698b","form":{"lazyLoader":{},"number":200,"name":"操作日志","componentName":"sys_operation_log","url":"views/system/sys_operation_log/index","router":"/system/sys_operation_log","jumpUrl":"https://2x.antdv.com/components/icon-cn","icon":"ContainerOutlined","parentId":"9591f249-1471-44f7-86b5-6fdae8b93888","show":1,"close":1,"id":"10e7b3cf-d846-4b1b-7662-08d95814698b","updateTime":"2021-08-05T21:36:26","createTime":"2021-08-05T21:24:54","ParentId":"9591f249-1471-44f7-86b5-6fdae8b93888"},"allFunctions":[{"number":10,"name":"显示","byName":"Display","remark":"Display","id":"c9518758-b2e1-4f51-b517-5282e273889c","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":20,"name":"添加","byName":"Insert","remark":"Insert","id":"bffefb1c-8988-4ddf-b4ac-81c2b30e80cd","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":30,"name":"修改","byName":"Update","remark":"Update","id":"e7ef2a05-8317-41c3-b588-99519fe88bf9","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":40,"name":"删除","byName":"Delete","remark":"Delete","id":"9c388461-2704-4c5e-a729-72c17e9018e1","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":50,"name":"保存","byName":"Save","remark":"Save","id":"383e7ee2-7690-46ac-9230-65155c84aa30","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":60,"name":"检索","byName":"Search","remark":"Search","id":"f27ecb0a-197d-47b1-b243-59a8c71302bf","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":70,"name":"导出","byName":"Export","remark":"Export","id":"2401f4d0-60b0-4e2e-903f-84c603373572","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":80,"name":"打印","byName":"Print","remark":"Print","id":"b6fd5425-504a-46a9-993b-2f8dc9158eb8","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"}],"functionIds":["c9518758-b2e1-4f51-b517-5282e273889c","f27ecb0a-197d-47b1-b243-59a8c71302bf"]}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'120', N'2021-08-05 21:43:02', N'2021-08-05 21:43:02')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'95FBCC39-348B-4994-E8C6-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'190', N'2021-08-05 21:43:02', N'2021-08-05 21:43:02')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'0B4AAC2D-2C87-4461-E8C7-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'228', N'2021-08-05 21:43:02', N'2021-08-05 21:43:02')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'24C7ABEE-1FBD-4126-E8C8-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'77', N'2021-08-05 21:43:07', N'2021-08-05 21:43:07')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'DDCBCCBB-F6B1-45DB-E8C9-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'63', N'2021-08-05 21:43:09', N'2021-08-05 21:43:09')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'7E4D0959-FC9E-4844-E8CA-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'145', N'2021-08-05 21:43:10', N'2021-08-05 21:43:10')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'0CD6E66A-C395-4BE7-E8CB-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'167', N'2021-08-05 21:43:10', N'2021-08-05 21:43:10')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'920CF0F4-A45A-4B80-E8CC-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'83', N'2021-08-05 21:43:15', N'2021-08-05 21:43:15')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'FD9DB74F-9835-43F6-E8CD-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'96', N'2021-08-05 21:43:15', N'2021-08-05 21:43:15')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'923E710E-CB64-4982-E8CE-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'95', N'2021-08-05 21:43:25', N'2021-08-05 21:43:25')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'823AAB68-29C9-4EDC-E8CF-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'111', N'2021-08-05 21:43:25', N'2021-08-05 21:43:25')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'94DBAA10-D5CB-4E9F-E8D0-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'70', N'2021-08-05 21:43:50', N'2021-08-05 21:43:50')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'CE3FD8F6-DFD2-4E66-E8D1-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'98', N'2021-08-05 21:43:50', N'2021-08-05 21:43:50')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'C8A020C1-194B-49B1-E8D2-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'135', N'2021-08-05 21:43:50', N'2021-08-05 21:43:50')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'41E2EC7D-217F-49B4-E8D3-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'90', N'2021-08-05 21:45:08', N'2021-08-05 21:45:08')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'F71DE282-E09E-423B-E8D4-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'71', N'2021-08-05 21:45:09', N'2021-08-05 21:45:09')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'5DD1EFAF-79A5-4C36-E8D5-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'79', N'2021-08-05 21:45:09', N'2021-08-05 21:45:09')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'21DB902D-EC60-4CF3-E8D6-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'77', N'2021-08-05 21:46:37', N'2021-08-05 21:46:37')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'72F64FA0-82A5-4DDB-E8D7-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'98', N'2021-08-05 21:46:38', N'2021-08-05 21:46:38')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'0BD29FB6-DA15-4458-E8D8-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'108', N'2021-08-05 21:46:38', N'2021-08-05 21:46:38')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'B0A6689B-AAFF-4210-E8D9-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'87', N'2021-08-05 21:46:47', N'2021-08-05 21:46:47')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'01CF6F9C-873C-4563-E8DA-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'84', N'2021-08-05 21:46:47', N'2021-08-05 21:46:47')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'EFA20826-25A3-4F02-E8DB-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"6f48b583-9c8f-490f-a3e0-81fc5f2e71b4"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'55', N'2021-08-05 21:46:48', N'2021-08-05 21:46:48')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'FDD3BE4D-0634-46B4-E8DC-08D95815A729', N'/api/admin/SysMenu/deleteList', N'0.0.0.1', N'', N'["bc4b9153-c3ed-4185-3ba6-08d9580f5668"]', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'82', N'2021-08-05 21:46:51', N'2021-08-05 21:46:51')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'4175135F-CDA4-44FB-E8DD-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"6f48b583-9c8f-490f-a3e0-81fc5f2e71b4"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'94', N'2021-08-05 21:46:51', N'2021-08-05 21:46:51')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'71C400CB-0F8F-4C18-E8DE-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'100', N'2021-08-05 21:46:51', N'2021-08-05 21:46:51')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'FE64A08B-E207-45FE-E8DF-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'155', N'2021-08-05 21:47:49', N'2021-08-05 21:47:49')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'3559626A-C538-4ECC-E8E0-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'159', N'2021-08-05 21:47:49', N'2021-08-05 21:47:49')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'C5BDB088-EB48-4078-E8E1-08D95815A729', N'/api/admin/SysMenu/findForm/1ec76c4c-b9b3-4517-9854-f08cd11d653d', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'56', N'2021-08-05 21:48:06', N'2021-08-05 21:48:06')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'0516BD39-E6BE-4977-E8E2-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'47', N'2021-08-05 21:48:14', N'2021-08-05 21:48:14')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'C2B7791E-6C0C-43C4-E8E3-08D95815A729', N'/api/admin/SysMenu/findForm/383053f9-da70-4a0d-b9f0-08d94f7318cd', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'57', N'2021-08-05 21:48:16', N'2021-08-05 21:48:16')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'C3FE58D6-8554-471E-E8E4-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'55', N'2021-08-05 21:48:19', N'2021-08-05 21:48:19')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'F6C4D29D-B6F7-4362-E8E5-08D95815A729', N'/api/admin/SysMenu/findForm/10e7b3cf-d846-4b1b-7662-08d95814698b', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'48', N'2021-08-05 21:48:20', N'2021-08-05 21:48:20')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'D027AC10-3512-4E89-E8E6-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'106', N'2021-08-05 21:48:35', N'2021-08-05 21:48:35')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'447DE32E-3D34-4A90-E8E7-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'89', N'2021-08-05 21:48:36', N'2021-08-05 21:48:36')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'20E22628-1812-48EB-E8E8-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'94', N'2021-08-05 21:48:36', N'2021-08-05 21:48:36')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'C1D35608-A57E-4498-E8E9-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'54', N'2021-08-05 21:48:37', N'2021-08-05 21:48:37')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'66A6A7C3-9E29-4D8E-E8EA-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'56', N'2021-08-05 21:48:39', N'2021-08-05 21:48:39')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'80342D18-3C60-4E6F-E8EB-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'55', N'2021-08-05 21:48:41', N'2021-08-05 21:48:41')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'F78CCD6D-8F3E-425A-E8EC-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'57', N'2021-08-05 21:48:47', N'2021-08-05 21:48:47')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'694568A9-1F10-48FC-E8ED-08D95815A729', N'/api/admin/SysMenu/findForm/10e7b3cf-d846-4b1b-7662-08d95814698b', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'61', N'2021-08-05 21:48:49', N'2021-08-05 21:48:49')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'11E5AA3A-C823-4322-E8EE-08D95815A729', N'/api/admin/SysMenu/saveForm', N'0.0.0.1', N'', N'{"id":"10e7b3cf-d846-4b1b-7662-08d95814698b","form":{"lazyLoader":{},"number":200,"name":"操作日志","componentName":"sys_operation_log","url":"views/system/sys_operation_log/index","router":"/system/sys_operation_log","jumpUrl":"","icon":"ContainerOutlined","parentId":"9591f249-1471-44f7-86b5-6fdae8b93888","show":1,"close":1,"id":"10e7b3cf-d846-4b1b-7662-08d95814698b","updateTime":"2021-08-05T21:43:01","createTime":"2021-08-05T21:24:54","ParentId":"9591f249-1471-44f7-86b5-6fdae8b93888"},"allFunctions":[{"number":10,"name":"显示","byName":"Display","remark":"Display","id":"c9518758-b2e1-4f51-b517-5282e273889c","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":20,"name":"添加","byName":"Insert","remark":"Insert","id":"bffefb1c-8988-4ddf-b4ac-81c2b30e80cd","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":30,"name":"修改","byName":"Update","remark":"Update","id":"e7ef2a05-8317-41c3-b588-99519fe88bf9","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":40,"name":"删除","byName":"Delete","remark":"Delete","id":"9c388461-2704-4c5e-a729-72c17e9018e1","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":50,"name":"保存","byName":"Save","remark":"Save","id":"383e7ee2-7690-46ac-9230-65155c84aa30","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":60,"name":"检索","byName":"Search","remark":"Search","id":"f27ecb0a-197d-47b1-b243-59a8c71302bf","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":70,"name":"导出","byName":"Export","remark":"Export","id":"2401f4d0-60b0-4e2e-903f-84c603373572","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":80,"name":"打印","byName":"Print","remark":"Print","id":"b6fd5425-504a-46a9-993b-2f8dc9158eb8","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"}],"functionIds":["c9518758-b2e1-4f51-b517-5282e273889c","f27ecb0a-197d-47b1-b243-59a8c71302bf"]}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'88', N'2021-08-05 21:48:55', N'2021-08-05 21:48:55')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'3C45D4F4-3D21-4668-E8EF-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"9591f249-1471-44f7-86b5-6fdae8b93888"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'89', N'2021-08-05 21:48:55', N'2021-08-05 21:48:55')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'DF9A78D5-FB1C-4C56-E8F0-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'92', N'2021-08-05 21:48:55', N'2021-08-05 21:48:55')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'7D46A134-0105-4AAE-E8F1-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"6f48b583-9c8f-490f-a3e0-81fc5f2e71b4"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'65', N'2021-08-05 21:49:09', N'2021-08-05 21:49:09')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'5BD7E9C8-4DED-43D0-E8F2-08D95815A729', N'/api/admin/SysMenu/findForm', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'59', N'2021-08-05 21:49:12', N'2021-08-05 21:49:12')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'0AE1703B-BBC1-47C5-E8F3-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'78', N'2021-08-05 21:49:54', N'2021-08-05 21:49:54')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'DB2DC422-FD85-4411-E8F4-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"6f48b583-9c8f-490f-a3e0-81fc5f2e71b4"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'57', N'2021-08-05 21:49:55', N'2021-08-05 21:49:55')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'2DD28438-D6FE-41FF-E8F5-08D95815A729', N'/api/admin/SysMenu/findForm', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'71', N'2021-08-05 21:49:56', N'2021-08-05 21:49:56')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'7B622407-8E03-4ACB-E8F6-08D95815A729', N'/api/admin/SysMenu/saveForm', N'0.0.0.1', N'', N'{"id":"","form":{"number":"70","name":"跳转外部地址","componentName":null,"url":null,"router":null,"jumpUrl":"https://antv.vision/zh","icon":"RadarChartOutlined","parentId":null,"show":1,"close":1,"id":"00000000-0000-0000-0000-000000000000","updateTime":"0001-01-01T00:00:00","createTime":"0001-01-01T00:00:00","ParentId":"6f48b583-9c8f-490f-a3e0-81fc5f2e71b4"},"allFunctions":[{"number":10,"name":"显示","byName":"Display","remark":"Display","id":"c9518758-b2e1-4f51-b517-5282e273889c","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":20,"name":"添加","byName":"Insert","remark":"Insert","id":"bffefb1c-8988-4ddf-b4ac-81c2b30e80cd","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":30,"name":"修改","byName":"Update","remark":"Update","id":"e7ef2a05-8317-41c3-b588-99519fe88bf9","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":40,"name":"删除","byName":"Delete","remark":"Delete","id":"9c388461-2704-4c5e-a729-72c17e9018e1","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":50,"name":"保存","byName":"Save","remark":"Save","id":"383e7ee2-7690-46ac-9230-65155c84aa30","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":60,"name":"检索","byName":"Search","remark":"Search","id":"f27ecb0a-197d-47b1-b243-59a8c71302bf","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":70,"name":"导出","byName":"Export","remark":"Export","id":"2401f4d0-60b0-4e2e-903f-84c603373572","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"},{"number":80,"name":"打印","byName":"Print","remark":"Print","id":"b6fd5425-504a-46a9-993b-2f8dc9158eb8","updateTime":"2021-04-18T22:08:06","createTime":"2016-06-20T13:40:52"}],"functionIds":["c9518758-b2e1-4f51-b517-5282e273889c"]}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'73', N'2021-08-05 21:51:12', N'2021-08-05 21:51:12')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'539BAFA0-F1DA-4C9A-E8F7-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'106', N'2021-08-05 21:51:13', N'2021-08-05 21:51:13')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'838B5332-673C-456E-E8F8-08D95815A729', N'/api/admin/SysMenu/findList/10/2', N'0.0.0.1', N'', N'{"name":null,"parentId":"6f48b583-9c8f-490f-a3e0-81fc5f2e71b4"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'86', N'2021-08-05 21:51:13', N'2021-08-05 21:51:13')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'1A7D91C8-93FB-4C72-E8F9-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'96', N'2021-08-05 21:51:15', N'2021-08-05 21:51:15')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'F00E6920-8641-4636-E8FA-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'84', N'2021-08-05 21:51:15', N'2021-08-05 21:51:15')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'717BC3E2-B23E-492C-E8FB-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'86', N'2021-08-05 21:51:15', N'2021-08-05 21:51:15')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'A1843D9E-F05F-4578-E8FC-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":"6f48b583-9c8f-490f-a3e0-81fc5f2e71b4"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'71', N'2021-08-05 21:51:17', N'2021-08-05 21:51:17')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'D1DE0379-F36E-4A63-E8FD-08D95815A729', N'/api/admin/SysMenu/findForm/90e7f189-9160-4e46-e2d5-08d958181601', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'64', N'2021-08-05 22:11:57', N'2021-08-05 22:11:57')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'4A2B9747-81EB-4254-E8FE-08D95815A729', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'81', N'2021-08-05 22:12:08', N'2021-08-05 22:12:08')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'FBD3F0E6-085E-47F9-E8FF-08D95815A729', N'/api/admin/SysMenu/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"parentId":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'102', N'2021-08-05 22:12:09', N'2021-08-05 22:12:09')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'399AD601-9F0C-404A-E900-08D95815A729', N'/api/admin/SysMenu/getMenusFunctionTree', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'112', N'2021-08-05 22:12:09', N'2021-08-05 22:12:09')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'0BED23F2-5F0A-4937-0E58-08D9581B4DB3', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'354', N'2021-08-05 22:14:14', N'2021-08-05 22:14:14')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'635EAF1C-AB3A-404E-0E59-08D9581B4DB3', N'/api/admin/SysUser/info', N'0.0.0.1', N'', N'', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'78', N'2021-08-05 22:14:18', N'2021-08-05 22:14:18')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'CF465000-7567-48CD-0E5A-08D9581B4DB3', N'/api/admin/SysUser/sysOrganizationTree', N'0.0.0.1', N'', N'{}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'115', N'2021-08-05 22:14:47', N'2021-08-05 22:14:47')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'B92EECDC-759E-49A5-0E5B-08D9581B4DB3', N'/api/admin/SysUser/findList/10/1', N'0.0.0.1', N'', N'{"name":null,"loginName":null,"organizationId":"f23777dd-2c03-449f-953b-df91c19dee5b"}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'191', N'2021-08-05 22:14:47', N'2021-08-05 22:14:47')
+GO
+
+INSERT INTO [dbo].[SysOperationLog] ([Id], [Api], [Ip], [Form], [FormBody], [QueryString], [Browser], [OS], [UserId], [TakeUpTime], [UpdateTime], [CreateTime]) VALUES (N'00E6FC93-3D93-4659-0E5C-08D9581B4DB3', N'/api/admin/SysOperationLog/findList/10/1', N'0.0.0.1', N'', N'{"name":null}', N'', N'Chrome92', N'Windows10', N'0198459E-2034-4533-B843-5D227AD20740', N'65', N'2021-08-05 22:14:48', N'2021-08-05 22:14:48')
 GO
 
 
@@ -679,30 +1190,6 @@ GO
 INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'915AC7F5-4E1B-4D92-F06C-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'9A27DFC2-4A66-11EB-87B1-4CEDFB69A3E8', N'C9518758-B2E1-4F51-B517-5282E273889C', N'2021-05-12 20:25:33', N'2021-05-12 20:25:33')
 GO
 
-INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'754AD754-BBC4-47BC-F088-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'C9518758-B2E1-4F51-B517-5282E273889C', N'2021-05-12 20:25:38', N'2021-05-12 20:25:38')
-GO
-
-INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'C636D222-58DC-410F-F089-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'BFFEFB1C-8988-4DDF-B4AC-81C2B30E80CD', N'2021-05-12 20:25:38', N'2021-05-12 20:25:38')
-GO
-
-INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'92CEC1E4-CC90-4C20-F08A-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'E7EF2A05-8317-41C3-B588-99519FE88BF9', N'2021-05-12 20:25:38', N'2021-05-12 20:25:38')
-GO
-
-INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'C5AD81CC-09EC-4007-F08B-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'9C388461-2704-4C5E-A729-72C17E9018E1', N'2021-05-12 20:25:38', N'2021-05-12 20:25:38')
-GO
-
-INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'F058D1C8-7633-4781-F08C-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'383E7EE2-7690-46AC-9230-65155C84AA30', N'2021-05-12 20:25:38', N'2021-05-12 20:25:38')
-GO
-
-INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'9967C23D-9101-4543-F08D-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'F27ECB0A-197D-47B1-B243-59A8C71302BF', N'2021-05-12 20:25:38', N'2021-05-12 20:25:38')
-GO
-
-INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'2D23022C-DF34-4847-F08E-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'2401F4D0-60B0-4E2E-903F-84C603373572', N'2021-05-12 20:25:38', N'2021-05-12 20:25:38')
-GO
-
-INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'D92CC026-DFCF-49FE-F08F-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'B6FD5425-504A-46A9-993B-2F8DC9158EB8', N'2021-05-12 20:25:38', N'2021-05-12 20:25:38')
-GO
-
 INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'CB043048-142D-464D-F0A4-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'38D864FF-F6E7-43AF-8C5C-8BBCF9FA586D', N'C9518758-B2E1-4F51-B517-5282E273889C', N'2021-05-12 20:25:42', N'2021-05-12 20:25:42')
 GO
 
@@ -793,6 +1280,30 @@ GO
 INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'C9D1ED28-5F58-4C7E-F10B-08D915410342', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'E5D4DA6B-AAB0-4AAA-982F-43673E8152C0', N'F27ECB0A-197D-47B1-B243-59A8C71302BF', N'2021-05-12 20:25:54', N'2021-05-12 20:25:54')
 GO
 
+INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'3D48F0A9-103D-4AFD-C3BD-08D94DEFE002', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'BFFEFB1C-8988-4DDF-B4AC-81C2B30E80CD', N'2021-07-23 23:38:11', N'2021-07-23 23:38:11')
+GO
+
+INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'F35E685F-FD6F-4143-C3BE-08D94DEFE002', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'E7EF2A05-8317-41C3-B588-99519FE88BF9', N'2021-07-23 23:38:11', N'2021-07-23 23:38:11')
+GO
+
+INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'FA870601-C8B8-4ED7-C3BF-08D94DEFE002', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'9C388461-2704-4C5E-A729-72C17E9018E1', N'2021-07-23 23:38:11', N'2021-07-23 23:38:11')
+GO
+
+INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'CDDD1528-3849-4193-C3C0-08D94DEFE002', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'383E7EE2-7690-46AC-9230-65155C84AA30', N'2021-07-23 23:38:11', N'2021-07-23 23:38:11')
+GO
+
+INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'7017A61D-206B-43AF-C3C1-08D94DEFE002', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'F27ECB0A-197D-47B1-B243-59A8C71302BF', N'2021-07-23 23:38:11', N'2021-07-23 23:38:11')
+GO
+
+INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'642A76A6-B53F-4BBF-C3C2-08D94DEFE002', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'2401F4D0-60B0-4E2E-903F-84C603373572', N'2021-07-23 23:38:11', N'2021-07-23 23:38:11')
+GO
+
+INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'E060ECA0-7F5E-4B87-C3C3-08D94DEFE002', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'B6FD5425-504A-46A9-993B-2F8DC9158EB8', N'2021-07-23 23:38:11', N'2021-07-23 23:38:11')
+GO
+
+INSERT INTO [dbo].[SysRoleMenuFunction] ([Id], [RoleId], [MenuId], [FunctionId], [UpdateTime], [CreateTime]) VALUES (N'E73BA3C0-508A-4792-C3C4-08D94DEFE002', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'7C34C2FD-98ED-4655-AA04-BB00B915A751', N'C9518758-B2E1-4F51-B517-5282E273889C', N'2021-07-23 23:38:11', N'2021-07-23 23:38:11')
+GO
+
 
 -- ----------------------------
 -- Table structure for SysUser
@@ -852,7 +1363,7 @@ GO
 -- ----------------------------
 -- Records of SysUserPost
 -- ----------------------------
-INSERT INTO [dbo].[SysUserPost] ([Id], [UserId], [PostId], [UpdateTime], [CreateTime]) VALUES (N'14781042-D76B-41A0-9B75-4191FF66F1E2', N'0198459E-2034-4533-B843-5D227AD20740', N'96927C30-41D0-4CED-8E29-CBED35C90FB0', N'2021-07-23 17:52:05', N'2021-07-23 17:52:05')
+INSERT INTO [dbo].[SysUserPost] ([Id], [UserId], [PostId], [UpdateTime], [CreateTime]) VALUES (N'0639DDA4-DD3E-42C8-9237-037941DCA9D1', N'0198459E-2034-4533-B843-5D227AD20740', N'96927C30-41D0-4CED-8E29-CBED35C90FB0', N'2021-08-01 22:51:59', N'2021-08-01 22:51:59')
 GO
 
 INSERT INTO [dbo].[SysUserPost] ([Id], [UserId], [PostId], [UpdateTime], [CreateTime]) VALUES (N'8BE16163-CE6B-4ABB-908C-F343C6DF5ECC', N'AC18F496-E93D-42F0-B59E-E321ACC85335', N'0716B4B0-9A06-43E9-8AE8-82C74875F83E', N'2021-05-28 10:33:35', N'2021-05-28 10:33:35')
@@ -882,10 +1393,10 @@ GO
 -- ----------------------------
 -- Records of SysUserRole
 -- ----------------------------
-INSERT INTO [dbo].[SysUserRole] ([Id], [UserId], [RoleId], [UpdateTime], [CreateTime]) VALUES (N'2F892A33-FF5B-4C8A-94A6-95551455A78E', N'0198459E-2034-4533-B843-5D227AD20740', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'2021-07-23 17:52:05', N'2021-07-23 17:52:05')
+INSERT INTO [dbo].[SysUserRole] ([Id], [UserId], [RoleId], [UpdateTime], [CreateTime]) VALUES (N'9C6E49E7-FCF0-4372-B726-9D9D8B9A55E8', N'AC18F496-E93D-42F0-B59E-E321ACC85335', N'40FF1844-C099-4061-98E0-CD6E544FCFD3', N'2021-05-28 10:33:35', N'2021-05-28 10:33:35')
 GO
 
-INSERT INTO [dbo].[SysUserRole] ([Id], [UserId], [RoleId], [UpdateTime], [CreateTime]) VALUES (N'9C6E49E7-FCF0-4372-B726-9D9D8B9A55E8', N'AC18F496-E93D-42F0-B59E-E321ACC85335', N'40FF1844-C099-4061-98E0-CD6E544FCFD3', N'2021-05-28 10:33:35', N'2021-05-28 10:33:35')
+INSERT INTO [dbo].[SysUserRole] ([Id], [UserId], [RoleId], [UpdateTime], [CreateTime]) VALUES (N'22D86F5E-A737-411D-B33C-FC0FF485C78E', N'0198459E-2034-4533-B843-5D227AD20740', N'18FA4771-6F58-46A3-80D2-6F0F5E9972E3', N'2021-08-01 22:51:59', N'2021-08-01 22:51:59')
 GO
 
 
@@ -893,6 +1404,25 @@ GO
 -- Primary Key structure for table Member
 -- ----------------------------
 ALTER TABLE [dbo].[Member] ADD CONSTRAINT [Member_pkey] PRIMARY KEY CLUSTERED ([Id])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+ON [PRIMARY]
+GO
+
+
+-- ----------------------------
+-- Indexes structure for table SysDictionary
+-- ----------------------------
+CREATE UNIQUE NONCLUSTERED INDEX [SysDictionary_Id_uindex]
+ON [dbo].[SysDictionary] (
+  [Id] ASC
+)
+GO
+
+
+-- ----------------------------
+-- Primary Key structure for table SysDictionary
+-- ----------------------------
+ALTER TABLE [dbo].[SysDictionary] ADD CONSTRAINT [SysDictionary_pk] PRIMARY KEY NONCLUSTERED ([Id])
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
 ON [PRIMARY]
 GO
@@ -920,6 +1450,15 @@ GO
 -- Primary Key structure for table SysMenuFunction
 -- ----------------------------
 ALTER TABLE [dbo].[SysMenuFunction] ADD CONSTRAINT [SysMenuFunction_pkey] PRIMARY KEY CLUSTERED ([Id])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+ON [PRIMARY]
+GO
+
+
+-- ----------------------------
+-- Primary Key structure for table SysOperationLog
+-- ----------------------------
+ALTER TABLE [dbo].[SysOperationLog] ADD CONSTRAINT [PK__SysOpera__3214EC0743ACCFCD] PRIMARY KEY CLUSTERED ([Id])
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
 ON [PRIMARY]
 GO

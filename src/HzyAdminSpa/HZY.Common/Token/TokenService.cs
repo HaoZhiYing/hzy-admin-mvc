@@ -39,6 +39,11 @@ namespace HZY.Common.Token
         /// <returns></returns>
         public Guid GetAccountIdByToken()
         {
+            if (this._httpContext == null)
+            {
+                return Guid.Empty;
+            }
+
             var token = this._httpContext.Request.Headers[this._appConfiguration.AuthorizationKeyName].ToString();
 
             if (string.IsNullOrWhiteSpace(token))

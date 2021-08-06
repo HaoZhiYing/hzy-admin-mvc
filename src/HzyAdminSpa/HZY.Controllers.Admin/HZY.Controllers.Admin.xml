@@ -194,6 +194,27 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:HZY.Controllers.Admin.Framework.SysOperationLogController">
+            <summary>
+            操作日志控制器
+            </summary>
+        </member>
+        <member name="M:HZY.Controllers.Admin.Framework.SysOperationLogController.FindListAsync(System.Int32,System.Int32,HZY.Model.Entities.Framework.SysOperationLog)">
+            <summary>
+            获取表单数据
+            </summary>
+            <param name="size"></param>
+            <param name="page"></param>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Controllers.Admin.Framework.SysOperationLogController.FindFormAsync(System.Guid)">
+            <summary>
+            查询表单数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:HZY.Controllers.Admin.Framework.SysOrganizationController">
             <summary>
             组织机构控制器

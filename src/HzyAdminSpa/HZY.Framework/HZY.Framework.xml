@@ -302,17 +302,42 @@
             HZY.Framework 扩展
             </summary>
         </member>
-        <member name="T:HZY.Framework.Middleware.TakeUpTimeMiddleware">
+        <member name="T:HZY.Framework.MessageQueue.IMessageQueueProvider">
             <summary>
-            统计耗时 并记录日志中 中间件
+            消息队列提供者
             </summary>
         </member>
-        <member name="M:HZY.Framework.Middleware.TakeUpTimeMiddleware.IsApi(Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:HZY.Framework.MessageQueue.IMessageQueueProvider.RunAsync">
             <summary>
-            判断请求类型 是否 是 api
+            启动运行
             </summary>
-            <param name="context"></param>
             <returns></returns>
+        </member>
+        <member name="M:HZY.Framework.MessageQueue.IMessageQueueProvider.SendMessageQueueAsync(System.String,System.Object,System.Action{System.Object,System.IServiceProvider})">
+            <summary>
+            发布消息队列
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HZY.Framework.MessageQueue.MessageQueueProvider">
+            <summary>
+            消息队列提供者
+            </summary>
+        </member>
+        <member name="P:HZY.Framework.MessageQueue.Models.MessageQueueContext.Key">
+            <summary>
+            队列主键
+            </summary>
+        </member>
+        <member name="P:HZY.Framework.MessageQueue.Models.MessageQueueContext.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:HZY.Framework.MessageQueue.Models.MessageQueueContext.Call">
+            <summary>
+            队列回调函数
+            </summary>
         </member>
         <member name="T:HZY.Framework.Permission.Attributes.ActionDescriptorAttribute">
             <summary>

@@ -4,34 +4,14 @@
         <name>HZY.Repository</name>
     </assembly>
     <members>
-        <member name="T:HZY.Repository.Framework.Flow.SysFlowLogRepository">
-            <summary>
-            仓储 SysFlowLogRepository
-            </summary>
-        </member>
-        <member name="T:HZY.Repository.Framework.Flow.SysFlowLogUserRepository">
-            <summary>
-            仓储 SysFlowLogUserRepository
-            </summary>
-        </member>
-        <member name="T:HZY.Repository.Framework.Flow.SysFlowNodeRepository">
-            <summary>
-            仓储 SysFlowNodeRepository
-            </summary>
-        </member>
-        <member name="T:HZY.Repository.Framework.Flow.SysFlowNodeUserOrRoleRepository">
-            <summary>
-            仓储 SysFlowNodeUserOrRoleRepository
-            </summary>
-        </member>
-        <member name="T:HZY.Repository.Framework.Flow.SysFlowRepository">
-            <summary>
-            仓储 SysFlowRepository
-            </summary>
-        </member>
         <member name="T:HZY.Repository.Framework.SysDictionaryRepository">
             <summary>
             数据字典仓储
+            </summary>
+        </member>
+        <member name="T:HZY.Repository.Framework.SysOperationLogRepository">
+            <summary>
+            操作日志 仓储
             </summary>
         </member>
     </members>

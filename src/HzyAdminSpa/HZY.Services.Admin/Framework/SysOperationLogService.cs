@@ -149,18 +149,13 @@ namespace HZY.Services.Admin.Framework
         /// <returns></returns>
         public async Task<bool> DeletedAllData()
         {
-            int i = await Repository.DeleteAsync(w => 1 == 1);
-            if (i >= 0)
-            {
-                return await Task.FromResult(true);
-            }
-            return await Task.FromResult(false);
+            await Repository.DeleteAsync(w => true);
+            return true;
         }
         /// <summary>
         /// 查询表单数据
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="parentId"></param>
         /// <returns></returns>
         public async Task<Dictionary<string, object>> FindFormAsync(Guid id)
         {

@@ -30,6 +30,7 @@ namespace HZY.Services.Admin.Framework
         public async Task<(List<Guid> expandedRowKeys, List<SysOrganization> res)> FindListAsync(SysOrganization search)
         {
             var query = this.Repository.Select
+                .OrderBy(w => w.OrderNumber)
                 .WhereIf(search?.State == null, w => w.State == StateEnum.正常)
                 .WhereIf(search?.State != null, w => w.State == search.State)
                 .WhereIf(!string.IsNullOrWhiteSpace(search?.Name), w => w.Name.Contains(search.Name))

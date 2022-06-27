@@ -1,0 +1,44 @@
+﻿@section Styles{
+    <style>
+        body {
+            background-color: #f0f2f5 !important;
+        }
+    </style>
+}
+
+@section Scripts{
+   <script src="~/services/Framework/ChangePassword/indexService.js"></script>
+}
+
+<div id="app" v-cloak class="p-15">
+
+    <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+            <div>&nbsp;</div>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+            <el-card>
+                <div slot="header" class=" text-center">
+                    <span class="fs-20">修改密码</span>
+                </div>
+                <el-row :gutter="15">
+                    <el-col :xs="24">
+                        <h4>旧密码:</h4>
+                        <el-input v-model="vm.oldPassword" placeholder="请输入" type="password" />
+                    </el-col>
+                    <el-col :xs="24">
+                        <h4>新密码:</h4>
+                        <el-input v-model="vm.newPassword" placeholder="请输入" type="password" />
+                    </el-col>
+                    <el-col :xs="24">
+                        <h4>确认新密码:</h4>
+                        <el-input v-model="vm.qrPassword" placeholder="请输入" type="password" />
+                    </el-col>
+                    <el-col :xs="24" class="pt-20 pb-20">
+                        <el-button type="primary" class="w100" @@click="saveForm" :loading="loading">保存</el-button>
+                    </el-col>
+                </el-row>
+            </el-card>
+        </el-col>
+    </el-row>
+</div>

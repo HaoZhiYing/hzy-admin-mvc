@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HZY.Controllers</name>
+    </assembly>
+    <members>
+        <member name="T:HZY.Controllers.UploadController">
+            <summary>
+            上传文件控制器
+            </summary>
+        </member>
+        <member name="M:HZY.Controllers.UploadController.Images">
+            <summary>
+            上传图片
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

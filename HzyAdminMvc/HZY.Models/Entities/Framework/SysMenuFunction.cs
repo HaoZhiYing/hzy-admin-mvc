@@ -1,0 +1,13 @@
+﻿using HZY.Models.Entities.BaseEntitys;
+using System;
+
+namespace HZY.Models.Entities.Framework;
+
+/// <summary>
+/// 菜单与功能绑定
+/// </summary>
+public class SysMenuFunction : DefaultBaseEntity<Guid>
+{
+    public Guid MenuId { get; set; }
+    public Guid FunctionId { get; set; }
+}

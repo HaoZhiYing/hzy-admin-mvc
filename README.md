@@ -1,97 +1,74 @@
-# HzyAdminSpa
-
-####  文档: https://gitee.com/hzy6/HzyAdminSpa/wikis/pages
+# HzyAdmin
 
 
-### 后台模板
-https://gitee.com/hzy6/hzy-admin-spa-ui
+
+### :yellow_heart: 介绍 
+后台通配权限管理系统！
+
+### 基于后台模板(hzy-admin-ui)可结合自己的后台架构
+https://gitee.com/hzy6/hzy-admin-ui
+
+###  :cherries: 前后端分离版
+https://gitee.com/hzy6/HzyAdmin
+预览地址：http://124.221.128.7:5600
 
 ### WebApi 任务调度平台
 https://gitee.com/hzy6/hzy-quartz
 
-### 🚩  代码生成器 
+###  :coffee:  Java 后台框架
 
-https://gitee.com/hzy6/hzy-admin-code-generation
-
-### Java 后台框架
-
-1. https://gitee.com/hzy6/hzy-admin
+1. https://gitee.com/hzy6/hzy-admin-thymeleaf
 
 2. https://gitee.com/hzy6/hzy-admin-spa
 
+#### 软件架构
+开发环境：vs2022 、 .Net6.0(最新版本)
+
+###  **_交流群: 534584927_** 
+
+后端技术：.Net6、EFcore6
+
+前端技术：Vue 、Element UI、Layer(只是弹层 没用到 layui)
+
+数据库脚本位置：根目录/doc/HzyAdminRazor.sql
+
+
 ### 目录结构
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1111/110155_2e2c13f4_1242080.png "屏幕截图.png")
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0614/225823_4159745c_1242080.png "屏幕截图.png")
-
-#### 📝  介绍 
-前后分离,后台通配权限管理系统！基于.Net5
-
-    数据库脚本位置(默认 PostgreSql 数据库)：
-
-        PostgreSql > 根目录/doc/HzyAdminSpa_PostgreSql.sql
-
-        SqlServer > 根目录/doc/HzyAdminSpa.sql
-
-        MySql > 根目录/doc/hzyadminspa_MySql.sql
-
-
-    后端技术：.Net5、EFCore5、Vue3.x 、Antd2.0 、Swagger
-    
-    前端：Vue3.x 、Antd Of Vue 2.0
-    
-    
-    
-    #### 软件架构
-    开发环境：vs2019 、 .Net5.0 、VsCode
-    
-    ###  **_交流群: 534584927_** 
-
-
-
-#### ✨  特技
-
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/155729_75be773c_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185359_45c10fc9_1242080.png "屏幕截图.png") |
-|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185433_ef82bd42_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185506_3b83a405_1242080.png "屏幕截图.png") |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185540_4413085e_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185607_28ae4ec3_1242080.png "屏幕截图.png") |
-| ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185635_47a24fd9_1242080.png "屏幕截图.png") | ![输入图片说明](https://images.gitee.com/uploads/images/2021/0528/185701_b96e2f6c_1242080.png "屏幕截图.png") |
-
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0607/200025_8a62b4ca_1242080.png "屏幕截图.png")
-
-
-#### 安装前提
-
-1、安装 nodejs
-
-2、安装 vue cli >> cmd 执行: npm install -g @vue/cli
-
-#### 安装教程
-
-1. 前端 UI 在项目跟目录下 hzy-admin-clientapp 使用 VS Code 打开
-2. VS Code 打开终端执行CMD命令>> cnpm install 拉包 （node 环境 这些不懂得自行百度查询资料！）
-3. 然后使用 Vs 2019 打开服务端代码 f5 调试模式 运行即可
-注意：![输入图片说明](https://images.gitee.com/uploads/images/2019/1224/131124_8c2c3463_1242080.png "屏幕截图.png")
-
-请使用这种独立模式启动，不要使用 iis 模式
-
-
-4、命令 npm run build 打包后使用 iis 或者 nginx 部署前端 ui
-
-
+#### 部分界面截图
+![登录](https://images.gitee.com/uploads/images/2021/0320/151018_b51ad931_1242080.png "屏幕截图.png")
+![主页](https://images.gitee.com/uploads/images/2021/0320/151041_4daa85aa_1242080.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0320/151202_438941c7_1242080.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0320/151808_c26e1112_1242080.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0320/151337_c5a9e1d4_1242080.png "屏幕截图.png")
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+如果部署iis访问不了的情况可以用两种办法：
+
+1、直接打开exe然后控制台看错误
+
+2、web.config里面有个false 改为 true，iis重启项目后运行网站后，跟目录下面 有个文件夹 log 里面有错误日志文件
+
+
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+1. Fork 本仓库
+2. 新建 Feat_xxx 分支
+3. 提交代码
+4. 新建 Pull Request
 
 
+#### 码云特技
 
+1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
+2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
+3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
+4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
+5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
+6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
 
+####  :heart: 捐赠 兄弟们就当打发要饭的吧！
+![输入图片说明](https://images.gitee.com/uploads/images/2020/1216/105734_96c2122c_1242080.png "未标题-1.png")

@@ -1,0 +1,53 @@
+﻿@model Guid
+@section Styles{
+
+}
+@section Scripts{
+    <input type="hidden" value='@Html.Raw(ViewData["power"])' id="hidden_power" />
+    <input type="hidden" value='@Model' id="hidden_id" />
+    <script src="~/services/Framework/SysUser/infoService.js"></script>
+}
+
+<div id="app" v-cloak class="pl-20 pr-20 pb-100">
+    <el-row :gutter="15">
+        <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <h4>真实姓名:</h4>
+            <el-input v-model="vm.form.name" placeholder="请输入" />
+        </el-col>
+        <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <h4>账户名称:</h4>
+            <el-input v-model="vm.form.loginName" placeholder="请输入" />
+        </el-col>
+        <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <h4>账户密码:</h4>
+            <el-input v-model="vm.form.password" placeholder="请输入" />
+        </el-col>
+        <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <h4>联系电话:</h4>
+            <el-input v-model="vm.form.phone" placeholder="请输入" />
+        </el-col>
+        <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+            <h4>邮箱地址:</h4>
+            <el-input v-model="vm.form.email" placeholder="请输入" />
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <h4>角色:</h4>
+            <el-checkbox-group v-model="vm.roleIds" class="w100">
+                <el-row>
+                    <el-col :span="6" v-for="(item, index) in vm.allRoleList" :key="index">
+                        <el-checkbox :label="item.id">
+                            {{ item.name }}
+                        </el-checkbox>
+                    </el-col>
+                </el-row>
+            </el-checkbox-group>
+        </el-col>
+    </el-row>
+    <div class="hzy-admin-window-footer">
+        <div style="flex: 1 1 0%"></div>
+        <div class="p-10">
+            <el-button type="primary" @@click="saveForm" :loading="loading">提交</el-button>
+            <el-button type="danger" @@click="closeWindow">关闭</el-button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model Guid
+@section Styles{
+    <style type="text/css">
+        html,
+        body {
+            background: #ffffff;
+        }
+    </style>
+}
+@section Scripts{
+    <input type="hidden" value='@Html.Raw(ViewData["power"])' id="hidden_power" />
+    <input type="hidden" value='@Model' id="hidden_id" />
+    <script src="~/services/Framework/SysFunction/infoService.js"></script>
+}
+
+<div id="app" v-cloak class="pl-20 pr-20 pb-100">
+    <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <h4>编号:</h4>
+            <el-input v-model="vm.form.number" placeholder="请输入" />
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <h4>功能名称:</h4>
+            <el-input v-model="vm.form.name" placeholder="请输入" />
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <h4>英文名称:</h4>
+            <el-input v-model="vm.form.byName" placeholder="请输入" />
+        </el-col>
+    </el-row>
+    <div class="hzy-admin-window-footer">
+        <div style="flex: 1 1 0%"></div>
+        <div class="p-10">
+            <el-button type="primary" @@click="saveForm" :loading="loading">提交</el-button>
+            <el-button type="danger" @@click="closeWindow">关闭</el-button>
+        </div>
+    </div>
+</div>

@@ -25,7 +25,7 @@ public class EFCoreModule
     {
         #region 后台 管理系统 数据库上下文
 
-        services.AddDbContextPool<AdminBaseDbContext>(options =>
+        services.AddDbContextPool<AdminDbContext>(options =>
         {
 
             // sql 日志写入控制台
@@ -68,6 +68,14 @@ public class EFCoreModule
         services.AddTransient(typeof(AdminBaseRepository<>));
     }
 
+    /// <summary>
+    /// 使用 AdminDbContext
+    /// </summary>
+    /// <param name="serviceProvider"></param>
+    public static void UseAdminDbContext(IServiceProvider serviceProvider)
+    {
+        serviceProvider.UseHzyEFCore(typeof(AdminDbContext));
+    }
 
 
 

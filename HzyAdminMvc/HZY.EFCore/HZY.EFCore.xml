@@ -4,6 +4,55 @@
         <name>HZY.EFCore</name>
     </assembly>
     <members>
+        <member name="T:HZY.EFCore.Aop.TransactionalAttribute">
+            <summary>
+            事务拦截
+            </summary>
+        </member>
+        <member name="F:HZY.EFCore.Aop.TransactionalAttribute._dbContextTypes">
+            <summary>
+            指定 数据上下文
+            </summary>
+        </member>
+        <member name="M:HZY.EFCore.Aop.TransactionalAttribute.#ctor(System.Type[])">
+            <summary>
+            事务拦截
+            </summary>
+            <param name="dbContextTypes">数据上下文</param>
+        </member>
+        <member name="M:HZY.EFCore.Aop.TransactionalAttribute.Before(HzyScanDiService.AopContext)">
+            <summary>
+            之前
+            </summary>
+            <param name="aopContext"></param>
+        </member>
+        <member name="M:HZY.EFCore.Aop.TransactionalAttribute.After(HzyScanDiService.AopContext)">
+            <summary>
+            之后
+            </summary>
+            <param name="aopContext"></param>
+        </member>
+        <member name="M:HZY.EFCore.Aop.TransactionalAttribute.Before``1(HzyScanDiService.AopContext)">
+            <summary>
+            之前
+            </summary>
+            <param name="aopContext"></param>
+        </member>
+        <member name="M:HZY.EFCore.Aop.TransactionalAttribute.After``1(HzyScanDiService.AopContext,``0)">
+            <summary>
+            之后
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="aopContext"></param>
+            <param name="result"></param>
+        </member>
+        <member name="M:HZY.EFCore.Aop.TransactionalAttribute.OnException(HzyScanDiService.AopContext,System.Exception)">
+            <summary>
+            异常
+            </summary>
+            <param name="aopContext"></param>
+            <param name="exception"></param>
+        </member>
         <member name="T:HZY.EFCore.CacheEntity.ICacheEntity">
             <summary>
             缓存实体信息服务
@@ -14,7 +63,7 @@
             缓存实体信息服务
             </summary>
         </member>
-        <member name="T:HZY.EFCore.DbContexts.AdminBaseDbContext">
+        <member name="T:HZY.EFCore.DbContexts.AdminDbContext">
             <summary>
             后台权限管理系统 DbContext
             </summary>
@@ -44,6 +93,12 @@
             <param name="services"></param>
             <param name="connectionString">默认数据库连接字符串</param>
             <param name="defaultDatabaseType">默认数据库类型</param>
+        </member>
+        <member name="M:HZY.EFCore.EFCoreModule.UseAdminDbContext(System.IServiceProvider)">
+            <summary>
+            使用 AdminDbContext
+            </summary>
+            <param name="serviceProvider"></param>
         </member>
         <member name="T:HZY.EFCore.PagingViews.PagingView">
             <summary>

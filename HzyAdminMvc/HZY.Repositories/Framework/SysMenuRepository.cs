@@ -6,7 +6,7 @@ namespace HZY.Repositories.Framework;
 
 public class SysMenuRepository : AdminBaseRepository<SysMenu>
 {
-    public SysMenuRepository(AdminBaseDbContext context) : base(context)
+    public SysMenuRepository(AdminDbContext context) : base(context)
     {
     }
 }

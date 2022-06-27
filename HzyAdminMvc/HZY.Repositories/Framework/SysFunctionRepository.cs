@@ -6,7 +6,7 @@ namespace HZY.Repositories.Framework;
 
 public class SysFunctionRepository : AdminBaseRepository<SysFunction>
 {
-    public SysFunctionRepository(AdminBaseDbContext context) : base(context)
+    public SysFunctionRepository(AdminDbContext context) : base(context)
     {
     }
 }

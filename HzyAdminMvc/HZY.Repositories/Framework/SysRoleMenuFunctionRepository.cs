@@ -6,7 +6,7 @@ namespace HZY.Repositories.Framework;
 
 public class SysRoleMenuFunctionRepository : AdminBaseRepository<SysRoleMenuFunction>
 {
-    public SysRoleMenuFunctionRepository(AdminBaseDbContext context) : base(context)
+    public SysRoleMenuFunctionRepository(AdminDbContext context) : base(context)
     {
 
     }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HzyScanDiService;
+using Microsoft.AspNetCore.Builder;
 
 namespace HZY.WebHost.Configure;
 
@@ -28,8 +29,11 @@ public class AppConfigureServices
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
-    public static void Build(IServiceCollection services, IConfiguration configuration)
+    public static void Build(WebApplicationBuilder builder)
     {
+        var services = builder.Services;
+        var configuration = builder.Configuration;
+
         var jwtKeyName = configuration["AppConfiguration:JwtKeyName"];
         var jwtSecurityKey = configuration["AppConfiguration:JwtSecurityKey"];
         var connectionString = configuration["AppConfiguration:AdminConnectionString"];

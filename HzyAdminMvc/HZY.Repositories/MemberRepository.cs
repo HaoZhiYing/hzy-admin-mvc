@@ -7,7 +7,7 @@ namespace HZY.Repositories;
 
 public class MemberRepository : AdminBaseRepository<Member>
 {
-    public MemberRepository(AdminBaseDbContext context) : base(context)
+    public MemberRepository(AdminDbContext context) : base(context)
     {
 
     }

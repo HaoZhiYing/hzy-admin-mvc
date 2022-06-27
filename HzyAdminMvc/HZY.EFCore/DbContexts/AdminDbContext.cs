@@ -24,9 +24,9 @@ namespace HZY.EFCore.DbContexts;
 /// <summary>
 /// 后台权限管理系统 DbContext
 /// </summary>
-public class AdminBaseDbContext : DbContextBase
+public class AdminDbContext : DbContextBase
 {
-    public AdminBaseDbContext(DbContextOptions<AdminBaseDbContext> options) : base(options)
+    public AdminDbContext(DbContextOptions<AdminDbContext> options) : base(options)
     {
 
     }

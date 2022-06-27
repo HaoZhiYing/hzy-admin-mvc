@@ -48,7 +48,7 @@ builder.Services.AddControllersWithViews(options =>
 ;
 
 //服务构建
-AppConfigureServices.Build(builder.Services, builder.Configuration);
+AppConfigureServices.Build(builder);
 
 var app = builder.Build();
 
@@ -78,6 +78,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 //配置构建
-AppConfigure.Build(app, app.Environment, app.Services, messageQueueProvider);
+AppConfigure.Build(app);
 
 app.Run();

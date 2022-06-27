@@ -6,7 +6,7 @@ namespace HZY.Repositories.Framework;
 
 public class SysRoleRepository : AdminBaseRepository<SysRole>
 {
-    public SysRoleRepository(AdminBaseDbContext context) : base(context)
+    public SysRoleRepository(AdminDbContext context) : base(context)
     {
 
     }

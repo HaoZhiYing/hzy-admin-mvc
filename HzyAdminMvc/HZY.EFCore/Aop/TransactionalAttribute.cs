@@ -1,12 +1,12 @@
-﻿using HzyScanDiService;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using HzyEFCoreRepositories;
+using HzyScanDiService;
+using Microsoft.EntityFrameworkCore;
 
-namespace HZY.Infrastructure.Aop
+namespace HZY.EFCore.Aop
 {
     /// <summary>
     /// 事务拦截
@@ -17,7 +17,19 @@ namespace HZY.Infrastructure.Aop
         /// <summary>
         /// 指定 数据上下文
         /// </summary>
-        public Type[] DbContextTypes { get; }
+        private readonly Type[] _dbContextTypes;
+
+        public TransactionalAttribute()
+        {
+            _dbContextTypes = HzyEFCoreUtil.GetAllDbContextType().ToArray();
+
+            if (_dbContextTypes == null || _dbContextTypes.Length == 0)
+            {
+                throw new Exception("请在程序启动前注册 程序中所有的 dbcontext 类型。例如： serviceProvider.UseHzyEFCore(typeof(AdminDbContext));");
+            }
+
+            ExceptionEvent = OnException;
+        }
 
         /// <summary>
         /// 事务拦截
@@ -25,8 +37,8 @@ namespace HZY.Infrastructure.Aop
         /// <param name="dbContextTypes">数据上下文</param>
         public TransactionalAttribute(params Type[] dbContextTypes)
         {
-            DbContextTypes = dbContextTypes;
-            this.ExceptionEvent = OnException;
+            _dbContextTypes = dbContextTypes;
+            ExceptionEvent = OnException;
         }
 
         /// <summary>
@@ -35,7 +47,7 @@ namespace HZY.Infrastructure.Aop
         /// <param name="aopContext"></param>
         public override void Before(AopContext aopContext)
         {
-            foreach (var dbContextType in DbContextTypes)
+            foreach (var dbContextType in _dbContextTypes)
             {
                 var dbcontext = (DbContext)aopContext.ServiceProvider.GetService(dbContextType);
                 dbcontext.Database.OpenConnection();
@@ -49,7 +61,7 @@ namespace HZY.Infrastructure.Aop
         /// <param name="aopContext"></param>
         public override void After(AopContext aopContext)
         {
-            foreach (var dbContextType in DbContextTypes)
+            foreach (var dbContextType in _dbContextTypes)
             {
                 var dbcontext = (DbContext)aopContext.ServiceProvider.GetService(dbContextType);
                 dbcontext.Database.CommitTransaction();
@@ -84,7 +96,7 @@ namespace HZY.Infrastructure.Aop
         private void OnException(AopContext aopContext, Exception exception)
         {
             //函数异常触发事件
-            foreach (var dbContextType in DbContextTypes)
+            foreach (var dbContextType in _dbContextTypes)
             {
                 var dbcontext = (DbContext)aopContext.ServiceProvider.GetService(dbContextType);
                 if (dbcontext.Database.CurrentTransaction != null)
@@ -98,6 +110,5 @@ namespace HZY.Infrastructure.Aop
 
 
     }
-
 
 }

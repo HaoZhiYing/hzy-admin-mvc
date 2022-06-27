@@ -1,8 +1,5 @@
-﻿using HZY.Infrastructure;
-using HZY.Infrastructure.MessageQueue;
+﻿using HZY.EFCore;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using System;
 
 namespace HZY.WebHost.Configure;
 
@@ -15,9 +12,11 @@ public class AppConfigure
     /// <param name="env"></param>
     /// <param name="serviceProvider"></param>
     /// <param name="messageQueueProvider"></param>
-    public static void Build(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider, IMessageQueueProvider messageQueueProvider)
+    public static void Build(WebApplication app)
     {
-
+        #region 使用 DbContext
+        EFCoreModule.UseAdminDbContext(app.Services);
+        #endregion
     }
 
 

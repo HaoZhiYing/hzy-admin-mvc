@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System.Reflection;
 using Newtonsoft.Json;
 using HZY.Services.Admin.Framework;
-using HZY.Services.Accounts;
 using HZY.Infrastructure.Permission.Attributes;
 using HZY.Infrastructure;
 using HZY.Infrastructure.ApiResultManage;
 using HZY.Services.Admin.ServicesAdmin;
 using System.Linq;
 using Newtonsoft.Json.Serialization;
-using HZY.Services.Consts;
+using HZY.Domain.Services.Accounts;
+using HZY.Domain.Services.Consts;
 
 namespace HZY.WebHost.Filters
 {

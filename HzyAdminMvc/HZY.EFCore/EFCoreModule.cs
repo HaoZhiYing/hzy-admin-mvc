@@ -2,7 +2,6 @@
 using HZY.EFCore.CacheEntity.Impl;
 using HZY.EFCore.DbContexts;
 using HZY.EFCore.DbContexts.Interceptors;
-using HZY.EFCore.Repositories;
 using HZY.Infrastructure;
 using HzyEFCoreRepositories;
 using Microsoft.EntityFrameworkCore;
@@ -65,14 +64,13 @@ public class EFCoreModule
         #endregion
 
         services.AddSingleton<ICacheEntity, CacheEntityImpl>();
-        services.AddTransient(typeof(AdminBaseRepository<>));
     }
 
     /// <summary>
     /// 使用 AdminDbContext
     /// </summary>
     /// <param name="serviceProvider"></param>
-    public static void UseAdminDbContext(IServiceProvider serviceProvider)
+    public static void UseDbContext(IServiceProvider serviceProvider)
     {
         serviceProvider.UseHzyEFCore(typeof(AdminDbContext));
     }

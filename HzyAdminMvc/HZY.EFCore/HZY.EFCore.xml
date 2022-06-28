@@ -94,7 +94,7 @@
             <param name="connectionString">默认数据库连接字符串</param>
             <param name="defaultDatabaseType">默认数据库类型</param>
         </member>
-        <member name="M:HZY.EFCore.EFCoreModule.UseAdminDbContext(System.IServiceProvider)">
+        <member name="M:HZY.EFCore.EFCoreModule.UseDbContext(System.IServiceProvider)">
             <summary>
             使用 AdminDbContext
             </summary>
@@ -209,13 +209,42 @@
             <param name="width"></param>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:HZY.EFCore.Repositories.AdminBaseRepository`1">
+        <member name="T:HZY.EFCore.Repositories.Admin.Core.IAdminRepository`1">
             <summary>
-            默认基础仓储
+            Admin默认基础仓储接口
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:HZY.EFCore.Repositories.AdminBaseRepository`1.AsPagingViewAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Collections.Generic.List{HZY.EFCore.PagingViews.TableColumnView})">
+        <member name="M:HZY.EFCore.Repositories.Admin.Core.IAdminRepository`1.AsPagingViewAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Collections.Generic.List{HZY.EFCore.PagingViews.TableColumnView})">
+            <summary>
+            分页模型构建
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="query"></param>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="columnHeads"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.EFCore.Repositories.Admin.Core.IAdminRepository`1.AsPagingViewAsync(System.String,System.Int32,System.Int32,System.String,System.Collections.Generic.List{HZY.EFCore.PagingViews.TableColumnView},System.Object[])">
+            <summary>
+            分页模型构建 用于编写 sql 语句得情况
+            </summary>
+            <param name="sql"></param>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="orderBy"></param>
+            <param name="columnHeads"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HZY.EFCore.Repositories.Admin.Core.Impl.AdminRepositoryImpl`1">
+            <summary>
+            Admin默认基础仓储接口
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:HZY.EFCore.Repositories.Admin.Core.Impl.AdminRepositoryImpl`1.AsPagingViewAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Collections.Generic.List{HZY.EFCore.PagingViews.TableColumnView})">
             <summary>
             查询转换为分页视图模型
             </summary>
@@ -226,7 +255,7 @@
             <typeparam name="TModel"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:HZY.EFCore.Repositories.AdminBaseRepository`1.AsPagingViewAsync(System.String,System.Int32,System.Int32,System.String,System.Collections.Generic.List{HZY.EFCore.PagingViews.TableColumnView},System.Object[])">
+        <member name="M:HZY.EFCore.Repositories.Admin.Core.Impl.AdminRepositoryImpl`1.AsPagingViewAsync(System.String,System.Int32,System.Int32,System.String,System.Collections.Generic.List{HZY.EFCore.PagingViews.TableColumnView},System.Object[])">
             <summary>
             查询转换为分页视图模型 支持 Sql 字符串
             </summary>

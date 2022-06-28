@@ -1,11 +1,12 @@
 using System;
 using System.IO;
 using System.Linq;
+using HZY.Domain.Services.Upload;
 using HZY.Infrastructure.ApiResultManage;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
-namespace HZY.Services.Upload.Impl;
+namespace HZY.Domain.Services.Upload.Impl;
 
 /// <summary>
 /// 上传文件服务
@@ -39,22 +40,22 @@ public class UploadService : IUploadService
 
         var path = $"/upload/{folder}";
 
-        if (!Directory.Exists(this._webRootPath + path))
+        if (!Directory.Exists(_webRootPath + path))
         {
-            Directory.CreateDirectory(this._webRootPath + path);
+            Directory.CreateDirectory(_webRootPath + path);
         }
 
         path += $"/{DateTime.Now:yyyyMMdd}";
 
-        if (!Directory.Exists(this._webRootPath + path))
+        if (!Directory.Exists(_webRootPath + path))
         {
-            Directory.CreateDirectory(this._webRootPath + path);
+            Directory.CreateDirectory(_webRootPath + path);
         }
 
         path += $"/time_{DateTime.Now:HHmmss}_old_name_{formFile.FileName}";
 
         // 创建新文件
-        using var fs = File.Create(this._webRootPath + path);
+        using var fs = File.Create(_webRootPath + path);
         formFile.CopyTo(fs);
         // 清空缓冲区数据
         fs.Flush();
@@ -69,7 +70,7 @@ public class UploadService : IUploadService
     /// <param name="format"></param>
     /// <returns></returns>
     public virtual string HandleUploadFile(IFormFile iFormFile, params string[] format)
-        => this.HandleUploadFile(iFormFile, "files", format);
+        => HandleUploadFile(iFormFile, "files", format);
 
     /// <summary>
     /// 上传图片
@@ -78,5 +79,5 @@ public class UploadService : IUploadService
     /// <param name="folder"></param>
     /// <returns></returns>
     public virtual string HandleUploadImageFile(IFormFile iFormFile, string folder = "files")
-        => this.HandleUploadFile(iFormFile, folder, ".jpg", ".jpeg", ".png", ".gif", ".jfif");
+        => HandleUploadFile(iFormFile, folder, ".jpg", ".jpeg", ".png", ".gif", ".jfif");
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HZY.Services.Consts
+namespace HZY.Domain.Services.Consts
 {
     public class AdminFunctionConsts
     {

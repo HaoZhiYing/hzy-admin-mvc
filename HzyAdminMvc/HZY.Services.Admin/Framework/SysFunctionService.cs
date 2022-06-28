@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using HZY.Services.Admin.ServicesAdmin;
-using HZY.Repositories.Framework;
 using HZY.Models.Entities.Framework;
 using HZY.Infrastructure;
 using HZY.EFCore.PagingViews;
 using HzyEFCoreRepositories.Extensions;
+using HZY.EFCore.Repositories.Admin.Core;
 
 namespace HZY.Services.Admin.Framework;
 
 /// <summary>
 /// 功能服务
 /// </summary>
-public class SysFunctionService : AdminBaseService<SysFunctionRepository>
+public class SysFunctionService : AdminBaseService<IAdminRepository<SysFunction>>
 {
-    public SysFunctionService(SysFunctionRepository repository) : base(repository)
+    public SysFunctionService(IAdminRepository<SysFunction> repository) : base(repository)
     {
     }
 

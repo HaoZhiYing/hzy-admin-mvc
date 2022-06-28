@@ -1,38 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using HZY.Services.Admin.ServicesAdmin;
-using HZY.Repositories.Framework;
 using HZY.Models.Entities.Framework;
 using HZY.Infrastructure;
 using HZY.Models.BO;
-using HZY.Services.Accounts.Impl;
 using HZY.Models.DTO;
 using System.Collections;
-using HZY.Services.Accounts;
-using HZY.Services.Consts;
 using HZY.EFCore.PagingViews;
 using HzyEFCoreRepositories.Extensions;
+using HZY.EFCore.Repositories.Admin.Core;
+using HZY.Domain.Services.Accounts;
+using HZY.Domain.Services.Consts;
 
 namespace HZY.Services.Admin.Framework;
 
 /// <summary>
 /// 菜单服务
 /// </summary>
-public class SysMenuService : AdminBaseService<SysMenuRepository>
+public class SysMenuService : AdminBaseService<IAdminRepository<SysMenu>>
 {
-    private readonly SysFunctionRepository _sysFunctionRepository;
-    private readonly SysMenuFunctionRepository _sysMenuFunctionRepository;
-    private readonly SysRoleMenuFunctionRepository _sysRoleMenuFunctionRepository;
+    private readonly IAdminRepository<SysFunction> _sysFunctionRepository;
+    private readonly IAdminRepository<SysMenuFunction> _sysMenuFunctionRepository;
+    private readonly IAdminRepository<SysRoleMenuFunction> _sysRoleMenuFunctionRepository;
     private readonly AccountInfo _accountInfo;
     private readonly AppConfiguration _appConfiguration;
 
-    public SysMenuService(SysMenuRepository repository,
-        SysFunctionRepository sysFunctionRepository,
-        SysMenuFunctionRepository sysMenuFunctionRepository,
-        SysRoleMenuFunctionRepository sysRoleMenuFunctionRepository,
+    public SysMenuService(IAdminRepository<SysMenu> repository,
+        IAdminRepository<SysFunction> sysFunctionRepository,
+        IAdminRepository<SysMenuFunction> sysMenuFunctionRepository,
+        IAdminRepository<SysRoleMenuFunction> sysRoleMenuFunctionRepository,
         IAccountService accountService,
         AppConfiguration appConfiguration) : base(
         repository)
@@ -481,7 +476,7 @@ public class SysMenuService : AdminBaseService<SysMenuRepository>
 
                     children.Add(new
                     {
-                        key = key,
+                        key,
                         title = $"{function.Name}-{function.ByName}-{function.Number}",
                         disabled = true,
                         children = new ArrayList()
@@ -494,7 +489,7 @@ public class SysMenuService : AdminBaseService<SysMenuRepository>
                 key = item.Id,
                 title = $"{item.Name}-{item.Number}",
                 disableCheckbox = true,
-                children = children
+                children
             });
         }
 

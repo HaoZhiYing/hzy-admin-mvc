@@ -9,13 +9,10 @@ public class AppConfigure
     /// 配置构建
     /// </summary>
     /// <param name="app"></param>
-    /// <param name="env"></param>
-    /// <param name="serviceProvider"></param>
-    /// <param name="messageQueueProvider"></param>
     public static void Build(WebApplication app)
     {
         #region 使用 DbContext
-        EFCoreModule.UseAdminDbContext(app.Services);
+        EFCoreModule.UseDbContext(app.Services);
         #endregion
     }
 

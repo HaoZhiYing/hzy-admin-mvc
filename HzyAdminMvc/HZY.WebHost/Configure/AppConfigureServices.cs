@@ -27,8 +27,7 @@ public class AppConfigureServices
     /// <summary>
     /// 配置服务
     /// </summary>
-    /// <param name="services"></param>
-    /// <param name="configuration"></param>
+    /// <param name="builder"></param>
     public static void Build(WebApplicationBuilder builder)
     {
         var services = builder.Services;

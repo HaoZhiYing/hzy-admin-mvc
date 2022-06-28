@@ -21,10 +21,7 @@
     <ProjectReference Include="..\HZY.FreeSqlCore\HZY.FreeSqlCore.csproj" />
     <ProjectReference Include="..\HZY.Infrastructure\HZY.Infrastructure.csproj" />
     <ProjectReference Include="..\HZY.Models\HZY.Models.csproj" />
-    <ProjectReference Include="..\HZY.Repositories.Redis\HZY.Repositories.Redis.csproj" />
-    <ProjectReference Include="..\HZY.Repositories\HZY.Repositories.csproj" />
     <ProjectReference Include="..\HZY.Services.Admin\HZY.Services.Admin.csproj" />
-    <ProjectReference Include="..\HZY.Services\HZY.Services.csproj" />
   </ItemGroup>
 
 </Project>

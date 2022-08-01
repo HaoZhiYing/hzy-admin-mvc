@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using HZY.Services.Admin.ServicesAdmin;
-using HZY.Repositories;
-using HZY.Repositories.Framework;
 using HZY.Models.Entities;
 using HZY.Infrastructure;
-using HZY.Services.Upload;
 using HZY.EFCore.PagingViews;
 using HzyEFCoreRepositories.Extensions;
+using HZY.EFCore.Repositories.Admin.Core;
+using HZY.Domain.Services.Upload;
+using HZY.Models.Entities.Framework;
 
 namespace HZY.Services.Admin;
 
 /// <summary>
 /// 会员服务
 /// </summary>
-public class MemberService : AdminBaseService<MemberRepository>
+public class MemberService : AdminBaseService<IAdminRepository<Member>>
 {
     private readonly string _webRootPath;
-    private readonly SysUserRepository _sysUserRepository;
+    private readonly IAdminRepository<SysUser> _sysUserRepository;
     private readonly IUploadService _uploadService;
 
-    public MemberService(MemberRepository repository,
-        SysUserRepository sysUserRepository,
+    public MemberService(IAdminRepository<Member> repository,
+        IAdminRepository<SysUser> sysUserRepository,
         IWebHostEnvironment webHostEnvironment, IUploadService uploadService)
         : base(repository)
     {

@@ -1,32 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using HZY.Services.Admin.ServicesAdmin;
-using HZY.Repositories.Framework;
 using HZY.Models.Entities.Framework;
-using HZY.Infrastructure;
-using HZY.Models.BO;
-using HZY.Services.Accounts.Impl;
 using HZY.Models.DTO;
-using System.Collections;
+using HZY.EFCore.Repositories.Admin.Core;
 
 namespace HZY.Services.Admin.Framework;
 
 /// <summary>
 /// 角色 菜单 功能服务
 /// </summary>
-public class SysRoleMenuFunctionService : AdminBaseService<SysRoleMenuFunctionRepository>
+public class SysRoleMenuFunctionService : AdminBaseService<IAdminRepository<SysRoleMenuFunction>>
 {
-    private readonly SysMenuRepository _sysMenuRepository;
-    private readonly SysFunctionRepository _sysFunctionRepository;
-    private readonly SysMenuFunctionRepository _sysMenuFunctionRepository;
+    private readonly IAdminRepository<SysMenu> _sysMenuRepository;
+    private readonly IAdminRepository<SysFunction> _sysFunctionRepository;
+    private readonly IAdminRepository<SysMenuFunction> _sysMenuFunctionRepository;
 
-    public SysRoleMenuFunctionService(SysRoleMenuFunctionRepository repository,
-        SysMenuRepository sysMenuRepository,
-        SysFunctionRepository sysFunctionRepository,
-        SysMenuFunctionRepository sysMenuFunctionRepository) : base(repository)
+    public SysRoleMenuFunctionService(IAdminRepository<SysRoleMenuFunction> repository,
+        IAdminRepository<SysMenu> sysMenuRepository,
+        IAdminRepository<SysFunction> sysFunctionRepository,
+        IAdminRepository<SysMenuFunction> sysMenuFunctionRepository) : base(repository)
     {
         _sysMenuRepository = sysMenuRepository;
         _sysFunctionRepository = sysFunctionRepository;

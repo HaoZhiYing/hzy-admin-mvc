@@ -1,17 +1,16 @@
-﻿using HZY.Infrastructure;
+﻿using HZY.EFCore.Repositories.Admin.Core;
+using HZY.Infrastructure;
 using HZY.Infrastructure.ApiResultManage;
 using HZY.Infrastructure.Services;
 using HZY.Infrastructure.Token;
 using HZY.Models.BO;
 using HZY.Models.Entities.Framework;
-using HZY.Repositories.Framework;
-using HZY.Services.Accounts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HZY.Services.Accounts.Impl;
+namespace HZY.Domain.Services.Accounts.Impl;
 
 /// <summary>
 /// 当前登录账户服务
@@ -21,16 +20,16 @@ public class AccountService : IAccountService
     private readonly AccountInfo _accountInfo;
     private readonly AppConfiguration _appConfiguration;
     private readonly TokenService _tokenService;
-    private readonly SysUserRepository _sysUserRepository;
+    private readonly IAdminRepository<SysUser> _sysUserRepository;
 
-    public AccountService(SysUserRepository sysUserRepository,
+    public AccountService(IAdminRepository<SysUser> sysUserRepository,
         AppConfiguration appConfiguration,
         TokenService tokenService)
     {
         _sysUserRepository = sysUserRepository;
         _appConfiguration = appConfiguration;
         _tokenService = tokenService;
-        this._accountInfo = this.FindAccountInfoByToken();       
+        _accountInfo = FindAccountInfoByToken();
     }
 
     /// <summary>
@@ -46,18 +45,18 @@ public class AccountService : IAccountService
             return default;
         }
 
-        var sysUser = this._sysUserRepository.FindById(id);
+        var sysUser = _sysUserRepository.FindById(id);
         if (sysUser == null) return default;
         var sysRoles = (
-            from sysUserRole in this._sysUserRepository.Orm.SysUserRole.AsQueryable()
-            from sysRole in this._sysUserRepository.Orm.SysRole.AsQueryable().Where(w => w.Id == sysUserRole.RoleId).DefaultIfEmpty()
+            from sysUserRole in _sysUserRepository.Orm.SysUserRole.AsQueryable()
+            from sysRole in _sysUserRepository.Orm.SysRole.AsQueryable().Where(w => w.Id == sysUserRole.RoleId).DefaultIfEmpty()
             where sysUserRole.UserId == id
             select sysRole
             ).ToList();
 
         var accountInfo = new AccountInfo();
         accountInfo = sysUser.MapTo<SysUser, AccountInfo>();
-        accountInfo.IsAdministrator = sysRoles.Any(w => w.Id == this._appConfiguration.Configs.AdminRoleId);
+        accountInfo.IsAdministrator = sysRoles.Any(w => w.Id == _appConfiguration.Configs.AdminRoleId);
         accountInfo.SysRoles = sysRoles;
 
         return accountInfo;
@@ -67,7 +66,7 @@ public class AccountService : IAccountService
     /// 获取当前登录账户信息
     /// </summary>
     /// <returns></returns>
-    public virtual AccountInfo GetAccountInfo() => this._accountInfo;
+    public virtual AccountInfo GetAccountInfo() => _accountInfo;
 
     /// <summary>
     /// 检查账户 登录信息 并返回 token
@@ -84,7 +83,7 @@ public class AccountService : IAccountService
             MessageBox.Show("请输入密码！");
         // if (string.IsNullOrWhiteSpace(code))
         //  MessageBox.Show("请输入验证码!");
-        var sysUser = await this._sysUserRepository.FindAsync(w => w.LoginName == name);
+        var sysUser = await _sysUserRepository.FindAsync(w => w.LoginName == name);
         if (sysUser == null)
         {
             MessageBox.Show("账户不存在!");
@@ -113,10 +112,10 @@ public class AccountService : IAccountService
     {
         if (string.IsNullOrEmpty(oldPassword)) MessageBox.Show("旧密码不能为空！");
         if (string.IsNullOrEmpty(newPassword)) MessageBox.Show("新密码不能为空！");
-        var sysUser = await this._sysUserRepository.FindByIdAsync(this.GetAccountInfo().Id);
+        var sysUser = await _sysUserRepository.FindByIdAsync(GetAccountInfo().Id);
         if (sysUser.Password != oldPassword) MessageBox.Show("旧密码不正确！");
         sysUser.Password = newPassword;
-        return await this._sysUserRepository.UpdateAsync(sysUser);
+        return await _sysUserRepository.UpdateAsync(sysUser);
     }
 
 }

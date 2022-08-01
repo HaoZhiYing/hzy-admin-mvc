@@ -1,31 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using HZY.Services.Admin.ServicesAdmin;
-using HZY.Repositories.Framework;
 using HZY.Models.Entities.Framework;
 using HZY.Infrastructure;
-using HZY.Models.BO;
-using HZY.Services.Accounts.Impl;
-using HZY.Models.DTO;
-using System.Collections;
 using HZY.Infrastructure.ApiResultManage;
 using HZY.EFCore.PagingViews;
 using HzyEFCoreRepositories.Extensions;
+using HZY.EFCore.Repositories.Admin.Core;
 
 namespace HZY.Services.Admin.Framework;
 
 /// <summary>
 /// 角色服务
 /// </summary>
-public class SysRoleService : AdminBaseService<SysRoleRepository>
+public class SysRoleService : AdminBaseService<IAdminRepository<SysRole>>
 {
-    private readonly SysUserRoleRepository _sysUserRoleRepository;
+    private readonly IAdminRepository<SysUserRole> _sysUserRoleRepository;
 
-    public SysRoleService(SysRoleRepository repository, SysUserRoleRepository sysUserRoleRepository) : base(
-        repository)
+    public SysRoleService(IAdminRepository<SysRole> repository, IAdminRepository<SysUserRole> sysUserRoleRepository)
+        : base(repository)
     {
         _sysUserRoleRepository = sysUserRoleRepository;
     }

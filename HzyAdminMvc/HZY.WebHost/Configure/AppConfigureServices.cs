@@ -16,7 +16,6 @@ namespace HZY.WebHost.Configure;
 public class AppConfigureServices
 {
     private static readonly IEnumerable<string> _versionList = typeof(ApiVersions).GetEnumNames().OrderBy(w => w);
-    public static readonly string prefixString = "HZY.";
 
     /// <summary>
     /// 获取 Swagger 版本集合

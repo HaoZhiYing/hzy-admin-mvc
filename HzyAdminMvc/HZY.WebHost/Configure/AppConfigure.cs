@@ -1,5 +1,8 @@
 ﻿using HZY.EFCore;
+using HZY.Infrastructure;
+using HzyScanDiService;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HZY.WebHost.Configure;
 
@@ -14,8 +17,19 @@ public class AppConfigure
     /// <param name="messageQueueProvider"></param>
     public static void Build(WebApplication app)
     {
+        var env = app.Environment;
+        var serviceProvider = app.Services;
+
         #region 使用 DbContext
-        EFCoreModule.UseAdminDbContext(app.Services);
+        app.UseAdminDbContext();
+        #endregion
+
+        var appConfiguration = app.Services.GetRequiredService<AppConfiguration>();
+
+        #region 注册服务提供者
+
+        serviceProvider.UseServiceProvider();
+
         #endregion
     }
 

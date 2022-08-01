@@ -27,7 +27,7 @@ namespace HZY.EFCore.Repositories
     /// 默认基础仓储
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class AdminBaseRepository<T> : AppRepositoryImpl<T, AdminDbContext>, IAppRepository<T, AdminDbContext>, IScopedSelfDependency
+    public class AdminBaseRepository<T> : RepositoryBaseImpl<T, AdminDbContext>, IRepositoryBase<T, AdminDbContext>, IScopedSelfDependency
         where T : class, new()
     {
         public AdminBaseRepository(AdminDbContext context) : base(context)

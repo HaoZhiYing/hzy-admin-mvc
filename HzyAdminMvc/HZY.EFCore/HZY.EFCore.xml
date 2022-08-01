@@ -94,11 +94,11 @@
             <param name="connectionString">默认数据库连接字符串</param>
             <param name="defaultDatabaseType">默认数据库类型</param>
         </member>
-        <member name="M:HZY.EFCore.EFCoreModule.UseAdminDbContext(System.IServiceProvider)">
+        <member name="M:HZY.EFCore.EFCoreModule.UseAdminDbContext(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             使用 AdminDbContext
             </summary>
-            <param name="serviceProvider"></param>
+            <param name="app"></param>
         </member>
         <member name="T:HZY.EFCore.PagingViews.PagingView">
             <summary>

@@ -34,10 +34,8 @@ public class AppConfigureServices
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        var jwtKeyName = configuration["AppConfiguration:JwtKeyName"];
-        var jwtSecurityKey = configuration["AppConfiguration:JwtSecurityKey"];
-        var connectionString = configuration["AppConfiguration:AdminConnectionString"];
-        var connectionStringRedis = configuration["AppConfiguration:ConnectionStringRedis"];
+        var appConfiguration = new AppConfiguration(configuration);
+        var prefixString = appConfiguration.Configs.Namespace + ".";
 
         //扫描服务
         services.AddHzyScanDiService(prefixString);
@@ -59,9 +57,9 @@ public class AppConfigureServices
 
         #region 数据库仓储注册 、 自动扫描服务注册 、 中间件注册
         //配置efcore
-        EFCoreModule.RegisterAdminRepository(services, connectionString, DefaultDatabaseType.SqlServer);
+        EFCoreModule.RegisterAdminRepository(services, appConfiguration.ConnectionStrings.DefaultSqlServer, DefaultDatabaseType.SqlServer);
         //配置freesql
-        FreeSqlCoreModule.RegisterFreeSql(services, connectionString, DefaultDatabaseType.SqlServer, $"{prefixString}Repositories");
+        FreeSqlCoreModule.RegisterFreeSql(services, appConfiguration.ConnectionStrings.DefaultSqlServer, DefaultDatabaseType.SqlServer, $"{prefixString}Repositories");
         //配置redis
         //RepositoryRedisModule.RegisterRedisRepository(services, connectionStringRedis);
         //添加中间件

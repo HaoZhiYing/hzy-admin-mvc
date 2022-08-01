@@ -5,6 +5,7 @@ using HZY.EFCore.DbContexts.Interceptors;
 using HZY.EFCore.Repositories;
 using HZY.Infrastructure;
 using HzyEFCoreRepositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +14,7 @@ namespace HZY.EFCore;
 /// <summary>
 /// 仓储模块
 /// </summary>
-public class EFCoreModule
+public static class EFCoreModule
 {
     /// <summary>
     /// 注册 Admin 后台管理数据库
@@ -36,7 +37,7 @@ public class EFCoreModule
             // 懒加载代理
             options.UseLazyLoadingProxies();
             //添加 EFCore 监控 和 动态表名
-            options.AddHzyEFCore(false);
+            options.AddHzyEFCoreRepository(false);
             options.AddInterceptors(new AuditInterceptor());
 
             if (defaultDatabaseType == DefaultDatabaseType.SqlServer)
@@ -71,10 +72,10 @@ public class EFCoreModule
     /// <summary>
     /// 使用 AdminDbContext
     /// </summary>
-    /// <param name="serviceProvider"></param>
-    public static void UseAdminDbContext(IServiceProvider serviceProvider)
+    /// <param name="app"></param>
+    public static void UseAdminDbContext(this IApplicationBuilder app)
     {
-        serviceProvider.UseHzyEFCore(typeof(AdminDbContext));
+        app.UseHzyEFCoreRepository(typeof(AdminDbContext));
     }
 
 

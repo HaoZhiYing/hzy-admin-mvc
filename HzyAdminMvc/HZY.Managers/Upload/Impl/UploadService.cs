@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 using System.Linq;
-using HZY.Domain.Services.Upload;
+using HZY.Managers.Upload;
 using HZY.Infrastructure.ApiResultManage;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
-namespace HZY.Domain.Services.Upload.Impl;
+namespace HZY.Managers.Upload.Impl;
 
 /// <summary>
 /// 上传文件服务

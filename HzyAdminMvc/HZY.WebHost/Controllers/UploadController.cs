@@ -1,4 +1,4 @@
-using HZY.Domain.Services.Upload;
+using HZY.Managers.Upload;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 

@@ -10,7 +10,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HZY.Domain.Services.Accounts.Impl;
+namespace HZY.Managers.Accounts.Impl;
 
 /// <summary>
 /// 当前登录账户服务

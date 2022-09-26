@@ -8,8 +8,8 @@ using System.Collections;
 using HZY.EFCore.PagingViews;
 using HzyEFCoreRepositories.Extensions;
 using HZY.EFCore.Repositories.Admin.Core;
-using HZY.Domain.Services.Accounts;
-using HZY.Domain.Services.Consts;
+using HZY.Managers.Accounts;
+using HZY.Managers.Consts;
 
 namespace HZY.Services.Admin.Framework;
 

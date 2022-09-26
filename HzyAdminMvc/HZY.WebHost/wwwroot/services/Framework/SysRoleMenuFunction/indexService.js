@@ -127,5 +127,19 @@ var app = new Vue({
                 if (res.code !== 1) return;
             });
         },
+        //全选/全不选
+        onCheckAllChange(e, row) {
+            console.log(e, row);
+            if (e) {
+                row.checkFunction = row.functions.map((w) => w.key);
+                row.indeterminate = row.checkFunction.length > 0 && row.checkFunction.length < row.functions.length;
+                row.checkAll = row.checkFunction.length === row.functions.length;
+            } else {
+                row.checkFunction = [];
+                row.indeterminate = false;
+            }
+
+           this.saveFunctions(row.checkFunction, row.key);
+        },
     }
 });

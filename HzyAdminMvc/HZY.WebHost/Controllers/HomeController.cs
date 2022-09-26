@@ -1,5 +1,5 @@
 ﻿using HZY.Controllers.Admin.ControllersAdmin;
-using HZY.Domain.Services.Accounts;
+using HZY.Managers.Accounts;
 using HZY.Infrastructure.Permission.Attributes;
 using HZY.Services.Admin.Framework;
 using Microsoft.AspNetCore.Mvc;

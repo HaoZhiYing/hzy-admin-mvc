@@ -3,7 +3,7 @@ using HZY.Services.Admin.Framework;
 using HZY.Controllers.Admin.ControllersAdmin;
 using HZY.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using HZY.Domain.Services.Accounts;
+using HZY.Managers.Accounts;
 
 namespace HZY.Controllers.Admin.Framework
 {

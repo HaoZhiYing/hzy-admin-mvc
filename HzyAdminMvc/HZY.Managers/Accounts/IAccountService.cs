@@ -2,7 +2,7 @@
 using HzyScanDiService;
 using System.Threading.Tasks;
 
-namespace HZY.Domain.Services.Accounts;
+namespace HZY.Managers.Accounts;
 
 /// <summary>
 /// 当前登录账户服务

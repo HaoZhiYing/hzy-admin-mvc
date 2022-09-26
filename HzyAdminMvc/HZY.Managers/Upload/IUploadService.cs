@@ -1,7 +1,7 @@
 ﻿using HzyScanDiService;
 using Microsoft.AspNetCore.Http;
 
-namespace HZY.Domain.Services.Upload;
+namespace HZY.Managers.Upload;
 
 public interface IUploadService : ITransientDependency
 {

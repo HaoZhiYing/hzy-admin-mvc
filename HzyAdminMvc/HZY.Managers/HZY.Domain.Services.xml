@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>HZY.Domain.Services</name>
+        <name>HZY.Managers</name>
     </assembly>
     <members>
-        <member name="T:HZY.Domain.Services.Accounts.IAccountService">
+        <member name="T:HZY.Managers.Accounts.IAccountService">
             <summary>
             当前登录账户服务
             </summary>
         </member>
-        <member name="M:HZY.Domain.Services.Accounts.IAccountService.GetAccountInfo">
+        <member name="M:HZY.Managers.Accounts.IAccountService.GetAccountInfo">
             <summary>
             获取账户信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Domain.Services.Accounts.IAccountService.CheckAccountAsync(System.String,System.String,System.String)">
+        <member name="M:HZY.Managers.Accounts.IAccountService.CheckAccountAsync(System.String,System.String,System.String)">
             <summary>
             检查账户密码信息
             </summary>
@@ -24,7 +24,7 @@
             <param name="code"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Domain.Services.Accounts.IAccountService.ChangePasswordAsync(System.String,System.String)">
+        <member name="M:HZY.Managers.Accounts.IAccountService.ChangePasswordAsync(System.String,System.String)">
             <summary>
             修改密码
             </summary>
@@ -32,24 +32,24 @@
             <param name="newPassword"></param>
             <returns></returns>
         </member>
-        <member name="T:HZY.Domain.Services.Accounts.Impl.AccountService">
+        <member name="T:HZY.Managers.Accounts.Impl.AccountService">
             <summary>
             当前登录账户服务
             </summary>
         </member>
-        <member name="M:HZY.Domain.Services.Accounts.Impl.AccountService.FindAccountInfoByToken">
+        <member name="M:HZY.Managers.Accounts.Impl.AccountService.FindAccountInfoByToken">
             <summary>
             根据用户信息获取 Account 对象
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Domain.Services.Accounts.Impl.AccountService.GetAccountInfo">
+        <member name="M:HZY.Managers.Accounts.Impl.AccountService.GetAccountInfo">
             <summary>
             获取当前登录账户信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Domain.Services.Accounts.Impl.AccountService.CheckAccountAsync(System.String,System.String,System.String)">
+        <member name="M:HZY.Managers.Accounts.Impl.AccountService.CheckAccountAsync(System.String,System.String,System.String)">
             <summary>
             检查账户 登录信息 并返回 token
             </summary>
@@ -58,7 +58,7 @@
             <param name="code"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Domain.Services.Accounts.Impl.AccountService.ChangePasswordAsync(System.String,System.String)">
+        <member name="M:HZY.Managers.Accounts.Impl.AccountService.ChangePasswordAsync(System.String,System.String)">
             <summary>
             修改密码
             </summary>
@@ -66,52 +66,52 @@
             <param name="newPassword"></param>
             <returns></returns>
         </member>
-        <member name="F:HZY.Domain.Services.Consts.AdminFunctionConsts.Function_Insert">
+        <member name="F:HZY.Managers.Consts.AdminFunctionConsts.Function_Insert">
             <summary>
             功能常量 添加
             </summary>
         </member>
-        <member name="F:HZY.Domain.Services.Consts.AdminFunctionConsts.Function_Update">
+        <member name="F:HZY.Managers.Consts.AdminFunctionConsts.Function_Update">
             <summary>
             功能常量 修改
             </summary>
         </member>
-        <member name="F:HZY.Domain.Services.Consts.AdminFunctionConsts.Function_Save">
+        <member name="F:HZY.Managers.Consts.AdminFunctionConsts.Function_Save">
             <summary>
             功能常量 保存
             </summary>
         </member>
-        <member name="F:HZY.Domain.Services.Consts.AdminFunctionConsts.Function_Delete">
+        <member name="F:HZY.Managers.Consts.AdminFunctionConsts.Function_Delete">
             <summary>
             功能常量 删除
             </summary>
         </member>
-        <member name="F:HZY.Domain.Services.Consts.AdminFunctionConsts.Function_Display">
+        <member name="F:HZY.Managers.Consts.AdminFunctionConsts.Function_Display">
             <summary>
             功能常量 是否拥有菜单
             </summary>
         </member>
-        <member name="F:HZY.Domain.Services.Consts.AdminFunctionConsts.Function_Search">
+        <member name="F:HZY.Managers.Consts.AdminFunctionConsts.Function_Search">
             <summary>
             功能常量 检索
             </summary>
         </member>
-        <member name="F:HZY.Domain.Services.Consts.AdminFunctionConsts.Function_Export">
+        <member name="F:HZY.Managers.Consts.AdminFunctionConsts.Function_Export">
             <summary>
             功能常量 导出
             </summary>
         </member>
-        <member name="F:HZY.Domain.Services.Consts.AdminFunctionConsts.Function_Print">
+        <member name="F:HZY.Managers.Consts.AdminFunctionConsts.Function_Print">
             <summary>
             功能常量 打印
             </summary>
         </member>
-        <member name="T:HZY.Domain.Services.Upload.Impl.UploadService">
+        <member name="T:HZY.Managers.Upload.Impl.UploadService">
             <summary>
             上传文件服务
             </summary>
         </member>
-        <member name="M:HZY.Domain.Services.Upload.Impl.UploadService.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String[])">
+        <member name="M:HZY.Managers.Upload.Impl.UploadService.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String[])">
             <summary>
             上传文件 辅助函数
             </summary>
@@ -120,7 +120,7 @@
             <param name="format"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Domain.Services.Upload.Impl.UploadService.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String[])">
+        <member name="M:HZY.Managers.Upload.Impl.UploadService.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String[])">
             <summary>
             上传文件
             </summary>
@@ -128,7 +128,7 @@
             <param name="format"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Domain.Services.Upload.Impl.UploadService.HandleUploadImageFile(Microsoft.AspNetCore.Http.IFormFile,System.String)">
+        <member name="M:HZY.Managers.Upload.Impl.UploadService.HandleUploadImageFile(Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传图片
             </summary>

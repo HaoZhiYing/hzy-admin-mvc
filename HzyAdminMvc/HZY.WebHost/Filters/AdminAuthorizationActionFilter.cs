@@ -12,8 +12,8 @@ using HZY.Infrastructure.ApiResultManage;
 using HZY.Services.Admin.ServicesAdmin;
 using System.Linq;
 using Newtonsoft.Json.Serialization;
-using HZY.Domain.Services.Accounts;
-using HZY.Domain.Services.Consts;
+using HZY.Managers.Accounts;
+using HZY.Managers.Consts;
 
 namespace HZY.WebHost.Filters
 {

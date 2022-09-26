@@ -90,7 +90,7 @@ public class SysRoleMenuFunctionService : AdminBaseService<IAdminRepository<SysR
         {
             var children = new List<object>();
             var functions = new List<object>();
-            var checkFunctions = new List<object>();
+            var checkFunctions = new List<string>();
             if (sysMenuAllList.Any(w => w.ParentId == item.Id))
             {
                 children = this.CreateRoleMenuFunctionTree(item.Id, sysMenuAllList, sysFunctionList,
@@ -132,8 +132,22 @@ public class SysRoleMenuFunctionService : AdminBaseService<IAdminRepository<SysR
                 label = $"{item.Name}-{item.Number}",
                 children = children.Count == 0 ? null : children,
                 functions = functions,
-                checkFunction = checkFunctions
+                checkFunction = checkFunctions,
+                checkedMenuFunctionIds = checkFunctions,
+                checkAll = sysMenuFunctionList.Count == checkFunctions.Count,
+                indeterminate = checkFunctions.Count > 0 && checkFunctions.Count < sysMenuFunctionList.Count
             });
+
+            //["id"] = item.Id,
+            //    ["name"] = item.Name,
+            //    ["number"] = item.Number,
+            //    ["parentId"] = item.ParentId,
+            //    ["levelCode"] = item.LevelCode,
+            //    ["menuFunctions"] = menuFunctions,
+            //    ["checkedMenuFunctionIds"] = checkedMenuFunctionIds,
+            //    ["checkAll"] = menuFunctions.Count == checkedMenuFunctionIds.Count,
+            //    ["indeterminate"] = checkedMenuFunctionIds.Count > 0 && checkedMenuFunctionIds.Count < menuFunctions.Count
+
         }
 
         return res;

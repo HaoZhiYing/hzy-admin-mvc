@@ -6,7 +6,7 @@ using HZY.Infrastructure;
 using HZY.EFCore.PagingViews;
 using HzyEFCoreRepositories.Extensions;
 using HZY.EFCore.Repositories.Admin.Core;
-using HZY.Domain.Services.Upload;
+using HZY.Managers.Upload;
 using HZY.Models.Entities.Framework;
 
 namespace HZY.Services.Admin;

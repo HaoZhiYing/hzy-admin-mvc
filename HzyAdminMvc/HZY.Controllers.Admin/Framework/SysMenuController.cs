@@ -7,7 +7,7 @@ using HZY.Models.DTO;
 using HZY.Models.Entities.Framework;
 using Microsoft.AspNetCore.Mvc;
 using HZY.EFCore.PagingViews;
-using HZY.Domain.Services.Accounts;
+using HZY.Managers.Accounts;
 
 namespace HZY.Controllers.Admin.Framework
 {

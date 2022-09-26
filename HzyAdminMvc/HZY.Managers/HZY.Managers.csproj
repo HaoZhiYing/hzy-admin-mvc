@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -7,13 +7,14 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>HZY.Services.Admin.xml</DocumentationFile>
+		<DocumentationFile>HZY.Managers.xml</DocumentationFile>
 		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\HZY.Managers\HZY.Managers.csproj" />
-	  <ProjectReference Include="..\HZY.EFCore\HZY.EFCore.csproj" />
+		<ProjectReference Include="..\HZY.EFCore\HZY.EFCore.csproj" />
+		<ProjectReference Include="..\HZY.Infrastructure\HZY.Infrastructure.csproj" />
+		<ProjectReference Include="..\HZY.Models\HZY.Models.csproj" />
 	</ItemGroup>
 
 </Project>

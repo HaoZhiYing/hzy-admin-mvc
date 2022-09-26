@@ -27,9 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "004 Services", "004 Service
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "005 Controllers", "005 Controllers", "{652943F8-0A77-4646-92CA-8391F0CA2BC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HZY.Domain.Services", "HZY.Domain.Services\HZY.Domain.Services.csproj", "{FAE3AC6B-854C-44D2-8632-50EDDAFB2758}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HZY.Managers", "HZY.Managers\HZY.Managers.csproj", "{FAE3AC6B-854C-44D2-8632-50EDDAFB2758}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 Domain Services", "003 Domain Services", "{598D561B-882A-40FC-B6B3-8F051DE0F62A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 Managers", "003 Managers", "{598D561B-882A-40FC-B6B3-8F051DE0F62A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
